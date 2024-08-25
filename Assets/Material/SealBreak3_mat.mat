@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SealBreak3_mat
+  m_Shader: {fileID: 4800000, guid: b928496bd129358499fe5b9a080b4510, type: 3}
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _B_LOAD_COL_TEX
+  - _ENABLEEMISSION
+  - _USEDISSOLVE
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+  - RenderType: TransparentCutout
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 4e5164870a7b3ad42a6538007308850f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 2800000, guid: 866c058baee02c842bb8cc316c9acc6f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_72ab43ee7e5b4ff3acd5a9fb57f150dc_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _colTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _posTexture:
+        m_Texture: {fileID: 2800000, guid: 12333a743b5346444934733b36ca1cec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _posTexture2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _rotTexture:
+        m_Texture: {fileID: 2800000, guid: ff67b2efb6ee48b4c9321d3a5b118cfd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _spareColTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+    - _AlbedoMaxFrame: 60
+    - _AlphaClip: 1
+    - _B_LOAD_COL_TEX: 1
+    - _B_LOAD_NORM_TEX: 0
+    - _B_LOAD_POS_TWO_TEX: 0
+    - _B_SMOOTH_TRAJECTORIES: 0
+    - _B_animateFirstFrame: 0
+    - _B_autoPlayback: 0
+    - _B_interpolate: 0
+    - _B_interpolateCol: 0
+    - _B_interpolateSpareCol: 0
+    - _B_pscaleAreInPosA: 1
+    - _B_stretchByVel: 0
+    - _B_surfaceNormals: 1
+    - _B_twoSidedNorms: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _CastShadows: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DissolveNoiseScale: 5000
+    - _DissolveStartFrame: 160
+    - _DissolveStep: 0.16
+    - _DstBlend: 0
+    - _ENABLEALBEDOMULTIPLY: 0
+    - _ENABLEEMISSION: 1
+    - _EmissionIntensity: 2.5
+    - _EnvironmentReflections: 1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Metallic: 0
+    - _NotUseMaxFrame: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _SegmentSize: 60
+    - _Smoothness: 0.4
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _USEDISSOLVE: 1
+    - _UseFrameSegment: 0
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
+    - _boundMaxX: 6.9
+    - _boundMaxY: 7.7
+    - _boundMaxZ: 6.17
+    - _boundMinX: -9.6
+    - _boundMinY: -1.6010001
+    - _boundMinZ: -9.3
+    - _displayFrame: 1
+    - _frameCount: 180
+    - _gameTimeAtFirstFrame: 0
+    - _globalPscaleMul: 1
+    - _houdiniFPS: 60
+    - _playbackSpeed: 1
+    - _stretchByVelAmount: 0
+    m_Colors:
+    - _AlbedoColor: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 4.5176473, b: 95.87451, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []
