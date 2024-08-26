@@ -32,20 +32,20 @@ public class Character : MonoBehaviour
     {
         if (playerController.isGrounded)
         {
-            MovePlayer(10.0f);
+            MovePlayer();
         }
         else
         {
-            MovePlayer(0.01f);
+            MovePlayer();
         }
         playerController.Move(run * Time.deltaTime);
     }
 
-    public void MovePlayer(float rate)
+    public void MovePlayer()
     {
 
         run.y = 0;
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         float inputMagnitude = move.sqrMagnitude;
         move = player.TransformDirection(move);
@@ -67,27 +67,28 @@ public class Character : MonoBehaviour
                 (
                     player.rotation,
                     cameraRotation,
-                    13.0f * Time.deltaTime
+                    20.0f * Time.deltaTime
                 );
-
+            run = Vector3.MoveTowards(run, move, moveSpeed);
             if (run != Vector3.zero)
             {
+                
                 Quaternion characterRotation = Quaternion.LookRotation(run);
                 cameraRotation.x = cameraRotation.z = 0;
                 playerModel.rotation = Quaternion.Slerp
                     (
                         playerModel.rotation,
                         characterRotation,
-                        13.0f * Time.deltaTime
+                        20.0f * Time.deltaTime
                     );
             }
-            run = Vector3.MoveTowards(run, move, rate * moveSpeed);
         }
         else
         {
-            run = Vector3.MoveTowards(run, Vector3.zero, (2.0f * inputMagnitude) * moveSpeed * rate);
+            run = Vector3.zero;
         }
         float speed = run.sqrMagnitude;
+
         anim.SetFloat("aSpeed", speed);
 
     }
