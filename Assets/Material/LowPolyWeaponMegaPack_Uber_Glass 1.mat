@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowPolyWeaponMegaPack_Uber_Glass 1
+  m_Shader: {fileID: 4800000, guid: 555bc67f20b30be42a41c43e64dd0539, type: 3}
+  m_ValidKeywords:
+  - _USECUBEMAP_OFF
+  m_InvalidKeywords:
+  - _FRESNELONOFF_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CubeMap:
+        m_Texture: {fileID: 8900000, guid: af44c130c9a514c4482dc0f949c4c25b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+    - _AlphaClip: 1
+    - _AlphaCutoff: 0.5
+    - _AoIntensity: 0
+    - _Blend: 0
+    - _BlurReflection: 0
+    - _Brightness: 3.04
+    - _BumpScale: 0
+    - _BumpScaleDecal: 0
+    - _BumpScaleDecal1: 0
+    - _CastShadows: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DissolveIntensity: 0
+    - _DissolveNoiseScale: 45
+    - _DissolveStep: 0.06
+    - _DstBlend: 0
+    - _ENABLEEMISSION: 1
+    - _EmissionAnimation: 0
+    - _EmissionAnimationSpeed: 1
+    - _EmissionIntensity: 0
+    - _EmissiveIntensity: 1
+    - _EnvironmentReflections: 1
+    - _Fade: 0.015
+    - _FalloffFade: 0
+    - _FalloffFade1: 0
+    - _FalloffOpacity: 0
+    - _FalloffOpacityIntensity: 0.982
+    - _Flash: 0
+    - _FresnelStrength: 1
+    - _GlossFromBlueChannel: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 1
+    - _GlossinessDecal: 1
+    - _GlossyReflections: 1
+    - _GradientFade: 1
+    - _Intensity: 1
+    - _Invert: 0
+    - _InvertAlbedoA1: 0
+    - _InvertFresnelFade: 0
+    - _Metallic: 0
+    - _MetallicDecal: 1
+    - _MetallicStrength: 0.5
+    - _Mode: 0
+    - _NormalStrength: 1
+    - _OcclusionStrength: 1
+    - _OffsetX: 0
+    - _OffsetY: 0
+    - _Opacity: 0.05
+    - _Parallax: 0.02
+    - _PowerFalloffFade: 1
+    - _PowerFalloffOpacity: 1
+    - _PowerFresnel: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _ReflectionDecal: 1
+    - _ReflectionIntensity: 0.5
+    - _Refraction: 1.1
+    - _Rotation: 90
+    - _Saturation: 0
+    - _SaturationDecal: 0
+    - _Smoothness: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _TilingX: 1
+    - _TilingY: 1
+    - _USEDISSOLVE: 1
+    - _UV2AsMetallic: 0
+    - _UVSec: 0
+    - _UseAlbedoA1: 0
+    - _UseCubemap: 0
+    - _UseSmoothness: 0
+    - _VERTEXCOLORMASK: 1
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorCubemap: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorDecal: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorFresnel1: {r: 0, g: 0, b: 0, a: 0}
+    - _DissolveColor: {r: 1.3490196, g: 5.992157, b: 1.1921569, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
+    - _MainColor: {r: 0.75, g: 0.7323113, b: 0.7323113, a: 0}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
