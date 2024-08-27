@@ -7,38 +7,70 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MapLayout_Metalic_Emis_Monolith
-  m_Shader: {fileID: 4800000, guid: 7ef2220a135da0043b7a7ce186349915, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ENABLEEMISSION
-  m_LightmapFlags: 2
+  m_Name: MapLayout_Wall 1
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _GLOSSYREFLECTIONS_OFF
+  - _NORMALMAP
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _EmissionGradientTex:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: b858d439469684c4e9a781ee73e62f13, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: b41805b75e5793b4484c3d4f3cd72b11, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmissionTex:
-        m_Texture: {fileID: 2800000, guid: 7e853876bef677c41bd407c080829516, type: 3}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 2800000, guid: 50ec079aa715aee46b87fac930ddec69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7e853876bef677c41bd407c080829516, type: 3}
+        m_Texture: {fileID: 2800000, guid: b858d439469684c4e9a781ee73e62f13, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MetallicTex:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalTex:
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -57,6 +89,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AlphaClipValue: 0
     - _Blend: 0
     - _BumpScale: 1
     - _CastShadows: 1
@@ -66,39 +99,47 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DirectionalXray: 1
     - _DstBlend: 0
-    - _ENABLEEMISSION: 1
-    - _EmissionGradient: 0
-    - _EmissionIntensity: 2
-    - _EmissionSpeed: 1
-    - _EmissionUV2: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _MetallicStrength: 0.8
-    - _NormalStrength: 1
+    - _Mode: 0
+    - _NormalBlend: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 0
+    - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Rotation: 0
     - _Smoothness: 0.2
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _USECOLORMASKING: 0
-    - _UseOldMetallicTex: 0
+    - _UVSec: 0
+    - _UseEmission: 1
     - _WorkflowMode: 1
+    - _XrayNoise: 20
+    - _XrayOpacity: 1
+    - _XrayRadius: 1
+    - _XraySmoothness: 0.5
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
+    - _useDither: 0
+    - _useNoise: 0
+    - _useNormal: 0
+    - _useXRay: 1
+    - _uvIdx: 0
     m_Colors:
     - _BaseColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
-    - _Color_1: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 2, g: 2, b: 2, a: 1}
+    - _NoisePanning: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _UVShift: {r: 0, g: 0, b: 0, a: 0}
+    - _XrayPos: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
