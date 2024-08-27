@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Lance : MonoBehaviour
 {
     #region public Fields
     public float AttackRange;
+    public float coolTime = 1.0f;
     public LayerMask targetLayer;
     public bool isAttacking = false;
     public int monsterIndex;
-    public float coolTime = 1.0f;
     #endregion
 
     #region private Fields
@@ -29,8 +28,8 @@ public class Sword : MonoBehaviour
         attackParent.transform.position = gameObject.transform.parent.position;
         attackParent.transform.rotation = gameObject.transform.parent.rotation;
         attackParent.transform.localScale = gameObject.transform.parent.localScale;
-        
-    }   
+
+    }
     private void Update()
     {
         FindTarget();
@@ -38,10 +37,10 @@ public class Sword : MonoBehaviour
     /// <summary>
     /// 먼저 적을 찾고 공격을 준비하는 함수
     /// </summary>
-    private void FindTarget()
+    public void FindTarget()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, AttackRange, targetLayer);
- 
+
         if (isAttacking == false && target.Length != 0)
         {
             if (target.Length == 1)
@@ -60,19 +59,19 @@ public class Sword : MonoBehaviour
             Vector3 postion = enemyTransform.position - gameObject.transform.position;
             gameObject.transform.forward = postion;
 
-           float setY = transform.localRotation.eulerAngles.y;
+            float setY = transform.localRotation.eulerAngles.y;
             if (setY > 180)
             {
                 setY -= 360.0f;
                 startRotation.y = setY;
-                
+
             }
             else { startRotation.y = setY; }
             StartCoroutine(PrepareAttack(setY));
         }
         else
         {
-            
+
             return;
         }
     }
@@ -89,7 +88,7 @@ public class Sword : MonoBehaviour
         gameObject.transform.parent = attackParent.transform;
         isAttacking = true;
         float time = 0.0f;
-        float duration = 0.5f;
+        float duration = 0.4f;
         while (time <= duration)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
@@ -97,6 +96,7 @@ public class Sword : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+        
         transform.localRotation = Quaternion.Euler(90, setY, 0);
         transform.localPosition = endRotatePosition;
         StartCoroutine(StartAttack());
@@ -105,11 +105,9 @@ public class Sword : MonoBehaviour
 
     private IEnumerator StartAttack()
     {
-
         float time = 0.0f;
-        float duration = 0.3f;
+        float duration = 0.5f;
         enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
-        // Debug.Log(rotation.y);
         while (time <= duration)
         {
             transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
