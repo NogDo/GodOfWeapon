@@ -7,14 +7,13 @@ public class Sword : MonoBehaviour
     #region public Fields
     public float AttackRange;
     public LayerMask targetLayer;
+    public bool isAttacking = false;
     #endregion
 
     #region private Fields
-    private bool isAttacking = false;
+
     private Vector3 startPosition;
     private Vector3 endRotatePosition;
-    private float time = 0.0f;
-    private float duration = 1.0f;
     private Transform enemyTransform;
     #endregion
 
@@ -28,12 +27,14 @@ public class Sword : MonoBehaviour
     }
     private void FindTarget()
     {
-        Collider[] target = Physics.OverlapSphere(transform.position, AttackRange,targetLayer);
-        
+        Collider[] target = Physics.OverlapSphere(transform.position, AttackRange, targetLayer);
+
         if (isAttacking == false && target.Length != 0)
         {
             enemyTransform = target[0].transform;
-            StartCoroutine(PrepareAttack());
+            transform.LookAt(enemyTransform.position); 
+            Debug.Log(transform.localRotation);
+            StartCoroutine(PrepareAttack(enemyTransform));
         }
         else
         {
@@ -41,38 +42,66 @@ public class Sword : MonoBehaviour
         }
     }
 
-    private IEnumerator PrepareAttack()
+    private IEnumerator PrepareAttack(Transform ememyTransform)
     {
         isAttacking = true;
-        transform.LookAt(enemyTransform);
+        Debug.Log(transform.localRotation);
         Quaternion startRotation = transform.localRotation;
         Quaternion endRotation = Quaternion.Euler(90, transform.localRotation.y, transform.localRotation.z);
         startPosition = transform.localPosition;
-        endRotatePosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z -2);
+        endRotatePosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - 2);
+
+        float time = 0.0f;
+        float duration = 0.3f;
         while (time <= duration)
         {
             transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / duration);
-            transform.localRotation =  Quaternion.Slerp(startRotation, endRotation, time / duration);
+            transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
+        yield return new WaitForSeconds(0.2f);
         transform.localPosition = endRotatePosition;
         transform.localRotation = endRotation;
         StartCoroutine(StartAttack(transform));
-        isAttacking = false;
         yield return null;
     }
 
     private IEnumerator StartAttack(Transform startPosition)
     {
-         Vector3.Distance(startPosition.localPosition, enemyTransform.localPosition);
+
+        float time = 0.0f;
+        float duration = 0.3f;
+        transform.localRotation = startPosition.localRotation;
         while (time <= duration)
         {
-           transform.localPosition = Vector3.Lerp(startPosition.localPosition, enemyTransform.localPosition, time / duration);
+            transform.localPosition = Vector3.Lerp(startPosition.localPosition, enemyTransform.localPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
         transform.localPosition = enemyTransform.localPosition;
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(EndAttack(transform));
         yield return null;
     }
+
+    private IEnumerator EndAttack(Transform startPostion)
+    {
+        float time = 0.0f;
+        float duration = 0.1f;
+        while (time <= duration)
+        {
+            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / duration);
+            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+        yield return new WaitForSeconds(0.3f);
+        isAttacking = false;
+        yield return null;
+    }
+
+
 }

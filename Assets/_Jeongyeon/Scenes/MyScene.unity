@@ -201,10 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800430cff9d212647b16e52d29941483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 5
+  AttackRange: 10
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
+  isAttacking: 0
 --- !u!1 &699845221
 GameObject:
   m_ObjectHideFlags: 0
