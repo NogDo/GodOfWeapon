@@ -14,18 +14,22 @@ public class CCreateMapManager : MonoBehaviour
 
     #region private º¯¼ö
     [SerializeField]
-    GameObject oElevator;
+    GameObject oStartFloor;
     [SerializeField]
-    GameObject oSpikeFloor;
+    GameObject[] oBasicFloors;
     [SerializeField]
-    GameObject oSpike;
+    GameObject[] oSpecFloors;
     [SerializeField]
-    GameObject[] oFloors;
+    GameObject oTraps;
 
     GameObject tfMapParent;
 
     float fFloorWidth = 4.0f;
     float fFloorHeight = 4.0f;
+
+    int nBasicFloorPercent = 70;
+    int nSpecFloorPercent = 20;
+    int nTrapPercent = 10;
     #endregion
 
     private void Awake()
@@ -57,13 +61,52 @@ public class CCreateMapManager : MonoBehaviour
             {
                 if (i == 0 && j == 0)
                 {
-                    Instantiate(oElevator, Vector3.zero, Quaternion.identity, tfMapParent.transform);
+                    Instantiate(oStartFloor, Vector3.zero, Quaternion.identity, tfMapParent.transform);
 
                     continue;
                 }
 
-                int randFloor = Random.Range(0, oFloors.Length);
-                Instantiate(oFloors[randFloor], new Vector3(i * fFloorWidth, 0.0f, j * fFloorHeight), Quaternion.identity, tfMapParent.transform);
+                int randFloorType = Random.Range(0, 100);
+                int randFloor = 0;
+
+                if (randFloorType < nBasicFloorPercent)
+                {
+                    randFloor = Random.Range(0, oBasicFloors.Length);
+
+                    Instantiate
+                        (
+                            oBasicFloors[randFloor], 
+                            new Vector3(i * fFloorWidth, 0.0f, j * fFloorHeight), 
+                            Quaternion.identity, 
+                            tfMapParent.transform
+                        );
+                }
+
+                else if (randFloorType < nBasicFloorPercent + nSpecFloorPercent)
+                {
+                    randFloor = Random.Range(0, oSpecFloors.Length);
+
+                    Instantiate
+                        (
+                            oSpecFloors[randFloor],
+                            new Vector3(i * fFloorWidth, 0.0f, j * fFloorHeight),
+                            Quaternion.identity,
+                            tfMapParent.transform
+                        );
+                }
+
+                else
+                {
+                    Instantiate
+                        (
+                            oTraps,
+                            new Vector3(i * fFloorWidth, 0.0f, j * fFloorHeight),
+                            Quaternion.identity,
+                            tfMapParent.transform
+                        );
+                }
+
+                
             }
         }
 

@@ -8,19 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: glow1_ADD
-  m_Shader: {fileID: 4800000, guid: 425fd4d30c5c6804c891d28fe542140f, type: 3}
-  m_ValidKeywords:
+  m_Shader: {fileID: 4800000, guid: 46b304e451e394a429f8f5be49675930, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _FADING_ON
+  - _FLIPBOOKBLENDING_OFF
   - _SOFTPARTICLES_ON
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
-  - _FLIPBOOKBLENDING_OFF
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-  - RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - ALWAYS
   - SHADOWCASTER
@@ -29,7 +28,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: ac29326a3bd440946a94b51637bbd515, type: 3}
+        m_Texture: {fileID: 2800000, guid: 34481e423a22ba84c94c0f0500d9eec1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -40,7 +39,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: {}
+    m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 2
