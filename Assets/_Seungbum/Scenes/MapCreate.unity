@@ -268,6 +268,10 @@ MonoBehaviour:
   oTraps:
   - {fileID: 4358611856228139948, guid: d7e168f9e464679439ebe422e68545d0, type: 3}
   - {fileID: 448364338502218463, guid: 22afffc3cc7c6bd43a50fcfd8562f1da, type: 3}
+  oFence:
+  - {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
+  - {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+  oFenceEdge: {fileID: 5899413282669452227, guid: 53552e28aa2fea4469d0b4e60f0f1bec, type: 3}
 --- !u!1 &1052464299
 GameObject:
   m_ObjectHideFlags: 0
