@@ -26,7 +26,7 @@ public class CMap : MonoBehaviour
     }
 
 
-    public void SerFloorPart()
+    public void SetFloorPart()
     {
 
     }
