@@ -8,10 +8,6 @@ public class CCreateMapManager : MonoBehaviour
     public static CCreateMapManager Instance { get; private set; }
     #endregion
 
-    #region public 변수
-
-    #endregion
-
     #region private 변수
     [Header("바닥 관련")]
     [SerializeField]
@@ -29,7 +25,13 @@ public class CCreateMapManager : MonoBehaviour
     [SerializeField]
     GameObject oFenceEdge;
 
-    GameObject tfMapParent;
+
+
+    Transform tfMapFloor;
+    Transform tfMapLeftUp;
+    Transform tfMapLeftDown;
+    Transform tfMapRightUp;
+    Transform tfMapRightDown;
 
     float fFloorWidth = 4.0f;
     float fFloorHeight = 4.0f;
@@ -60,7 +62,13 @@ public class CCreateMapManager : MonoBehaviour
     /// <param name="maxZ">세로 최대값</param>
     public void CreateMap(int minX, int maxX, int minZ, int maxZ)
     {
-        tfMapParent = GameObject.Find("Map");
+        GameObject map = GameObject.Find("Map");
+
+        tfMapFloor = map.transform.GetChild(0);
+        tfMapLeftUp = map.transform.GetChild(1);
+        tfMapLeftDown = map.transform.GetChild(2);
+        tfMapRightUp = map.transform.GetChild(3);
+        tfMapRightDown = map.transform.GetChild(4);
 
         for (int i = minX; i < maxX; i++)
         {
@@ -72,7 +80,7 @@ public class CCreateMapManager : MonoBehaviour
 
         CreateFence(minX, maxX, minZ, maxZ);
 
-        tfMapParent.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
+        tfMapFloor.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
     }
 
     /// <summary>
@@ -84,7 +92,7 @@ public class CCreateMapManager : MonoBehaviour
     {
         if (posX == 0 && posZ == 0)
         {
-            Instantiate(oStartFloor, Vector3.zero, Quaternion.identity, tfMapParent.transform);
+            Instantiate(oStartFloor, Vector3.zero, Quaternion.identity, tfMapFloor.transform);
 
             return;
         }
@@ -101,7 +109,7 @@ public class CCreateMapManager : MonoBehaviour
                     oBasicFloors[randFloor],
                     new Vector3(posX * fFloorWidth, 0.0f, posZ * fFloorHeight),
                     Quaternion.identity,
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
         }
 
@@ -114,7 +122,7 @@ public class CCreateMapManager : MonoBehaviour
                     oSpecFloors[randFloor],
                     new Vector3(posX * fFloorWidth, 0.0f, posZ * fFloorHeight),
                     Quaternion.identity,
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
         }
 
@@ -127,7 +135,7 @@ public class CCreateMapManager : MonoBehaviour
                     oTraps[randFloor],
                     new Vector3(posX * fFloorWidth, 0.0f, posZ * fFloorHeight),
                     Quaternion.identity,
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
         }
     }
@@ -150,7 +158,7 @@ public class CCreateMapManager : MonoBehaviour
                     oFence[randFence],
                     new Vector3(i * fFloorWidth, 0.0f, minZ * fFloorHeight),
                     Quaternion.identity,
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
 
             Instantiate
@@ -158,7 +166,7 @@ public class CCreateMapManager : MonoBehaviour
                     oFence[randFence],
                     new Vector3(i * fFloorWidth, 0.0f, maxZ * fFloorHeight),
                     Quaternion.identity,
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
         }
 
@@ -171,7 +179,7 @@ public class CCreateMapManager : MonoBehaviour
                     oFence[randFence],
                     new Vector3(minX * fFloorWidth, 0.0f, i * fFloorHeight),
                     Quaternion.Euler(0.0f, -90.0f, 0.0f),
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
 
             Instantiate
@@ -179,7 +187,7 @@ public class CCreateMapManager : MonoBehaviour
                     oFence[randFence],
                     new Vector3(maxX * fFloorWidth, 0.0f, i * fFloorHeight),
                     Quaternion.Euler(0.0f, -90.0f, 0.0f),
-                    tfMapParent.transform
+                    tfMapFloor.transform
                 );
         }
 
@@ -188,7 +196,7 @@ public class CCreateMapManager : MonoBehaviour
                    oFenceEdge,
                    new Vector3(minX * fFloorWidth, 0.0f, minZ * fFloorHeight),
                    Quaternion.identity,
-                   tfMapParent.transform
+                   tfMapFloor.transform
                );
 
         Instantiate
@@ -196,7 +204,7 @@ public class CCreateMapManager : MonoBehaviour
                    oFenceEdge,
                    new Vector3(maxX * fFloorWidth, 0.0f, minZ * fFloorHeight),
                    Quaternion.identity,
-                   tfMapParent.transform
+                   tfMapFloor.transform
                );
 
         Instantiate
@@ -204,7 +212,7 @@ public class CCreateMapManager : MonoBehaviour
                    oFenceEdge,
                    new Vector3(minX * fFloorWidth, 0.0f, maxZ * fFloorHeight),
                    Quaternion.identity,
-                   tfMapParent.transform
+                   tfMapFloor.transform
                );
 
         Instantiate
@@ -212,7 +220,13 @@ public class CCreateMapManager : MonoBehaviour
                    oFenceEdge,
                    new Vector3(maxX * fFloorWidth, 0.0f, maxZ * fFloorHeight),
                    Quaternion.identity,
-                   tfMapParent.transform
+                   tfMapFloor.transform
                );
+    }
+
+
+    void CreateLeftUpWall()
+    {
+
     }
 }
