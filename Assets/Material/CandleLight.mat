@@ -8,26 +8,44 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CandleLight
-  m_Shader: {fileID: 4800000, guid: 86ccbb786110c7c408fd64e7554507b6, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
+  m_InvalidKeywords:
   - COLORGRADING_ON
   - GLOW_ON
   - SHAPE1DISTORT_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ColorRampTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorRampTexGradient:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -37,6 +55,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DistortTex:
         m_Texture: {fileID: 2800000, guid: abef4ab8f31587d46865a4de990d0cc4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FadeBurnTex:
@@ -57,6 +79,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: 4b0155e4365767141ae258134895cbfd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape1MaskTex:
@@ -91,7 +125,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 9422a023fd52228488f53f472e07e948, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: {}
+    m_Ints: []
     m_Floats:
     - _Alpha: 1
     - _AlphaCutoffValue: 0.25
@@ -100,6 +134,7 @@ Material:
     - _AlphaFadeSmooth: 0.075
     - _AlphaStepMax: 0.075
     - _AlphaStepMin: 0
+    - _BumpScale: 1
     - _CamDistFadeStepMax: 100
     - _CamDistFadeStepMin: 0
     - _CamDistProximityFade: 0
@@ -108,11 +143,13 @@ Material:
     - _ColorRampBlend: 1
     - _ColorRampLuminosity: 0
     - _CullingOption: 0
+    - _Cutoff: 0.5
     - _DebugShape: 1
     - _DepthGlow: 1
     - _DepthGlowDist: 0.5
     - _DepthGlowGlobal: 1
     - _DepthGlowPow: 1
+    - _DetailNormalMapScale: 1
     - _DistortAmount: 0.5
     - _DistortTexXSpeed: 5
     - _DistortTexYSpeed: 5
@@ -120,6 +157,7 @@ Material:
     - _DistortionPower: 10
     - _DistortionScrollXSpeed: 0
     - _DistortionScrollYSpeed: 0
+    - _DstBlend: 10
     - _DstMode: 10
     - _EditorDrawers: 61
     - _FadeAmount: -0.1
@@ -129,6 +167,9 @@ Material:
     - _FadeScrollXSpeed: 0
     - _FadeScrollYSpeed: 0
     - _FadeTransition: 0.075
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _Glow: 0
     - _GlowGlobal: 1
     - _HandDrawnAmount: 10
@@ -138,9 +179,13 @@ Material:
     - _HsvShift: 180
     - _LightAmount: 0
     - _MaskPow: 1
+    - _Metallic: 0
+    - _Mode: 3
+    - _OcclusionStrength: 1
     - _OffsetSh1: 1
     - _OffsetSh2: 1
     - _OffsetSh3: 1
+    - _Parallax: 0.02
     - _PixelateSize: 32
     - _PosterizeNumColors: 3.03
     - _RandomSh1Mult: 1
@@ -201,7 +246,10 @@ Material:
     - _ShapeRotationSpeed: 0
     - _ShapeXSpeed: 0
     - _ShapeYSpeed: 0
+    - _SmoothnessTextureChannel: 0
     - _SoftFactor: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
     - _SrcMode: 5
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
@@ -211,6 +259,7 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
+    - _UVSec: 0
     - _VertOffsetAmount: 0.5
     - _VertOffsetPower: 1
     - _VertOffsetTexXSpeed: 0.1
@@ -224,11 +273,12 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _ColorGradingDark: {r: 0.058314566, g: 0.058314566, b: 0.058314566, a: 1}
     - _ColorGradingLight: {r: 2, g: 2, b: 2, a: 1}
     - _ColorGradingMiddle: {r: 3.031433, g: 3.031433, b: 3.031433, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
