@@ -20,7 +20,7 @@ public class CCreateMapManager : MonoBehaviour
     [SerializeField]
     GameObject[] oSpecFloors;
     [SerializeField]
-    GameObject oTraps;
+    GameObject[] oTraps;
 
     GameObject tfMapParent;
 
@@ -97,9 +97,11 @@ public class CCreateMapManager : MonoBehaviour
 
                 else
                 {
+                    randFloor = Random.Range(0, oTraps.Length);
+
                     Instantiate
                         (
-                            oTraps,
+                            oTraps[randFloor],
                             new Vector3(i * fFloorWidth, 0.0f, j * fFloorHeight),
                             Quaternion.identity,
                             tfMapParent.transform
