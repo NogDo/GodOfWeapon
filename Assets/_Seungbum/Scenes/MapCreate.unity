@@ -393,18 +393,17 @@ MonoBehaviour:
   - {fileID: 4358611856228139948, guid: d7e168f9e464679439ebe422e68545d0, type: 3}
   - {fileID: 448364338502218463, guid: 22afffc3cc7c6bd43a50fcfd8562f1da, type: 3}
   oFloorProps: []
-  oFence:
+  oBasicFences:
   - {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
   - {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+  oSpecFences:
+  - {fileID: 8100435324376370145, guid: 3f63f9bcd284f6d44aa8471a7dd91846, type: 3}
+  - {fileID: 2365486453446267022, guid: b53ba742090285648a993d75ac68dc57, type: 3}
   oFenceEdge: {fileID: 5899413282669452227, guid: 53552e28aa2fea4469d0b4e60f0f1bec, type: 3}
   oBasicWalls:
   - {fileID: 6513753022806347116, guid: 433dab9e9362da2499bda8fec975ae4b, type: 3}
   - {fileID: 6066057059891723652, guid: e61310e24e966ea4999f6b2310972c8e, type: 3}
   - {fileID: 1657073426865252764, guid: 784d2ccd2ccefac46b631998cf5df3db, type: 3}
-  oSpecWalls:
-  - {fileID: 1269534584927720, guid: f8f65ae1f94eaf04fbcab99155e75e5a, type: 3}
-  - {fileID: 1922191612439065, guid: 6733e80b57a79d8448a68839a27b9100, type: 3}
-  - {fileID: 1780987877166868, guid: ee69e0665c025cd4798d6debfecefa70, type: 3}
   oWallProps: []
   oColumn: {fileID: 91277535901414533, guid: 0316319a2b0a7dd4d97ed405f6937b3b, type: 3}
 --- !u!1 &1618382925

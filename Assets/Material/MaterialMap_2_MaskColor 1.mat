@@ -7,10 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MaterialMap_2_NotClone_0 1
-  m_Shader: {fileID: 4800000, guid: e67f79eccca7d154fa72ae581cf39047, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_Name: MaterialMap_2_MaskColor 1
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _EMISSION
+  - _GLOSSYREFLECTIONS_OFF
+  m_InvalidKeywords:
+  - _ENABLEEMISSION
+  - _USECOLORMASKING
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -20,8 +24,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f977b73f117aaba46b088dd19fbe10e7, type: 3}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionGradientTex:
@@ -29,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 2a9b18e1aec6269459d3a89e7a0315a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 50ec079aa715aee46b87fac930ddec69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionTex:
-        m_Texture: {fileID: 2800000, guid: 2a9b18e1aec6269459d3a89e7a0315a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 50ec079aa715aee46b87fac930ddec69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -48,6 +64,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise2Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -57,6 +77,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoughnessTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureNoise:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -74,9 +110,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _AlphaClip: 0
-    - _AlphaClipValue: 0
+    - _AlphaClipTheshold: 0.5
     - _Blend: 0
+    - _Brightness: 1
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -85,56 +123,80 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DirectionalXray: 1
+    - _DissolveIntensity: 0.41
+    - _DissolveNoiseScale: 30
+    - _DissolveStep: 0.1
     - _DstBlend: 0
-    - _ENABLEEMISSION: 0
+    - _ENABLEEMISSION: 1
+    - _ENABLEEMISSIONNOISE: 0
+    - _ENABLEEMISSIONNOISE2: 0
+    - _EmissionAnimation: 0
+    - _EmissionAnimationSpeed: 1
     - _EmissionGradient: 0
     - _EmissionIntensity: 1
+    - _EmissionIntensity2: 1
+    - _EmissionNoise2Power: 0
+    - _EmissionNoise2Speed: 0
     - _EmissionSpeed: 1
     - _EmissionUV2: 0
+    - _EnableEmissionIntensity2: 0
+    - _EnableRoughnessTex: 0
+    - _EnableSmoothControl: 0
     - _EnvironmentReflections: 1
+    - _Flash: 0
+    - _FlickerValue: 1
+    - _FresnelStrength: 5
+    - _GlossFromBlueChannel: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _IsEmissionNoiseEnding: 0
+    - _METALLICFROMUV1: 0
     - _Metallic: 0
     - _MetallicStrength: 1
-    - _NormalBlend: 0
+    - _Mode: 0
+    - _Noise2Distortion: 50
+    - _Noise2Threshold: 0
+    - _NoiseEmissionPower: 1
+    - _NoiseSpeed: 0.5
     - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rotation: 0
+    - _SmoothContorlIntensity: 1
     - _Smoothness: 0.2
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _USECOLORMASKING: 0
-    - _UseEmission: 0
+    - _USECOLORMASKING: 1
+    - _USEDISSOLVE: 0
+    - _UV2AsMetallic: 0
+    - _UVSec: 0
+    - _UseCustomNoise: 0
     - _UseOldMetallicTex: 0
+    - _UseVertex: 0
+    - _UseVertexColorEmission: 0
+    - _VERTEXCOLORMASK: 0
     - _WorkflowMode: 1
-    - _XrayNoise: 20
-    - _XrayOpacity: 1
-    - _XrayRadius: 4
-    - _XraySmoothness: 0.5
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _useDither: 0
-    - _useNoise: 0
-    - _useNormal: 0
-    - _useXRay: 1
-    - _uvIdx: 0
     m_Colors:
     - _BaseColor: {r: 0.865, g: 0.865, b: 0.865, a: 1}
     - _Color: {r: 0.865, g: 0.865, b: 0.865, a: 1}
-    - _Color_1: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 2.6082375, g: 0.2582156, b: 0.3763727, a: 0}
-    - _NoisePanning: {r: 0, g: 0, b: 0, a: 0}
+    - _Color_1: {r: 0.8679245, g: 0.2446706, b: 0, a: 1}
+    - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 4.7593803, g: 0.18446563, b: 0, a: 1}
+    - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
+    - _EmissionNoise2Color: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionNoiseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MainColor: {r: 0.75, g: 0.7323113, b: 0.7323113, a: 0}
+    - _OffsetUV: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _TilingUV: {r: 1, g: 1, b: 0, a: 0}
     - _UVShift: {r: 0, g: 0, b: 0, a: 0}
-    - _UVsOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _XrayPos: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
