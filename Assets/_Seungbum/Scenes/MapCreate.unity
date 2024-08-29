@@ -404,6 +404,9 @@ MonoBehaviour:
   - {fileID: 6513753022806347116, guid: 433dab9e9362da2499bda8fec975ae4b, type: 3}
   - {fileID: 6066057059891723652, guid: e61310e24e966ea4999f6b2310972c8e, type: 3}
   - {fileID: 1657073426865252764, guid: 784d2ccd2ccefac46b631998cf5df3db, type: 3}
+  oSpecWalls:
+  - {fileID: 4879134702257068313, guid: 3129d819686298840a4ebd02099a959e, type: 3}
+  - {fileID: 7367318023953932167, guid: a678a6aa7a8f15041b02b8b6acf8c8e3, type: 3}
   oWallProps: []
   oColumn: {fileID: 91277535901414533, guid: 0316319a2b0a7dd4d97ed405f6937b3b, type: 3}
 --- !u!1 &1618382925

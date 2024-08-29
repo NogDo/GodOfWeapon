@@ -29,6 +29,8 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
     [SerializeField]
     GameObject[] oBasicWalls;
     [SerializeField]
+    GameObject[] oSpecWalls;
+    [SerializeField]
     GameObject[] oWallProps;
     [SerializeField]
     GameObject oColumn;
@@ -48,6 +50,10 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
     int nSpecFencePercent = 20;
     int nColumnFencePercent = 30;
     int nNonColumnFencePercent = 70;
+
+    // 벽 종류 확률
+    int nBasicWallPercent = 80;
+    int nSpecWallPercent = 20;
 
     // 맵 끝 좌표들
     int nMinX;
@@ -90,6 +96,7 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         {
             for (int j = nMinZ; j < nMaxZ; j++)
             {
+                // 0,0 좌표에는 시작 바닥을 생성
                 if (i == 0 && j == 0)
                 {
                     mapPart.AddPart(oStartFloor, Vector3.zero, Vector3.zero, floor.transform);
@@ -101,20 +108,21 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
 
                 Vector3 pos = new Vector3(i * fFloorWidth, 0.0f, j * fFloorLength);
 
+                // 기본 바닥 생성
                 if (randFloorType < nBasicFloorPercent)
                 {
                     randFloor = Random.Range(0, oBasicFloors.Length);
 
                     mapPart.AddPart(oBasicFloors[randFloor], pos, Vector3.zero, floor.transform);
                 }
-
+                // 특수 바닥 생성
                 else if (randFloorType < nBasicFloorPercent + nSpecFloorPercent)
                 {
                     randFloor = Random.Range(0, oSpecFloors.Length);
 
                     mapPart.AddPart(oSpecFloors[randFloor], pos, Vector3.zero, floor.transform);
                 }
-
+                // 함정(방해) 바닥 생성
                 else
                 {
                     randFloor = Random.Range(0, oTraps.Length);
@@ -135,12 +143,36 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         {
             for (int j = 1; j <= 3; j++)
             {
-                int randWall = Random.Range(0, oBasicWalls.Length);
+                int randWallType = Random.Range(0, nBasicWallPercent + nSpecWallPercent);
+                int randWall = 0;
 
                 Vector3 pos = new Vector3(i * fFloorWidth, -j * fFloorHeight, nMinZ * fFloorLength);
                 Vector3 rot = new Vector3(0.0f, 180.0f, 0.0f);
 
-                mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
+                // 마지막줄은 특수벽을 생성하지 않는다.
+                if (j == 3)
+                {
+                    randWall = Random.Range(0, oBasicWalls.Length);
+
+                    mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
+                    continue;
+                }
+
+                // 기본 벽 생성
+                if (randWallType < nBasicWallPercent)
+                {
+                    randWall = Random.Range(0, oBasicWalls.Length);
+
+                    mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
+                }
+                // 특수 벽 생성
+                else
+                {
+                    randWall = Random.Range(0, oSpecWalls.Length);
+
+                    mapPart.AddPart(oSpecWalls[randWall], pos, rot, downWall.transform);
+                }
+
             }
         }
 
@@ -165,6 +197,7 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             {
                 Vector3 pos = new Vector3(i * fFloorWidth, -j * fFloorHeight, nMinZ * fFloorLength);
 
+                // 마지막 벽일 경우 기둥을 생성
                 if (i == nMaxX - 1)
                 {
                     pos.x += 4.0f;
@@ -173,6 +206,7 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
                     continue;
                 }
 
+                // 2칸씩 떨어져 기둥을 생성
                 if ((i - nMinX) % 2 == 0)
                 {
                     mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
@@ -209,22 +243,24 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             Vector3 pos1 = new Vector3(i * fFloorWidth, 0.0f, nMinZ * fFloorLength);
             Vector3 pos2 = new Vector3(i * fFloorWidth, 0.0f, nMaxZ * fFloorLength);
 
+            // 기본 울타리 생성
             if (randFenceType1 < nBasicFencePercent)
             {
                 mapPart.AddPart(oBasicFences[randFence1], pos1, Vector3.zero, upWall.transform);
             }
-
+            // 특수 울타리 생성
             else
             {
                 pos1.x += 4.0f;
                 mapPart.AddPart(oSpecFences[randFence1], pos1, new Vector3(0.0f, 180.0f, 0.0f), upWall.transform);
             }
 
+            // 기본 울타리 생성
             if (randFenceType2 < nBasicFencePercent)
             {
                 mapPart.AddPart(oBasicFences[randFence2], pos2, Vector3.zero, upWall.transform);
             }
-
+            // 특수 울타리 생성
             else
             {
                 mapPart.AddPart(oSpecFences[randFence2], pos2, Vector3.zero, upWall.transform);
@@ -245,21 +281,23 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
 
             Vector3 rot = new Vector3(0.0f, -90.0f, 0.0f);
 
+            // 기본 울타리 생성
             if (randFenceType1 < nBasicFencePercent)
             {
                 mapPart.AddPart(oBasicFences[randFence1], pos1, rot, upWall.transform);
             }
-
+            // 특수 울타리 생성
             else
             {
                 mapPart.AddPart(oSpecFences[randFence1], pos1, rot, upWall.transform);
             }
 
+            // 기본 울타리 생성
             if (randFenceType2 < nBasicFencePercent)
             {
                 mapPart.AddPart(oBasicFences[randFence2], pos2, rot, upWall.transform);
             }
-
+            // 특수 울타리 생성
             else
             {
                 rot.y += -180.0f;
@@ -268,6 +306,7 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             }
         }
 
+        // 모서리 네곳에 기둥을 생성
         mapPart.AddPart(oFenceEdge, new Vector3(nMinX * fFloorWidth, 0.0f, nMinZ * fFloorLength), Vector3.zero, upWall.transform);
         mapPart.AddPart(oFenceEdge, new Vector3(nMinX * fFloorWidth, 0.0f, nMaxZ * fFloorLength), Vector3.zero, upWall.transform);
         mapPart.AddPart(oFenceEdge, new Vector3(nMaxX * fFloorWidth, 0.0f, nMaxZ * fFloorLength), Vector3.zero, upWall.transform);
@@ -277,11 +316,5 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
     public void BuildDeco()
     {
         // 바닥에 생성될 데코
-
-
-        // 울타리에 생성될 데코
-
-
-        // 벽에 생성될 데코
     }
 }
