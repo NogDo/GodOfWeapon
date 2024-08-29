@@ -10,12 +10,14 @@ public class SwordController : WeaponController, ISwing, IPierce
     private bool isSwing = false;
     private int patternCount;
     private Animator anim;
+
     #endregion
     public override void Start()
     {
         base.Start();
         patternCount = Random.Range(0, 10);
         anim = GetComponentInChildren<Animator>();
+        
     }
 
     private void Update()
