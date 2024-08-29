@@ -36,8 +36,11 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
     float fFloorHeight = 4.0f;
 
     int nBasicFloorPercent = 75;
-    int nSpecFloorPercent = 20;
-    int nTrapPercent = 5;
+    int nSpecFloorPercent = 22;
+    int nTrapPercent = 3;
+
+    int nColumnFencePercent = 30;
+    int nNonColumnFencePercent = 70;
 
     int nMinX;
     int nMaxX;
@@ -189,27 +192,29 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         // 가로 울타리
         for (int i = nMinX; i < nMaxX; i++)
         {
-            int randFence = Random.Range(0, oFence.Length);
+            int randFence1 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
+            int randFence2 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
 
             Vector3 pos1 = new Vector3(i * fFloorWidth, 0.0f, nMinZ * fFloorLength);
             Vector3 pos2 = new Vector3(i * fFloorWidth, 0.0f, nMaxZ * fFloorLength);
 
-            mapPart.AddPart(oFence[randFence], pos1, Vector3.zero, upWall.transform);
-            mapPart.AddPart(oFence[randFence], pos2, Vector3.zero, upWall.transform);
+            mapPart.AddPart(oFence[randFence1], pos1, Vector3.zero, upWall.transform);
+            mapPart.AddPart(oFence[randFence2], pos2, Vector3.zero, upWall.transform);
         }
 
         // 세로 울타리
         for (int i = nMinZ; i < nMaxZ; i++)
         {
-            int randFence = Random.Range(0, oFence.Length);
+            int randFence1 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
+            int randFence2 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
 
             Vector3 pos1 = new Vector3(nMinX * fFloorWidth, 0.0f, i * fFloorLength);
             Vector3 pos2 = new Vector3(nMaxX * fFloorWidth, 0.0f, i * fFloorLength);
 
             Vector3 rot = new Vector3(0.0f, -90.0f, 0.0f);
 
-            mapPart.AddPart(oFence[randFence], pos1, rot, upWall.transform);
-            mapPart.AddPart(oFence[randFence], pos2, rot, upWall.transform);
+            mapPart.AddPart(oFence[randFence1], pos1, rot, upWall.transform);
+            mapPart.AddPart(oFence[randFence2], pos2, rot, upWall.transform);
         }
 
         mapPart.AddPart(oFenceEdge, new Vector3(nMinX * fFloorWidth, 0.0f, nMinZ * fFloorLength), Vector3.zero, upWall.transform);
