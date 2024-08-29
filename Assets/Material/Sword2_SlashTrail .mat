@@ -8,8 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 'Sword2_SlashTrail '
-  m_Shader: {fileID: 101, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _ALPHABLEND_ON
+  - _EMISSION
   m_InvalidKeywords:
   - MASK_ON
   - SHAPE1DISTORT_ON
@@ -18,14 +20,14 @@ Material:
   - SHAPE2SHAPECOLOR_ON
   - SHAPE2_ON
   - SHAPEADD_ON
-  - _ALPHAPREMULTIPLY_ON
-  - _EMISSION
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - GRABPASS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -79,8 +81,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 0.56, y: -0.22}
+        m_Offset: {x: 1.06, y: 0.3}
     - _FadeBurnTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -96,7 +98,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 4faca78bc4769c94eb8f06852339b4c7, type: 3}
         m_Scale: {x: 0.56, y: -0.22}
-        m_Offset: {x: 0.52, y: 0.3}
+        m_Offset: {x: 1.06, y: 0.3}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: a134008c8a1f8f64cb7a57570ca0ba94, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -172,6 +174,7 @@ Material:
     - _CameraNearFadeDistance: 1
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
+    - _ColorMode: 0
     - _ColorRampBlend: 0.606
     - _ColorRampLuminosity: -0.095
     - _Cull: 2
@@ -196,7 +199,7 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0.1
-    - _DstBlend: 10
+    - _DstBlend: 1
     - _DstMode: 10
     - _EditorDrawers: 54
     - _EmissionEnabled: 1
@@ -235,12 +238,12 @@ Material:
     - _InvertAlbedoA1: 0
     - _InvertFresnelFade: 0
     - _LightAmount: 0
-    - _LightingEnabled: 1
+    - _LightingEnabled: 0
     - _MaskPow: 1.5
     - _Metallic: 0
     - _MetallicDecal: 0.2
     - _MiddlePointPos: 0.5
-    - _Mode: 3
+    - _Mode: 4
     - _MultiplyNoiseDesaturation: 1
     - _OcclusionStrength: 1
     - _OffsetSh1: 1
@@ -329,7 +332,7 @@ Material:
     - _SoftParticlesNearFadeDistance: 0
     - _SourceBlendRGB: 10
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcMode: 5
     - _Surface: 0
     - _TextureScrollXSpeed: 1
@@ -368,6 +371,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _ColorCubemap: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDecal: {r: 1, g: 1, b: 1, a: 1}
     - _ColorFresnel1: {r: 1, g: 1, b: 1, a: 0}
