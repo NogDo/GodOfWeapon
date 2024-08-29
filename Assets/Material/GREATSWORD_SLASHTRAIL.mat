@@ -8,8 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GREATSWORD_SLASHTRAIL
-  m_Shader: {fileID: 210, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _ALPHABLEND_ON
+  - _COLOROVERLAY_ON
   m_InvalidKeywords:
   - MASK_ON
   - SHAPE1DISTORT_ON
@@ -19,8 +21,9 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses:
   - GRABPASS
   m_SavedProperties:
@@ -46,7 +49,15 @@ Material:
         m_Texture: {fileID: 2800000, guid: 61f750cb124da7e41a6013c83b31e0b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissionGradientTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.75, y: 2}
+        m_Offset: {x: 2.03, y: 0}
+    - _EmissionTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -65,12 +76,20 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 4faca78bc4769c94eb8f06852339b4c7, type: 3}
         m_Scale: {x: 0.75, y: 2}
-        m_Offset: {x: -1.14, y: 0}
+        m_Offset: {x: 2.03, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: fe7bffc9add14894c8b6f06376c86dee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -98,6 +117,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 61f750cb124da7e41a6013c83b31e0b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TrailWidthGradient:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -106,15 +129,30 @@ Material:
         m_Texture: {fileID: 2800000, guid: b4d957af1a41b1e45931c24acd64acf7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Alpha: 1
+    - _AlphaClip: 0
+    - _AlphaClipTheshold: 0.5
     - _AlphaCutoffValue: 0.25
     - _AlphaFadeAmount: -0.1
     - _AlphaFadePow: 1
     - _AlphaFadeSmooth: 0.075
     - _AlphaStepMax: 0.479
     - _AlphaStepMin: 0.067
+    - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1
     - _CamDistFadeStepMax: 100
@@ -123,8 +161,10 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
+    - _CastShadows: 1
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
+    - _ColorMode: 3
     - _ColorRampBlend: 0.606
     - _ColorRampLuminosity: -0.095
     - _Cull: 2
@@ -135,6 +175,9 @@ Material:
     - _DepthGlowDist: 0.01
     - _DepthGlowGlobal: 1
     - _DepthGlowPow: 2.94
+    - _DissolveIntensity: 0.41
+    - _DissolveNoiseScale: 30
+    - _DissolveStep: 0.1
     - _DistortAmount: 0.5
     - _DistortTexXSpeed: 5
     - _DistortTexYSpeed: 5
@@ -145,10 +188,16 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
-    - _DstBlend: 0
+    - _DstBlend: 1
     - _DstMode: 10
+    - _ENABLEEMISSION: 0
     - _EditorDrawers: 54
+    - _EmissionAnimation: 0
+    - _EmissionAnimationSpeed: 1
     - _EmissionEnabled: 0
+    - _EmissionIntensity: 1
+    - _EmissionIntensity2: 1
+    - _EnableEmissionIntensity2: 0
     - _FadeAmount: -0.1
     - _FadeBurnGlow: 5
     - _FadeBurnWidth: 0.01
@@ -157,6 +206,7 @@ Material:
     - _FadeScrollYSpeed: 0
     - _FadeTransition: 0.075
     - _FlipbookMode: 0
+    - _GlossFromBlueChannel: 0
     - _Glossiness: 0.5
     - _Glow: 0
     - _GlowGlobal: 7.02
@@ -166,18 +216,23 @@ Material:
     - _HsvSaturation: 1
     - _HsvShift: 180
     - _LightAmount: 0
-    - _LightingEnabled: 1
+    - _LightingEnabled: 0
     - _MaskPow: 1
     - _Metallic: 0
-    - _Mode: 0
+    - _MetallicStrength: 1
+    - _Mode: 4
+    - _NormalStrength: 1
     - _OffsetSh1: 1
     - _OffsetSh2: 1
     - _OffsetSh3: 1
     - _PixelateSize: 75
     - _PosterizeNumColors: 1
+    - _QueueControl: -1
+    - _QueueOffset: 0
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
+    - _ReceiveShadows: 1
     - _RenderingMode: 0
     - _RimAddAmount: 1
     - _RimBias: 0
@@ -233,12 +288,14 @@ Material:
     - _ShapeRotationSpeed: 0
     - _ShapeXSpeed: 0
     - _ShapeYSpeed: 0
+    - _Smoothness: 1
     - _SoftFactor: 2.137
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcMode: 5
+    - _Surface: 0
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
     - _TimingSeed: 0
@@ -247,6 +304,12 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.28
+    - _USEDISSOLVE: 0
+    - _UV2AsMetallic: 0
+    - _UseCustomNoise: 0
+    - _UseVertex: 0
+    - _UseVertexColorEmission: 0
+    - _VERTEXCOLORMASK: 0
     - _VertOffsetAmount: 0.5
     - _VertOffsetPower: 1
     - _VertOffsetTexXSpeed: 0.1
@@ -256,24 +319,33 @@ Material:
     - _WaveStrength: 7.5
     - _WaveX: 0
     - _WaveY: 0.5
+    - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZTestMode: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
     - _BackFaceTint: {r: 1, g: 0.6650944, b: 0.6650944, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OffsetUV: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
     - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _TilingUV: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

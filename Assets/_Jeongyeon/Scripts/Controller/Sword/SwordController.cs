@@ -5,24 +5,15 @@ using UnityEngine;
 public class SwordController : WeaponController, ISwing, IPierce
 {
     #region public Fields
+    public GameObject[] particle;
+    public int patternCount;
     #endregion
     #region private Fields
-    private bool isSwing = false;
-    private int patternCount;
-    private Animator anim;
-
     #endregion
-    public override void Start()
-    {
-        base.Start();
-        patternCount = Random.Range(0, 10);
-        anim = GetComponentInChildren<Animator>();
-        
-    }
 
-    private void Update()
+    public virtual void Update()
     {
-        if (FindTarget() == true && isAttacking ==false)
+        if (FindTarget() == true && isAttacking == false)
         {
             if (patternCount % 2 == 0)
             {
@@ -34,13 +25,13 @@ public class SwordController : WeaponController, ISwing, IPierce
             }
         }
     }
-    public IEnumerator PreParePierce(float setY)
+    public virtual IEnumerator PreParePierce(float setY)
     {
         attackParent.transform.position = startParent.transform.position;
         attackParent.transform.rotation = startParent.transform.rotation;
         gameObject.transform.parent = attackParent.transform;
 
-        endRotatePosition = transform.forward * -1.0f;
+        endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         float time = 0.0f;
         float duration = 0.4f;
@@ -59,11 +50,12 @@ public class SwordController : WeaponController, ISwing, IPierce
         yield return null;
     }
 
-    public IEnumerator Pierce()
+    public virtual IEnumerator Pierce()
     {
         float time = 0.0f;
         float duration = 0.5f;
         enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
+        //particle[0].SetActive(true);
         while (time <= duration)
         {
             transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
@@ -71,13 +63,14 @@ public class SwordController : WeaponController, ISwing, IPierce
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
+        //particle[0].SetActive(false);
         StartCoroutine(EndAttack(transform));
-        patternCount++;
+        //patternCount++;
         yield return null;
     }
 
 
-    public IEnumerator PrePareSwing(float setY)
+    public virtual IEnumerator PrePareSwing(float setY)
     {
         attackParent.transform.position = startParent.transform.position;
         attackParent.transform.rotation = startParent.transform.rotation;
@@ -99,25 +92,17 @@ public class SwordController : WeaponController, ISwing, IPierce
         yield return null;
     }
 
-    public IEnumerator Swing()
+    public virtual IEnumerator Swing()
     {
-        anim.SetTrigger("isSwing");
-        isSwing = true;
+        //anim.SetTrigger("isSwing");
+        //isSwing = true;
+        //particle[1].SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        isSwing = false;
-        Debug.Log("Swing");
+        //isSwing = false;
+        //particle[1].SetActive(false);
         StartCoroutine(EndAttack(transform));
-        patternCount++;
+        //patternCount++;
         yield return null;
     }
 
-    public void IsFinish()
-    {
-        isSwing = false;
-    }
-
-    public void IsStart()
-    {
-        isSwing = true;
-    }
 }
