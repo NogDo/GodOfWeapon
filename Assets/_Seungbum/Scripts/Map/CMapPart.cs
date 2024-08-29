@@ -9,8 +9,10 @@ public class CMapPart : MonoBehaviour
     /// </summary>
     /// <param name="part">추가할 오브젝트</param>
     /// <param name="pos">배치 위치</param>
-    public void AddPart(GameObject part, Vector3 pos, Vector3 rot)
+    /// <param name="rot">회전값</param>
+    /// <param name="parent">부모</param>
+    public void AddPart(GameObject part, Vector3 pos, Vector3 rot, Transform parent)
     {
-        Instantiate(part, pos, Quaternion.Euler(rot), transform);
+        Instantiate(part, pos, Quaternion.Euler(rot), parent);
     }
 }

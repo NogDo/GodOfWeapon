@@ -9,6 +9,8 @@ public class CCreateMapManager : MonoBehaviour
     #endregion
 
     #region private 변수
+    CMap map;
+
     CMapFloorBuilder floorBuilder;
     #endregion
 
@@ -33,11 +35,9 @@ public class CCreateMapManager : MonoBehaviour
     /// <param name="maxZ">세로 최대값</param>
     public void CreateMap(int minX, int maxX, int minZ, int maxZ)
     {
-        GameObject map = GameObject.Find("Map");
+        map = GameObject.Find("Map").GetComponent<CMap>();
 
-        floorBuilder = map.transform.GetChild(0).GetComponent<CMapFloorBuilder>();
-
-        floorBuilder.CreateMapPart(minX, maxX, minZ, maxZ);
+        map.SetFloorPart(minX, maxX, minZ, maxZ);
 
         map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
     }
