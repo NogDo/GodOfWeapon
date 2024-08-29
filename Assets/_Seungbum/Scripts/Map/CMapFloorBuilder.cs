@@ -237,8 +237,8 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             int randFenceType1 = Random.Range(0, nBasicFencePercent + nSpecFencePercent);
             int randFenceType2 = Random.Range(0, nBasicFencePercent + nSpecFencePercent);
 
-            int randFence1 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
-            int randFence2 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
+            int randFence1 = 0;
+            int randFence2 = 0;
 
             Vector3 pos1 = new Vector3(i * fFloorWidth, 0.0f, nMinZ * fFloorLength);
             Vector3 pos2 = new Vector3(i * fFloorWidth, 0.0f, nMaxZ * fFloorLength);
@@ -246,11 +246,15 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             // 기본 울타리 생성
             if (randFenceType1 < nBasicFencePercent)
             {
+                randFence1 = Random.Range(0, oBasicFences.Length);
+
                 mapPart.AddPart(oBasicFences[randFence1], pos1, Vector3.zero, upWall.transform);
             }
             // 특수 울타리 생성
             else
             {
+                randFence1 = Random.Range(0, oSpecFences.Length);
+
                 pos1.x += 4.0f;
                 mapPart.AddPart(oSpecFences[randFence1], pos1, new Vector3(0.0f, 180.0f, 0.0f), upWall.transform);
             }
@@ -258,11 +262,15 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             // 기본 울타리 생성
             if (randFenceType2 < nBasicFencePercent)
             {
+                randFence2 = Random.Range(0, oBasicFences.Length);
+
                 mapPart.AddPart(oBasicFences[randFence2], pos2, Vector3.zero, upWall.transform);
             }
             // 특수 울타리 생성
             else
             {
+                randFence2 = Random.Range(0, oSpecFences.Length);
+
                 mapPart.AddPart(oSpecFences[randFence2], pos2, Vector3.zero, upWall.transform);
             }
         }
@@ -273,8 +281,8 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             int randFenceType1 = Random.Range(0, nBasicFencePercent + nSpecFencePercent);
             int randFenceType2 = Random.Range(0, nBasicFencePercent + nSpecFencePercent);
 
-            int randFence1 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
-            int randFence2 = (Random.Range(0, nColumnFencePercent + nNonColumnFencePercent) < 30) ? 0 : 1;
+            int randFence1 = 0;
+            int randFence2 = 0;
 
             Vector3 pos1 = new Vector3(nMinX * fFloorWidth, 0.0f, i * fFloorLength);
             Vector3 pos2 = new Vector3(nMaxX * fFloorWidth, 0.0f, i * fFloorLength);
@@ -284,22 +292,30 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
             // 기본 울타리 생성
             if (randFenceType1 < nBasicFencePercent)
             {
+                randFence1 = Random.Range(0, oBasicFences.Length);
+
                 mapPart.AddPart(oBasicFences[randFence1], pos1, rot, upWall.transform);
             }
             // 특수 울타리 생성
             else
             {
+                randFence1 = Random.Range(0, oSpecFences.Length);
+
                 mapPart.AddPart(oSpecFences[randFence1], pos1, rot, upWall.transform);
             }
 
             // 기본 울타리 생성
             if (randFenceType2 < nBasicFencePercent)
             {
+                randFence2 = Random.Range(0, oBasicFences.Length);
+
                 mapPart.AddPart(oBasicFences[randFence2], pos2, rot, upWall.transform);
             }
             // 특수 울타리 생성
             else
             {
+                randFence2 = Random.Range(0, oSpecFences.Length);
+
                 rot.y += -180.0f;
                 pos2.z += 4.0f;
                 mapPart.AddPart(oSpecFences[randFence2], pos2, rot, upWall.transform);

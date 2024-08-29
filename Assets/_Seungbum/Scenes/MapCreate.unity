@@ -399,6 +399,10 @@ MonoBehaviour:
   oSpecFences:
   - {fileID: 8100435324376370145, guid: 3f63f9bcd284f6d44aa8471a7dd91846, type: 3}
   - {fileID: 2365486453446267022, guid: b53ba742090285648a993d75ac68dc57, type: 3}
+  - {fileID: 6624581887293860747, guid: c5d7a18eee3b5ff4d9c7d48ba091db95, type: 3}
+  - {fileID: 4362044838782975929, guid: c796a92c9278bf248b7875e1e5438ba0, type: 3}
+  - {fileID: 748615634028526997, guid: 118da2d79a554f54d970e022dbcc6bb7, type: 3}
+  - {fileID: 2004356959999082386, guid: b4b86b50d8ff01942beb2d5b11409120, type: 3}
   oFenceEdge: {fileID: 5899413282669452227, guid: 53552e28aa2fea4469d0b4e60f0f1bec, type: 3}
   oBasicWalls:
   - {fileID: 6513753022806347116, guid: 433dab9e9362da2499bda8fec975ae4b, type: 3}
