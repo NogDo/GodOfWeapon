@@ -12,7 +12,20 @@ public class CCreateMapManager : MonoBehaviour
     CMap map;
 
     CMapFloorBuilder floorBuilder;
+
+    bool isCreateMap = false;
     #endregion
+
+    /// <summary>
+    /// ¸ÊÀÌ ¿Ï¼º µÆ´ÂÁö.
+    /// </summary>
+    public bool IsCreateMap
+    {
+        get
+        {
+            return isCreateMap;
+        }
+    }
 
     private void Awake()
     {
@@ -40,5 +53,7 @@ public class CCreateMapManager : MonoBehaviour
         map.SetFloorPart(minX, maxX, minZ, maxZ);
 
         map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
+
+        isCreateMap = true;
     }
 }
