@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -10,12 +11,18 @@ public class Character : MonoBehaviour
     public Transform playerModel;
     public Transform cameraTransform;
     public Transform cameraParentTransform;
+
+    public GameObject[] afterImage;
     #endregion
 
     #region private
     private CharacterController playerController;
     private Animator anim;
     private Vector3 run;
+    private int dashCount = 1;
+    private int currentDashCount;
+    private Vector3 dashDirection;
+    private SMRCreator smrCreator;
     #endregion
 
     public void Awake()
@@ -26,19 +33,23 @@ public class Character : MonoBehaviour
         cameraParentTransform = cameraTransform.parent;
         playerController = GetComponent<CharacterController>();
         anim = playerModel.GetComponent<Animator>();
+        currentDashCount = dashCount;
+        smrCreator = GetComponent<SMRCreator>();
+        CreatAfterImage();
     }
 
     public void Update()
     {
-        if (playerController.isGrounded)
-        {
-            MovePlayer();
-        }
-        else
-        {
-            MovePlayer();
-        }
+        MovePlayer();
         playerController.Move(run * Time.deltaTime);
+        if (currentDashCount > 0)
+        { 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StartCoroutine(Dash());
+            } 
+        }
+        
     }
 
     public void MovePlayer()
@@ -70,6 +81,7 @@ public class Character : MonoBehaviour
                     20.0f * Time.deltaTime
                 );
             run = Vector3.MoveTowards(run, move, moveSpeed);
+            dashDirection = run;
             if (run != Vector3.zero)
             {
                 
@@ -91,5 +103,38 @@ public class Character : MonoBehaviour
 
         anim.SetFloat("aSpeed", speed);
 
+    }
+    private void CreatAfterImage()
+    {
+        for (int i = 0; i < afterImage.Length; i++)
+        {
+            smrCreator.Setup(afterImage[i].GetComponent<SkinnedMeshRenderer>(), 7, 0.2f);
+           
+        }
+    }
+    public IEnumerator Dash()
+    {
+        currentDashCount--;
+        float time = 0;
+        float dashTime = 0.3f;
+        float dashSpeed = 3f;
+        anim.SetBool("isDash", true);
+        smrCreator.Create(true);
+        while (time <= dashTime)
+        {
+            playerController.Move(dashDirection * dashSpeed * Time.deltaTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        anim.SetBool("isDash", false);
+        smrCreator.Create(false);
+        StartCoroutine(DashCoolTime());
+        yield return null;
+    }
+
+    private IEnumerator DashCoolTime()
+    {
+        yield return new WaitForSeconds(2.0f);
+        currentDashCount++;
     }
 }
