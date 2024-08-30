@@ -26,7 +26,7 @@ public class Camer : MonoBehaviour
     }
     void CameraDistanceControll()
     {
-        Camera.main.transform.localPosition = new Vector3(0, 2, -9);
+        Camera.main.transform.localPosition = new Vector3(0, 4, -10);
         Camera.main.transform.localRotation = Quaternion.Euler(38, 0, 0);
         
     }
