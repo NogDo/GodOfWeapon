@@ -13,6 +13,7 @@ public class WeaponController : MonoBehaviour
     #endregion
 
     #region private Fields
+    private Vector3 startScale;
     #endregion
 
     #region protected Fields
@@ -31,6 +32,7 @@ public class WeaponController : MonoBehaviour
         attackParent.transform.position = gameObject.transform.parent.position;
         attackParent.transform.rotation = gameObject.transform.parent.rotation;
         attackParent.transform.localScale = gameObject.transform.parent.localScale;
+        startScale = gameObject.transform.localScale;
     }
   
     /// <summary>
@@ -81,9 +83,10 @@ public class WeaponController : MonoBehaviour
     /// <returns></returns>
     public virtual IEnumerator EndAttack(Transform startPostion)
     {
+        gameObject.transform.localScale = startScale;
         gameObject.transform.parent = startParent.transform;
         float time = 0.0f;
-        float duration = 0.1f;
+        float duration = 0.3f;
         while (time <= duration)
         {
             transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / duration);

@@ -8,17 +8,18 @@ public class SMRCreator : MonoBehaviour
     private Material afterImageMaterial;
 
     #region Public Fields
+    public Transform parentTransform;
     #endregion
 
     #region Private Fields
-    private SkinnedMeshRenderer smr;
-    private AfterImage[] afterImages;
+    private SkinnedMeshRenderer[] smrs;
+    private AfterImage[][] afterImages;
 
     private int afterImageCount;
     private int currentIndex;
     private float remainingTime;
     private float interval;
-    private Coroutine createCoroutine = null;
+    private Coroutine[] createCoroutine = null;
 
     bool isCreating = false;
     #endregion
@@ -26,31 +27,34 @@ public class SMRCreator : MonoBehaviour
     /// <summary>
     /// 잔상 이미지의 설정값을 넣는 메서드
     /// </summary>
-    /// <param name="smr">생성을 담당하는 스킨드메쉬랜더러</param>
+    /// <param name="smrs">생성을 담당하는 스킨드메쉬랜더러</param>
     /// <param name="count">잔상의 갯수를 설정</param>
     /// <param name="remainTime">소환시간을 설정</param>
-    public void Setup(SkinnedMeshRenderer smr, int count, float remainTime)
+    public void Setup(SkinnedMeshRenderer[] smrs, int count, float remainTime)
     {
-        this.smr = smr;
+        this.smrs = smrs;
         afterImageCount = count;
         remainingTime = remainTime;
-        interval = remainingTime/ (float)afterImageCount;
-        Debug.Log($"AfterImage Created");
+        interval = remainingTime / (float)afterImageCount;
         CreateImageClone();
     }
 
     /// <summary>
-    /// 설정값을 생성해야될 잔상에 적용하는 함수
+    /// 설정값 만큼의 잔상을 생성하는 메서드
     /// </summary>
     private void CreateImageClone()
     {
-       
-        afterImages = new AfterImage[afterImageCount];
-        for (int i = 0; i < afterImages.Length; i++)
+        afterImages = new AfterImage[smrs.Length][]; 
+
+        for (int i = 0; i < smrs.Length; i++)
         {
-            GameObject obj = new GameObject();
-            afterImages[i] = obj.AddComponent<AfterImage>();
-            afterImages[i].Init(afterImageMaterial);
+            afterImages[i] = new AfterImage[afterImageCount];
+            for (int j = 0; j < afterImages[i].Length; j++)
+            {
+                GameObject obj = new GameObject();
+                afterImages[i][j] = obj.AddComponent<AfterImage>();
+                afterImages[i][j].Init(afterImageMaterial);
+            }
         }
     }
 
@@ -65,7 +69,11 @@ public class SMRCreator : MonoBehaviour
         {
             if (createCoroutine == null)
             {
-                createCoroutine = StartCoroutine(CreateImage());
+                createCoroutine = new Coroutine[smrs.Length]; 
+                for (int i = 0; i < smrs.Length; i++)
+                {
+                    createCoroutine[i] = StartCoroutine(CreateImage(i));
+                }
             }
         }
     }
@@ -73,7 +81,7 @@ public class SMRCreator : MonoBehaviour
     ///  잔상을 생성하는 코루틴
     /// </summary>
     /// <returns></returns>
-    private IEnumerator CreateImage()
+    private IEnumerator CreateImage(int index)
     {
         float time = 0;
         while (isCreating)
@@ -81,8 +89,8 @@ public class SMRCreator : MonoBehaviour
             time += Time.deltaTime;
             if (time >= interval)
             {
-                smr.BakeMesh(afterImages[currentIndex].Mesh);
-                afterImages[currentIndex].Create(transform.position, transform.rotation, remainingTime);
+                smrs[index].BakeMesh(afterImages[index][currentIndex].Mesh);
+                afterImages[index][currentIndex].Create(parentTransform.parent.position, parentTransform.rotation, remainingTime);
                 currentIndex = (currentIndex + 1) % afterImageCount;
                 time -= interval;
             }

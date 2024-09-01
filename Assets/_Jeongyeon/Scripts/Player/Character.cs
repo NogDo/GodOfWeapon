@@ -106,11 +106,12 @@ public class Character : MonoBehaviour
     }
     private void CreatAfterImage()
     {
+        SkinnedMeshRenderer[] afterImageRenderer = new SkinnedMeshRenderer[afterImage.Length];
         for (int i = 0; i < afterImage.Length; i++)
         {
-            smrCreator.Setup(afterImage[i].GetComponent<SkinnedMeshRenderer>(), 7, 0.2f);
-           
+            afterImageRenderer[i] = afterImage[i].GetComponent<SkinnedMeshRenderer>();
         }
+            smrCreator.Setup(afterImageRenderer, 7, 0.25f);  
     }
     public IEnumerator Dash()
     {

@@ -58,8 +58,9 @@ public class AfterImage : MonoBehaviour
     {
         while (time > 0f)
         {
+            float alpha = originAlpha / 4 * time;
+            aiMaterial.color = new Color(0.3f, 0.3f, 0.3f, alpha);
             time -= Time.deltaTime;
-            aiMaterial.color = new Color(aiMaterial.color.r, aiMaterial.color.g, aiMaterial.color.b, originAlpha * time);
             yield return null;
         }
         gameObject.SetActive(false);
