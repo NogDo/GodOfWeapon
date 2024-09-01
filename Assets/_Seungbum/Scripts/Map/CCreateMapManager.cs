@@ -4,14 +4,31 @@ using UnityEngine;
 
 public class CCreateMapManager : MonoBehaviour
 {
+    public struct STMapSize
+    {
+        public int minX;
+        public int maxX;
+        public int minZ;
+        public int maxZ;
+
+        public STMapSize(int minX, int maxX, int minZ, int maxZ)
+        {
+            this.minX = minX;
+            this.maxX = maxX;
+            this.minZ = minZ;
+            this.maxZ = maxZ;
+        }
+    }
+
     #region static 변수
     public static CCreateMapManager Instance { get; private set; }
     #endregion
 
     #region private 변수
     CMap map;
-
     CMapFloorBuilder floorBuilder;
+
+    STMapSize mapSize;
 
     bool isCreateMap = false;
     #endregion
@@ -27,6 +44,18 @@ public class CCreateMapManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 맵 크기
+    /// </summary>
+    public STMapSize MapSize
+
+    {
+        get
+        {
+            return mapSize;
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -36,7 +65,20 @@ public class CCreateMapManager : MonoBehaviour
 
     private void Start()
     {
-        CreateMap(-1, 5, -1, 10);
+        SetMapSize(-1, 5, -1, 10);
+        CreateMap();
+    }
+
+    /// <summary>
+    /// 맵 크기를 지정한다.
+    /// </summary>
+    /// <param name="minX">가로 최소값</param>
+    /// <param name="maxX">가로 최대값</param>
+    /// <param name="minZ">세로 최소값</param>
+    /// <param name="maxZ">세로 최대값</param>
+    public void SetMapSize(int minX, int maxX, int minZ, int maxZ)
+    {
+        mapSize = new STMapSize(minX, maxX, minZ, maxZ);
     }
 
     /// <summary>
@@ -46,13 +88,13 @@ public class CCreateMapManager : MonoBehaviour
     /// <param name="maxX">가로 최대값</param>
     /// <param name="minZ">세로 최소값</param>
     /// <param name="maxZ">세로 최대값</param>
-    public void CreateMap(int minX, int maxX, int minZ, int maxZ)
+    public void CreateMap()
     {
         map = GameObject.Find("Map").GetComponent<CMap>();
 
-        map.SetFloorPart(minX, maxX, minZ, maxZ);
+        map.SetFloorPart(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ);
 
-        map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
+        //map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
 
         isCreateMap = true;
     }
