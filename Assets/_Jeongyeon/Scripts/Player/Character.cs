@@ -40,16 +40,19 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
+        if (playerController.isGrounded == false)
+        {
+            playerController.Move(-(Vector3.up) * 9.8f * Time.deltaTime);
+        }
         MovePlayer();
         playerController.Move(run * Time.deltaTime);
         if (currentDashCount > 0)
-        { 
+        {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 StartCoroutine(Dash());
-            } 
+            }
         }
-        
     }
 
     public void MovePlayer()
@@ -84,7 +87,7 @@ public class Character : MonoBehaviour
             dashDirection = run;
             if (run != Vector3.zero)
             {
-                
+
                 Quaternion characterRotation = Quaternion.LookRotation(run);
                 cameraRotation.x = cameraRotation.z = 0;
                 playerModel.rotation = Quaternion.Slerp
@@ -111,7 +114,7 @@ public class Character : MonoBehaviour
         {
             afterImageRenderer[i] = afterImage[i].GetComponent<SkinnedMeshRenderer>();
         }
-            smrCreator.Setup(afterImageRenderer, 7, 0.25f);  
+        smrCreator.Setup(afterImageRenderer, 7, 0.25f);
     }
     public IEnumerator Dash()
     {

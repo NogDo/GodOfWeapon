@@ -50,12 +50,13 @@ public class ShortSwordController : SwordController
     public override IEnumerator Pierce()
     {
         float time = 0.0f;
-        float duration = 0.5f;
-        enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
+        float duration = 0.3f;
+        transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         while (time <= duration)
         {
-            transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -63,6 +64,29 @@ public class ShortSwordController : SwordController
         particle[0].SetActive(false);
         StartCoroutine(EndAttack(transform));
         patternCount++;
+        yield return null;
+    }
+    public override IEnumerator PrePareSwing(float setY)
+    {
+        attackParent.transform.position = startParent.transform.position;
+        attackParent.transform.rotation = startParent.transform.rotation;
+        gameObject.transform.parent = attackParent.transform;
+
+        isAttacking = true;
+        float time = 0.0f;
+        float duration = 0.4f;
+        transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
+        while (time <= duration)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / duration);
+            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.localRotation = Quaternion.Euler(55, setY, 0);
+        transform.position = enemyTransform.position;
+        StartCoroutine(Swing());
         yield return null;
     }
     public override IEnumerator Swing()

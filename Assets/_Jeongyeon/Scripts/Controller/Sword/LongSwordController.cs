@@ -27,11 +27,12 @@ public class LongSwordController : SwordController
     {
         float time = 0.0f;
         float duration = 0.5f;
-        enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
+        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         while (time <= duration)
         {
-            transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -45,6 +46,7 @@ public class LongSwordController : SwordController
     {
         anim.SetTrigger("isSwing");
         isSwing = true;
+        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         particle[1].SetActive(true);
         yield return new WaitForSeconds(0.5f);
         isSwing = false;

@@ -54,11 +54,11 @@ public class SwordController : WeaponController, ISwing, IPierce
     {
         float time = 0.0f;
         float duration = 0.5f;
-        enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         //particle[0].SetActive(true);
         while (time <= duration)
         {
-            transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -79,10 +79,11 @@ public class SwordController : WeaponController, ISwing, IPierce
         isAttacking = true;
         float time = 0.0f;
         float duration = 0.4f;
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         while (time <= duration)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / duration);
-            transform.position = Vector3.Lerp(transform.transform.position, enemyTransform.position, time / duration);
+            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }

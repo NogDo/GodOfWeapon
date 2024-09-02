@@ -39,10 +39,11 @@ public class SpearController : WeaponController, IPierce
     {
         float time = 0.0f;
         float duration = 0.5f;
-        enemyTransform.position = new Vector3(enemyTransform.position.x, 0, enemyTransform.position.z);
+        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         while (time <= duration)
         {
-            transform.position = Vector3.Lerp(transform.position, enemyTransform.position, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
