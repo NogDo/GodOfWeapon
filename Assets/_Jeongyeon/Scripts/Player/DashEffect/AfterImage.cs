@@ -57,9 +57,8 @@ public class AfterImage : MonoBehaviour
     private IEnumerator FadeOut(float time)
     {
         while (time > 0f)
-        {
-            float alpha = originAlpha / 4 * time;
-            aiMaterial.color = new Color(0.3f, 0.3f, 0.3f, alpha);
+        { 
+            aiMaterial.color = new Color(0.3f, 0.3f, 0.3f, originAlpha * time);
             time -= Time.deltaTime;
             yield return null;
         }
