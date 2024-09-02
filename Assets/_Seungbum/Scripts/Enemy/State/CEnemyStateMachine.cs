@@ -13,6 +13,8 @@ public class CEnemyStateMachine : MonoBehaviour
     CEnemyController enemyController;
 
     CEnemyBaseState currentState;
+
+    bool isFirst = true;
     #endregion
 
     /// <summary>
@@ -71,8 +73,16 @@ public class CEnemyStateMachine : MonoBehaviour
 
     void OnEnable()
     {
-        currentState = spawnState;
-        currentState.OnEnter();
+        if (!isFirst)
+        {
+            currentState = spawnState;
+            currentState.OnEnter();
+        }
+
+        else
+        {
+            isFirst = false;
+        }
     }
 
     void Update()

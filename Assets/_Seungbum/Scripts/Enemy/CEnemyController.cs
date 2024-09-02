@@ -11,6 +11,7 @@ public class CEnemyController : MonoBehaviour, IHittable
     #region public 변수
     public event Action OnSpawn;
     public event Action OnDie;
+    public event Action<float> OnHit;
     #endregion
 
     #region private 변수
@@ -20,6 +21,7 @@ public class CEnemyController : MonoBehaviour, IHittable
 
     Transform tfPlayer;
     Rigidbody rb;
+    Collider col;
     Animator animator;
 
     float fRotationSpeed = 5.0f;
@@ -49,6 +51,7 @@ public class CEnemyController : MonoBehaviour, IHittable
 
         tfPlayer = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
     }
 
@@ -69,9 +72,12 @@ public class CEnemyController : MonoBehaviour, IHittable
 
         transform.localPosition = spawnPoint;
 
+        col.enabled = true;
+
         OnSpawn?.Invoke();
 
         StartCoroutine(AfterSpawn());
+        StartCoroutine(TestDamage());
     }
 
     /// <summary>
@@ -84,11 +90,18 @@ public class CEnemyController : MonoBehaviour, IHittable
 
         stateMachine.ChangeState(stateMachine.ChaseState);
 
-        yield return new WaitForSeconds(1.0f);
-
-        Die();
-
         yield return null;
+    }
+
+
+    IEnumerator TestDamage()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            Hit(Random.Range(10.0f, 50.0f));
+        }
     }
 
     /// <summary>
@@ -107,7 +120,10 @@ public class CEnemyController : MonoBehaviour, IHittable
     /// </summary>
     public void Rotate()
     {
-        Vector3 dir = tfPlayer.position - transform.position;
+        Vector3 playerPosition = tfPlayer.position;
+        playerPosition.y = 0;
+
+        Vector3 dir = playerPosition - transform.position;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * fRotationSpeed);
     }
@@ -120,11 +136,19 @@ public class CEnemyController : MonoBehaviour, IHittable
         {
             Die();
         }
+
+        else
+        {
+            OnHit?.Invoke(damage);
+        }
     }
 
     public void Die()
     {
         stateMachine.ChangeState(stateMachine.DieState);
+
+        col.enabled = false;
+
         OnDie?.Invoke();
 
         StartCoroutine(DeSpawn());
