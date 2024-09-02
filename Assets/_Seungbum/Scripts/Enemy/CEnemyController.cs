@@ -1,12 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+using SystemRandom = System.Random;
+
 public class CEnemyController : MonoBehaviour, IHittable
 {
+    #region public 변수
+    public event Action OnSpawn;
+    public event Action OnDie;
+    #endregion
+
     #region private 변수
     CEnemyInfo enemyInfo;
     CEnemyPool enemyPool;
+    CEnemyStateMachine stateMachine;
 
     Transform tfPlayer;
     Rigidbody rb;
@@ -15,10 +25,27 @@ public class CEnemyController : MonoBehaviour, IHittable
     float fRotationSpeed = 5.0f;
     #endregion
 
+    /// <summary>
+    /// 적 애니메이터
+    /// </summary>
+    public Animator Animator
+    {
+        get
+        {
+            if (animator == null)
+            {
+                animator = GetComponent<Animator>();
+            }
+
+            return animator;
+        }
+    }
+
     void Awake()
     {
         enemyInfo = GetComponent<CEnemyInfo>();
         enemyPool = GetComponentInParent<CEnemyPool>();
+        stateMachine = GetComponent<CEnemyStateMachine>();
 
         tfPlayer = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody>();
@@ -34,14 +61,39 @@ public class CEnemyController : MonoBehaviour, IHittable
 
         transform.position = spawnPoint;
 
-        //StartCoroutine("TestDamage");
+        stateMachine.InitState(stateMachine.SpawnState);
     }
 
     void OnDisable()
     {
         enemyPool.DespawnEnemy(gameObject, enemyInfo.AttackType);
+    }
 
-        //StopCoroutine("TestDamage");
+    /// <summary>
+    /// 적이 맵에 소환되었을 때 실행할 메서드, Spawn Animation을 재생하고 일정시간 이후 State를 변경한다.
+    /// </summary>
+    public void Spawn()
+    {
+        OnSpawn?.Invoke();
+
+        StartCoroutine(AfterSpawn());
+    }
+
+    /// <summary>
+    /// Spawn이후 실행될 코루틴, 일정시간 이후 Spawn 상태를 종료한다.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator AfterSpawn()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        stateMachine.ChangeState(stateMachine.ChaseState);
+
+        yield return new WaitForSeconds(1.0f);
+
+        Die();
+
+        yield return null;
     }
 
     /// <summary>
@@ -77,16 +129,20 @@ public class CEnemyController : MonoBehaviour, IHittable
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        stateMachine.ChangeState(stateMachine.DieState);
+        OnDie?.Invoke();
+
+        StartCoroutine(DeSpawn());
     }
 
-    IEnumerator TestDamage()
+    /// <summary>
+    /// 죽은 적을 일정시간 이후 비활성화 시킨다.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator DeSpawn()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(5.0f);
 
-            Hit(Random.Range(1.0f, 10.0f));
-        }
+        gameObject.SetActive(false);
     }
 }

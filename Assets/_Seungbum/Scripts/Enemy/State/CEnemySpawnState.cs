@@ -11,6 +11,9 @@ public class CEnemySpawnState : CEnemyBaseState
 
     public override void OnEnter()
     {
+        enemyController.Animator.SetBool("isSpawnEnd", false);
+
+        enemyController.Spawn();
     }
 
     public override void OnUpdate()
@@ -19,5 +22,6 @@ public class CEnemySpawnState : CEnemyBaseState
 
     public override void OnExit()
     {
+        enemyController.Animator.SetBool("isSpawnEnd", true);
     }
 }

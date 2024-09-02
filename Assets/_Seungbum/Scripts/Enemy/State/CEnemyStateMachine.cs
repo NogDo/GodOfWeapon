@@ -15,6 +15,50 @@ public class CEnemyStateMachine : MonoBehaviour
     CEnemyBaseState currentState;
     #endregion
 
+    /// <summary>
+    /// Spawn 상태
+    /// </summary>
+    public CEnemySpawnState SpawnState
+    {
+        get
+        {
+            return spawnState;
+        }
+    }
+
+    /// <summary>
+    /// Chase 상태
+    /// </summary>
+    public CEnemyChaseState ChaseState
+    {
+        get
+        {
+            return chaseState;
+        }
+    }
+
+    /// <summary>
+    /// Attack 상태
+    /// </summary>
+    public CEnemyAttackState AttackState
+    {
+        get
+        {
+            return attackState;
+        }
+    }
+
+    /// <summary>
+    /// Die 상태
+    /// </summary>
+    public CEnemyDieState DieState
+    {
+        get
+        {
+            return dieState;
+        }
+    }
+
     void Awake()
     {
         enemyController = GetComponent<CEnemyController>();
@@ -23,8 +67,11 @@ public class CEnemyStateMachine : MonoBehaviour
         chaseState = new CEnemyChaseState(enemyController);
         attackState = new CEnemyAttackState(enemyController);
         dieState = new CEnemyDieState(enemyController);
+    }
 
-        currentState = chaseState;
+    void OnEnable()
+    {
+        currentState = spawnState;
         currentState.OnEnter();
     }
 
@@ -50,6 +97,16 @@ public class CEnemyStateMachine : MonoBehaviour
 
         currentState.OnExit();
         currentState = changeState;
+        currentState.OnEnter();
+    }
+
+    /// <summary>
+    /// 현재 상태를 초기화한다.
+    /// </summary>
+    /// <param name="initState">초기화할 상태</param>
+    public void InitState(CEnemyBaseState initState)
+    {
+        currentState = initState;
         currentState.OnEnter();
     }
 }

@@ -11,13 +11,16 @@ public class CEnemyDieState : CEnemyBaseState
 
     public override void OnEnter()
     {
+        enemyController.Animator.SetBool("isDie", true);
     }
 
     public override void OnUpdate()
     {
+
     }
 
     public override void OnExit()
     {
+
     }
 }
