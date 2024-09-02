@@ -19,6 +19,11 @@ public class CEnemyDieState : CEnemyBaseState
 
     }
 
+    public override void OnFixedUpdate()
+    {
+
+    }
+
     public override void OnExit()
     {
 

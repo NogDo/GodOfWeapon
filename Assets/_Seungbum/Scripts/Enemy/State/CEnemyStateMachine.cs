@@ -61,6 +61,17 @@ public class CEnemyStateMachine : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 현재 상태
+    /// </summary>
+    public CEnemyBaseState CurrentState
+    {
+        get
+        {
+            return currentState;
+        }
+    }
+
     void Awake()
     {
         enemyController = GetComponent<CEnemyController>();
@@ -90,6 +101,14 @@ public class CEnemyStateMachine : MonoBehaviour
         if (currentState != null)
         {
             currentState.OnUpdate();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (currentState != null)
+        {
+            currentState.OnFixedUpdate();
         }
     }
 

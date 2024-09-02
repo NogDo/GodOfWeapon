@@ -98,9 +98,9 @@ public class CEnemyController : MonoBehaviour, IHittable
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
 
-            Hit(Random.Range(10.0f, 50.0f));
+            Hit(Random.Range(0.0f, 10.0f), Random.Range(0.0f, 0.5f));
         }
     }
 
@@ -109,10 +109,9 @@ public class CEnemyController : MonoBehaviour, IHittable
     /// </summary>
     public void Move()
     {
-        transform.Translate(Vector3.forward * enemyInfo.Speed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * enemyInfo.Speed * Time.deltaTime);
 
-        // 충돌로 인해 오브젝트가 계속해서 밀리는 현상을 방지하기 위해 Rigidbody의 속도값을 계속 0으로 초기화
-        rb.velocity = Vector3.zero;
+        rb.MovePosition(rb.position + transform.forward * enemyInfo.Speed * Time.deltaTime);
     }
 
     /// <summary>
@@ -128,7 +127,7 @@ public class CEnemyController : MonoBehaviour, IHittable
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * fRotationSpeed);
     }
 
-    public void Hit(float damage)
+    public void Hit(float damage, float mass)
     {
         enemyInfo.ChangeNowHP(enemyInfo.NowHP - damage);
 
@@ -140,6 +139,12 @@ public class CEnemyController : MonoBehaviour, IHittable
         else
         {
             OnHit?.Invoke(damage);
+
+            if (stateMachine.CurrentState == stateMachine.ChaseState)
+            {
+                rb.velocity = Vector3.zero;
+                rb.MovePosition(rb.position + -transform.forward * mass);
+            }
         }
     }
 
@@ -147,6 +152,7 @@ public class CEnemyController : MonoBehaviour, IHittable
     {
         stateMachine.ChangeState(stateMachine.DieState);
 
+        rb.velocity = Vector3.zero;
         col.enabled = false;
 
         OnDie?.Invoke();

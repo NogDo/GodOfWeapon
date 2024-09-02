@@ -20,6 +20,10 @@ public class CEnemySpawnState : CEnemyBaseState
     {
     }
 
+    public override void OnFixedUpdate()
+    {
+    }
+
     public override void OnExit()
     {
         enemyController.Animator.SetBool("isSpawnEnd", true);
