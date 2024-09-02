@@ -67,4 +67,6 @@ public class LanceController : SpearController
         yield return null;
         StartCoroutine(EndAttack(transform));
     }
+
+    
 }
