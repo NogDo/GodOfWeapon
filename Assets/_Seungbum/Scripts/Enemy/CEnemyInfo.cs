@@ -17,6 +17,7 @@ public class CEnemyInfo : MonoBehaviour
     protected float fSpeed;
     protected float fMaxHp;
     protected float fNowHp;
+    protected float fAttack;
     #endregion
 
     /// <summary>
@@ -60,6 +61,17 @@ public class CEnemyInfo : MonoBehaviour
         get
         {
             return fNowHp;
+        }
+    }
+
+    /// <summary>
+    /// 적 공격력
+    /// </summary>
+    public float Attack
+    {
+        get
+        {
+            return fAttack;
         }
     }
 

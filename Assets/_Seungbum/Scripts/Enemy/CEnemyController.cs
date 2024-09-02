@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using SystemRandom = System.Random;
 
-public class CEnemyController : MonoBehaviour, IHittable
+public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 {
     #region public 변수
     public event Action OnSpawn;
@@ -58,6 +58,11 @@ public class CEnemyController : MonoBehaviour, IHittable
     void OnDisable()
     {
         enemyPool.DespawnEnemy(gameObject, enemyInfo.AttackType);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     /// <summary>
@@ -148,6 +153,11 @@ public class CEnemyController : MonoBehaviour, IHittable
         }
     }
 
+    [Obsolete("mass값을 파라미터로 받는 Hit(float damage, float mass)를 사용하세요.")]
+    public void Hit(float damage)
+    {
+    }
+
     public void Die()
     {
         stateMachine.ChangeState(stateMachine.DieState);
@@ -169,5 +179,10 @@ public class CEnemyController : MonoBehaviour, IHittable
         yield return new WaitForSeconds(5.0f);
 
         gameObject.SetActive(false);
+    }
+
+    public float GetAttackDamage()
+    {
+        return enemyInfo.Attack;
     }
 }
