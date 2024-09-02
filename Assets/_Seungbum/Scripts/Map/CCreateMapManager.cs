@@ -94,7 +94,7 @@ public class CCreateMapManager : MonoBehaviour
 
         map.SetFloorPart(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ);
 
-        //map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
+        map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
 
         isCreateMap = true;
     }

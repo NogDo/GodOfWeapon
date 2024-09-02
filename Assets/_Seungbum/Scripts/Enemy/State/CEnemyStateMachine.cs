@@ -99,14 +99,4 @@ public class CEnemyStateMachine : MonoBehaviour
         currentState = changeState;
         currentState.OnEnter();
     }
-
-    /// <summary>
-    /// 현재 상태를 초기화한다.
-    /// </summary>
-    /// <param name="initState">초기화할 상태</param>
-    public void InitState(CEnemyBaseState initState)
-    {
-        currentState = initState;
-        currentState.OnEnter();
-    }
 }

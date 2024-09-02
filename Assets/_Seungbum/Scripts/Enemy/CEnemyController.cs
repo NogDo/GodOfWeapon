@@ -52,18 +52,6 @@ public class CEnemyController : MonoBehaviour, IHittable
         animator = GetComponent<Animator>();
     }
 
-    void OnEnable()
-    {
-        float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxX * 4.0f);
-        float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxZ * 4.0f);
-
-        Vector3 spawnPoint = new Vector3(randX, 0.0f, randZ);
-
-        transform.position = spawnPoint;
-
-        stateMachine.InitState(stateMachine.SpawnState);
-    }
-
     void OnDisable()
     {
         enemyPool.DespawnEnemy(gameObject, enemyInfo.AttackType);
@@ -74,6 +62,13 @@ public class CEnemyController : MonoBehaviour, IHittable
     /// </summary>
     public void Spawn()
     {
+        float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxX * 4.0f);
+        float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxZ * 4.0f);
+
+        Vector3 spawnPoint = new Vector3(randX, 0.0f, randZ);
+
+        transform.localPosition = spawnPoint;
+
         OnSpawn?.Invoke();
 
         StartCoroutine(AfterSpawn());
