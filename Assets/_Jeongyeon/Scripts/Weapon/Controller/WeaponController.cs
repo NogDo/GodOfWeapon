@@ -33,6 +33,7 @@ public class WeaponController : MonoBehaviour
         attackParent.transform.rotation = gameObject.transform.parent.rotation;
         attackParent.transform.localScale = gameObject.transform.parent.localScale;
         startScale = gameObject.transform.localScale;
+        targetLayer = 1 << 3;
     }
   
     /// <summary>
