@@ -9,6 +9,7 @@ public class CEnemyController : MonoBehaviour, IHittable
     CEnemyPool enemyPool;
 
     Transform tfPlayer;
+    Rigidbody rb;
     Animator animator;
 
     float fRotationSpeed = 5.0f;
@@ -20,6 +21,7 @@ public class CEnemyController : MonoBehaviour, IHittable
         enemyPool = GetComponentInParent<CEnemyPool>();
 
         tfPlayer = GameObject.Find("Player").transform;
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
 
@@ -32,14 +34,14 @@ public class CEnemyController : MonoBehaviour, IHittable
 
         transform.position = spawnPoint;
 
-        StartCoroutine("TestDamage");
+        //StartCoroutine("TestDamage");
     }
 
     void OnDisable()
     {
         enemyPool.DespawnEnemy(gameObject, enemyInfo.AttackType);
 
-        StopCoroutine("TestDamage");
+        //StopCoroutine("TestDamage");
     }
 
     /// <summary>
@@ -48,6 +50,9 @@ public class CEnemyController : MonoBehaviour, IHittable
     public void Move()
     {
         transform.Translate(Vector3.forward * enemyInfo.Speed * Time.deltaTime);
+
+        // 충돌로 인해 오브젝트가 계속해서 밀리는 현상을 방지하기 위해 Rigidbody의 속도값을 계속 0으로 초기화
+        rb.velocity = Vector3.zero;
     }
 
     /// <summary>
