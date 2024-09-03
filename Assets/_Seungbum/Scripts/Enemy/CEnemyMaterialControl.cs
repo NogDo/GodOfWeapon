@@ -6,7 +6,7 @@ public class CEnemyMaterialControl : MonoBehaviour
 {
     #region private º¯¼ö
     [SerializeField]
-    SkinnedMeshRenderer renderer;
+    SkinnedMeshRenderer skin;
 
     [SerializeField]
     Material materialNormal;
@@ -30,7 +30,7 @@ public class CEnemyMaterialControl : MonoBehaviour
     /// </summary>
     public void ChangeMateiral_Die()
     {
-        renderer.material = materialDie;
+        skin.material = materialDie;
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class CEnemyMaterialControl : MonoBehaviour
     /// </summary>
     public void ChangeMaterial_Normal()
     {
-        renderer.material = materialNormal;
+        skin.material = materialNormal;
     }
 
     /// <summary>
@@ -56,11 +56,11 @@ public class CEnemyMaterialControl : MonoBehaviour
     /// <returns></returns>
     IEnumerator OnHit()
     {
-        renderer.material = materialHit;
+        skin.material = materialHit;
 
         yield return new WaitForSeconds(0.1f);
 
-        renderer.material = materialNormal;
+        skin.material = materialNormal;
 
         yield return null;
     }

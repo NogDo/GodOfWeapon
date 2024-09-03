@@ -26,7 +26,7 @@ public class CEnemyPool : MonoBehaviour
     /// <summary>
     /// 풀에 적들을 생성한다.
     /// </summary>
-    public void InitPool()
+    void InitPool()
     {
         for (int i = 0; i < 10; i++)
         {
@@ -66,7 +66,7 @@ public class CEnemyPool : MonoBehaviour
     /// </summary>
     /// <param name="enemy">적 오브젝트</param>
     /// <param name="type">적 공격 타입</param>
-    public void DespawnEnemy(GameObject enemy, EAttackType type)
+    public void ReturnPool(GameObject enemy, EAttackType type)
     {
         switch (type)
         {

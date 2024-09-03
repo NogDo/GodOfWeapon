@@ -25,6 +25,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     Animator animator;
 
     float fRotationSpeed = 5.0f;
+
+    bool isCollision = false;
     #endregion
 
     /// <summary>
@@ -55,20 +57,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         animator = GetComponent<Animator>();
     }
 
-    void OnDisable()
-    {
-        enemyPool.DespawnEnemy(gameObject, enemyInfo.AttackType);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        
-    }
-
-    /// <summary>
-    /// 적이 맵에 소환되었을 때 실행할 메서드, Spawn Animation을 재생하고 일정시간 이후 State를 변경한다.
-    /// </summary>
-    public void Spawn()
+    void OnEnable()
     {
         float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxX * 4.0f);
         float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 1) * 4.0f, CCreateMapManager.Instance.MapSize.maxZ * 4.0f);
@@ -76,7 +65,18 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         Vector3 spawnPoint = new Vector3(randX, 0.0f, randZ);
 
         transform.localPosition = spawnPoint;
+    }
 
+    void OnDisable()
+    {
+        enemyPool.ReturnPool(gameObject, enemyInfo.AttackType);
+    }
+
+    /// <summary>
+    /// 적이 맵에 소환되었을 때 실행할 메서드, Spawn Animation을 재생하고 일정시간 이후 State를 변경한다.
+    /// </summary>
+    public void Spawn()
+    {
         col.enabled = true;
 
         OnSpawn?.Invoke();
@@ -103,7 +103,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(5.0f);
 
             Hit(Random.Range(0.0f, 10.0f), Random.Range(0.0f, 0.5f));
         }
@@ -116,7 +116,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         //transform.Translate(Vector3.forward * enemyInfo.Speed * Time.deltaTime);
 
-        rb.MovePosition(rb.position + transform.forward * enemyInfo.Speed * Time.deltaTime);
+        rb.MovePosition(rb.position + enemyInfo.Speed * Time.deltaTime * transform.forward);
     }
 
     /// <summary>
