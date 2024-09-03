@@ -26,11 +26,13 @@ public class Character : MonoBehaviour
     #region private
     private CharacterController playerController;
     private Animator anim;
-    private Vector3 run;
+    private Vector3 run; // 이동시 사용할 벡터
     private int dashCount = 1;
     private int currentDashCount;
     private Vector3 dashDirection;
     private SMRCreator smrCreator;
+    private IEnumerator hitCoroutine;
+    private Rigidbody rb;
     #endregion
 
     public void Awake()
@@ -39,22 +41,18 @@ public class Character : MonoBehaviour
         playerModel = transform.GetChild(0);
         cameraTransform = Camera.main.transform;
         cameraParentTransform = cameraTransform.parent;
-        playerController = GetComponent<CharacterController>();
         anim = playerModel.GetComponent<Animator>();
         currentDashCount = dashCount;
         smrCreator = GetComponent<SMRCreator>();
         CreatAfterImage();
         currentHp = maxHp;
+        rb = GetComponent<Rigidbody>();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        if (playerController.isGrounded == false)
-        {
-            playerController.Move(-(Vector3.up) * 9.8f * Time.deltaTime);
-        }
-        MovePlayer();
-        playerController.Move(run * Time.deltaTime);
+        MovePlayer();  
+        rb.MovePosition(rb.position + run * Time.deltaTime);
         if (currentDashCount > 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -130,13 +128,13 @@ public class Character : MonoBehaviour
         currentDashCount--;
         float time = 0;
         float dashTime = 0.3f;
-        float dashSpeed = 3f;
+        float dashSpeed = 15f;
         anim.SetBool("isDash", true);
         smrCreator.Create(true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
         while (time <= dashTime)
         {
-            playerController.Move(dashDirection * dashSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + playerModel.forward * dashSpeed* Time.deltaTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -152,15 +150,13 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         currentDashCount++;
     }
-
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnCollisionEnter(Collision hit)
     {
         if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("Hit");
-            StartCoroutine(HitEffect());
+            hitCoroutine = HitEffect();
+            StopCoroutine(hitCoroutine);
+            StartCoroutine(hitCoroutine);
         }
     }
 
@@ -168,7 +164,7 @@ public class Character : MonoBehaviour
     {
         for (int i = 0; i < afterImage.Length; i++)
         {
-            afterImage[i].GetComponent<SkinnedMeshRenderer>().material = playerMaterial[1];  
+            afterImage[i].GetComponent<SkinnedMeshRenderer>().material = playerMaterial[1];
         }
         yield return new WaitForSeconds(0.2f);
         for (int i = 0; i < afterImage.Length; i++)
