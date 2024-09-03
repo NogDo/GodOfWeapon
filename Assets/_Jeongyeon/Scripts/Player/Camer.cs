@@ -7,7 +7,8 @@ public class Camer : MonoBehaviour
     public Transform player;
     public Transform cameraTrasform;
     public Transform cameraParentTransform;
-
+    public Vector3 cameraPosition;
+    public Vector3 cameraRotation;
     private void Awake()
     {
         cameraTrasform = Camera.main.transform;
@@ -26,8 +27,8 @@ public class Camer : MonoBehaviour
     }
     void CameraDistanceControll()
     {
-        Camera.main.transform.localPosition = new Vector3(0, 4, -10);
-        Camera.main.transform.localRotation = Quaternion.Euler(38, 0, 0);
+        Camera.main.transform.localPosition = cameraPosition;
+        Camera.main.transform.localRotation = Quaternion.Euler(cameraRotation);
         
     }
 }
