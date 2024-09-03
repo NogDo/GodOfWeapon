@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    #region public
+
+    #region player Info
     public float moveSpeed = 3;
+    public float maxHp = 100;
+    public float currentHp;
+    #endregion
+
+    #region public
     public Transform player;
     public Transform playerModel;
     public Transform cameraTransform;
     public Transform cameraParentTransform;
 
     public GameObject[] afterImage;
+    public Material[] playerMaterial;
     #endregion
 
     #region private
@@ -36,6 +44,7 @@ public class Character : MonoBehaviour
         currentDashCount = dashCount;
         smrCreator = GetComponent<SMRCreator>();
         CreatAfterImage();
+        currentHp = maxHp;
     }
 
     public void Update()
@@ -124,12 +133,14 @@ public class Character : MonoBehaviour
         float dashSpeed = 3f;
         anim.SetBool("isDash", true);
         smrCreator.Create(true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
         while (time <= dashTime)
         {
             playerController.Move(dashDirection * dashSpeed * Time.deltaTime);
             time += Time.deltaTime;
             yield return null;
         }
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         anim.SetBool("isDash", false);
         smrCreator.Create(false);
         StartCoroutine(DashCoolTime());
@@ -141,4 +152,31 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         currentDashCount++;
     }
+
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Debug.Log("Hit");
+            StartCoroutine(HitEffect());
+        }
+    }
+
+    private IEnumerator HitEffect()
+    {
+        for (int i = 0; i < afterImage.Length; i++)
+        {
+            afterImage[i].GetComponent<SkinnedMeshRenderer>().material = playerMaterial[1];  
+        }
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < afterImage.Length; i++)
+        {
+            afterImage[i].GetComponent<SkinnedMeshRenderer>().material = playerMaterial[0];
+        }
+        yield return null;
+    }
 }
+
+

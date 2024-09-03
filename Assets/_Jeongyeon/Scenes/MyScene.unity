@@ -774,7 +774,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
+  m_Color: {r: 0.48235294, g: 0.3764706, b: 0.101960786, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -833,7 +833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699845221}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 11.36, y: 4.28, z: 5.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 727652529}
   - component: {fileID: 727652528}
   - component: {fileID: 727652531}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -890,6 +890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxHp: 100
+  currentHp: 0
   player: {fileID: 727652530}
   playerModel: {fileID: 4588717448724071}
   cameraTransform: {fileID: 1783840648}
@@ -898,6 +900,9 @@ MonoBehaviour:
   - {fileID: 1947073185343389}
   - {fileID: 1836712296605350}
   - {fileID: 1437552522432566}
+  playerMaterial:
+  - {fileID: 2100000, guid: b8e42c05997133149830ed062ef36b7b, type: 2}
+  - {fileID: 2100000, guid: 0026511e88b2773458da2c2ead0cd594, type: 2}
 --- !u!4 &727652530
 Transform:
   m_ObjectHideFlags: 0
@@ -8753,7 +8758,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004072350058975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.74, z: 0}
+  m_LocalPosition: {x: 0, y: 6.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

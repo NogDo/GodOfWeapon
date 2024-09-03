@@ -64,8 +64,8 @@ public class LanceController : SpearController
         //transform.position = enemyTransform.position;
         anim.SetBool("isAttack", false);
         particle.SetActive(false);
-        yield return null;
         StartCoroutine(EndAttack(transform));
+        yield return null;
     }
 
     

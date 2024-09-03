@@ -48,8 +48,8 @@ public class SpearController : WeaponController, IPierce
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
-        yield return null;
         StartCoroutine(EndAttack(transform));
+        yield return null;
     }
 
 }

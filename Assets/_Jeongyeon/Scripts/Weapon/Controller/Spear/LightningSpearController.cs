@@ -37,8 +37,8 @@ public class LightningSpearController : SpearController
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
-        yield return null;
         particle.SetActive(false);
         StartCoroutine(EndAttack(transform));
+        yield return null;
     }
 }

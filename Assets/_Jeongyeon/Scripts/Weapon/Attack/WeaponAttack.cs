@@ -14,7 +14,7 @@ public class WeaponAttack : MonoBehaviour
     {
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
-            hit.Hit(weapon.damage);
+            hit.Hit(weapon.damage, 0.5f);
         }
     }
 }
