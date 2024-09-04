@@ -10,7 +10,6 @@ Material:
   m_Name: ToonProjectileTrail_Default
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
-  - _ALPHABLEND_ON
   - _EMISSION
   - _GLOSSYREFLECTIONS_OFF
   m_InvalidKeywords:
@@ -18,9 +17,8 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -222,7 +220,7 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _DstMode: 10
     - _ENABLEEMISSION: 0
     - _EditorDrawers: 60
@@ -258,7 +256,7 @@ Material:
     - _MaskPow: 1
     - _Metallic: 0
     - _MetallicStrength: 1
-    - _Mode: 2
+    - _Mode: 0
     - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _OffsetSh1: 1
@@ -337,7 +335,7 @@ Material:
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SrcMode: 5
     - _Stencil: 0
     - _StencilComp: 8
@@ -376,7 +374,7 @@ Material:
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZTestMode: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -390,7 +388,7 @@ Material:
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
     - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}

@@ -24,13 +24,14 @@ public class Character : MonoBehaviour
     #endregion
 
     #region private
-    private Animator anim;
-    private Vector3 run; // 이동시 사용할 벡터
     private int dashCount = 1;
     private int currentDashCount;
+    private float dashSpeed = 15f;
+    private Vector3 run; // 이동시 사용할 벡터
+    private Animator anim;
     private SMRCreator smrCreator;
-    private IEnumerator hitCoroutine;
     private Rigidbody rb;
+    private IEnumerator hitCoroutine;
     #endregion
 
     public void Awake()
@@ -129,10 +130,11 @@ public class Character : MonoBehaviour
         currentDashCount--;
         float time = 0;
         float dashTime = 0.3f;
-        float dashSpeed = 15f;
+        
         anim.SetBool("isDash", true);
         smrCreator.Create(true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        rb.velocity = Vector3.zero;
         while (time <= dashTime)
         {
             rb.MovePosition(rb.position + playerModel.forward * dashSpeed * Time.deltaTime);
@@ -140,6 +142,7 @@ public class Character : MonoBehaviour
             yield return null;
         }
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        rb.velocity = Vector3.zero;
         anim.SetBool("isDash", false);
         smrCreator.Create(false);
         StartCoroutine(DashCoolTime());
@@ -159,8 +162,18 @@ public class Character : MonoBehaviour
             StopCoroutine(hitCoroutine);
             StartCoroutine(hitCoroutine);
         }
+        if (hit.gameObject.tag == "Fence")
+        {
+            dashSpeed = 0;
+        }
     }
-
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Fence")
+        {
+            dashSpeed = 15f;
+        }
+    }
     private IEnumerator HitEffect()
     {
         for (int i = 0; i < afterImage.Length; i++)
@@ -174,6 +187,8 @@ public class Character : MonoBehaviour
         }
         yield return null;
     }
+
+   
 }
 
 

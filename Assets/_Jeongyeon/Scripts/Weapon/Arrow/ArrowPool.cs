@@ -14,29 +14,25 @@ public class ArrowPool : MonoBehaviour
     private int arrowCount = 5;
     #endregion
 
-    public static ArrowPool Instance;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
     private void Start()
     {
         arrowPool = new Queue<Arrow>();
         SetPool(arrowCount);
     }
-
+    /// <summary>
+    /// 화살을 생성하는 메서드
+    /// </summary>
+    /// <returns></returns>
     public Arrow CreateArrow()
     {
-        var newArrow = Instantiate(ArrowPrefab).GetComponent<Arrow>();
+        var newArrow = Instantiate(ArrowPrefab, transform).GetComponent<Arrow>();
         newArrow.gameObject.SetActive(false);
-        newArrow.transform.SetParent(transform);
         return newArrow;
     }
-
+    /// <summary>
+    /// 시작시 풀안에 화살을 생성하는 메서드
+    /// </summary>
+    /// <param name="count">생성할 화살의 갯수</param>
     public void SetPool(int count)
     {
         for (int i = 0; i < count; i++)
@@ -45,6 +41,10 @@ public class ArrowPool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 화살을 풀에서 꺼내는 메서드(없을경우 생성후 반환)
+    /// </summary>
+    /// <returns></returns>
     public Arrow GetArrow()
     {
         if (arrowPool.Count > 0)
@@ -62,10 +62,14 @@ public class ArrowPool : MonoBehaviour
             return newArrow;
         }
     }
-
+    /// <summary>
+    /// 화살을 풀안으로 반환하는 메서드
+    /// </summary>
+    /// <param name="arrow">풀안으로 들어올 화살</param>
     public void ReturnArrow(Arrow arrow)
     {
         arrow.gameObject.SetActive(false);
+        arrow.transform.SetParent(transform);
         arrowPool.Enqueue(arrow);
     }
 
