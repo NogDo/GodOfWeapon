@@ -8,12 +8,9 @@ public class CEnemyInfoDeath : CEnemyInfo
     {
         if (stats == null)
         {
-            stats = new EnemyStats(EAttackType.MELEE, 4.0f, 100.0f, 100.0f, 5.0f);
+            stats = new EnemyStats(EAttackType.MELEE, 4.0f, 100.0f, 100.0f, 5.0f, 0.0f);
         }
 
-        else
-        {
-            stats.fNowHp = stats.fMaxHp;
-        }
+        base.Init();
     }
 }

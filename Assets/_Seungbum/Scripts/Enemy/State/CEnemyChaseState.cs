@@ -16,12 +16,12 @@ public class CEnemyChaseState : CEnemyBaseState
 
     public override void OnUpdate()
     {
+        enemyController.Move();
         enemyController.Rotate();
     }
 
     public override void OnFixedUpdate()
     {
-        enemyController.Move();
     }
 
     public override void OnExit()

@@ -124,6 +124,12 @@ public class CEnemyStateMachine : MonoBehaviour
             return;
         }
 
+        // 현재 상태가 죽은 상태라면 다른 상태로 변경할 수 없음.
+        if (currentState == dieState)
+        {
+            return;
+        }
+
         currentState.OnExit();
         currentState = changeState;
         currentState.OnEnter();

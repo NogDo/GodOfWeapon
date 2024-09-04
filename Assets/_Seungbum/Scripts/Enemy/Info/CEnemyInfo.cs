@@ -13,6 +13,8 @@ public class CEnemyInfo : MonoBehaviour
 {
     #region protected 변수
     protected EnemyStats stats;
+
+    [SerializeField]
     protected CEnemySkill[] skills;
     #endregion
 
@@ -72,6 +74,17 @@ public class CEnemyInfo : MonoBehaviour
     }
 
     /// <summary>
+    /// 적 공격 쿨타임
+    /// </summary>
+    public float AttackCoolTime
+    {
+        get
+        {
+            return stats.fAttackCoolTime;
+        }
+    }
+
+    /// <summary>
     /// 적 스킬
     /// </summary>
     public CEnemySkill[] Skills
@@ -81,8 +94,6 @@ public class CEnemyInfo : MonoBehaviour
             return skills;
         }
     }
-    
-
 
     void OnEnable()
     {
@@ -90,13 +101,16 @@ public class CEnemyInfo : MonoBehaviour
     }
 
     /// <summary>
-    /// 적 스탯 설정
+    /// 적 스탯 및 스킬 초기화.
     /// </summary>
     public virtual void Init()
     {
         if (stats == null)
         {
-            stats = new EnemyStats(EAttackType.MELEE, 3.0f, 100.0f, 100.0f, 5.0f);
+            for (int i = 0; i < skills.Length; i++)
+            {
+                skills[i].Init();
+            }
         }
 
         else
@@ -115,7 +129,6 @@ public class CEnemyInfo : MonoBehaviour
     }
 }
 
-
 public class EnemyStats
 {
     #region public 변수
@@ -125,14 +138,16 @@ public class EnemyStats
     public float fMaxHp;
     public float fNowHp;
     public float fAttack;
+    public float fAttackCoolTime;
     #endregion
 
-    public EnemyStats(EAttackType attackType, float fSpeed, float fMaxHp, float fNowHp, float fAttack)
+    public EnemyStats(EAttackType attackType, float fSpeed, float fMaxHp, float fNowHp, float fAttack, float fAttackCoolTime)
     {
         this.attackType = attackType;
         this.fSpeed = fSpeed;
         this.fMaxHp = fMaxHp;
         this.fNowHp = fNowHp;
         this.fAttack = fAttack;
+        this.fAttackCoolTime = fAttackCoolTime;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CEnemyProjectileSkill : CEnemySkill
 {
     #region public º¯¼ö
-    public GameObject oParticlePrefab;
+    public CEnemyProjectileControl oParticlePrefab;
     public Transform[] shootPoints;
     #endregion
 
@@ -13,6 +13,11 @@ public class CEnemyProjectileSkill : CEnemySkill
     [SerializeField]
     float fShootDelay;
     #endregion
+
+    void Awake()
+    {
+        
+    }
 
     public override void Active()
     {
@@ -25,16 +30,17 @@ public class CEnemyProjectileSkill : CEnemySkill
     /// <returns></returns>
     IEnumerator ShootProjectile()
     {
-        GameObject[] projectiles = new GameObject[shootPoints.Length];
+        CEnemyProjectileControl[] projectiles = new CEnemyProjectileControl[shootPoints.Length];
 
         for (int i = 0; i < shootPoints.Length; i++)
         {
             projectiles[i] = Instantiate(oParticlePrefab, shootPoints[i].position, shootPoints[i].rotation);
+            projectiles[i].SetDamage(fAttack + fOwnerAttack);
         }
 
         for (int i = 0; i < shootPoints.Length; i++)
         {
-
+            projectiles[i].Shoot();
 
             yield return new WaitForSeconds(fShootDelay);
         }

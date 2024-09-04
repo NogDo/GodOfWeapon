@@ -26,7 +26,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
     float fRotationSpeed = 5.0f;
 
-    bool isCollision = false;
+    bool isAttackCoolTime = false;
+    bool isAttacking = false;
     #endregion
 
     /// <summary>
@@ -42,6 +43,28 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
             }
 
             return animator;
+        }
+    }
+
+    /// <summary>
+    /// 적 공격 가능여부
+    /// </summary>
+    public bool IsAttackCoolTime
+    {
+        get
+        {
+            return isAttackCoolTime;
+        }
+    }
+
+    /// <summary>
+    /// 적이 공격중인지
+    /// </summary>
+    public bool IsAttacking
+    {
+        get
+        {
+            return isAttacking;
         }
     }
 
@@ -196,7 +219,41 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         if (enemyInfo.Skills.Length > 0)
         {
-            enemyInfo.Skills[0].Active();
+            int randSkill = Random.Range(0, enemyInfo.Skills.Length);
+
+            animator.SetTrigger($"Attack{randSkill}");
+
+            enemyInfo.Skills[randSkill].Active();
+            isAttacking = true;
+            isAttackCoolTime = true;
+
+            StartCoroutine(AttackAnimationEndCheck());
+            StartCoroutine(AttackCoolTime());
         }
+    }
+
+    /// <summary>
+    /// 공격 애니메이션이 종료됐는지 확인하고, isAttacking을 false로 바꾸는 코루틴
+    /// </summary>
+    IEnumerator AttackAnimationEndCheck()
+    {
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
+
+        isAttacking = false;
+
+        yield return null;
+    }
+
+    /// <summary>
+    /// 공격 쿨타임 실행 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator AttackCoolTime()
+    {
+        yield return new WaitForSeconds(enemyInfo.AttackCoolTime);
+
+        isAttackCoolTime = false;
+
+        yield return null;
     }
 }

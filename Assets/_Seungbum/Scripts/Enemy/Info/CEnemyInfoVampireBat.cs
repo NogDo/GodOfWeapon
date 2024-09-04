@@ -8,12 +8,9 @@ public class CEnemyInfoVampireBat : CEnemyInfo
     {
         if (stats == null)
         {
-            stats = new EnemyStats(EAttackType.RANGE, 3.0f, 100.0f, 100.0f, 5.0f);
+            stats = new EnemyStats(EAttackType.RANGE, 3.0f, 100.0f, 100.0f, 5.0f, 3.0f);
         }
 
-        else
-        {
-            stats.fNowHp = stats.fMaxHp;
-        }
+        base.Init();
     }
 }

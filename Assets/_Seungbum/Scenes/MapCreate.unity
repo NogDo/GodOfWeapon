@@ -2524,6 +2524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrossbowRevolver_Rigged
       objectReference: {fileID: 0}
+    - target: {fileID: 1072729919200118, guid: 17b70dcae316f3d4381d7b2ba378fa0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4324349579979740, guid: 17b70dcae316f3d4381d7b2ba378fa0d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7167,7 +7171,7 @@ GameObject:
   - component: {fileID: 1131610609}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
