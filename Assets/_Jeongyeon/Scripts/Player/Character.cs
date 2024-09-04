@@ -24,12 +24,10 @@ public class Character : MonoBehaviour
     #endregion
 
     #region private
-    private CharacterController playerController;
     private Animator anim;
     private Vector3 run; // 이동시 사용할 벡터
     private int dashCount = 1;
     private int currentDashCount;
-    private Vector3 dashDirection;
     private SMRCreator smrCreator;
     private IEnumerator hitCoroutine;
     private Rigidbody rb;
@@ -51,8 +49,12 @@ public class Character : MonoBehaviour
 
     public void FixedUpdate()
     {
-        MovePlayer();  
+        MovePlayer();
         rb.MovePosition(rb.position + run * Time.deltaTime);
+
+    }
+    public void Update()
+    {
         if (currentDashCount > 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -91,7 +93,6 @@ public class Character : MonoBehaviour
                     20.0f * Time.deltaTime
                 );
             run = Vector3.MoveTowards(run, move, moveSpeed);
-            dashDirection = run;
             if (run != Vector3.zero)
             {
 
@@ -131,10 +132,10 @@ public class Character : MonoBehaviour
         float dashSpeed = 15f;
         anim.SetBool("isDash", true);
         smrCreator.Create(true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         while (time <= dashTime)
         {
-            rb.MovePosition(rb.position + playerModel.forward * dashSpeed* Time.deltaTime);
+            rb.MovePosition(rb.position + playerModel.forward * dashSpeed * Time.deltaTime);
             time += Time.deltaTime;
             yield return null;
         }
