@@ -43,6 +43,7 @@ public class CEnemyPoolManager : MonoBehaviour
         while (true)
         {
             enemyPool.SpawnMeleeEnemy();
+            enemyPool.SpawnRangeEnemy();
 
             yield return new WaitForSeconds(fSpawnTime);
         }

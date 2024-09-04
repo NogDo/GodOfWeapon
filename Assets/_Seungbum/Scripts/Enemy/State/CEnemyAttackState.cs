@@ -15,6 +15,7 @@ public class CEnemyAttackState : CEnemyBaseState
 
     public override void OnUpdate()
     {
+        enemyController.Attack();
     }
 
     public override void OnFixedUpdate()

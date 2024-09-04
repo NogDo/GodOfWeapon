@@ -31,7 +31,7 @@ public class CEnemyPool : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             meleeEnemyFactory.CreateEnemy();
-            //rangeEnemyFactory.CreateEnemy();
+            rangeEnemyFactory.CreateEnemy();
         }
     }
 

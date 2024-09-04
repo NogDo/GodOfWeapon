@@ -5,19 +5,15 @@ using UnityEngine;
 public enum EAttackType
 {
     MELEE,
-    RANGE
+    RANGE,
+    BOTH
 }
 
 public class CEnemyInfo : MonoBehaviour
 {
-
     #region protected 변수
-    protected EAttackType attackType;
-
-    protected float fSpeed;
-    protected float fMaxHp;
-    protected float fNowHp;
-    protected float fAttack;
+    protected EnemyStats stats;
+    protected CEnemySkill[] skills;
     #endregion
 
     /// <summary>
@@ -27,7 +23,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return attackType;
+            return stats.attackType;
         }
     }
 
@@ -38,7 +34,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return fSpeed;
+            return stats.fSpeed;
         }
     }
 
@@ -49,7 +45,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return fMaxHp;
+            return stats.fMaxHp;
         }
     }
 
@@ -60,7 +56,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return fNowHp;
+            return stats.fNowHp;
         }
     }
 
@@ -71,9 +67,22 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return fAttack;
+            return stats.fAttack;
         }
     }
+
+    /// <summary>
+    /// 적 스킬
+    /// </summary>
+    public CEnemySkill[] Skills
+    {
+        get
+        {
+            return skills;
+        }
+    }
+    
+
 
     void OnEnable()
     {
@@ -85,11 +94,15 @@ public class CEnemyInfo : MonoBehaviour
     /// </summary>
     public virtual void Init()
     {
-        attackType = EAttackType.MELEE;
+        if (stats == null)
+        {
+            stats = new EnemyStats(EAttackType.MELEE, 3.0f, 100.0f, 100.0f, 5.0f);
+        }
 
-        fSpeed = 3.0f;
-        fMaxHp = 100.0f;
-        fNowHp = fMaxHp;
+        else
+        {
+            stats.fNowHp = stats.fMaxHp;
+        }
     }
 
     /// <summary>
@@ -98,6 +111,28 @@ public class CEnemyInfo : MonoBehaviour
     /// <param name="amount">변경할 체력</param>
     public void ChangeNowHP(float amount)
     {
-        fNowHp = amount;
+        stats.fNowHp = amount;
+    }
+}
+
+
+public class EnemyStats
+{
+    #region public 변수
+    public EAttackType attackType;
+
+    public float fSpeed;
+    public float fMaxHp;
+    public float fNowHp;
+    public float fAttack;
+    #endregion
+
+    public EnemyStats(EAttackType attackType, float fSpeed, float fMaxHp, float fNowHp, float fAttack)
+    {
+        this.attackType = attackType;
+        this.fSpeed = fSpeed;
+        this.fMaxHp = fMaxHp;
+        this.fNowHp = fNowHp;
+        this.fAttack = fAttack;
     }
 }

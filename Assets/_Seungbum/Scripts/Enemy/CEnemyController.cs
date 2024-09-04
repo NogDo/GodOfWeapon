@@ -103,7 +103,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         while (true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(0.5f);
 
             Hit(Random.Range(0.0f, 10.0f), Random.Range(0.0f, 0.5f));
         }
@@ -184,5 +184,16 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     public float GetAttackDamage()
     {
         return enemyInfo.Attack;
+    }
+
+    /// <summary>
+    /// 공격을 실행한다.
+    /// </summary>
+    public void Attack()
+    {
+        if (enemyInfo.Skills.Length > 0)
+        {
+            enemyInfo.Skills[0].Active();
+        }
     }
 }

@@ -6,46 +6,65 @@ using TMPro;
 public class UIDamageTextControl : MonoBehaviour
 {
     #region private 변수
-    TextMeshPro text;
+    TextMeshProUGUI text;
 
     CDamageTextPool damageTextPool;
 
     Transform transformEnemy;
+    Transform transformCanvas;
+
+    Vector3 v3LastEnemyPosition;
     #endregion
 
     void Awake()
     {
-        text = GetComponent<TextMeshPro>();
+        text = GetComponent<TextMeshProUGUI>();
         damageTextPool = GetComponentInParent<CDamageTextPool>();
 
         transformEnemy = damageTextPool.transform.parent;
+        transformCanvas = GameObject.Find("Canvas").transform;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         damageTextPool.ReturnPool(this);
     }
 
+    void LateUpdate()
+    {
+        if (gameObject.activeSelf)
+        {
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
+            transform.position = screenPoint;
+        }
+    }
+
     /// <summary>
-    /// 데미지, 위치, 회전 값을 초기화 하고 게임 오브젝트를 활성화시킨다.
+    /// 데미지, 위치, 회전 값을 초기화 하고 텍스트를 활성화시킨다.
     /// </summary>
     /// <param name="damage">데미지</param>
     public void InitText(float damage)
     {
         text.text = damage.ToString("F1");
 
-        transform.SetParent(null);
+        transform.SetParent(transformCanvas);
 
         transform.localScale = Vector3.one;
-        transform.eulerAngles = new Vector3(38.0f, 0.0f, 0.0f);
-        transform.position = new Vector3(transformEnemy.position.x, 3.0f, transformEnemy.position.z);
+        transform.rotation = Quaternion.identity;
+
+        v3LastEnemyPosition = transformEnemy.position + Vector3.up;
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(transformEnemy.position);
+        transform.position = screenPoint;
 
         gameObject.SetActive(true);
 
         StartCoroutine(TextAnimation());
     }
 
-
+    /// <summary>
+    /// 데미지 텍스트 애니메이션
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TextAnimation()
     {
         yield return new WaitForSeconds(2.0f);
@@ -56,6 +75,7 @@ public class UIDamageTextControl : MonoBehaviour
         while (startTime <= duration)
         {
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, startTime / duration);
+
             startTime += Time.deltaTime;
 
             yield return null;

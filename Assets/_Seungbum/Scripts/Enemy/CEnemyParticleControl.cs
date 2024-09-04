@@ -22,7 +22,10 @@ public class CEnemyParticleControl : MonoBehaviour
     /// </summary>
     public void IdleParticleOn()
     {
-        particleIdle.Play();
+        if (particleIdle != null)
+        {
+            particleIdle.Play();
+        }
     }
 
     /// <summary>
@@ -30,6 +33,9 @@ public class CEnemyParticleControl : MonoBehaviour
     /// </summary>
     public void IdleParticleOff()
     {
-        particleIdle.Stop();
+        if (particleIdle != null)
+        {
+            particleIdle.Stop();
+        }
     }
 }
