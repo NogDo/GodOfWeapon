@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CrossBowController : WeaponController
 {
     #region Public Fields
-
+    public ArrowPool arrowPool;
+    public Transform arrowPosition;
     #endregion
     #region Private Fields
     private PositionInfo positionInfo;
-    private Transform[] shotPosition;
+    private Transform[] shootPosition;
     private Animator anim;
+    private int positionIndex = 0;
     #endregion
 
     public override void Start()
     {
         positionInfo = GetComponentInParent<PositionInfo>();
-        shotPosition = positionInfo.shotPositions;
+        shootPosition = positionInfo.shotPositions;
         startParent = gameObject.transform.parent.gameObject;
         anim = GetComponent<Animator>();
     }
@@ -27,16 +30,15 @@ public class CrossBowController : WeaponController
         {
             if (FindTarget())
             {
-                // StartCoroutine(Attack());
+                StartCoroutine(Shoot());
             }
         }
     }
     public override bool FindTarget()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, AttackRange, targetLayer);
-        float distance = float.MaxValue;
-        float currentDistance = 0;
-        int monsterIndex = 0;
+
+
         if (isAttacking == false && target.Length > 0)
         {
             if (target.Length == 1)
@@ -56,16 +58,7 @@ public class CrossBowController : WeaponController
             {
                 enemyTransform = target[monsterIndex].transform;
             }
-            for (int i = 0; i < shotPosition.Length; i++)
-            {
-                currentDistance = (enemyTransform.position - shotPosition[i].position).sqrMagnitude;
-                if (distance < currentDistance)
-                {
-                    distance = currentDistance;
-                    monsterIndex = i;
-                }
-            }
-            gameObject.transform.parent = shotPosition[monsterIndex];
+            StartCoroutine(ChangePosition());
             Vector3 postion = enemyTransform.position - gameObject.transform.position;
             gameObject.transform.forward = postion;
 
@@ -84,27 +77,46 @@ public class CrossBowController : WeaponController
             return false;
         }
     }
-    private IEnumerator PrepareShot(float setY)
+
+    private IEnumerator ChangePosition()
     {
-        isAttacking = true;
+        float distance = float.MaxValue;
+        float currentDistance = 0;
+        for (int i = 0; i < shootPosition.Length; i++)
+        {
+            currentDistance = (enemyTransform.position - shootPosition[i].position).sqrMagnitude;
+            if (distance > currentDistance)
+            {
+                distance = currentDistance;
+                positionIndex = i;
+            }
+        }
+        gameObject.transform.parent = shootPosition[positionIndex];
         float time = 0.0f;
         float duration = 0.2f;
         while (time <= duration)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
-            transform.localPosition = Vector3.Lerp(startPosition, Vector3.zero, time / duration);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
-        transform.localRotation = Quaternion.Euler(90, setY, 0);
-        transform.localPosition = Vector3.zero;
-        StartCoroutine(Shot());
+    }
+
+    private IEnumerator Shoot()
+    {
+        isAttacking = true;
+        Arrow arrow = arrowPool.GetArrow();
+        arrow.transform.position = arrowPosition.position;
+        arrow.transform.rotation = gameObject.transform.rotation;
+        arrow.Shoot(enemyTransform.position);
+        anim.SetTrigger("isAttack");
+        StartCoroutine(CoolTime());
         yield return null;
     }
 
-    private IEnumerator Shot()
+    private IEnumerator CoolTime()
     {
-        anim.SetTrigger("isAttack");
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
+        isAttacking = false;
     }
 }
