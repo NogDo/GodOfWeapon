@@ -82,7 +82,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         OnSpawn?.Invoke();
 
         StartCoroutine(AfterSpawn());
-        StartCoroutine(TestDamage());
+        //StartCoroutine(TestDamage());
     }
 
     /// <summary>
@@ -93,7 +93,10 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         yield return new WaitForSeconds(1.0f);
 
-        stateMachine.ChangeState(stateMachine.ChaseState);
+        if (stateMachine.CurrentState != stateMachine.DieState)
+        {
+            stateMachine.ChangeState(stateMachine.ChaseState);
+        }
 
         yield return null;
     }
@@ -105,7 +108,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         {
             yield return new WaitForSeconds(0.5f);
 
-            Hit(Random.Range(0.0f, 10.0f), Random.Range(0.0f, 0.5f));
+            Hit(Random.Range(90.0f, 100.0f), Random.Range(0.0f, 0.5f));
         }
     }
 

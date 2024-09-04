@@ -52,8 +52,10 @@ public class UIDamageTextControl : MonoBehaviour
         transform.localScale = Vector3.one;
         transform.rotation = Quaternion.identity;
 
-        v3LastEnemyPosition = transformEnemy.position + Vector3.up;
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(transformEnemy.position);
+        v3LastEnemyPosition = transformEnemy.position;
+        v3LastEnemyPosition.y = 2.0f;
+
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
         transform.position = screenPoint;
 
         gameObject.SetActive(true);
