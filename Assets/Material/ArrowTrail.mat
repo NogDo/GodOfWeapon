@@ -8,14 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ArrowTrail
-  m_Shader: {fileID: 210, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _COLORCOLOR_ON
   m_InvalidKeywords:
   - ADDITIVECONFIG_ON
   - PREMULTIPLYCOLOR_ON
   - TRAILWIDTH_ON
-  - _COLOROVERLAY_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -146,7 +146,7 @@ Material:
     - _CameraNearFadeDistance: 1
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
-    - _ColorMode: 3
+    - _ColorMode: 4
     - _ColorRampBlend: 1
     - _ColorRampLuminosity: 0
     - _Cull: 2
@@ -168,7 +168,7 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
-    - _DstBlend: 10
+    - _DstBlend: 1
     - _DstMode: 1
     - _EditorDrawers: 60
     - _EmissionEnabled: 0
@@ -191,10 +191,10 @@ Material:
     - _HsvSaturation: 1
     - _HsvShift: 180
     - _LightAmount: 0
-    - _LightingEnabled: 1
+    - _LightingEnabled: 0
     - _MaskPow: 1
     - _Metallic: 0
-    - _Mode: 2
+    - _Mode: 4
     - _OcclusionStrength: 1
     - _OffsetSh1: 1
     - _OffsetSh2: 1
@@ -291,8 +291,8 @@ Material:
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.4245283, g: 0.41852084, b: 0.41852084, a: 1}
-    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.5019609, g: 0.5019609, b: 0.5019609, a: 1}
+    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}

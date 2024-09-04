@@ -4,30 +4,48 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private Rigidbody rb;
     private float speed = 20.0f;
+    private Rigidbody rb;
+    private GameObject startParent;
+    private ArrowPool arrowPool;
+    private float damage = 30.0f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        startParent = transform.parent.gameObject;
+        arrowPool = startParent.GetComponent<ArrowPool>();
     }
-    
+    /// <summary>
+    /// 풀에 반환하는 메서드
+    /// </summary>
     public void ReturnArrow()
     {
         rb.velocity = Vector3.zero;
-        ArrowPool.Instance.ReturnArrow(this);
+        transform.parent = startParent.transform;
+        arrowPool.ReturnArrow(this);
     }
-
+    /// <summary>
+    /// 화살을 발사하는 메서드
+    /// </summary>
+    /// <param name="direction"></param>
     public void Shoot(Vector3 direction)
     {
-        //rb.AddForce(direction.normalized * speed, ForceMode.Impulse);
-        rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+        transform.LookAt(direction);
+        rb.velocity = transform.forward * speed;
+        Invoke("ReturnArrow", 3.0f);
     }
-
+    /// <summary>
+    /// 충돌을 감지하는 메서드
+    /// </summary>
+    /// <param name="other">대상</param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             ReturnArrow();
+            hit.Hit(damage,0.3f);
+            CancelInvoke("ReturnArrow");
+
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class CrossBowController : WeaponController
 {
@@ -34,6 +35,7 @@ public class CrossBowController : WeaponController
             }
         }
     }
+    
     public override bool FindTarget()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, AttackRange, targetLayer);
@@ -50,10 +52,6 @@ public class CrossBowController : WeaponController
                 monsterIndex = target.Length - 1;
                 enemyTransform = target[monsterIndex].transform;
             }
-            /*else if (target.Length == 0)
-            {
-                transform.parent = startParent.transform;
-            }*/
             else
             {
                 enemyTransform = target[monsterIndex].transform;
@@ -77,18 +75,46 @@ public class CrossBowController : WeaponController
             return false;
         }
     }
-
+    /// <summary>
+    /// 화살의 쏠 위치를 정렬후 가장 가까운곳으로 이동시키는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangePosition()
     {
-        float distance = float.MaxValue;
-        float currentDistance = 0;
-        for (int i = 0; i < shootPosition.Length; i++)
+       
+        Array.Sort(shootPosition, (a, b) =>
         {
-            currentDistance = (enemyTransform.position - shootPosition[i].position).sqrMagnitude;
-            if (distance > currentDistance)
+            if ((a.position - enemyTransform.position).sqrMagnitude > (b.position - enemyTransform.position).sqrMagnitude)
             {
-                distance = currentDistance;
-                positionIndex = i;
+                return 1;
+            }
+            else if ((a.position - enemyTransform.position).sqrMagnitude < (b.position - enemyTransform.position).sqrMagnitude)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        });
+        if (shootPosition[positionIndex].childCount > 0 && gameObject.transform.parent != shootPosition[positionIndex])
+        {
+            positionIndex++;
+            while (true)
+            {
+                if (positionIndex == shootPosition.Length)
+                {
+                    positionIndex = 0;
+                    break;
+                }
+                else if (shootPosition[positionIndex].childCount == 0)
+                {
+                    break;
+                }
+                else 
+                { 
+                    positionIndex++;
+                }
             }
         }
         gameObject.transform.parent = shootPosition[positionIndex];
@@ -101,22 +127,29 @@ public class CrossBowController : WeaponController
             yield return null;
         }
     }
-
+    /// <summary>
+    /// 화살을 발사하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Shoot()
     {
         isAttacking = true;
         Arrow arrow = arrowPool.GetArrow();
         arrow.transform.position = arrowPosition.position;
         arrow.transform.rotation = gameObject.transform.rotation;
-        arrow.Shoot(enemyTransform.position);
+        arrow.Shoot(enemyTransform.position + Vector3.up);
         anim.SetTrigger("isAttack");
         StartCoroutine(CoolTime());
         yield return null;
     }
-
+    /// <summary>
+    /// 공격 딜레이를 주는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CoolTime()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         isAttacking = false;
     }
+
 }
