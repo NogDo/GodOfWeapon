@@ -26,6 +26,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
     float fRotationSpeed = 5.0f;
 
+    int nCurrentSkillNum;
+
     bool isAttackCoolTime = false;
     bool isAttacking = false;
     #endregion
@@ -105,7 +107,6 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         OnSpawn?.Invoke();
 
         StartCoroutine(AfterSpawn());
-        //StartCoroutine(TestDamage());
     }
 
     /// <summary>
@@ -122,17 +123,6 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         }
 
         yield return null;
-    }
-
-
-    IEnumerator TestDamage()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            Hit(Random.Range(90.0f, 100.0f), Random.Range(0.0f, 0.5f));
-        }
     }
 
     /// <summary>
@@ -217,29 +207,36 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         if (enemyInfo.Skills.Length > 0)
         {
-            int randSkill = Random.Range(0, enemyInfo.Skills.Length);
-            enemyInfo.Skills[randSkill].Active(tfPlayer);
+            nCurrentSkillNum = Random.Range(0, enemyInfo.Skills.Length);
 
-            animator.SetTrigger($"Attack{randSkill}");
+            animator.SetTrigger($"Attack{nCurrentSkillNum}");
 
             isAttacking = true;
             isAttackCoolTime = true;
 
-            StartCoroutine(AttackAnimationEndCheck());
             StartCoroutine(AttackCoolTime());
         }
     }
 
     /// <summary>
-    /// 공격 애니메이션이 종료됐는지 확인하고, isAttacking을 false로 바꾸는 코루틴
+    /// 공격 모션이 나왔을 때 스킬을 실행
     /// </summary>
-    IEnumerator AttackAnimationEndCheck()
+    public void AttackSkillActive()
     {
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
+        enemyInfo.Skills[nCurrentSkillNum].Active(tfPlayer);
+    }
 
+    /// <summary>
+    /// 공격 애니메이션이 끝났을 때 호출될 이벤트
+    /// </summary>
+    public void AttackAnimationEnd()
+    {
         isAttacking = false;
 
-        yield return null;
+        if (stateMachine.CurrentState != stateMachine.DieState)
+        {
+            stateMachine.ChangeState(stateMachine.ChaseState);
+        }
     }
 
     /// <summary>

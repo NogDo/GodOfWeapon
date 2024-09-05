@@ -25,15 +25,4 @@ public class CEnemyAttackRangeCheck : MonoBehaviour
             }
         }
     }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Character"))
-        {
-            if (enemyStateMachine.CurrentState != enemyStateMachine.SpawnState)
-            {
-                enemyStateMachine.ChangeState(enemyStateMachine.ChaseState);
-            }
-        }
-    }
 }
