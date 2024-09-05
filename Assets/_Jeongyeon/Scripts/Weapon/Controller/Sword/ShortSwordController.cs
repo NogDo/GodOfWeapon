@@ -13,6 +13,10 @@ public class ShortSwordController : SwordController
     private Animator anim;
     #endregion
 
+    private void Awake()
+    {
+        duration = 0.4f;
+    }
     public override void Start()
     {
         base.Start();
@@ -31,13 +35,12 @@ public class ShortSwordController : SwordController
 
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
-        float time = 0.0f;
-        float duration = 0.4f;
-
-        while (time <= duration)
+        time = 0.0f;
+        durationSpeed = duration/3;
+        while (time <= durationSpeed)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / duration);
-            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / duration);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / durationSpeed);
+            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / durationSpeed);
             time += Time.deltaTime;
             yield return null;
         }
@@ -49,20 +52,20 @@ public class ShortSwordController : SwordController
     }
     public override IEnumerator Pierce()
     {
-        float time = 0.0f;
-        float duration = 0.3f;
+        time = 0.0f;
+        durationSpeed = duration / 3 *2;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
-        while (time <= duration)
+        while (time <= durationSpeed)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
         particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         patternCount++;
         yield return null;
     }
@@ -73,14 +76,14 @@ public class ShortSwordController : SwordController
         gameObject.transform.parent = attackParent.transform;
 
         isAttacking = true;
-        float time = 0.0f;
-        float duration = 0.4f;
+        time = 0.0f;
+        durationSpeed = duration / 3;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        while (time <= duration)
+        while (time <= durationSpeed)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / duration);
-            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / duration);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / durationSpeed);
+            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / durationSpeed);
             time += Time.deltaTime;
             yield return null;
         }
@@ -94,10 +97,10 @@ public class ShortSwordController : SwordController
         anim.SetTrigger("isSwing");
         isSwing = true;
         particle[1].SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration / 3 * 2);
         isSwing = false;
         particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         patternCount++;
         yield return null;
     }

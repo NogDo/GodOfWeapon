@@ -8,7 +8,9 @@ public class SwordController : WeaponController, ISwing, IPierce
     public GameObject[] particle;
     public int patternCount;
     #endregion
-    #region private Fields
+    #region protected Fields
+    [SerializeField]
+    protected Collider[] attackCollider;
     #endregion
 
     public virtual void Update()
@@ -64,7 +66,7 @@ public class SwordController : WeaponController, ISwing, IPierce
         }
         transform.position = enemyTransform.localPosition;
         //particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         //patternCount++;
         yield return null;
     }
@@ -101,7 +103,7 @@ public class SwordController : WeaponController, ISwing, IPierce
         yield return new WaitForSeconds(0.5f);
         //isSwing = false;
         //particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         //patternCount++;
         yield return null;
     }

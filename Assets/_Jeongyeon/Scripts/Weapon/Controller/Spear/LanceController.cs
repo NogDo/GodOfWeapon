@@ -12,6 +12,10 @@ public class LanceController : SpearController
     public GameObject particle;
     #endregion
 
+    private void Awake()
+    {
+        duration = 0.5f;
+    }
     public override void Start()
     {
         base.Start();
@@ -32,15 +36,14 @@ public class LanceController : SpearController
 
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.5f;
         isAttacking = true;
-        float time = 0.0f;
-        float duration = 0.2f;
+        time = 0.0f;
+        durationSpeed = duration/3;
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        while (time <= duration)
+        while (time <= durationSpeed)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
-            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / duration);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / durationSpeed);
+            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / durationSpeed);
             time += Time.deltaTime;
-
             yield return null;
         }
         transform.localRotation = Quaternion.Euler(90, setY, 0);
@@ -52,19 +55,20 @@ public class LanceController : SpearController
     {
         anim.SetBool("isAttack", true);
         particle.SetActive(true);
-        float time = 0.0f;
-        float duration = 0.5f;
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        while (time <= duration)
+        attackCollider.enabled = true;
+        time = 0.0f;
+        durationSpeed = duration /3 *2;
+        while (time <= durationSpeed)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
             time += Time.deltaTime;
             yield return null;
         }
-        //transform.position = enemyTransform.position;
         anim.SetBool("isAttack", false);
         particle.SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        attackCollider.enabled = false;
+        StartCoroutine(EndAttack(transform,0.7f));
         yield return null;
     }
 

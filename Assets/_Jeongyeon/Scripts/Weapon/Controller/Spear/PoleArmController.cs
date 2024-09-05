@@ -39,7 +39,7 @@ public class PoleArmController : SpearController
         }
         transform.position = enemyTransform.localPosition;        
         particle.SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform,coolTime));
         yield return null;
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Lance : WeaponInfo
 {
 
+    
     public void State(int level)
     {
         

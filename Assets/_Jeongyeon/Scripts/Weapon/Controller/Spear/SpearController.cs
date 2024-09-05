@@ -8,7 +8,9 @@ public class SpearController : WeaponController, IPierce
     #region Private Fields
     #endregion
 
-    #region Public Fields
+    #region Protected Fields
+    [SerializeField]
+    protected Collider attackCollider;
     #endregion
 
     public virtual IEnumerator PreParePierce(float setY)
@@ -21,7 +23,6 @@ public class SpearController : WeaponController, IPierce
         isAttacking = true;
         float time = 0.0f;
         float duration = 0.4f;
-        
         while (time <= duration)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
@@ -38,7 +39,7 @@ public class SpearController : WeaponController, IPierce
     public virtual IEnumerator Pierce()
     {
         float time = 0.0f;
-        float duration = 0.5f;
+        float duration = 0.3f;
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         while (time <= duration)
@@ -48,7 +49,7 @@ public class SpearController : WeaponController, IPierce
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         yield return null;
     }
 
