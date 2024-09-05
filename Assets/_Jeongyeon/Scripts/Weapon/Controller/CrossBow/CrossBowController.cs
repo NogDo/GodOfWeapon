@@ -7,7 +7,7 @@ using System;
 public class CrossBowController : WeaponController
 {
     #region Public Fields
-    public ArrowPool arrowPool;
+    public WProjectilePool projectilePool;
     public Transform arrowPosition;
     #endregion
     #region Private Fields
@@ -134,7 +134,7 @@ public class CrossBowController : WeaponController
     private IEnumerator Shoot()
     {
         isAttacking = true;
-        Arrow arrow = arrowPool.GetArrow();
+        WeaponProjectile arrow = projectilePool.GetProjectile();
         arrow.transform.position = arrowPosition.position;
         arrow.transform.rotation = gameObject.transform.rotation;
         arrow.Shoot(enemyTransform.position + Vector3.up);

@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     private int dashCount = 1;
     private int currentDashCount;
     private float dashSpeed = 15f;
+    private bool isdash = false; 
     private Vector3 run; // 이동시 사용할 벡터
     private Animator anim;
     private SMRCreator smrCreator;
@@ -58,13 +59,25 @@ public class Character : MonoBehaviour
     {
         if (currentDashCount > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isdash == false)
             {
                 StartCoroutine(Dash());
             }
         }
+        if (dashSpeed > 15)
+        {
+            dashSpeed = 15;
+        }
     }
-
+    /// <summary>
+    /// 플레이어가 공격 받았을때 hp를 깎는 메서드
+    /// </summary>
+    /// <param name="damage">받을 데미지</param>
+    public void Hit(float damage)
+    {
+        currentHp -= damage;
+        CDamageTextPoolManager.Instance.SpawnPlayerText(transform, damage);
+    }
     public void MovePlayer()
     {
 
@@ -128,13 +141,13 @@ public class Character : MonoBehaviour
     public IEnumerator Dash()
     {
         currentDashCount--;
+        isdash = true;
         float time = 0;
         float dashTime = 0.3f;
-        
         anim.SetBool("isDash", true);
         smrCreator.Create(true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         rb.velocity = Vector3.zero;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         while (time <= dashTime)
         {
             rb.MovePosition(rb.position + playerModel.forward * dashSpeed * Time.deltaTime);
@@ -145,24 +158,36 @@ public class Character : MonoBehaviour
         rb.velocity = Vector3.zero;
         anim.SetBool("isDash", false);
         smrCreator.Create(false);
+        if (currentDashCount == 0)
+        {
         StartCoroutine(DashCoolTime());
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+            isdash = false;
+        }
+        
         yield return null;
     }
 
     private IEnumerator DashCoolTime()
     {
         yield return new WaitForSeconds(2.0f);
-        currentDashCount++;
+        currentDashCount = dashCount;
+        isdash = false;
     }
-    private void OnCollisionEnter(Collision hit)
+    private void OnCollisionEnter(Collision ohter)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (ohter.gameObject.TryGetComponent<IAttackable>(out IAttackable hit))
         {
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);
             StartCoroutine(hitCoroutine);
+            Hit(hit.GetAttackDamage());
+            
         }
-        if (hit.gameObject.tag == "Fence")
+        if (ohter.gameObject.tag == "Fence")
         {
             dashSpeed = 0;
         }
@@ -172,8 +197,7 @@ public class Character : MonoBehaviour
     {
         if (other.TryGetComponent<IAttackable>(out IAttackable hit))
         {
-            float damage = hit.GetAttackDamage();
-            currentHp -= damage;
+            Hit(hit.GetAttackDamage());
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);
             StartCoroutine(hitCoroutine);
