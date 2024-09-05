@@ -16,7 +16,7 @@ public class CEnemyProjectileSkill : CEnemySkill
 
     void Awake()
     {
-        
+
     }
 
     public override void Active(Transform target)
@@ -34,8 +34,9 @@ public class CEnemyProjectileSkill : CEnemySkill
 
         for (int i = 0; i < shootPoints.Length; i++)
         {
-            projectiles[i] = Instantiate(oParticlePrefab, shootPoints[i].position, shootPoints[i].rotation);
-            projectiles[i].InitProjectile(target, fAttack + fOwnerAttack);
+            CEnemyProjectilePoolManager.Instance.SpawnProjectile(oParticlePrefab, strSkillName, out projectiles[i]);
+            projectiles[i].InitProjectile(target, shootPoints[i], fAttack + fOwnerAttack);
+            projectiles[i].gameObject.SetActive(true);
         }
 
         for (int i = 0; i < shootPoints.Length; i++)
@@ -45,6 +46,4 @@ public class CEnemyProjectileSkill : CEnemySkill
             yield return new WaitForSeconds(fShootDelay);
         }
     }
-
-    
 }

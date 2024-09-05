@@ -16,6 +16,8 @@ public class CEnemyInfo : MonoBehaviour
 
     [SerializeField]
     protected CEnemySkill[] skills;
+
+    protected bool isSkillInit = false;
     #endregion
 
     /// <summary>
@@ -105,7 +107,7 @@ public class CEnemyInfo : MonoBehaviour
     /// </summary>
     public virtual void Init()
     {
-        if (stats == null)
+        if (!isSkillInit)
         {
             for (int i = 0; i < skills.Length; i++)
             {
@@ -113,10 +115,7 @@ public class CEnemyInfo : MonoBehaviour
             }
         }
 
-        else
-        {
-            stats.fNowHp = stats.fMaxHp;
-        }
+        stats.fNowHp = stats.fMaxHp;
     }
 
     /// <summary>

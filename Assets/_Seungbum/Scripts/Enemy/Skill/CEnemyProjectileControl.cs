@@ -5,6 +5,7 @@ using UnityEngine;
 public class CEnemyProjectileControl : MonoBehaviour, IAttackable
 {
     #region private 변수
+    CEnemyProjectilePool enemyProjectilePool;
     Transform target;
 
     [SerializeField]
@@ -16,16 +17,40 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     [SerializeField]
     float fTrackingTime;
 
+    string strSkillName;
     float fDamage;
     #endregion
+
+    void Awake()
+    {
+        enemyProjectilePool = GetComponentInParent<CEnemyProjectilePool>();
+    }
+
+    void OnDisable()
+    {
+        enemyProjectilePool.ReturnPool(this, strSkillName);
+    }
+
+    /// <summary>
+    /// 풀에 반환하기 위해 스킬 이름을 초기화 한다.
+    /// </summary>
+    /// <param name="skillName"></param>
+    public void InitSkillName(string skillName)
+    {
+        strSkillName = skillName;
+    }
 
     /// <summary>
     /// 투사체의 데미지 및 타겟을 초기화시킨다.
     /// </summary>
     /// <param name="damage">데미지</param>
-    public void InitProjectile(Transform target, float damage)
+    public void InitProjectile(Transform target, Transform shootPoint, float damage)
     {
         this.target = target;
+
+        transform.position = shootPoint.position;
+        transform.rotation = shootPoint.rotation;
+
         fDamage = damage;
     }
 
@@ -55,7 +80,9 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
             yield return null;
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+
+        yield return null;
     }
 
     /// <summary>

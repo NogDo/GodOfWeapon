@@ -218,10 +218,10 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         if (enemyInfo.Skills.Length > 0)
         {
             int randSkill = Random.Range(0, enemyInfo.Skills.Length);
+            enemyInfo.Skills[randSkill].Active(tfPlayer);
 
             animator.SetTrigger($"Attack{randSkill}");
 
-            enemyInfo.Skills[randSkill].Active(tfPlayer);
             isAttacking = true;
             isAttackCoolTime = true;
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CEnemySkill : MonoBehaviour
 {
     #region protected º¯¼ö
+    [SerializeField]
     protected string strSkillName;
 
     protected float fAttack;
