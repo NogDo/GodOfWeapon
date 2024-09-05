@@ -167,6 +167,19 @@ public class Character : MonoBehaviour
             dashSpeed = 0;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<IAttackable>(out IAttackable hit))
+        {
+            float damage = hit.GetAttackDamage();
+            currentHp -= damage;
+            hitCoroutine = HitEffect();
+            StopCoroutine(hitCoroutine);
+            StartCoroutine(hitCoroutine);
+        }
+    }
+    
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Fence")

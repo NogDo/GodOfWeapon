@@ -6,7 +6,6 @@ public class WeaponController : MonoBehaviour
 {
     #region public Fields
     public float AttackRange;
-    public float coolTime = 1.0f;
     public LayerMask targetLayer;
     public bool isAttacking = false;
     public int monsterIndex;
@@ -23,7 +22,11 @@ public class WeaponController : MonoBehaviour
     protected Transform enemyTransform;
     protected GameObject attackParent;
     protected GameObject startParent;
+    protected float coolTime = 1.0f;
     protected float setY;
+    protected float time;
+    protected float duration;
+    protected float durationSpeed;
     #endregion
     public virtual void Start()
     {
@@ -82,7 +85,7 @@ public class WeaponController : MonoBehaviour
     /// </summary>
     /// <param name="startPostion">무기의 현재위치를 의미하는 변수</param>
     /// <returns></returns>
-    public virtual IEnumerator EndAttack(Transform startPostion)
+    public virtual IEnumerator EndAttack(Transform startPostion, float coolTime)
     {
         gameObject.transform.localScale = startScale;
         gameObject.transform.parent = startParent.transform;

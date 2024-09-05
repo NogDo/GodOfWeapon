@@ -38,7 +38,7 @@ public class LongSwordController : SwordController
         }
         transform.position = enemyTransform.localPosition;
         particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         patternCount++;
         yield return null;
     }
@@ -51,7 +51,7 @@ public class LongSwordController : SwordController
         yield return new WaitForSeconds(0.5f);
         isSwing = false;
         particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform));
+        StartCoroutine(EndAttack(transform, coolTime));
         patternCount++;
         yield return null;
     }
