@@ -9,17 +9,20 @@ public class Arrow : MonoBehaviour
     private GameObject startParent;
     private ArrowPool arrowPool;
     private float damage = 30.0f;
+    private TrailRenderer trailRenderer;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         startParent = transform.parent.gameObject;
         arrowPool = startParent.GetComponent<ArrowPool>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
     /// <summary>
     /// 풀에 반환하는 메서드
     /// </summary>
     public void ReturnArrow()
     {
+        trailRenderer.enabled = false;
         rb.velocity = Vector3.zero;
         transform.parent = startParent.transform;
         arrowPool.ReturnArrow(this);
@@ -32,6 +35,7 @@ public class Arrow : MonoBehaviour
     {
         transform.LookAt(direction);
         rb.velocity = transform.forward * speed;
+        trailRenderer.enabled = true;
         Invoke("ReturnArrow", 3.0f);
     }
     /// <summary>
