@@ -59,8 +59,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 0.17, y: 1}
+        m_Offset: {x: 0.47, y: 0}
     - _FadeBurnTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -75,8 +75,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: d8b969b594026d9459c7294b032387cc, type: 3}
-        m_Scale: {x: 0.5, y: 1}
-        m_Offset: {x: 0.51, y: 0}
+        m_Scale: {x: 0.17, y: 1}
+        m_Offset: {x: 0.47, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: 593b4deeb94f53945a149860d0adab86, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -288,7 +288,7 @@ Material:
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.84160876, b: 0.5896226, a: 1}
+    - _Color: {r: 1, g: 0.7933513, b: 0.4575472, a: 1}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
