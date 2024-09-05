@@ -61,7 +61,8 @@ public class CEnemySkill : MonoBehaviour
     /// <summary>
     /// 스킬 사용
     /// </summary>
-    public virtual void Active()
+    /// <param name="target">공격할 타겟 Transform</param>
+    public virtual void Active(Transform target)
     {
 
     }

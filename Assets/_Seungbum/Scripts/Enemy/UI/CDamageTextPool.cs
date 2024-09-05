@@ -14,8 +14,6 @@ public class CDamageTextPool : MonoBehaviour
     void Start()
     {
         InitPool();
-
-        GetComponentInParent<CEnemyController>().OnHit += DisplayText;
     }
 
     /// <summary>
@@ -23,14 +21,20 @@ public class CDamageTextPool : MonoBehaviour
     /// </summary>
     void InitPool()
     {
-        UIDamageTextControl damageText = Instantiate(oDamageTextPrefab, transform);
-        damageText.gameObject.SetActive(false);
+        for (int i = 0; i < 10; i++)
+        {
+            UIDamageTextControl damageText = Instantiate(oDamageTextPrefab, transform);
+            damageText.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
-    /// 데미지 텍스트를 화면에 띄운다.
+    /// 데미지 텍스트를 활성화 한다.
     /// </summary>
-    public void DisplayText(float damage)
+    /// <param name="target">피격당한 객체의 Transform</param>
+    /// <param name="damage">데미지</param>
+    /// <param name="color">텍스트 컬러값</param>
+    public void DisplayText(Transform target, float damage, Color color)
     {
         if (damageTextPool.Count <= 0)
         {
@@ -38,7 +42,7 @@ public class CDamageTextPool : MonoBehaviour
             damageText.gameObject.SetActive(false);
         }
 
-        damageTextPool.Dequeue().InitText(damage);
+        damageTextPool.Dequeue().InitText(target, damage, color);
     }
 
     /// <summary>

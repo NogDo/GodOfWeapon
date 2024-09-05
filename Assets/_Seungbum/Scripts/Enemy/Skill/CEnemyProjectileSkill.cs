@@ -19,23 +19,23 @@ public class CEnemyProjectileSkill : CEnemySkill
         
     }
 
-    public override void Active()
+    public override void Active(Transform target)
     {
-        StartCoroutine(ShootProjectile());
+        StartCoroutine(ShootProjectile(target));
     }
 
     /// <summary>
     /// 투사체를 발사한다.
     /// </summary>
     /// <returns></returns>
-    IEnumerator ShootProjectile()
+    IEnumerator ShootProjectile(Transform target)
     {
         CEnemyProjectileControl[] projectiles = new CEnemyProjectileControl[shootPoints.Length];
 
         for (int i = 0; i < shootPoints.Length; i++)
         {
             projectiles[i] = Instantiate(oParticlePrefab, shootPoints[i].position, shootPoints[i].rotation);
-            projectiles[i].SetDamage(fAttack + fOwnerAttack);
+            projectiles[i].InitProjectile(target, fAttack + fOwnerAttack);
         }
 
         for (int i = 0; i < shootPoints.Length; i++)
@@ -45,4 +45,6 @@ public class CEnemyProjectileSkill : CEnemySkill
             yield return new WaitForSeconds(fShootDelay);
         }
     }
+
+    
 }

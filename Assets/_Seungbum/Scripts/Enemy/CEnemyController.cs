@@ -140,8 +140,6 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     /// </summary>
     public void Move()
     {
-        //transform.Translate(Vector3.forward * enemyInfo.Speed * Time.deltaTime);
-
         rb.MovePosition(rb.position + enemyInfo.Speed * Time.deltaTime * transform.forward);
     }
 
@@ -223,7 +221,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
             animator.SetTrigger($"Attack{randSkill}");
 
-            enemyInfo.Skills[randSkill].Active();
+            enemyInfo.Skills[randSkill].Active(tfPlayer);
             isAttacking = true;
             isAttackCoolTime = true;
 

@@ -10,7 +10,6 @@ public class UIDamageTextControl : MonoBehaviour
 
     CDamageTextPool damageTextPool;
 
-    Transform transformEnemy;
     Transform transformCanvas;
 
     Vector3 v3LastEnemyPosition;
@@ -21,7 +20,6 @@ public class UIDamageTextControl : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         damageTextPool = GetComponentInParent<CDamageTextPool>();
 
-        transformEnemy = damageTextPool.transform.parent;
         transformCanvas = GameObject.Find("Canvas").transform;
     }
 
@@ -43,16 +41,17 @@ public class UIDamageTextControl : MonoBehaviour
     /// 데미지, 위치, 회전 값을 초기화 하고 텍스트를 활성화시킨다.
     /// </summary>
     /// <param name="damage">데미지</param>
-    public void InitText(float damage)
+    public void InitText(Transform target, float damage, Color color)
     {
         text.text = damage.ToString("F1");
+        text.color = color;
 
         transform.SetParent(transformCanvas);
 
         transform.localScale = Vector3.one;
         transform.rotation = Quaternion.identity;
 
-        v3LastEnemyPosition = transformEnemy.position;
+        v3LastEnemyPosition = target.position;
         v3LastEnemyPosition.y = 2.0f;
 
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
