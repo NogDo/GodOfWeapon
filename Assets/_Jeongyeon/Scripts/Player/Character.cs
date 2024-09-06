@@ -148,6 +148,7 @@ public class Character : MonoBehaviour
         smrCreator.Create(true);
         rb.velocity = Vector3.zero;
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
         while (time <= dashTime)
         {
             rb.MovePosition(rb.position + playerModel.forward * dashSpeed * Time.deltaTime);
@@ -155,6 +156,7 @@ public class Character : MonoBehaviour
             yield return null;
         }
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
         rb.velocity = Vector3.zero;
         anim.SetBool("isDash", false);
         smrCreator.Create(false);
@@ -202,8 +204,10 @@ public class Character : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Èý¶Ç");
         if (other.TryGetComponent<IAttackable>(out IAttackable hit))
         {
+            Debug.Log(other.gameObject.name);
             Hit(hit.GetAttackDamage());
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);
