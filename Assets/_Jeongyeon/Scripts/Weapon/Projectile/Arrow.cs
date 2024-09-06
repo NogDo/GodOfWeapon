@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Arrow : WeaponProjectile
 {
+    #region Public Fields
+    public ParticleSystem[] particle;
+    #endregion
     #region Private Fields
     private float speed = 20.0f;
     private float damage = 30.0f;
@@ -13,6 +16,7 @@ public class Arrow : WeaponProjectile
     private WProjectilePool arrowPool;
     private TrailRenderer trailRenderer;
     private WeaponInfo crossbowInfo;
+    private Collider myCollider;
     #endregion
     private void Awake()
     {
@@ -21,14 +25,15 @@ public class Arrow : WeaponProjectile
         arrowPool = startParent.GetComponent<WProjectilePool>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
         crossbowInfo = startParent.GetComponentInParent<WeaponInfo>();
+        myCollider = GetComponent<Collider>();
     }
     /// <summary>
     /// 풀에 반환하는 메서드
     /// </summary>
     public override void Return()
     {
+        particle[0].gameObject.SetActive(true);
         trailRenderer.enabled = false;
-        rb.velocity = Vector3.zero;
         transform.parent = startParent.transform;
         arrowPool.ReturnProjectile(this);
     }
@@ -38,6 +43,7 @@ public class Arrow : WeaponProjectile
     /// <param name="direction"></param>
     public override void Shoot(Vector3 direction)
     {
+        myCollider.enabled = true;
         transform.LookAt(direction);
         rb.velocity = transform.forward * speed;
         trailRenderer.enabled = true;
@@ -51,9 +57,10 @@ public class Arrow : WeaponProjectile
     {
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
-            Return();
-            hit.Hit(crossbowInfo.damage, 0.3f);
             CancelInvoke("Return");
+            myCollider.enabled = false;
+            StartCoroutine(HitParticle());
+            hit.Hit(crossbowInfo.damage, 0.3f);
             if (CheckCritical(0.25f) == true)
             {
                 CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbowInfo.damage + (crossbowInfo.damage * 0.5f));
@@ -67,6 +74,21 @@ public class Arrow : WeaponProjectile
                 // 흡혈 구현 필요
             }
         }
+    }
+    /// <summary>
+    /// 화살 피격시 피격이펙트가 나타나게하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator HitParticle()
+    {
+        rb.velocity = Vector3.zero;
+        particle[0].gameObject.SetActive(false);
+        particle[1].gameObject.SetActive(true);
+        particle[1].Play();
+        yield return new WaitForSeconds(0.9f);
+        particle[1].Stop();
+        particle[1].gameObject.SetActive(false);
+        Return();
     }
 
 }

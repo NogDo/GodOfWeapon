@@ -177,9 +177,9 @@ public class Character : MonoBehaviour
         currentDashCount = dashCount;
         isdash = false;
     }
-    private void OnCollisionEnter(Collision ohter)
+    private void OnCollisionEnter(Collision other)
     {
-        if (ohter.gameObject.TryGetComponent<IAttackable>(out IAttackable hit))
+        if (other.gameObject.TryGetComponent<IAttackable>(out IAttackable hit))
         {
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);
@@ -187,12 +187,19 @@ public class Character : MonoBehaviour
             Hit(hit.GetAttackDamage());
             
         }
-        if (ohter.gameObject.tag == "Fence")
+        if (other.gameObject.CompareTag("Fence"))
         {
             dashSpeed = 0;
         }
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Fence"))
+        {
+            dashSpeed = 0;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<IAttackable>(out IAttackable hit))
