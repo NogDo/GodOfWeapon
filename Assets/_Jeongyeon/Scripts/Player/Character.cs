@@ -204,10 +204,8 @@ public class Character : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Èý¶Ç");
         if (other.TryGetComponent<IAttackable>(out IAttackable hit))
         {
-            Debug.Log(other.gameObject.name);
             Hit(hit.GetAttackDamage());
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);

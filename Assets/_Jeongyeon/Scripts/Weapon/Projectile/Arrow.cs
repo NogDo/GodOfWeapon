@@ -9,7 +9,6 @@ public class Arrow : WeaponProjectile
     #endregion
     #region Private Fields
     private float speed = 20.0f;
-    private float damage = 30.0f;
 
     private Rigidbody rb;
     private GameObject startParent;
