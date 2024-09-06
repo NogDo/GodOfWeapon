@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CEnemyMaterialControl : MonoBehaviour
+public class CEnemyMeshControl : MonoBehaviour
 {
     #region private 변수
     [SerializeField]
@@ -16,12 +16,13 @@ public class CEnemyMaterialControl : MonoBehaviour
     Material materialHit;
     #endregion
 
-    void Start()
+    void Awake()
     {
         CEnemyController enemyController = GetComponentInParent<CEnemyController>();
 
         enemyController.OnDie += ChangeMateiral_Die;
         enemyController.OnSpawn += ChangeMaterial_Normal;
+        enemyController.OnSpawn += DisableMesh;
         enemyController.OnHit += ChangeMaterial_Hit;
     }
 
@@ -63,5 +64,26 @@ public class CEnemyMaterialControl : MonoBehaviour
         skin.material = materialNormal;
 
         yield return null;
+    }
+
+    /// <summary>
+    /// 적이 생성됐을 때 메쉬를 끄고 일정시간 이후 다시 켠다.
+    /// </summary>
+    public void DisableMesh()
+    {
+        skin.enabled = false;
+
+        StartCoroutine(EnableMesh());
+    }
+
+    /// <summary>
+    /// 일정시간 이후 메쉬를 다시 켜는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator EnableMesh()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        skin.enabled = true;
     }
 }

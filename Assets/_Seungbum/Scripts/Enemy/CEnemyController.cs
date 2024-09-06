@@ -76,7 +76,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         enemyPool = GetComponentInParent<CEnemyPool>();
         stateMachine = GetComponent<CEnemyStateMachine>();
 
-        tfPlayer = GameObject.Find("Player").transform;
+        tfPlayer = FindObjectOfType<Character>().transform;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
@@ -102,8 +102,6 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     /// </summary>
     public void Spawn()
     {
-        col.enabled = true;
-
         OnSpawn?.Invoke();
 
         StartCoroutine(AfterSpawn());
@@ -115,6 +113,12 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     /// <returns></returns>
     IEnumerator AfterSpawn()
     {
+        yield return new WaitForSeconds(1.0f);
+
+        animator.SetBool("isSpawnEnd", false);
+
+        col.enabled = true;
+
         yield return new WaitForSeconds(1.0f);
 
         if (stateMachine.CurrentState != stateMachine.DieState)

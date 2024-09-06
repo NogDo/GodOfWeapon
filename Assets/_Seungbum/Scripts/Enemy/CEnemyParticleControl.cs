@@ -6,26 +6,40 @@ public class CEnemyParticleControl : MonoBehaviour
 {
     #region private 변수
     [SerializeField]
+    ParticleSystem particleSpawn;
+    [SerializeField]
     ParticleSystem particleIdle;
     #endregion
 
-    void Start()
+    void Awake()
     {
         CEnemyController enemyController = GetComponentInParent<CEnemyController>();
 
         enemyController.OnDie += IdleParticleOff;
-        enemyController.OnSpawn += IdleParticleOn;
+        enemyController.OnSpawn += SpawnParticleOn;
+    }
+
+    /// <summary>
+    /// Spawn 파티클을 실행한다.
+    /// </summary>
+    public void SpawnParticleOn()
+    {
+        particleSpawn.Play();
+
+        if (particleIdle != null)
+        {
+            StartCoroutine(IdleParticleOn());
+        }
     }
 
     /// <summary>
     /// Idle 파티클을 실행한다.
     /// </summary>
-    public void IdleParticleOn()
+    IEnumerator IdleParticleOn()
     {
-        if (particleIdle != null)
-        {
-            particleIdle.Play();
-        }
+        yield return new WaitForSeconds(1.0f);
+
+        particleIdle.Play();
     }
 
     /// <summary>
