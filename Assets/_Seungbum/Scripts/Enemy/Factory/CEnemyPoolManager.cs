@@ -10,7 +10,7 @@ public class CEnemyPoolManager : MonoBehaviour
     IEnumerator spawnMeleeEnemyCoroutine;
     IEnumerator spawnRangeEnemyCoroutine;
 
-    float fMeleeEnemySpawnTime = 2.5f;
+    float fMeleeEnemySpawnTime = 3.0f;
     float fRangeEnemySpawnTime = 5.0f;
     #endregion
 
@@ -46,7 +46,7 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            int meleeEnemySpawnNumber = Random.Range(0, 5);
+            int meleeEnemySpawnNumber = Random.Range(1, 7);
 
             for (int i = 0; i < meleeEnemySpawnNumber; i++)
             {

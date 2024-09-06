@@ -38,7 +38,7 @@ public class CDamageTextPoolManager : MonoBehaviour
     /// <param name="damage"></param>
     public void SpawnEnemyCriticalText(Transform target, float damage)
     {
-        damageTextPool.DisplayText(target, damage, new Color(255.0f, 165.0f, 0.0f));
+        damageTextPool.DisplayText(target, damage, new Color(1.0f, 0.65f, 0.0f));
     }
 
     /// <summary>

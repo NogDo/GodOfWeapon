@@ -5,8 +5,8 @@ using UnityEngine;
 public class CEnemyProjectileControl : MonoBehaviour, IAttackable
 {
     #region private 변수
-    CEnemyProjectilePool enemyProjectilePool;
-    Transform target;
+    [SerializeField]
+    ParticleSystem hitParticle;
 
     [SerializeField]
     float fMoveSpeed;
@@ -17,6 +17,13 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     [SerializeField]
     float fTrackingTime;
 
+    CEnemyProjectilePool enemyProjectilePool;
+    ParticleSystem ownParticle;
+    Transform target;
+
+    IEnumerator moveCoroutine;
+    IEnumerator rotateCoroutine;
+
     string strSkillName;
     float fDamage;
     #endregion
@@ -24,11 +31,38 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     void Awake()
     {
         enemyProjectilePool = GetComponentInParent<CEnemyProjectilePool>();
+        ownParticle = GetComponent<ParticleSystem>();
+
+        moveCoroutine = ProjectileMove();
+        rotateCoroutine = ProjectileRotate();
     }
 
     void OnDisable()
     {
         enemyProjectilePool.ReturnPool(this, strSkillName);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            StopCoroutine(moveCoroutine);
+            StopCoroutine(rotateCoroutine);
+
+            ownParticle.Stop();
+            hitParticle.Play();
+
+            StartCoroutine(ProjectileActiveFalse());
+        }
+
+        // TODO : 나중에 벽이나 울타리에 IHittable같은 상호작용 가능한 인터페이스 달아놓고 그거 불러다 쓰는게 나을듯?
+        else if (other.CompareTag("Fence"))
+        {
+            StopCoroutine(moveCoroutine);
+            StopCoroutine(rotateCoroutine);
+
+            gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -59,8 +93,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     /// </summary>
     public void Shoot()
     {
-        StartCoroutine(ProjectileMove());
-        StartCoroutine(RotateProjectile());
+        StartCoroutine(moveCoroutine);
+        StartCoroutine(rotateCoroutine);
     }
 
     /// <summary>
@@ -89,7 +123,7 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     /// 투사체를 플레이어 방향으로 회전시킨다.
     /// </summary>
     /// <returns></returns>
-    IEnumerator RotateProjectile()
+    IEnumerator ProjectileRotate()
     {
         float fTime = 0.0f;
 
@@ -109,6 +143,19 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
 
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// 투사체를 대기 시간 이후 비활성화 시키는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ProjectileActiveFalse()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        gameObject.SetActive(false);
+
+        yield return null;
     }
 
     public float GetAttackDamage()
