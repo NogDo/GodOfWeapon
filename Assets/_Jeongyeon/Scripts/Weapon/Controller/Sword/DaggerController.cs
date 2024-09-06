@@ -152,6 +152,10 @@ public class DaggerController : SwordController
                     {
                         StartCoroutine(SecondPierce());
                     }
+                    else
+                    {
+                        StartCoroutine(EndAttack(transform, coolTime));
+                    }
                 }
             }
         }

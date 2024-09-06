@@ -5,28 +5,32 @@ using UnityEngine;
 public class LongSwordController : SwordController
 {
     #region Public Fields
-    
+
     #endregion
 
     #region Private Fields
     private bool isSwing = false;
     private Animator anim;
+    private WeaponInfo weaponInfo;
+  
     #endregion
 
     public override void Start()
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
+        weaponInfo = GetComponent<WeaponInfo>();
     }
     public override void Update()
     {
        base.Update();
     }
+ 
 
     public override IEnumerator Pierce()
     {
-        float time = 0.0f;
-        float duration = 0.5f;
+         time = 0.0f;
+         duration = weaponInfo.attackSpeed;
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -44,6 +48,7 @@ public class LongSwordController : SwordController
     }
     public override IEnumerator Swing()
     {
+        anim.SetFloat("SwingSpeed", 1.5f);
         anim.SetTrigger("isSwing");
         isSwing = true;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -55,4 +60,5 @@ public class LongSwordController : SwordController
         patternCount++;
         yield return null;
     }
+
 }
