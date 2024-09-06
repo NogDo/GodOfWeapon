@@ -41,7 +41,7 @@ public class LightningSpearController : SpearController
                 WeaponProjectile lightning = lightningPool.GetProjectile();
                 lightning.transform.localScale = Vector3.one;
                 lightning.Shoot(lightningPoint.position);
-                particleduration += 0.1f; // 锅俺 积己 林扁
+                particleduration += 0.25f; // 锅俺 积己 林扁
             }
             time += Time.deltaTime;
             yield return null;

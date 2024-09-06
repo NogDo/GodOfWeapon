@@ -5,20 +5,21 @@ using UnityEngine;
 public class LightningProjectile : WeaponProjectile
 {
     #region Private Fields
-    private float damage = 30.0f;
+    private float damage;
     private WProjectilePool lightningPool;
-    private SphereCollider collider;
+    private SphereCollider sphereCollider;
     #endregion
 
     private void Awake()
     {
         lightningPool = transform.parent.GetComponent<WProjectilePool>();
-        collider = GetComponent<SphereCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
+        damage = transform.parent.GetComponentInParent<WeaponInfo>().damage;
     }
     public override void Return()
     {
         transform.parent = lightningPool.transform;
-        collider.enabled = true;
+        sphereCollider.enabled = true;
         lightningPool.ReturnProjectile(this);
     }
 
@@ -34,16 +35,23 @@ public class LightningProjectile : WeaponProjectile
     {
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, collider.radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius);
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent<IHittable>(out IHittable hittable))
                 {
                     hittable.Hit(damage, 0.3f);
-                    CDamageTextPoolManager.Instance.SpawnEnemyNormalText(collider.transform, damage);
+                    if (CheckCritical(0.25f) == true)
+                    {
+                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+                    }
+                    else
+                    {
+                        CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                    }
                 }
             }
-            collider.enabled = false;
+            sphereCollider.enabled = false;
         }
     }
 }
