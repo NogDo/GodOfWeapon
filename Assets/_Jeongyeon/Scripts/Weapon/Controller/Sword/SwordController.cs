@@ -6,11 +6,11 @@ public class SwordController : WeaponController, ISwing, IPierce
 {
     #region public Fields
     public GameObject[] particle;
-    public int patternCount;
     #endregion
     #region protected Fields
     [SerializeField]
     protected Collider[] attackCollider;
+    protected int patternCount;
     #endregion
 
     public virtual void Update()
@@ -97,14 +97,7 @@ public class SwordController : WeaponController, ISwing, IPierce
 
     public virtual IEnumerator Swing()
     {
-        //anim.SetTrigger("isSwing");
-        //isSwing = true;
-        //particle[1].SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        //isSwing = false;
-        //particle[1].SetActive(false);
         StartCoroutine(EndAttack(transform, coolTime));
-        //patternCount++;
         yield return null;
     }
 
