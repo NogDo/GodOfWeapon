@@ -7,16 +7,19 @@ public class CEnemyPoolManager : MonoBehaviour
     #region private 函荐
     CEnemyPool enemyPool;
 
-    IEnumerator spawnEnemyCoroutine;
+    IEnumerator spawnMeleeEnemyCoroutine;
+    IEnumerator spawnRangeEnemyCoroutine;
 
-    float fSpawnTime = 1.0f;
+    float fMeleeEnemySpawnTime = 2.5f;
+    float fRangeEnemySpawnTime = 5.0f;
     #endregion
 
     void Awake()
     {
         enemyPool = GetComponent<CEnemyPool>();
 
-        spawnEnemyCoroutine = SpawnEnemy();
+        spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
+        spawnRangeEnemyCoroutine = SpawnRangeEnemy();
     }
 
     IEnumerator Start()
@@ -31,21 +34,45 @@ public class CEnemyPoolManager : MonoBehaviour
     /// </summary>
     public void StartSpawn()
     {
-        StartCoroutine(spawnEnemyCoroutine);
+        StartCoroutine(spawnMeleeEnemyCoroutine);
+        StartCoroutine(spawnRangeEnemyCoroutine);
     }
 
     /// <summary>
-    /// 利 家券 内风凭
+    /// 辟立 利 家券 内风凭
     /// </summary>
     /// <returns></returns>
-    IEnumerator SpawnEnemy()
+    IEnumerator SpawnMeleeEnemy()
     {
         while (true)
         {
-            enemyPool.SpawnMeleeEnemy();
-            enemyPool.SpawnRangeEnemy();
+            int meleeEnemySpawnNumber = Random.Range(0, 5);
 
-            yield return new WaitForSeconds(fSpawnTime);
+            for (int i = 0; i < meleeEnemySpawnNumber; i++)
+            {
+                enemyPool.SpawnMeleeEnemy();
+            }
+
+            yield return new WaitForSeconds(fMeleeEnemySpawnTime);
+        }
+    }
+
+    /// <summary>
+    /// 盔芭府 利 家券 内风凭
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator SpawnRangeEnemy()
+    {
+        while (true)
+        {
+            int rangeEnemySpawnNumber = Random.Range(0, 3);
+
+            for (int i = 0; i < rangeEnemySpawnNumber; i++)
+            {
+                enemyPool.SpawnRangeEnemy();
+            }
+
+            yield return new WaitForSeconds(fRangeEnemySpawnTime);
         }
     }
 }

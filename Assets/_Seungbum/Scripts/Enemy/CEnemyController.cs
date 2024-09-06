@@ -116,6 +116,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         yield return new WaitForSeconds(1.0f);
 
         animator.SetBool("isSpawnEnd", false);
+        animator.SetTrigger("isSpawn");
 
         col.enabled = true;
 
@@ -196,7 +197,24 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         yield return new WaitForSeconds(5.0f);
 
+        float time = 0.0f;
+        float duration = 0.5f;
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = startPosition + Vector3.down * 1.0f;
+
+        while (time <= duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
         gameObject.SetActive(false);
+
+        yield return null;
     }
 
     public float GetAttackDamage()
