@@ -26,7 +26,11 @@ public class ShortSwordController : SwordController
     {
        base.Update();
     }
-
+    /// <summary>
+    /// 단검이 찌르기를 준비하는 코루틴
+    /// </summary>
+    /// <param name="setY">꺾이는 각도</param>
+    /// <returns></returns>
     public override IEnumerator PreParePierce(float setY)
     {
         attackParent.transform.position = startParent.transform.position;
@@ -50,6 +54,10 @@ public class ShortSwordController : SwordController
         StartCoroutine(Pierce());
         yield return null;
     }
+    /// <summary>
+    /// 단검이 찌르기를 시전하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     public override IEnumerator Pierce()
     {
         time = 0.0f;
@@ -69,6 +77,11 @@ public class ShortSwordController : SwordController
         patternCount++;
         yield return null;
     }
+    /// <summary>
+    /// 단검이 휘두르기를 준비하는 코루틴
+    /// </summary>
+    /// <param name="setY">꺽이는 각도</param>
+    /// <returns></returns>
     public override IEnumerator PrePareSwing(float setY)
     {
         attackParent.transform.position = startParent.transform.position;
@@ -92,6 +105,10 @@ public class ShortSwordController : SwordController
         StartCoroutine(Swing());
         yield return null;
     }
+    /// <summary>
+    /// 단검이 휘두르기를 시전하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     public override IEnumerator Swing()
     {
         anim.SetTrigger("isSwing");
