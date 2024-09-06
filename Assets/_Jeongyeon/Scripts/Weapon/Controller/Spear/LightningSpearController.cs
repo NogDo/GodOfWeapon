@@ -32,7 +32,7 @@ public class LightningSpearController : SpearController
         particle.SetActive(true);
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        float particleduration = 0.01f; // 번개생성 시작시간
+        float particleduration = 0.1f; // 번개생성 시작시간
         while (time <= duration)
         {
             transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);

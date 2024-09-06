@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     public float moveSpeed = 3;
     public float maxHp = 100;
     public float currentHp;
+    private int dashCount = 5;
     #endregion
 
     #region public
@@ -24,7 +25,6 @@ public class Character : MonoBehaviour
     #endregion
 
     #region private
-    private int dashCount = 1;
     private int currentDashCount;
     private float dashSpeed = 15f;
     private bool isdash = false; 
