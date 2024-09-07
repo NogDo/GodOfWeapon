@@ -108,6 +108,12 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
 
                 Vector3 pos = new Vector3(i * fFloorWidth, 0.0f, j * fFloorLength);
 
+                // 맵 외곽에는 함정이 설치 안되게 예외처리
+                if (i == nMinX || j == nMinZ || i == nMaxX - 1 || j == nMaxZ - 1)
+                {
+                    randFloorType = Random.Range(0, nBasicFloorPercent + nSpecFloorPercent);
+                }
+
                 // 기본 바닥 생성
                 if (randFloorType < nBasicFloorPercent)
                 {
