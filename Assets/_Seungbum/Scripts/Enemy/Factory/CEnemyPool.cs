@@ -10,12 +10,14 @@ public class CEnemyPool : MonoBehaviour
 
     CMeleeEnemyFactory meleeEnemyFactory;
     CRangeEnemyFactory rangeEnemyFactory;
+    CChestFactory chestFactory;
     #endregion
 
     void Awake()
     {
         meleeEnemyFactory = transform.GetChild(0).GetComponent<CMeleeEnemyFactory>();
         rangeEnemyFactory = transform.GetChild(1).GetComponent<CRangeEnemyFactory>();
+        chestFactory = transform.GetChild(2).GetComponent<CChestFactory>();
     }
 
     void Start()
@@ -59,6 +61,14 @@ public class CEnemyPool : MonoBehaviour
         }
 
         rangeEnemyPool.Dequeue().SetActive(true);
+    }
+
+    /// <summary>
+    /// 상자를 만든다.
+    /// </summary>
+    public void SpawnChest()
+    {
+        chestFactory.CreateEnemy();
     }
 
     /// <summary>

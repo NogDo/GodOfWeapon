@@ -9,6 +9,7 @@ public class CEnemyPoolManager : MonoBehaviour
 
     IEnumerator spawnMeleeEnemyCoroutine;
     IEnumerator spawnRangeEnemyCoroutine;
+    IEnumerator spawnChestCoroutine;
 
     float fMeleeEnemySpawnTime = 3.0f;
     float fRangeEnemySpawnTime = 5.0f;
@@ -20,6 +21,7 @@ public class CEnemyPoolManager : MonoBehaviour
 
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
         spawnRangeEnemyCoroutine = SpawnRangeEnemy();
+        spawnChestCoroutine = SpawnChest();
     }
 
     IEnumerator Start()
@@ -30,12 +32,24 @@ public class CEnemyPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 적 소환 코루틴을 실행한다.
+    /// 적 소환 코루틴들을 실행한다.
     /// </summary>
     public void StartSpawn()
     {
         StartCoroutine(spawnMeleeEnemyCoroutine);
         StartCoroutine(spawnRangeEnemyCoroutine);
+        StartCoroutine(spawnChestCoroutine);
+    }
+
+
+    /// <summary>
+    /// 적 소환 코루틴들을 종료한다.
+    /// </summary>
+    public void StopSpawn()
+    {
+        StopCoroutine(spawnMeleeEnemyCoroutine);
+        StopCoroutine(spawnRangeEnemyCoroutine);
+        StopCoroutine(spawnChestCoroutine);
     }
 
     /// <summary>
@@ -46,9 +60,9 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            int meleeEnemySpawnNumber = Random.Range(1, 7);
+            float meleeEnemySpawnTime = Random.Range(1.0f, 7.0f);
 
-            for (int i = 0; i < meleeEnemySpawnNumber; i++)
+            for (int i = 0; i < meleeEnemySpawnTime; i++)
             {
                 enemyPool.SpawnMeleeEnemy();
             }
@@ -65,14 +79,30 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            int rangeEnemySpawnNumber = Random.Range(0, 3);
+            float rangeEnemySpawnTime = Random.Range(0.0f, 3.0f);
 
-            for (int i = 0; i < rangeEnemySpawnNumber; i++)
+            for (int i = 0; i < rangeEnemySpawnTime; i++)
             {
                 enemyPool.SpawnRangeEnemy();
             }
 
             yield return new WaitForSeconds(fRangeEnemySpawnTime);
+        }
+    }
+
+    /// <summary>
+    /// 상자 소환 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator SpawnChest()
+    {
+        while (true)
+        {
+            float chestSpawnTime = Random.Range(10.0f, 20.0f);
+
+            yield return new WaitForSeconds(1.0f);
+
+            enemyPool.SpawnChest();
         }
     }
 }
