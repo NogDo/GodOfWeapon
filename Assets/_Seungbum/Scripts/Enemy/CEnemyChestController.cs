@@ -9,12 +9,17 @@ using SystemRandom = System.Random;
 public class CEnemyChestController : MonoBehaviour, IHittable
 {
     #region private 변수
+    [Header("상자 생성 및 파괴 관련")]
     [SerializeField]
     ParticleSystem particleSpawnPrefab;
     [SerializeField]
+    GameObject[] oBrokenChest;
+
+    [Header("상자 보상 관련")]
+    [SerializeField]
     GameObject oGoldIngotPrefab;
     [SerializeField]
-    GameObject[] oBrokenChest;
+    GameObject oBomb;
 
     CEnemyPool enemyPool;
     ParticleSystem particleSpawn;
@@ -66,22 +71,36 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     public void Die()
     {
         Destroy(particleSpawn.gameObject);
+
         mesh.enabled = false;
         col.enabled = false;
 
-        // TODO : 여기에 상자 부셔져서 파편 날리는 기능과 보상 떨어지는 기능 구현하면 됨.
-        for (int i = 0; i < 5; i++)
-        {
-            Vector3 position1 = new Vector3(transform.position.x - 0.125f, 0.2f + i * 0.25f, transform.position.z);
-            Vector3 position2 = new Vector3(transform.position.x + 0.125f, 0.2f + i * 0.25f, transform.position.z);
-
-            CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position1);
-            CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position2);
-        }
-
+        // 상자 파편
         for (int i = 0; i < oBrokenChest.Length; i++)
         {
             oBrokenChest[i].SetActive(true);
+        }
+
+        int rewardNum = Random.Range(0, 2);
+
+        switch (rewardNum)
+        {
+            case 0:
+                // 금괴 보상
+                for (int i = 0; i < 5; i++)
+                {
+                    Vector3 position1 = new Vector3(transform.position.x - 0.125f, 0.2f + i * 0.25f, transform.position.z);
+                    Vector3 position2 = new Vector3(transform.position.x + 0.125f, 0.2f + i * 0.25f, transform.position.z);
+
+                    CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position1);
+                    CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position2);
+                }
+                break;
+
+            case 1:
+                // 폭탄
+                Instantiate(oBomb, transform.position, Quaternion.identity);
+                break;
         }
     }
 
