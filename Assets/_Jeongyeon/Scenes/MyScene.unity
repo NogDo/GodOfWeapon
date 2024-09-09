@@ -12841,3 +12841,60 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &9178403340047510350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7367864361099287118, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_Name
+      value: InventoryViewModeComp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367864361099287364, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92160723bfc6fef42bd4764f9eb28a3d, type: 3}
