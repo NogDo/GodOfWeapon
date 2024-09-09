@@ -11,16 +11,17 @@ public class CrossBowController : WeaponController
     public Transform arrowPosition;
     #endregion
     #region Private Fields
-    private PositionInfo positionInfo;
-    private Transform[] shootPosition;
-    private Animator anim;
-    private int positionIndex = 0;
     #endregion
-
+    #region Protected Fields
+    protected PositionInfo positionInfo;
+    protected Animator anim;
+    protected int positionIndex = 0;
+    protected Transform[] shootPosition;
+    #endregion
     public override void Start()
     {
         positionInfo = GetComponentInParent<PositionInfo>();
-        shootPosition = positionInfo.shotPositions;
+        shootPosition = positionInfo.shootPositions;
         startParent = gameObject.transform.parent.gameObject;
         anim = GetComponent<Animator>();
     }
@@ -79,9 +80,8 @@ public class CrossBowController : WeaponController
     /// 화살의 쏠 위치를 정렬후 가장 가까운곳으로 이동시키는 코루틴
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ChangePosition()
+    public virtual IEnumerator ChangePosition()
     {
-       
         Array.Sort(shootPosition, (a, b) =>
         {
             if ((a.position - enemyTransform.position).sqrMagnitude > (b.position - enemyTransform.position).sqrMagnitude)
@@ -131,10 +131,10 @@ public class CrossBowController : WeaponController
     /// 화살을 발사하는 코루틴
     /// </summary>
     /// <returns></returns>
-    private IEnumerator Shoot()
+    public virtual IEnumerator Shoot()
     {
         isAttacking = true;
-        WeaponProjectile arrow = projectilePool.GetProjectile();
+        WeaponProjectile arrow = projectilePool.GetProjectile(0);
         arrow.transform.position = arrowPosition.position;
         arrow.transform.rotation = gameObject.transform.rotation;
         arrow.Shoot(enemyTransform.position + Vector3.up);
@@ -146,7 +146,7 @@ public class CrossBowController : WeaponController
     /// 공격 딜레이를 주는 코루틴
     /// </summary>
     /// <returns></returns>
-    private IEnumerator CoolTime()
+    public virtual IEnumerator CoolTime()
     {
         yield return new WaitForSeconds(0.2f);
         isAttacking = false;

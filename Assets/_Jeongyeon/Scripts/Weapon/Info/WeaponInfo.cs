@@ -14,8 +14,9 @@ public class WeaponInfo : MonoBehaviour
     public float damage;
     public float massValue;
     public float attackSpeed;
-    public int level;
     public float attackRange;
+    public float criticalRate;
+    public int level;
     public int price;
     public string weaponName;
     public Type weaponType;

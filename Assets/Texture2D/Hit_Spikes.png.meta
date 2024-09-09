@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b245ff6e4ac92904197a1ec14606eb92
-timeCreated: 1725898499
+guid: e4dc880fd6d252442a91514e2c49bba6
+timeCreated: 1725898503
 licenseType: Free
 TextureImporter:
   serializedVersion: 11
@@ -37,7 +37,7 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: 4
+  textureFormat: 25
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2

@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4157553bc1d804943987ede611d04edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPositions:
+  shootPositions:
   - {fileID: 955405076}
   - {fileID: 439436721}
   - {fileID: 652216753}
@@ -844,7 +844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &471284316
 Transform:
   m_ObjectHideFlags: 0
@@ -1283,6 +1283,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8257729614551626231, guid: 692c3127641b61c41b89592870f8763a, type: 3}
+      propertyPath: objectPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257729614551626231, guid: 692c3127641b61c41b89592870f8763a, type: 3}
+      propertyPath: objectPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 1818187898754657, guid: 9f162da6537f1174f9389ec580d05c78, type: 3}
+    - target: {fileID: 8257729614551626231, guid: 692c3127641b61c41b89592870f8763a, type: 3}
+      propertyPath: objectPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692c3127641b61c41b89592870f8763a, type: 3}
 --- !u!1001 &637667122
@@ -1455,7 +1467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &678702909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1556,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &680317859
 Transform:
   m_ObjectHideFlags: 0
@@ -1718,7 +1730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &727652529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,7 +1930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &875360738
 Transform:
   m_ObjectHideFlags: 0
@@ -2062,7 +2074,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7064989713825625257, guid: 17b70dcae316f3d4381d7b2ba378fa0d, type: 3}
+      propertyPath: sProjectileCount
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 162248352, guid: 17b70dcae316f3d4381d7b2ba378fa0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 17b70dcae316f3d4381d7b2ba378fa0d, type: 3}
 --- !u!4 &907583038 stripped
 Transform:

@@ -38,7 +38,7 @@ public class LightningSpearController : SpearController
             transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             if (time >= particleduration)
             {
-                WeaponProjectile lightning = lightningPool.GetProjectile();
+                WeaponProjectile lightning = lightningPool.GetProjectile(0);
                 lightning.transform.localScale = Vector3.one;
                 lightning.Shoot(lightningPoint.position);
                 particleduration += 0.25f; // 번개 생성 주기
