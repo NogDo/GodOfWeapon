@@ -6,7 +6,8 @@ public enum EAttackType
 {
     MELEE,
     RANGE,
-    BOTH
+    BOTH,
+    NONE
 }
 
 public class CEnemyInfo : MonoBehaviour

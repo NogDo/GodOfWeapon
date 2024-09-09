@@ -11,6 +11,7 @@ public class CChestFactory : CEnemyFactory
 
     public override void CreateEnemy()
     {
-        Instantiate(oChestPrefabs[0], transform);
+        GameObject chest = Instantiate(oChestPrefabs[0], transform);
+        chest.SetActive(false);
     }
 }

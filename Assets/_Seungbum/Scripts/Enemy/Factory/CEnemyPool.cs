@@ -7,6 +7,7 @@ public class CEnemyPool : MonoBehaviour
     #region private º¯¼ö
     Queue<GameObject> meleeEnemyPool = new Queue<GameObject>();
     Queue<GameObject> rangeEnemyPool = new Queue<GameObject>();
+    Queue<GameObject> enemyChestPool = new Queue<GameObject>();
 
     CMeleeEnemyFactory meleeEnemyFactory;
     CRangeEnemyFactory rangeEnemyFactory;
@@ -68,7 +69,12 @@ public class CEnemyPool : MonoBehaviour
     /// </summary>
     public void SpawnChest()
     {
-        chestFactory.CreateEnemy();
+        if (enemyChestPool.Count == 0)
+        {
+            chestFactory.CreateEnemy();
+        }
+
+        enemyChestPool.Dequeue().SetActive(true);
     }
 
     /// <summary>
@@ -86,6 +92,10 @@ public class CEnemyPool : MonoBehaviour
 
             case EAttackType.RANGE:
                 rangeEnemyPool.Enqueue(enemy);
+                break;
+
+            case EAttackType.NONE:
+                enemyChestPool.Enqueue(enemy);
                 break;
         }
     }

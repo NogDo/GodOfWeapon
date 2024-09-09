@@ -13,19 +13,34 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     ParticleSystem particleSpawnPrefab;
     [SerializeField]
     GameObject oGoldIngotPrefab;
+    [SerializeField]
+    GameObject[] oBrokenChest;
 
+    CEnemyPool enemyPool;
     ParticleSystem particleSpawn;
-
     Collider col;
     Animator animator;
+    MeshRenderer mesh;
+
+    float fMaxHP;
+    float fNowHP;
     #endregion
+
+    void Awake()
+    {
+        enemyPool = GetComponentInParent<CEnemyPool>();
+        col = GetComponent<Collider>();
+        animator = GetComponent<Animator>();
+        mesh = GetComponent<MeshRenderer>();
+    }
 
     void OnEnable()
     {
-        col = GetComponent<Collider>();
-        animator = GetComponent<Animator>();
-
         col.enabled = false;
+        mesh.enabled = true;
+
+        fMaxHP = 50.0f;
+        fNowHP = fMaxHP;
 
         float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxX - 1) * 4.0f);
         float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxZ - 1) * 4.0f);
@@ -41,10 +56,18 @@ public class CEnemyChestController : MonoBehaviour, IHittable
         Invoke("AnimationStart", 1.0f);
     }
 
+    void OnDisable()
+    {
+        CancelInvoke();
+
+        enemyPool.ReturnPool(gameObject, EAttackType.NONE);
+    }
+
     public void Die()
     {
         Destroy(particleSpawn.gameObject);
-        Destroy(gameObject);
+        mesh.enabled = false;
+        col.enabled = false;
 
         // TODO : 여기에 상자 부셔져서 파편 날리는 기능과 보상 떨어지는 기능 구현하면 됨.
         for (int i = 0; i < 5; i++)
@@ -55,11 +78,21 @@ public class CEnemyChestController : MonoBehaviour, IHittable
             CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position1);
             CGoldIngotPoolManager.Instance.SpawnTier2GoldIngot(position2);
         }
+
+        for (int i = 0; i < oBrokenChest.Length; i++)
+        {
+            oBrokenChest[i].SetActive(true);
+        }
     }
 
     public void Hit(float damage, float mass)
     {
-        Die();
+        fNowHP -= damage;
+
+        if (fNowHP <= 0.0f)
+        {
+            Die();
+        }
     }
 
     [Obsolete("mass값을 파라미터로 받는 Hit(float damage, float mass)를 사용하세요.")]
