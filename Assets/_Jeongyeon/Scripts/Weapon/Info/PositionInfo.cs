@@ -5,7 +5,7 @@ using UnityEngine;
 public class PositionInfo : MonoBehaviour
 {
     #region public Fields
-    public Transform[] shotPositions;
+    public Transform[] shootPositions;
     #endregion
 
 }

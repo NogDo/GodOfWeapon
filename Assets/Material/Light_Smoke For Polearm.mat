@@ -14,6 +14,7 @@ Material:
   m_InvalidKeywords:
   - _ADD_PRECOMPUTED_VELOCITY
   - _BLENDMODE_ADD
+  - _COLORCOLOR_ON
   - _DISABLE_SSR
   - _SURFACE_TYPE_TRANSPARENT
   - _USEALPHADISOLVE_ON
@@ -41,19 +42,39 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailNoise:
         m_Texture: {fileID: 2800000, guid: ece8843c2d4329348a5b06c6bc435e0d, type: 3}
         m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9f24e9432e0f57a408593038580abc3b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38567cddeb455944d87f2131c13c9929, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -70,11 +91,13 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
+    - _ColorMode: 4
     - _Cull: 2
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
     - _Desaturate: 1
+    - _DetailNormalMapScale: 1
     - _DisableErosion: 0
     - _DistortionBlend: 0.5
     - _DistortionEnable: 0
@@ -92,20 +115,26 @@ Material:
     - _Fresnel: 0
     - _FresnelPower: 1
     - _FresnelScale: 1
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _LightingEnabled: 1
     - _Metallic: 0
     - _MiddlePointPos: 0.773
     - _Mode: 4
     - _MultiplyNoiseDesaturation: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
     - _ReceivesSSR: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
+    - _SmoothnessTextureChannel: 0
     - _SoftFadeFactor: 0.75
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SourceBlendRGB: 10
+    - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _StencilRef: 0
     - _StencilRefDepth: 0
@@ -122,6 +151,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentSortPriority: 0
     - _TransparentZWrite: 0
+    - _UVSec: 0
     - _UseAlphaDisolve: 1
     - _UseAlphaOverride: 0
     - _UseRamp: 0
@@ -136,7 +166,8 @@ Material:
     - _AlphaOverrideChannel: {r: 1, g: 0, b: 0, a: 0}
     - _AlphaOverridePanning: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0, g: 1, b: 0.08670306, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.08627451, a: 1}
+    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _DetailAdditiveChannel: {r: 0, g: 0, b: 0, a: 0}
     - _DetailDisolveChannel: {r: 0, g: 0, b: 0, a: 0}
     - _DetailDistortionChannel: {r: 0, g: 0.4, b: 0, a: 0}

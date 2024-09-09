@@ -1,11 +1,17 @@
 fileFormatVersion: 2
-guid: 9f24e9432e0f57a408593038580abc3b
-timeCreated: 1723169051
+guid: 38567cddeb455944d87f2131c13c9929
+timeCreated: 1725898500
 licenseType: Free
 TextureImporter:
-  serializedVersion: 12
+  serializedVersion: 11
+  objectHideFlags: 0
+  correspondingSourceObject: {fileID: 0}
+  prefabInstance: {fileID: 0}
+  prefabAsset: {fileID: 0}
+  name:
   internalIDToNameTable: []
   externalObjects: {}
+  usedFileIDs: []
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -65,14 +71,13 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
