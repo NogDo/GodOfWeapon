@@ -9,6 +9,8 @@ public class CEnemyStandBombController : MonoBehaviour
 
     [SerializeField]
     GameObject explotionPrefab;
+    [SerializeField]
+    CEnemySkill skill;
     #endregion
 
     void Awake()
@@ -27,6 +29,9 @@ public class CEnemyStandBombController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Explode()
     {
+        skill.gameObject.SetActive(true);
+        skill.Active(transform);
+
         yield return new WaitForSeconds(2.0f);
 
         animator.SetTrigger("Explode");
