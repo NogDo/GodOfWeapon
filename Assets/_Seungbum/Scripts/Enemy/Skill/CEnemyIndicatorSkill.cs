@@ -5,7 +5,6 @@ using UnityEngine;
 public class CEnemyIndicatorSkill : CEnemySkill
 {
     #region protected º¯¼ö
-    [SerializeField]
-    protected float fDuration;
+    
     #endregion
 }

@@ -4,36 +4,23 @@ using UnityEngine;
 
 public class CEnemySphereIndicatorSkill : CEnemyIndicatorSkill
 {
+    #region public 변수
+    public CEnemySphereIndicatorControl oIndicatorPrefab;
+    #endregion
+
     #region private 변수
     [SerializeField]
-    Transform tfInnerRing;
-
+    float fRadius;
     #endregion
 
     public override void Active(Transform target)
     {
-        StartCoroutine(ActiveIndicator());
-    }
+        Vector3 spawnPosition = target.position;
+        spawnPosition.y = 0.2f;
 
-    /// <summary>
-    /// 피격 범위를 알려주는 코루틴
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator ActiveIndicator()
-    {
-        float time = 0.0f;
-        
-        while (time <= fDuration)
-        {
-            tfInnerRing.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, time / fDuration);
+        CEnemySphereIndicatorControl indicator = Instantiate(oIndicatorPrefab);
+        indicator.InitIndicator(spawnPosition, fAttack + fOwnerAttack, fRadius);
 
-            time += Time.deltaTime;
-
-            yield return null;
-        }
-
-        tfInnerRing.localScale = Vector3.one;
-
-        yield return null;
+        indicator.ActiveIndicator();
     }
 }
