@@ -10,18 +10,27 @@ public class CEnemySphereIndicatorControl : MonoBehaviour
 
     [SerializeField]
     LayerMask playerLayer;
-    [SerializeField]
-    float fRotateSpeed;
-    [SerializeField]
-    float fDuration;
+
+    CEnemyIndicatorPool indicatorPool;
 
     float fDamage;
     float fRadius;
+    float fDuration;
     #endregion
+
+    void Awake()
+    {
+        indicatorPool = GetComponentInParent<CEnemyIndicatorPool>();
+    }
 
     void Update()
     {
-        transform.Rotate(Vector3.up * fRotateSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+    }
+
+    void OnDisable()
+    {
+        indicatorPool.ReturnPool(sphereindicator: this);
     }
 
     /// <summary>
@@ -30,12 +39,13 @@ public class CEnemySphereIndicatorControl : MonoBehaviour
     /// <param name="spawnPosition">범위가 표시될 위치값</param>
     /// <param name="damage">데미지</param>
     /// <param name="radius">피격 범위 반지름</param>
-    public void InitIndicator(Vector3 spawnPosition, float damage, float radius)
+    public void InitIndicator(Vector3 spawnPosition, float damage, float radius, float duration)
     {
         transform.position = spawnPosition;
 
         fDamage = damage;
         fRadius = radius;
+        fDuration = duration;
 
         transform.localScale = Vector3.one * fRadius;
     }
@@ -69,9 +79,9 @@ public class CEnemySphereIndicatorControl : MonoBehaviour
 
         TakeDamageToPlayer();
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
 
-        yield return null; 
+        yield return null;
     }
 
     /// <summary>

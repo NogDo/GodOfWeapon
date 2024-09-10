@@ -21,6 +21,7 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
 
     CEnemyProjectilePool enemyProjectilePool;
     Transform target;
+    Collider col;
 
     IEnumerator moveCoroutine;
     IEnumerator rotateCoroutine;
@@ -32,6 +33,7 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     void Awake()
     {
         enemyProjectilePool = GetComponentInParent<CEnemyProjectilePool>();
+        col = GetComponent<Collider>();
 
         moveCoroutine = ProjectileMove();
         rotateCoroutine = ProjectileRotate();
@@ -48,6 +50,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
         {
             StopCoroutine(moveCoroutine);
             StopCoroutine(rotateCoroutine);
+
+            col.enabled = false;
 
             ownParticle.Stop();
             hitParticle.Play();
@@ -95,6 +99,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     {
         if (gameObject.activeSelf)
         {
+            col.enabled = true;
+
             StartCoroutine(moveCoroutine);
             StartCoroutine(rotateCoroutine);
         }

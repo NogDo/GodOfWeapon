@@ -18,8 +18,10 @@ public class CEnemySphereIndicatorSkill : CEnemyIndicatorSkill
         Vector3 spawnPosition = target.position;
         spawnPosition.y = 0.2f;
 
-        CEnemySphereIndicatorControl indicator = Instantiate(oIndicatorPrefab);
-        indicator.InitIndicator(spawnPosition, fAttack + fOwnerAttack, fRadius);
+        CEnemySphereIndicatorControl indicator = CEnemyIndicatorManager.Instance.SpawnSphereIndicator();
+        indicator.InitIndicator(spawnPosition, fAttack + fOwnerAttack, fRadius, fDuration);
+
+        indicator.gameObject.SetActive(true);
 
         indicator.ActiveIndicator();
     }
