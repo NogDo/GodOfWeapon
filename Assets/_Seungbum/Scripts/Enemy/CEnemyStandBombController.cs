@@ -6,6 +6,9 @@ public class CEnemyStandBombController : MonoBehaviour
 {
     #region private º¯¼ö
     Animator animator;
+
+    [SerializeField]
+    GameObject explotionPrefab;
     #endregion
 
     void Awake()
@@ -36,6 +39,12 @@ public class CEnemyStandBombController : MonoBehaviour
     /// </summary>
     public void AfterExplode()
     {
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y = 1.0f;
+
+        GameObject particle = Instantiate(explotionPrefab, spawnPosition, Quaternion.identity);
+
+        Destroy(particle, 2.0f);
         Destroy(gameObject);
     }
 }
