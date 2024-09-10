@@ -29,6 +29,8 @@ public class CEnemyChestController : MonoBehaviour, IHittable
 
     float fMaxHP;
     float fNowHP;
+
+    bool isInit = false;
     #endregion
 
     void Awake()
@@ -41,36 +43,42 @@ public class CEnemyChestController : MonoBehaviour, IHittable
 
     void OnEnable()
     {
-        col.enabled = false;
-        mesh.enabled = true;
+        if (isInit)
+        {
+            col.enabled = false;
+            mesh.enabled = true;
 
-        fMaxHP = 50.0f;
-        fNowHP = fMaxHP;
+            fMaxHP = 50.0f;
+            fNowHP = fMaxHP;
 
-        float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxX - 1) * 4.0f);
-        float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxZ - 1) * 4.0f);
+            float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxX - 1) * 4.0f);
+            float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxZ - 1) * 4.0f);
 
-        Vector3 spawnPoint = new Vector3(randX, 7.65f, randZ);
-        Vector3 particlePoint = new Vector3(randX, 0.2f, randZ);
+            Vector3 spawnPoint = new Vector3(randX, 7.65f, randZ);
+            Vector3 particlePoint = new Vector3(randX, 0.2f, randZ);
 
-        particleSpawn = Instantiate(particleSpawnPrefab, particlePoint, Quaternion.identity);
-        particleSpawn.Play();
+            particleSpawn = Instantiate(particleSpawnPrefab, particlePoint, Quaternion.identity);
+            particleSpawn.Play();
+            Destroy(particleSpawn.gameObject, 2.0f);
 
-        transform.position = spawnPoint;
+            transform.position = spawnPoint;
 
-        Invoke("AnimationStart", 1.0f);
+            Invoke("AnimationStart", 1.0f);
+        }
+
+        else
+        {
+            isInit = true;
+        }
     }
 
     void OnDisable()
     {
-        CancelInvoke();
-
         enemyPool.ReturnPool(gameObject, EAttackType.NONE);
     }
 
     public void Die()
     {
-        Destroy(particleSpawn.gameObject);
 
         mesh.enabled = false;
         col.enabled = false;
@@ -120,11 +128,18 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     }
 
     /// <summary>
+    /// 애니메이션 재생 이후 상자의 Collider를 활성화 시키는 메서드
+    /// </summary>
+    public void ColliderActive()
+    {
+        col.enabled = true;
+    }
+
+    /// <summary>
     /// 애니메이션을 재생하고 콜라이더를 활성화 시킨다.
     /// </summary>
     void AnimationStart()
     {
         animator.SetTrigger("Down");
-        col.enabled = true;
     }
 }

@@ -55,7 +55,12 @@ public class CEnemySkill : MonoBehaviour
     {
         // TODO : 나중에 데이터베이스에서 이름으로 정보값 가져와 초기화하기 (EnemySkill의 정보를 담는 Manager에 데이터를 먼저 가져오고 Manager를 통해 초기화)
         fAttack = 5.0f;
-        fOwnerAttack = GetComponent<CEnemyInfo>().Attack;
+
+        if (TryGetComponent<CEnemyInfo>(out CEnemyInfo info))
+        {
+            fOwnerAttack = info.Attack;
+        }
+
         fCoolTime = 3.0f;
     }
 
