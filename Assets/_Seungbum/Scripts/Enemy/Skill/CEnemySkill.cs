@@ -49,7 +49,7 @@ public class CEnemySkill : MonoBehaviour
     }
 
     /// <summary>
-    /// 스킬 정보를 초기화 한다.
+    /// 스킬 정보를 초기화 한다. (데이터 베이스)
     /// </summary>
     public void Init()
     {
@@ -65,9 +65,22 @@ public class CEnemySkill : MonoBehaviour
     }
 
     /// <summary>
+    /// 스킬 정보를 초기화 한다. (직접 할당)
+    /// </summary>
+    /// <param name="attack">공격력</param>
+    /// <param name="ownerAttack">스킬 보유 적 공격력</param>
+    /// <param name="coolTime">스킬 쿨타임</param>
+    public void Init(float attack, float ownerAttack, float coolTime)
+    {
+        fAttack = attack;
+        fOwnerAttack = ownerAttack;
+        fCoolTime = coolTime;
+    }
+
+    /// <summary>
     /// 스킬 사용
     /// </summary>
-    /// <param name="target">공격할 타겟 Transform</param>
+    /// <param name="target">공격할 타겟또는, 지점</param>
     public virtual void Active(Transform target)
     {
 
