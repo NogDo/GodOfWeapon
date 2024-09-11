@@ -29,10 +29,12 @@ public class CEnemyStandBombController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Explode()
     {
+        skill.Init(5.0f, 0.0f, 0.0f);
+
         skill.gameObject.SetActive(true);
         skill.Active(transform);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.9f);
 
         animator.SetTrigger("Explode");
 

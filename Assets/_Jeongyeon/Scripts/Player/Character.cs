@@ -78,6 +78,9 @@ public class Character : MonoBehaviour
         currentHp -= damage;
         CDamageTextPoolManager.Instance.SpawnPlayerText(transform, damage);
     }
+    /// <summary>
+    /// 플레이어의 회전을 조절하는 메서드
+    /// </summary>
     public void MovePlayer()
     {
 
@@ -129,6 +132,10 @@ public class Character : MonoBehaviour
         anim.SetFloat("aSpeed", speed);
 
     }
+
+    /// <summary>
+    /// 잔상을 생성하는 메서드
+    /// </summary>
     private void CreatAfterImage()
     {
         SkinnedMeshRenderer[] afterImageRenderer = new SkinnedMeshRenderer[afterImage.Length];
@@ -138,6 +145,10 @@ public class Character : MonoBehaviour
         }
         smrCreator.Setup(afterImageRenderer, 7, 0.25f);
     }
+    /// <summary>
+    /// 대쉬를 실행하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Dash()
     {
         currentDashCount--;
@@ -172,13 +183,17 @@ public class Character : MonoBehaviour
         
         yield return null;
     }
-
+    /// <summary>
+    /// 대쉬 쿨타임을 적용하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DashCoolTime()
     {
         yield return new WaitForSeconds(2.0f);
         currentDashCount = dashCount;
         isdash = false;
     }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.TryGetComponent<IAttackable>(out IAttackable hit))
@@ -202,6 +217,15 @@ public class Character : MonoBehaviour
             dashSpeed = 0;
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Fence")
+        {
+            dashSpeed = 15f;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<IAttackable>(out IAttackable hit))
@@ -212,14 +236,10 @@ public class Character : MonoBehaviour
             StartCoroutine(hitCoroutine);
         }
     }
-    
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Fence")
-        {
-            dashSpeed = 15f;
-        }
-    }
+    /// <summary>
+    /// 플레이어가 맞았을때 메테리얼을 변경하는 코루틴 (ex: 맞았을시 빨간색)
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator HitEffect()
     {
         for (int i = 0; i < afterImage.Length; i++)
