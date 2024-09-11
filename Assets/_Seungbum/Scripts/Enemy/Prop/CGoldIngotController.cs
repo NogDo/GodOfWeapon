@@ -56,11 +56,11 @@ public class CGoldIngotController : MonoBehaviour
         switch (nTier)
         {
             case 1:
-                power = Random.Range(0.2f, 0.4f);
+                power = Random.Range(0.3f, 0.5f);
                 break;
 
             case 2:
-                power = Random.Range(0.1f, 0.2f);
+                power = Random.Range(0.2f, 0.3f);
                 break;
         }
 

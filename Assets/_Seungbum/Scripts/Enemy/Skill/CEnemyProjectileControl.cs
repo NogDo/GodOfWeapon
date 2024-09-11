@@ -7,6 +7,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     #region private º¯¼ö
     [SerializeField]
     ParticleSystem hitParticle;
+    [SerializeField]
+    ParticleSystem ownParticle;
 
     [SerializeField]
     float fMoveSpeed;
@@ -18,8 +20,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     float fTrackingTime;
 
     CEnemyProjectilePool enemyProjectilePool;
-    ParticleSystem ownParticle;
     Transform target;
+    Collider col;
 
     IEnumerator moveCoroutine;
     IEnumerator rotateCoroutine;
@@ -31,7 +33,7 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     void Awake()
     {
         enemyProjectilePool = GetComponentInParent<CEnemyProjectilePool>();
-        ownParticle = GetComponent<ParticleSystem>();
+        col = GetComponent<Collider>();
 
         moveCoroutine = ProjectileMove();
         rotateCoroutine = ProjectileRotate();
@@ -48,6 +50,8 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
         {
             StopCoroutine(moveCoroutine);
             StopCoroutine(rotateCoroutine);
+
+            col.enabled = false;
 
             ownParticle.Stop();
             hitParticle.Play();
@@ -93,8 +97,13 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     /// </summary>
     public void Shoot()
     {
-        StartCoroutine(moveCoroutine);
-        StartCoroutine(rotateCoroutine);
+        if (gameObject.activeSelf)
+        {
+            col.enabled = true;
+
+            StartCoroutine(moveCoroutine);
+            StartCoroutine(rotateCoroutine);
+        }
     }
 
     /// <summary>

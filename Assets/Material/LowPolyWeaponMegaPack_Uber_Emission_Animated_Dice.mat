@@ -8,16 +8,19 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LowPolyWeaponMegaPack_Uber_Emission_Animated_Dice
-  m_Shader: {fileID: 4800000, guid: 8c7a7f3edbf258943b04b193d73eb283, type: 3}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
+  - _METALLICGLOSSMAP
   m_InvalidKeywords:
   - _ENABLEEMISSION
   - _VERTEXCOLORMASK
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -55,11 +58,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ccf29aa3c4e0656419236a3f3dd2bd3e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ccf29aa3c4e0656419236a3f3dd2bd3e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
@@ -106,7 +109,7 @@ Material:
     - _DissolveIntensity: 0
     - _DissolveNoiseScale: 45
     - _DissolveStep: 0.06
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _ENABLEEMISSION: 1
     - _EmissionAnimation: 1
     - _EmissionAnimationSpeed: 0.5
@@ -117,12 +120,12 @@ Material:
     - _EnvironmentReflections: 1
     - _Flash: 0
     - _GlossFromBlueChannel: 0
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0
     - _Glossiness: 0.1
     - _GlossyReflections: 1
     - _Metallic: 0
     - _MetallicStrength: 0.5
-    - _Mode: 0
+    - _Mode: 3
     - _NormalStrength: 0.97
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -143,7 +146,7 @@ Material:
     - _VERTEXCOLORMASK: 1
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
