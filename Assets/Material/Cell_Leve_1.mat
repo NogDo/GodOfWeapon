@@ -7,26 +7,29 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cell_NewFx_Mat_big
+  m_Name: Cell_Leve_1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _EMISSION
   - _GLOSSYREFLECTIONS_OFF
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_InvalidKeywords:
+  - _FLIPBOOKBLENDING_OFF
+  - _SURFACE_TYPE_TRANSPARENT
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BackgroundTex:
-        m_Texture: {fileID: 2800000, guid: c375cc39e8712bb46808f6a5f6bd0f32, type: 3}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 005c822a9b273944c915a669907a0b90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BlurTex:
@@ -49,6 +52,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DetailTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionGradientTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,14 +66,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerBackgroundTex:
-        m_Texture: {fileID: 2800000, guid: b63c418da8181604aa0ade8f8839ea1a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LinkTex:
-        m_Texture: {fileID: 2800000, guid: b63c418da8181604aa0ade8f8839ea1a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -111,7 +110,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - PixelSnap: 0
     - _AlphaClip: 0
     - _AlphaClipTheshold: 0.5
     - _Blend: 0
@@ -123,6 +121,7 @@ Material:
     - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorMask: 15
     - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
@@ -142,7 +141,6 @@ Material:
     - _EmissionIntensity: 1
     - _EmissionIntensity2: 1
     - _EnableEmissionIntensity2: 0
-    - _EnableExternalAlpha: 0
     - _EnableFlicker: 0
     - _EnableInnerShape: 1
     - _EnvironmentReflections: 1
@@ -157,25 +155,32 @@ Material:
     - _LinkIntensity: 0.96
     - _Metallic: 0
     - _MetallicStrength: 1
-    - _Mode: 0
+    - _Mode: 1
     - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _Smoothness: 0.1
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Strength: 0.2
     - _Surface: 1
     - _USEDISSOLVE: 0
     - _UV2AsMetallic: 0
     - _UVSec: 0
     - _UseCustomNoise: 0
+    - _UseUIAlphaClip: 0
     - _UseVertex: 0
     - _UseVertexColorEmission: 0
     - _VERTEXCOLORMASK: 0
@@ -184,21 +189,19 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.09433959, g: 0.08499462, b: 0.08499462, a: 0.65882355}
     - _ColorCombine: {r: 0, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 1, g: 0, b: 0.018612862, a: 1}
+    - _EmissionColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
     - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
     - _FlickerAlphaRange: {r: 0, g: 0.5, b: 0, a: 0}
     - _FlickerRange: {r: 0.75, g: 1, b: 0, a: 0}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _InnerColor: {r: 0.65999997, g: 0.42607585, b: 0.13784799, a: 0.23921569}
     - _LinkFlag: {r: 0, g: 0, b: 0, a: 0}
     - _OffsetUV: {r: 0, g: 0, b: 0, a: 0}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
