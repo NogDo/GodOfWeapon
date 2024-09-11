@@ -4,16 +4,32 @@ using UnityEngine;
 
 public class CellColor : MonoBehaviour
 {
+    #region Public Fields
     public Material[] materials;
     public Material[] materials_Single;
+    #endregion
 
+    #region Private Fields
     private MeshRenderer myMeshRenderer;
     private Material myMaterial;
     private GameObject item;
-    private void Start()
+    private CellInfo parent;
+
+    private int x;
+    private int z;
+    #endregion
+
+    private void Awake()
     {
-        myMeshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        parent = transform.parent.GetComponent<CellInfo>();
+        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
         myMaterial = myMeshRenderer.material;
+    }
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => parent.isActive);
+        x = parent.x;
+        z = parent.z;
     }
 
     private void OnTriggerEnter(Collider other)
