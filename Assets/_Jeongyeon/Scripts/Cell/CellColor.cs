@@ -12,7 +12,6 @@ public class CellColor : MonoBehaviour
     #region Private Fields
     private MeshRenderer myMeshRenderer;
     private Material myMaterial;
-    private GameObject item;
     private CellInfo parent;
 
     private int x;
@@ -32,58 +31,44 @@ public class CellColor : MonoBehaviour
         z = parent.z;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ChangeCellColor(int level)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Item") && myMeshRenderer.material == myMaterial)
+        switch (level)
         {
-            item = other.gameObject;
-            float itemXSize = other.gameObject.GetComponent<BoxCollider>().size.x;
-            float itemZSize = other.gameObject.GetComponent<BoxCollider>().size.z;
-            int level = Random.Range(0, 3);
-            if (itemXSize+ itemZSize > 2)
-            {
-                switch (level)
-                {
-                    case 0:
-                        myMeshRenderer.material = materials[0];
-                        break;
-                    case 1:
-                        myMeshRenderer.material = materials[1];
-                        break;
-                    case 2:
-                        myMeshRenderer.material = materials[2];
-                        break;
-                    case 3:
-                        myMeshRenderer.material = materials[3];
-                        break;
-                }
-            }
-            else
-            {
-                switch (level)
-                {
-                    case 0:
-                        myMeshRenderer.material = materials_Single[0];
-                        break;
-                    case 1:
-                        myMeshRenderer.material = materials_Single[1];
-                        break;
-                    case 2:
-                        myMeshRenderer.material = materials_Single[2];
-                        break;
-                    case 3:
-                        myMeshRenderer.material = materials_Single[3];
-                        break;
-                }
-            }
+            case 1:
+                myMeshRenderer.material = materials[0];
+                break;
+            case 2:
+                myMeshRenderer.material = materials[1];
+                break;
+            case 3:
+                myMeshRenderer.material = materials[2];
+                break;
+            case 4:
+                myMeshRenderer.material = materials[3];
+                break;
+
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void ChangeCellColor_Single(int level)
     {
-        if (other.gameObject == item && myMeshRenderer.material != myMaterial)
+        switch (level)
         {
-            myMeshRenderer.material = myMaterial;
+            case 1:
+                myMeshRenderer.material = materials_Single[0];
+                break;
+            case 2:
+                myMeshRenderer.material = materials_Single[1];
+                break;
+            case 3:
+                myMeshRenderer.material = materials_Single[2];
+                break;
+            case 4:
+                myMeshRenderer.material = materials_Single[3];
+                break;
         }
+    
     }
+
 }
