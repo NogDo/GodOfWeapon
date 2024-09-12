@@ -185,7 +185,7 @@ public class CellManager : MonoBehaviour
     /// <summary>
     /// 랜덤으로 뽑은 5개를 리셋하는 메서드
     /// </summary>
-    public void ResetCanActiveCell()
+    public void ResetAddCell()
     {
         for (int j = 0; j < 5; j++)
         {
@@ -226,7 +226,7 @@ public class CellManager : MonoBehaviour
     /// </summary>
     /// <param name="pos">위치값을 저장하는 Struct</param>
     /// <param name="level">색상을 결정하는 변수값</param>
-    public void SetItem(List<Pos> pos, int level)
+    public void SetItem(List<STPos> pos, int level)
     {
         if (pos.Count > 1)
         {
@@ -243,6 +243,12 @@ public class CellManager : MonoBehaviour
         }
     }
 
-
+    public void ResetItem(List<STPos> pos)
+    {
+        for (int i = 0; i < pos.Count; i++)
+        {
+            gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().ResetColor();
+        }
+    }
 }
 
