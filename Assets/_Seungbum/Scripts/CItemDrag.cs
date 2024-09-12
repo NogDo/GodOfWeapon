@@ -19,42 +19,56 @@ public class CItemDrag : MonoBehaviour
     #region private 변수
     [SerializeField]
     Transform[] gridPoints;
-    Camera cameraShop;
 
-    List<STPos> pos = new List<STPos>();
+    Transform tfCell;
+    Transform tfmouse;
+    List<STPos> prevCellPos = new List<STPos>();
+    List<STPos> cellPos = new List<STPos>();
 
-    [SerializeField]
-    int nMaxCount;
+    Vector3 v3StartPosition;
+    Vector3 v3StartRotation;
 
     bool isCanDrop = false;
+    bool isInInventory = false;
+    int nRotateCount;
     #endregion
 
     void Awake()
     {
-        cameraShop = GameObject.Find("ShopCamera").GetComponent<Camera>();
+        tfmouse = FindObjectOfType<CMouseFollower>().transform;
+
+        v3StartPosition = transform.position;
+        v3StartRotation = new Vector3(-45.0f, 0.0f, 0.0f);
+
+        nRotateCount = 0;
     }
 
     void OnMouseDown()
     {
-        transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+        transform.SetParent(tfmouse);
+
+        if (!isInInventory)
+        {
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
+
+        nRotateCount = (int)(transform.rotation.eulerAngles.y / 90);
+
+        Vector3 position = transform.position;
+        position.y = 0.5f;
+        transform.position = position;
     }
 
     void OnMouseDrag()
     {
-        float distance = cameraShop.WorldToScreenPoint(transform.position).z;
-
-        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-        Vector3 objPos = cameraShop.ScreenToWorldPoint(mousePos);
-
-        objPos.y = 0.5f;
-
-        transform.position = objPos;
-
+        // 인벤토리 cell에 들어갈 수 있는지 판단
         int activeCellCount = 0;
+        cellPos.Clear();
 
         for (int i = 0; i < gridPoints.Length; i++)
         {
             RaycastHit hit;
+
             if (Physics.Raycast(gridPoints[i].position, Vector3.down, out hit, float.MaxValue, LayerMask.GetMask("Cell")))
             {
                 Debug.DrawRay(gridPoints[i].position, Vector3.down * hit.distance, Color.red);
@@ -62,17 +76,22 @@ public class CItemDrag : MonoBehaviour
                 if (hit.transform.parent.TryGetComponent<CellInfo>(out CellInfo cellinfo))
                 {
                     STPos cellPos = new STPos(cellinfo.x, cellinfo.z);
+                    this.cellPos.Add(cellPos);
 
-                    // TODO : cellPos를 CellManager에 메서드로 보내고 해당 좌표 cell이 0인지 1인지를 가져오는 로직
                     if (CellManager.Instance.CheckItemActive(cellPos.x, cellPos.z))
                     {
                         activeCellCount++;
+                    }
+
+                    if (i == 0)
+                    {
+                        tfCell = hit.transform;
                     }
                 }
             }
         }
 
-        if (activeCellCount == nMaxCount)
+        if (activeCellCount == gridPoints.Length)
         {
             isCanDrop = true;
         }
@@ -85,8 +104,76 @@ public class CItemDrag : MonoBehaviour
 
     void OnMouseUp()
     {
-        transform.rotation = Quaternion.Euler(-45.0f, 0.0f, 0.0f);
+        transform.SetParent(null);
 
-        Debug.Log(isCanDrop);
+        if (isCanDrop)
+        {
+            Vector3 pos = tfCell.position;
+
+            switch (nRotateCount)
+            {
+                case 0:
+                    pos.x += 0.0f;
+                    pos.z += 0.0f;
+                    v3StartRotation = new Vector3(0.0f, 0.0f, 0.0f);
+                    break;
+
+                case 1:
+                    pos.x += 0.0f;
+                    pos.z += 0.15f;
+                    v3StartRotation = new Vector3(0.0f, 90.0f, 0.0f);
+                    break;
+
+                case 2:
+                    pos.x += 0.15f;
+                    pos.z += 0.15f;
+                    v3StartRotation = new Vector3(0.0f, 180.0f, 0.0f);
+                    break;
+
+                case 3:
+                    pos.x += 0.15f;
+                    pos.z += 0.0f;
+                    v3StartRotation = new Vector3(0.0f, 270.0f, 0.0f);
+                    break;
+            }
+
+            transform.position = pos;
+            v3StartPosition = transform.position;
+
+            isInInventory = true;
+
+            // TODO : CellManager에 SetItem과 ResetItem 호출하기
+            //CellManager.Instance.SetItem(cellPos, 2);
+
+            if (prevCellPos.Count > 0)
+            {
+                //CellManager.Instance.ResetItem(prevCellPos);
+            }
+
+            prevCellPos = cellPos;
+        }
+
+        else
+        {
+            if (isInInventory)
+            {
+                transform.rotation = Quaternion.Euler(v3StartRotation);
+                transform.position = v3StartPosition;
+            }
+
+            else
+            {
+                transform.rotation = Quaternion.Euler(v3StartRotation);
+                transform.position = v3StartPosition;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 회전 카운트 수를 증가시킨다.
+    /// </summary>
+    public void IncreaseRotationCount()
+    {
+        nRotateCount = (nRotateCount + 1 < 4) ? nRotateCount + 1 : 0;
     }
 }
