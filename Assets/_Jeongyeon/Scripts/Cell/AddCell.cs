@@ -39,6 +39,7 @@ public class AddCell : MonoBehaviour
     private void OnMouseUp()
     {
         CellManager.Instance.Click();
+        CellManager.Instance.ResetCanActiveCell();
         CellManager.Instance.GetActiveCell(x, z);
     }
 

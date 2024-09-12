@@ -21,8 +21,9 @@ public class CellManager : MonoBehaviour
     #endregion
 
     #region Public Fields
-    //셀이 활성화 여부를 확인하는 델리게이트
+    // 셀이 클릭이 되었을때 호출되는 이벤트
     public event Action OnCellClick;
+
     #endregion
 
     public static CellManager Instance { get; private set; }
@@ -150,7 +151,7 @@ public class CellManager : MonoBehaviour
     /// <param name="cell">활성화 가능셀만 모아둔 리스트</param>
     private void ShuffleCell(List<Pos> cell)
     {
-        for (int i =0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             int j = Random.Range(0, canActiveCell.Count);
             int k = Random.Range(0, canActiveCell.Count);
@@ -170,16 +171,78 @@ public class CellManager : MonoBehaviour
         cell[j] = temp;
     }
 
+    /// <summary>
+    /// 클릭한 셀을 활성화하는 메서드
+    /// </summary>
+    /// <param name="x">셀의 x값</param>
+    /// <param name="z">셀의 z값</param>
+    public void GetActiveCell(int x, int z)
+    {
+        gameGrid[x, z].transform.GetChild(0).gameObject.SetActive(false);
+        gameGrid[x, z].transform.GetChild(1).gameObject.SetActive(true);
+        checkGrid[x, z] = 0;
+    }
+    /// <summary>
+    /// 랜덤으로 뽑은 5개를 리셋하는 메서드
+    /// </summary>
+    public void ResetCanActiveCell()
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            int x = canActiveCell[j].x;
+            int z = canActiveCell[j].z;
+            gameGrid[x, z].transform.GetChild(0).gameObject.SetActive(true);
+        }
+        canActiveCell.Clear();
+    }
+    /// <summary>
+    /// 클릭이 됬을경우 실행되는 메서드
+    /// </summary>
     public void Click()
     {
         OnCellClick?.Invoke();
     }
-   
-    public void GetActiveCell(int x, int z)
+
+    /// <summary>
+    /// 활성화된 자린지 아닌지 확인하는 메서드
+    /// </summary>
+    /// <param name="x">셀의 x좌표</param>
+    /// <param name="z">셀의 z좌표</param>
+    /// <returns></returns>
+    public bool CheckItemActive(int x, int z)
     {
-        gameGrid[x,z].transform.GetChild(0).gameObject.SetActive(false);
-        gameGrid[x, z].transform.GetChild(1).gameObject.SetActive(true);
-        checkGrid[x, z] = 0;
+        if (checkGrid[x, z] == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+
+    /// <summary>
+    /// 셀의 색상값을 변경하는 메서드
+    /// </summary>
+    /// <param name="pos">위치값을 저장하는 Struct</param>
+    /// <param name="level">색상을 결정하는 변수값</param>
+    public void SetItem(List<Pos> pos, int level)
+    {
+        if (pos.Count > 1)
+        {
+            for (int i = 0; i < pos.Count; i++)
+            {
+                gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().ChangeCellColor(level);
+                checkGrid[pos[i].x, pos[i].z] = 1;
+            }
+        }
+        else
+        {
+            gameGrid[pos[0].x, pos[0].z].transform.GetChild(1).GetComponent<CellColor>().ChangeCellColor_Single(level);
+            checkGrid[pos[0].x, pos[0].z] = 1;
+        }
+    }
+
+
 }
 
