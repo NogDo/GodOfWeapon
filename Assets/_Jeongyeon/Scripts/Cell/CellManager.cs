@@ -26,8 +26,6 @@ public class CellManager : MonoBehaviour
 
     #endregion
 
-    public static CellManager Instance { get; private set; }
-
     /// <summary>
     /// 활성화된 셀의 좌표값을 저장하는 구조체
     /// </summary>
@@ -41,6 +39,8 @@ public class CellManager : MonoBehaviour
             this.z = z;
         }
     }
+    public static CellManager Instance { get; private set; }
+
 
     private void Awake()
     {
