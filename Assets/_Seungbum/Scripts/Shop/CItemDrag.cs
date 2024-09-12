@@ -38,15 +38,13 @@ public class CItemDrag : MonoBehaviour
         tfmouse = FindObjectOfType<CMouseFollower>().transform;
 
         v3StartPosition = transform.position;
-        v3StartRotation = new Vector3(-45.0f, 0.0f, 0.0f);
+        v3StartRotation = new Vector3(-30.0f, 0.0f, 0.0f);
 
         nRotateCount = 0;
     }
 
     void OnMouseDown()
     {
-        transform.SetParent(tfmouse);
-
         if (!isInInventory)
         {
             transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -57,6 +55,8 @@ public class CItemDrag : MonoBehaviour
         Vector3 position = transform.position;
         position.y = 0.5f;
         transform.position = position;
+
+        transform.SetParent(tfmouse);
     }
 
     void OnMouseDrag()
@@ -140,17 +140,16 @@ public class CItemDrag : MonoBehaviour
             transform.position = pos;
             v3StartPosition = transform.position;
 
-            isInInventory = true;
-
-            // TODO : CellManager에 SetItem과 ResetItem 호출하기
-            //CellManager.Instance.SetItem(cellPos, 2);
+            CellManager.Instance.SetItem(cellPos, 2);
 
             if (prevCellPos.Count > 0)
             {
-                //CellManager.Instance.ResetItem(prevCellPos);
+                CellManager.Instance.ResetItem(prevCellPos);
             }
 
             prevCellPos = cellPos;
+
+            isInInventory = true;
         }
 
         else
