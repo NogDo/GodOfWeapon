@@ -71,4 +71,9 @@ public class CellColor : MonoBehaviour
     
     }
 
+    public void ResetColor()
+    {
+        myMeshRenderer.material = myMaterial;
+    }
+
 }

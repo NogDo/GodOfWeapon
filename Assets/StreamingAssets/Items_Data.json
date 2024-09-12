@@ -1,0 +1,39 @@
+[
+  {
+    "name": "Lance",
+    "uid": 1,
+    "hp": 0.0,
+    "damage": 0.0,
+    "meleeDamage": 0.0,
+    "rangeDamage": 0.0,
+    "criticalRate": 0.0,
+    "attackSpeed": 0.0,
+    "moveSpeed": 0.0,
+    "attackRange": 0.0,
+    "massValue": 0.0,
+    "bloodDrain": 0.0,
+    "defense": 0.0,
+    "luck": 0.0,
+    "moneyRate": 0.0,
+    "expRate": 0.0
+  },
+  {
+    "name": "Dice",
+    "uid": 2,
+    "hp": 0.0,
+    "damage": 0.0,
+    "meleeDamage": 0.0,
+    "rangeDamage": 0.0,
+    "criticalRate": 0.0,
+    "attackSpeed": 0.0,
+    "moveSpeed": 0.0,
+    "attackRange": 0.0,
+    "massValue": 0.0,
+    "bloodDrain": 0.0,
+    "defense": 0.0,
+    "luck": 0.0,
+    "moneyRate": 0.0,
+    "expRate": 0.0
+  }
+
+]

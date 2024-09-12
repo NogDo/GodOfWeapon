@@ -33,6 +33,7 @@ public class WeaponInfo : MonoBehaviour
     }
 }
 
+[SerializeField]
 public class WeaponData
 {
     #region Public Fields
@@ -43,25 +44,31 @@ public class WeaponData
         Spear,
         Crossbow
     }
+    public string weaponName;
+    public int uid;
+    public int level;
+    public int price;
     public float damage;
     public float massValue;
     public float attackSpeed;
-    public int level;
     public float attackRange;
-    public int price;
-    public string weaponName;
     public Type weaponType;
     #endregion
 
-    public WeaponData(float damage, float massValue, float attackSpeed, int level, float attackRange, int price, string weaponName, Type weaponType)
+    public WeaponData()
     {
+        
+    }
+    public WeaponData(string weaponName, int uid, int level, int price, float damage, float massValue, float attackSpeed, float attackRange, Type weaponType)
+    {
+        this.weaponName = weaponName;
+        this.uid = uid;
+        this.level = level;
+        this.price = price;
         this.damage = damage;
         this.massValue = massValue;
         this.attackSpeed = attackSpeed;
-        this.level = level;
         this.attackRange = attackRange;
-        this.price = price;
-        this.weaponName = weaponName;
         this.weaponType = weaponType;
     }
 }
