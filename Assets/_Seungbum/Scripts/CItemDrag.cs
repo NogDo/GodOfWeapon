@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-struct STPos
+public struct STPos
 {
     public int x;
     public int z;
@@ -16,23 +16,22 @@ struct STPos
 
 public class CItemDrag : MonoBehaviour
 {
-    #region public 변수
-    public Camera cameraShop;
-    #endregion
-
     #region private 변수
     [SerializeField]
     Transform[] gridPoints;
+    Camera cameraShop;
 
     List<STPos> pos = new List<STPos>();
 
     [SerializeField]
     int nMaxCount;
+
+    bool isCanDrop = false;
     #endregion
 
     void Awake()
     {
-        
+        cameraShop = GameObject.Find("ShopCamera").GetComponent<Camera>();
     }
 
     void OnMouseDown()
@@ -65,14 +64,29 @@ public class CItemDrag : MonoBehaviour
                     STPos cellPos = new STPos(cellinfo.x, cellinfo.z);
 
                     // TODO : cellPos를 CellManager에 메서드로 보내고 해당 좌표 cell이 0인지 1인지를 가져오는 로직
-                    //CellManager.Instance.
+                    if (CellManager.Instance.CheckItemActive(cellPos.x, cellPos.z))
+                    {
+                        activeCellCount++;
+                    }
                 }
             }
+        }
+
+        if (activeCellCount == nMaxCount)
+        {
+            isCanDrop = true;
+        }
+
+        else
+        {
+            isCanDrop = false;
         }
     }
 
     void OnMouseUp()
     {
         transform.rotation = Quaternion.Euler(-45.0f, 0.0f, 0.0f);
+
+        Debug.Log(isCanDrop);
     }
 }
