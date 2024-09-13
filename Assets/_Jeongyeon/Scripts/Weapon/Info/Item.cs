@@ -38,6 +38,7 @@ public class ItemData
     public float luck;
     public float moneyRate;
     public float expRate;
+    public int level;
 
     public ItemData()
     {
@@ -62,8 +63,9 @@ public class ItemData
         luck = 0;
         moneyRate = 0;
         expRate = 0;
+        level = 1;
     }
-    public ItemData(string name, int uid, int price,float hp, float damage, float meleeDamage, float rangeDamage, float criticalRate, float attackSpeed, float moveSpeed, float attackRange, float massValue, float bloodDrain, float defense, float luck, float moneyRate, float expRate)
+    public ItemData(string name, int uid, int price,float hp, float damage, float meleeDamage, float rangeDamage, float criticalRate, float attackSpeed, float moveSpeed, float attackRange, float massValue, float bloodDrain, float defense, float luck, float moneyRate, float expRate, int level)
     {
         this.name = name;
         this.uid = uid;
@@ -82,5 +84,6 @@ public class ItemData
         this.luck = luck;
         this.moneyRate = moneyRate;
         this.expRate = expRate;
+        this.level = level;
     }
 }
