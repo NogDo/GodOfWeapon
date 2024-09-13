@@ -7,6 +7,7 @@ public class LightningProjectile : WeaponProjectile
     #region Private Fields
     private float damage;
     private WProjectilePool lightningPool;
+    private WeaponStatInfo weapon;
     private SphereCollider sphereCollider;
     #endregion
 
@@ -14,7 +15,7 @@ public class LightningProjectile : WeaponProjectile
     {
         lightningPool = transform.parent.GetComponent<WProjectilePool>();
         sphereCollider = GetComponent<SphereCollider>();
-        damage = transform.parent.GetComponentInParent<WeaponInfo>().damage;
+        weapon = transform.parent.GetComponentInParent<WeaponStatInfo>();
     }
     public override void Return()
     {
@@ -25,6 +26,7 @@ public class LightningProjectile : WeaponProjectile
 
     public override void Shoot(Vector3 direction)
     {
+        damage = weapon.data.damage;
         transform.localPosition = new Vector3(direction.x, 0.3f, direction.z);
         transform.localRotation = Quaternion.identity;
         GetComponent<ParticleSystem>().Play();
