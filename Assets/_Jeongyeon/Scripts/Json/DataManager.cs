@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using Unity.VisualScripting;
 
 public class DataManager : MonoBehaviour
 {
@@ -10,48 +11,58 @@ public class DataManager : MonoBehaviour
     private List<WeaponData> weaponDatas;
     private WeaponData crossbow;
     private ItemData dice;
+
+    public static DataManager Instance { get; private set; }
     public void Awake()
     {
-        crossbow = new WeaponData("",0,0,0,0,0,0,0,0);
-        dice = new ItemData("Dice");
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
         weaponDatas = new List<WeaponData>();
         itemDatas = new List<ItemData>();
-        weaponDatas.Add(crossbow);
-        itemDatas.Add(dice);
+        LoadItem();
+        LoadWeapon();
     }
     private void Start()
     {
-        Save();
+
     }
 
-    public void Save()
-    {
-        string path = $"{Application.streamingAssetsPath}/Items_Data.json";
-        List<string> jsonList = new List<string>();
-
-        foreach (ItemData data in itemDatas)
-        {
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            jsonList.Add(json);
-        }
-
-        string finalJson = "[" + string.Join(",", jsonList) + "]";
-        File.WriteAllText(path, finalJson);
-    }
-
-    public void Load()
+    public void LoadItem()
     {
         string path = $"{Application.streamingAssetsPath}/Items_Data.json";
         string json = File.ReadAllText(path);
         List<ItemData> itemData = JsonConvert.DeserializeObject<List<ItemData>>(json);
         this.itemDatas.AddRange(itemData);
     }
+    public void LoadWeapon()
+    {
+        string path = $"{Application.streamingAssetsPath}/Weapons_Data.json";
+        string json = File.ReadAllText(path);
+        List<WeaponData> WeaponData = JsonConvert.DeserializeObject<List<WeaponData>>(json);
+        this.weaponDatas.AddRange(WeaponData);
+    }
+
 
     public ItemData GetItemData(int uid)
     {
         foreach (ItemData data in itemDatas)
         {
             if (data.uid == uid)
+            {
+                return data;
+            }
+        }
+        Debug.LogError("아이템이 없다구요!");
+        return null;
+    }
+    public ItemData GetItemData(string name)
+    {
+        foreach (ItemData data in itemDatas)
+        {
+            if (data.name.Equals(name))
             {
                 return data;
             }
@@ -69,7 +80,17 @@ public class DataManager : MonoBehaviour
                 return data;
             }
         }
-        Debug.LogError("힛또");
+        return null;
+    }
+    public WeaponData GetWeaponData(string name)
+    {
+        foreach (WeaponData data in weaponDatas)
+        {
+            if (data.weaponName.Equals(name))
+            {
+                return data;
+            }
+        }
         return null;
     }
 }
