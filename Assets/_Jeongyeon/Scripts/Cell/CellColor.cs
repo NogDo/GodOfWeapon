@@ -11,7 +11,6 @@ public class CellColor : MonoBehaviour
 
     #region Private Fields
     private MeshRenderer myMeshRenderer;
-    private Material myMaterial;
     private CellInfo parent;
 
     private int x;
@@ -22,7 +21,6 @@ public class CellColor : MonoBehaviour
     {
         parent = transform.parent.GetComponent<CellInfo>();
         myMeshRenderer = GetComponentInChildren<MeshRenderer>();
-        myMaterial = myMeshRenderer.material;
     }
     private IEnumerator Start()
     {
@@ -73,7 +71,7 @@ public class CellColor : MonoBehaviour
 
     public void ResetColor()
     {
-        myMeshRenderer.material = myMaterial;
+        myMeshRenderer.material = materials[4];
     }
 
 }

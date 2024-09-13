@@ -1,11 +1,124 @@
-[{
-  "weaponName": "",
-  "uid": 0,
-  "level": 0,
-  "price": 0,
-  "damage": 0.0,
-  "massValue": 0.0,
-  "attackSpeed": 0.0,
-  "attackRange": 0.0,
-  "weaponType": 0
-}]
+[
+  {
+    "weaponName": "Lance",
+    "uid": 1,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 0
+  },
+  {
+    "weaponName": "LightningSpear",
+    "uid": 2,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 0
+  },
+  {
+    "weaponName": "NormalSpear",
+    "uid": 3,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 0
+  },
+  {
+    "weaponName": "GreatSword",
+    "uid": 4,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 0
+  },
+  {
+    "weaponName": "CrossBowBasic",
+    "uid": 5,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 2
+  },
+  {
+    "weaponName": "CrossBowRevolver",
+    "uid": 6,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 2
+  },
+  {
+    "weaponName": "CrossBowAutomatic",
+    "uid": 7,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 2
+  },
+  {
+    "weaponName": "CrossBowSmall",
+    "uid": 8,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 2
+  },
+  {
+    "weaponName": "Dagger",
+    "uid": 9,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 1
+  },
+  {
+    "weaponName": "Sword1_Short",
+    "uid": 10,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 1
+  },
+  {
+    "weaponName": "Sword2_Short",
+    "uid": 11,
+    "level": 1,
+    "price": 0,
+    "damage": 0.0,
+    "massValue": 0.0,
+    "attackSpeed": 0.0,
+    "attackRange": 0.0,
+    "weaponType": 1
+  }
+
+]

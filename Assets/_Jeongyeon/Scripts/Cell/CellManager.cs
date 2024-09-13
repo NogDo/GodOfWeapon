@@ -248,6 +248,7 @@ public class CellManager : MonoBehaviour
         for (int i = 0; i < pos.Count; i++)
         {
             gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().ResetColor();
+            checkGrid[pos[i].x, pos[i].z] = 0;
         }
     }
 }
