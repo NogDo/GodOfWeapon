@@ -63,7 +63,6 @@ public class CShopManager : MonoBehaviour
         for (int i = 0; i < randomNumList.Count; i++)
         {
             GameObject item = Instantiate(itemList[randomNumList[i]], itemSpawnPoint[i].position, Quaternion.Euler(-30.0f, 0.0f, 0.0f));
-            item.transform.position += Vector3.left * item.GetComponent<BoxCollider>().size.x / 10.0f;
         }
     }
 }

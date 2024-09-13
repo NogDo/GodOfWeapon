@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,8 +38,10 @@ public class CItemDrag : MonoBehaviour
     {
         tfmouse = FindObjectOfType<CMouseFollower>().transform;
 
-        v3StartPosition = transform.position;
+        transform.position += Vector3.left * GetComponent<BoxCollider>().size.x / 10.0f;
+
         v3StartRotation = new Vector3(-30.0f, 0.0f, 0.0f);
+        v3StartPosition = transform.position;
 
         nRotateCount = 0;
     }
@@ -57,6 +60,12 @@ public class CItemDrag : MonoBehaviour
         transform.position = position;
 
         transform.SetParent(tfmouse);
+
+        // 원래 있던 칸 없애기
+        if (prevCellPos.Count > 0)
+        {
+            CellManager.Instance.ResetItem(prevCellPos);
+        }
     }
 
     void OnMouseDrag()
@@ -142,12 +151,7 @@ public class CItemDrag : MonoBehaviour
 
             CellManager.Instance.SetItem(cellPos, 2);
 
-            if (prevCellPos.Count > 0)
-            {
-                CellManager.Instance.ResetItem(prevCellPos);
-            }
-
-            prevCellPos = cellPos;
+            prevCellPos = cellPos.ToList();
 
             isInInventory = true;
         }
@@ -158,6 +162,8 @@ public class CItemDrag : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(v3StartRotation);
                 transform.position = v3StartPosition;
+
+                CellManager.Instance.SetItem(prevCellPos, 2);
             }
 
             else
