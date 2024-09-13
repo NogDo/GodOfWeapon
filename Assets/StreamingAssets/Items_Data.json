@@ -95,7 +95,7 @@
     "expRate": 0.0
   },
   {
-    "name": "DeckOfCards",
+    "name": "DeckOfCard",
     "uid": 6,
     "price": 0,
     "hp": 0.0,
@@ -266,7 +266,7 @@
     "expRate": 0.0
   },
   {
-    "name": "HnadMirror",
+    "name": "HandMirror",
     "uid": 15,
     "price": 0,
     "hp": 0.0,
@@ -285,7 +285,7 @@
     "expRate": 0.0
   },
   {
-    "name": "Pinewheel",
+    "name": "PineWheel",
     "uid": 16,
     "price": 0,
     "hp": 0.0,
@@ -379,5 +379,4 @@
     "moneyRate": 0.0,
     "expRate": 0.0
   }
-
 ]
