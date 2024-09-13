@@ -39,9 +39,8 @@ public class WeaponData
     #region Public Fields
     public enum Type
     {
-        LSword,
-        SSword,
-        Spear,
+        LWeapon,
+        SWeapon,
         Crossbow
     }
     public string weaponName;

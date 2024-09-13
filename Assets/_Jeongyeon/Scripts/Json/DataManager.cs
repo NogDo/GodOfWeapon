@@ -26,10 +26,10 @@ public class DataManager : MonoBehaviour
 
     public void Save()
     {
-        string path = $"{Application.streamingAssetsPath}/Weapons_Data.json";
+        string path = $"{Application.streamingAssetsPath}/Items_Data.json";
         List<string> jsonList = new List<string>();
 
-        foreach (WeaponData data in weaponDatas)
+        foreach (ItemData data in itemDatas)
         {
             string json = JsonConvert.SerializeObject(data, Formatting.Indented);
             jsonList.Add(json);
@@ -64,10 +64,10 @@ public class DataManager : MonoBehaviour
     {
         foreach (WeaponData data in weaponDatas)
         {
-            /*  if (data.uid == uid)
-              {
-                  return data;
-              }*/
+            if (data.uid == uid)
+            {
+                return data;
+            }
         }
         Debug.LogError("Èý¶Ç");
         return null;
