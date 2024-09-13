@@ -21,6 +21,8 @@ public class CItemDrag : MonoBehaviour
     [SerializeField]
     Transform[] gridPoints;
 
+    CItemStats itemStats;
+    CWeaponStats weaponStats;
     Transform tfCell;
     Transform tfmouse;
     List<STPos> prevCellPos = new List<STPos>();
@@ -36,6 +38,8 @@ public class CItemDrag : MonoBehaviour
 
     void Awake()
     {
+        itemStats = GetComponent<CItemStats>();
+        weaponStats = GetComponent<CWeaponStats>();
         tfmouse = FindObjectOfType<CMouseFollower>().transform;
 
         transform.position += Vector3.left * GetComponent<BoxCollider>().size.x / 10.0f;
@@ -149,7 +153,17 @@ public class CItemDrag : MonoBehaviour
             transform.position = pos;
             v3StartPosition = transform.position;
 
-            CellManager.Instance.SetItem(cellPos, 2);
+
+            if (itemStats != null)
+            {
+                CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
+            }
+
+            else if (weaponStats != null)
+            {
+                CellManager.Instance.SetItem(cellPos, weaponStats.Level);
+            }
+
 
             prevCellPos = cellPos.ToList();
 
@@ -163,7 +177,15 @@ public class CItemDrag : MonoBehaviour
                 transform.rotation = Quaternion.Euler(v3StartRotation);
                 transform.position = v3StartPosition;
 
-                CellManager.Instance.SetItem(prevCellPos, 2);
+                if (itemStats != null)
+                {
+                    CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
+                }
+
+                else if (weaponStats != null)
+                {
+                    CellManager.Instance.SetItem(cellPos, weaponStats.Level);
+                }
             }
 
             else

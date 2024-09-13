@@ -6,10 +6,26 @@ public class CItemStats : MonoBehaviour
 {
     #region private 변수
     ItemData itemData;
+
+    string itemName;
     #endregion
+
+    /// <summary>
+    /// 아이템 데이터 정보
+    /// </summary>
+    public ItemData Item
+    {
+        get
+        {
+            return itemData;
+        }
+    }
 
     void Start()
     {
-        //itemData = DataManager.Instance.GetItemData(gameObject.name);
+        int index = gameObject.name.IndexOf("(Clone)");
+        itemName = gameObject.name.Substring(0, index);
+
+        itemData = DataManager.Instance.GetItemData(itemName);
     }
 }
