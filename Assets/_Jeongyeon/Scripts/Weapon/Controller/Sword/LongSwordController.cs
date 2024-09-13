@@ -11,7 +11,7 @@ public class LongSwordController : SwordController
     #region Private Fields
     private bool isSwing = false;
     private Animator anim;
-    private WeaponInfo weaponInfo;
+    private WeaponStatInfo weaponInfo;
   
     #endregion
 
@@ -19,7 +19,8 @@ public class LongSwordController : SwordController
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
-        weaponInfo = GetComponent<WeaponInfo>();
+        weaponInfo = GetComponent<WeaponStatInfo>();
+        duration = weaponInfo.data.attackSpeed;
     }
     public override void Update()
     {
@@ -30,7 +31,7 @@ public class LongSwordController : SwordController
     public override IEnumerator Pierce()
     {
          time = 0.0f;
-         duration = weaponInfo.attackSpeed;
+         
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -48,7 +49,7 @@ public class LongSwordController : SwordController
     }
     public override IEnumerator Swing()
     {
-        anim.SetFloat("SwingSpeed", 1.5f);
+        anim.SetFloat("SwingSpeed", 1.0f+ (duration*0.1f));
         anim.SetTrigger("isSwing");
         isSwing = true;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);

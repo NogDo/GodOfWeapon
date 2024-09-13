@@ -13,7 +13,7 @@ public class CriticalArrow : WeaponProjectile
     private Rigidbody rb;
     private GameObject startParent;
     private WProjectilePool arrowPool;
-    private WeaponInfo crossbowInfo;
+    private WeaponStatInfo crossbowInfo;
     private Collider myCollider;
     private WHitParticlePool hitParticlePool;
     #endregion
@@ -23,7 +23,7 @@ public class CriticalArrow : WeaponProjectile
         rb = GetComponent<Rigidbody>();
         startParent = transform.parent.gameObject;
         arrowPool = startParent.GetComponent<WProjectilePool>();
-        crossbowInfo = startParent.GetComponentInParent<WeaponInfo>();
+        crossbowInfo = startParent.GetComponentInParent<WeaponStatInfo>();
         myCollider = GetComponent<Collider>();
         hitParticlePool = startParent.transform.parent.GetComponentInChildren<WHitParticlePool>();
     }
@@ -49,8 +49,8 @@ public class CriticalArrow : WeaponProjectile
         {
             Vector3 hitPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
             hitParticlePool.GetHitParticle(1).Play(hitPosition);
-            hit.Hit(crossbowInfo.damage + (crossbowInfo.damage * 0.5f), 0.2f);
-            CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbowInfo.damage + (crossbowInfo.damage * 0.5f));
+            hit.Hit(crossbowInfo.data.damage + (crossbowInfo.data.damage * 0.5f), 0.2f);
+            CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbowInfo.data.damage + (crossbowInfo.data.damage * 0.5f));
         }
     }
 }

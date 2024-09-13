@@ -14,7 +14,7 @@ public class Arrow : WeaponProjectile
     private GameObject startParent;
     private WProjectilePool arrowPool;
     private TrailRenderer trailRenderer;
-    private WeaponInfo crossbowInfo;
+    private WeaponStatInfo crossbowInfo;
     private WHitParticlePool hitParticlePool;
     #endregion
     private void Awake()
@@ -23,7 +23,7 @@ public class Arrow : WeaponProjectile
         startParent = transform.parent.gameObject;
         arrowPool = startParent.GetComponent<WProjectilePool>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
-        crossbowInfo = startParent.GetComponentInParent<WeaponInfo>();
+        crossbowInfo = startParent.GetComponentInParent<WeaponStatInfo>();
         hitParticlePool = startParent.transform.parent.GetComponentInChildren<WHitParticlePool>();
         if (hitParticlePool == null)
         {
@@ -65,16 +65,16 @@ public class Arrow : WeaponProjectile
             CancelInvoke("Return");
             Return();
             
-            hit.Hit(crossbowInfo.damage, 0.3f);
+            hit.Hit(crossbowInfo.data.damage, 0.3f);
             if (CheckCritical(criticalRate) == true)
             {
                 hitParticlePool.GetHitParticle(1).Play(hitPosition);   
-                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbowInfo.damage + (crossbowInfo.damage * 0.5f));
+                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbowInfo.data.damage + (crossbowInfo.data.damage * 0.5f));
             }
             else
             {
                 hitParticlePool.GetHitParticle(0).Play(hitPosition);
-                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, crossbowInfo.damage);
+                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, crossbowInfo.data.damage);
             }
             if (CheckBloodDrain(0.1f) == true)
             {

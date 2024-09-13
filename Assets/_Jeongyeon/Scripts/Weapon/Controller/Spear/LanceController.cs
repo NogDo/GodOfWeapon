@@ -14,7 +14,7 @@ public class LanceController : SpearController
 
     private void Awake()
     {
-        duration = 0.5f;
+        duration = 1.0f;
     }
     public override void Start()
     {
