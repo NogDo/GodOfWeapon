@@ -14,11 +14,6 @@ public class CEnemyProjectileSkill : CEnemySkill
     float fShootDelay;
     #endregion
 
-    void Awake()
-    {
-
-    }
-
     public override void Active(Transform target)
     {
         StartCoroutine(ShootProjectile(target));

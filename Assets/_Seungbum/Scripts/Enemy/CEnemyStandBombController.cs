@@ -29,7 +29,7 @@ public class CEnemyStandBombController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Explode()
     {
-        skill.Init(5.0f, 0.0f, 0.0f);
+        skill.Init(5.0f, 0.0f);
 
         skill.gameObject.SetActive(true);
         skill.Active(transform);
