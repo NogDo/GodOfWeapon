@@ -157,13 +157,13 @@ public class CItemDrag : MonoBehaviour
             if (itemStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
-                FindObjectOfType<PlayerInventory>().GetItem(itemStats.Item);
+                CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
             }
 
             else if (weaponStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, weaponStats.Level);
-                FindObjectOfType<PlayerInventory>().CreateWeapon(weaponStats.Weapon.uid, weaponStats.Level);
+                CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Level);
             }
 
             prevCellPos = cellPos.ToList();

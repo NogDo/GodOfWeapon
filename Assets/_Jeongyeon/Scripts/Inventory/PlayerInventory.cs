@@ -22,10 +22,15 @@ public class PlayerInventory : MonoBehaviour
 
     [HideInInspector] public ItemData myItemData;
     #endregion
-    
+
     #region Private Fields
     #endregion
 
+
+    private void Start()
+    {
+        CellManager.Instance.Init(this);
+    }
     /// <summary>
     /// 아이템이 인벤토리에 들어오면 리스트에 추가하고 아이템의 값을 캐릭터에 적용하는 메서드
     /// </summary>
@@ -79,6 +84,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
+        Debug.Log(playerWeapon[0].tooltip);
     }
     /// <summary>
     /// LWeapon Slot에 비어있는지 확인하고 생성하는 메서드

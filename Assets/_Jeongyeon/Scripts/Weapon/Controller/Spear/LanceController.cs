@@ -37,7 +37,7 @@ public class LanceController : SpearController
         {
             inventory = GetComponentInParent<PlayerInventory>();
         }
-        duration = myData.attackSpeed - (myData.attackSpeed * 0.1f);
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed/100));
         if (duration < 0.2f)
         {
             duration = 0.2f;
