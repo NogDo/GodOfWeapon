@@ -6,6 +6,9 @@ public class LanceController : SpearController
 {
     #region Private Fields
     private Animator anim;
+    private WeaponStatInfo weaponStatInfo;
+    private WeaponData myData;
+    private PlayerInventory inventory;
     #endregion
 
     #region Public Fields
@@ -14,13 +17,33 @@ public class LanceController : SpearController
 
     private void Awake()
     {
-        duration = 1.0f;
+        weaponStatInfo = GetComponent<WeaponStatInfo>();
     }
     public override void Start()
     {
         base.Start();
         anim = GetComponent<Animator>();
+        myData = weaponStatInfo.data;
+        inventory = GetComponentInParent<PlayerInventory>();
     }
+
+    private void OnEnable()
+    {
+        if (myData == null)
+        {
+            myData = weaponStatInfo.data;
+        }
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<PlayerInventory>();
+        }
+        duration = myData.attackSpeed - (myData.attackSpeed * 0.1f);
+        if (duration < 0.2f)
+        {
+            duration = 0.2f;
+        }
+    }
+
     private void Update()
     {
         if (FindTarget() == true && isAttacking == false)
@@ -68,7 +91,7 @@ public class LanceController : SpearController
         anim.SetBool("isAttack", false);
         particle.SetActive(false);
         attackCollider.enabled = false;
-        StartCoroutine(EndAttack(transform,0.7f));
+        StartCoroutine(EndAttack(transform,0.3f));
         yield return null;
     }
 
