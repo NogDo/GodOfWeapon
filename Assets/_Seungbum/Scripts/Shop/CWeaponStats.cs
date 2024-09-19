@@ -36,15 +36,13 @@ public class CWeaponStats : MonoBehaviour
         int index = gameObject.name.IndexOf("(Clone)");
         weaponName = gameObject.name.Substring(0, index);
 
-        Debug.Log($"Start¡ﬂ {nLevel}");
-        //weaponData = DataManager.Instance.GetWeaponData(weaponName);
-        //weaponData.level = nLevel;
+        weaponData = DataManager.Instance.GetWeaponData(weaponName);
+        weaponData.level = nLevel;
     }
 
 
     public void InitLevel(int level)
     {
-        Debug.Log($"Init¡ﬂ {nLevel}");
         nLevel = level;
     }
 }

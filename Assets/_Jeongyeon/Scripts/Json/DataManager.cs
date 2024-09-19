@@ -251,7 +251,7 @@ public enum Type
     Crossbow
 }
 
-[SerializeField]
+[Serializable]
 public class WeaponData
 {
     #region Public Fields
