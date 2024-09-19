@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class CStageManager : MonoBehaviour
 {
-    int level = 3;
-    bool isClick = false;
+    #region static 변수
     public static CStageManager Instance { get; private set; }
+    #endregion
 
+    #region private 변수
+    int nLevel = 1;
+    int nCurrnetLevel = 1;
+    int nStageCount = 1;
+
+    bool isClick = false;
+    #endregion
+
+    /// <summary>
+    /// 현재 스테이지
+    /// </summary>
+    public int StageCount
+    { 
+        get
+        {
+            return nStageCount;
+        }
+    }
 
     private void Awake()
     {
@@ -15,22 +33,31 @@ public class CStageManager : MonoBehaviour
         {
             Instance = this;
         }
+
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         CellManager.Instance.OnCellClick += AddCellCheck;
-        Invoke("StartStage", 3f);   
+        //Invoke("StartStage", 3f);   
     }
 
-    public void StartStage()
+    /// <summary>
+    /// 스테이지 종류 후 인벤토리 칸 추가 코루틴을 실행한다.
+    /// </summary>
+    public void EndStage()
     {
         StartCoroutine(AddCellCountCheck());
     }
+
+    /// <summary>
+    /// 레벨 상승량에 따라 인벤토리의 칸을 늘린다.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator AddCellCountCheck()
     {
-        for (int i = 0; i < level; i++)
+        for (int i = 0; i < nLevel; i++)
         {
             isClick = false;
             CellManager.Instance.AddCell();
@@ -39,9 +66,11 @@ public class CStageManager : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 칸이 추가됐다는걸 체크
+    /// </summary>
     private void AddCellCheck()
     {
         isClick = true;
-        
     }
 }

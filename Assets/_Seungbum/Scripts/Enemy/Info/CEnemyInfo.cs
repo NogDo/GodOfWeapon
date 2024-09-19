@@ -12,13 +12,13 @@ public enum EAttackType
 
 public class CEnemyInfo : MonoBehaviour
 {
-    #region protected 변수
-    protected EnemyStats stats;
+    #region private 변수
+    EnemyStats stats;
 
     [SerializeField]
-    protected CEnemySkill[] skills;
+    CEnemySkill[] skills;
 
-    protected bool isSkillInit = false;
+    bool isSkillInit = false;
     #endregion
 
     /// <summary>
@@ -28,7 +28,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.attackType;
+            return stats.Attacktype;
         }
     }
 
@@ -39,7 +39,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.fSpeed;
+            return stats.Speed;
         }
     }
 
@@ -50,7 +50,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.fMaxHp;
+            return stats.MaxHP;
         }
     }
 
@@ -61,7 +61,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.fNowHp;
+            return stats.NowHP;
         }
     }
 
@@ -72,7 +72,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.fAttack;
+            return stats.Attack;
         }
     }
 
@@ -83,7 +83,7 @@ public class CEnemyInfo : MonoBehaviour
     {
         get
         {
-            return stats.fAttackCoolTime;
+            return stats.AttackCooltime;
         }
     }
 
@@ -106,8 +106,17 @@ public class CEnemyInfo : MonoBehaviour
     /// <summary>
     /// 적 스탯 및 스킬 초기화.
     /// </summary>
-    public virtual void Init()
+    public void Init()
     {
+        if (stats == null)
+        {
+            int index = gameObject.name.IndexOf("(Clone)");
+            string name = gameObject.name.Substring(0, index);
+
+            stats = DataManager.Instance.GetEnemyStatsData(name);
+            SetStatsByStage();
+        }
+
         if (!isSkillInit)
         {
             for (int i = 0; i < skills.Length; i++)
@@ -116,7 +125,13 @@ public class CEnemyInfo : MonoBehaviour
             }
         }
 
-        stats.fNowHp = stats.fMaxHp;
+        stats.NowHP = stats.MaxHP;
+    }
+
+
+    public void SetStatsByStage()
+    {
+
     }
 
     /// <summary>
@@ -125,29 +140,6 @@ public class CEnemyInfo : MonoBehaviour
     /// <param name="amount">변경할 체력</param>
     public void ChangeNowHP(float amount)
     {
-        stats.fNowHp = amount;
-    }
-}
-
-public class EnemyStats
-{
-    #region public 변수
-    public EAttackType attackType;
-
-    public float fSpeed;
-    public float fMaxHp;
-    public float fNowHp;
-    public float fAttack;
-    public float fAttackCoolTime;
-    #endregion
-
-    public EnemyStats(EAttackType attackType, float fSpeed, float fMaxHp, float fNowHp, float fAttack, float fAttackCoolTime)
-    {
-        this.attackType = attackType;
-        this.fSpeed = fSpeed;
-        this.fMaxHp = fMaxHp;
-        this.fNowHp = fNowHp;
-        this.fAttack = fAttack;
-        this.fAttackCoolTime = fAttackCoolTime;
+        stats.NowHP = amount;
     }
 }

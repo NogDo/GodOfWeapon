@@ -1780,6 +1780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346518351}
   - component: {fileID: 346518350}
+  - component: {fileID: 346518352}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -1814,6 +1815,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &346518352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346518349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76e505b3246bc54ca119b96965f29eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemystatsList:
+  - Attacktype: 0
+    Name: Death
+    ID: 1
+    Speed: 4
+    MaxHP: 50
+    NowHP: 50
+    Attack: 5
+    AttackCooltime: 0
+  - Attacktype: 1
+    Name: Vampire Bat
+    ID: 2
+    Speed: 3
+    MaxHP: 50
+    NowHP: 50
+    Attack: 5
+    AttackCooltime: 3
 --- !u!1 &358625303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9668,7 +9698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1703786607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12791,7 +12821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1650119917417680154, guid: e01707d50c096464cbb31b502707c246, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e01707d50c096464cbb31b502707c246, type: 3}
@@ -13638,7 +13668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5465698702999126746
 GameObject:
   m_ObjectHideFlags: 0

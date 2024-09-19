@@ -1,0 +1,22 @@
+[
+  {
+    "Attacktype": 0,
+    "Name": "Death",
+    "ID": 1,
+    "Speed": 4.0,
+    "MaxHP": 50.0,
+    "NowHP": 50.0,
+    "Attack": 5.0,
+    "AttackCooltime": 0.0
+  },
+  {
+    "Attacktype": 1,
+    "Name": "Vampire Bat",
+    "ID": 2,
+    "Speed": 3.0,
+    "MaxHP": 50.0,
+    "NowHP": 50.0,
+    "Attack": 5.0,
+    "AttackCooltime": 3.0
+  }
+]
