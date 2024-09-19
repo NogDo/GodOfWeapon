@@ -22,8 +22,11 @@ public class WProjectilePool : MonoBehaviour
     {
         projectilePool = new Queue<WeaponProjectile>();
         sProjectilePool = new Queue<WeaponProjectile>();
-        SetPool(projectileCount);
-        if (objectPrefab[1] != null)
+        if (objectPrefab[0] != null)
+        {
+            SetPool(projectileCount);
+        }
+        if ( objectPrefab.Length > 1&& objectPrefab[1] != null)
         {
             SetSPool(sProjectileCount);
         }

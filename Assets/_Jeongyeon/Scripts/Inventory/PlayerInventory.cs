@@ -53,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
     public void CreateWeapon(int uid, int level)
     {
         playerWeapon.Add(DataManager.Instance.GetWeaponData(uid));
-        if (DataManager.Instance.GetWeaponData(uid).weaponType == Type.LWeapon)
+        if (playerWeapon[playerWeapon.Count - 1].weaponType == Type.LWeapon)
         {
             foreach (GameObject weapon in lWeapons)
             {
@@ -64,12 +64,13 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
-        else if (DataManager.Instance.GetWeaponData(uid).weaponType == Type.SWeapon)
+        else if (playerWeapon[playerWeapon.Count - 1].weaponType == Type.SWeapon)
         {
             foreach (GameObject weapon in sWeapons)
             {
                 if (playerWeapon[playerWeapon.Count - 1].weaponName == weapon.name)
                 {
+                    playerWeapon[playerWeapon.Count - 1].level = level;
                     CheckSSlot(weapon, level);
                 }
             }
@@ -80,6 +81,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (playerWeapon[playerWeapon.Count - 1].weaponName == weapon.name)
                 {
+                    playerWeapon[playerWeapon.Count - 1].level = level;
                     CheckCSlot(weapon, level);
                 }
             }
@@ -100,6 +102,7 @@ public class PlayerInventory : MonoBehaviour
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
                 obj.GetComponent<WeaponStatInfo>().LWeaponSetValue(level);
+                Debug.Log(parent.name);
                 break;
             }
         }
@@ -113,10 +116,14 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (GameObject parent in sWeoponSlot)
         {
-            GameObject obj = Instantiate(weapon, parent.transform);
-            obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-            obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);
-            break;
+            if (parent.transform.childCount == 0)
+            {
+                GameObject obj = Instantiate(weapon, parent.transform);
+                obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
+                obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);
+                Debug.Log(parent.name);
+                break;
+            }
         }
     }
     /// <summary>
@@ -128,10 +135,14 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (GameObject parent in crossbowSlot)
         {
-            GameObject obj = Instantiate(weapon, parent.transform);
-            obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-            obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);
-            break;
+            if (parent.transform.childCount == 0)
+            {
+                GameObject obj = Instantiate(weapon, parent.transform);
+                obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
+                obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);
+                break;
+
+            }
         }
     }
 

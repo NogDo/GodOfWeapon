@@ -8,7 +8,7 @@ public class LanceController : SpearController
     private Animator anim;
     private WeaponStatInfo weaponStatInfo;
     private WeaponData myData;
-    private PlayerInventory inventory;
+    
     #endregion
 
     #region Public Fields
@@ -60,12 +60,11 @@ public class LanceController : SpearController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.5f;
         isAttacking = true;
         time = 0.0f;
-        durationSpeed = duration/3;
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        while (time <= durationSpeed)
+        while (time <= duration)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / durationSpeed);
-            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / durationSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
+            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -81,17 +80,16 @@ public class LanceController : SpearController
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         attackCollider.enabled = true;
         time = 0.0f;
-        durationSpeed = duration /3 *2;
-        while (time <= durationSpeed)
+        while (time <= duration)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
         anim.SetBool("isAttack", false);
         particle.SetActive(false);
         attackCollider.enabled = false;
-        StartCoroutine(EndAttack(transform,0.3f));
+        StartCoroutine(EndAttack(transform,duration));
         yield return null;
     }
 
