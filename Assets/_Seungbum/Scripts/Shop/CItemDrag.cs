@@ -170,7 +170,7 @@ public class CItemDrag : MonoBehaviour
 
                 if (!isInInventory)
                 {
-                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Level);
+                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Weapon.level);
                 }
             }
 

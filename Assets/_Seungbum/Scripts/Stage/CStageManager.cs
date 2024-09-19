@@ -11,7 +11,7 @@ public class CStageManager : MonoBehaviour
     #region private º¯¼ö
     int nLevel = 1;
     int nCurrnetLevel = 1;
-    int nStageCount = 1;
+    int nStageCount = 10;
 
     bool isClick = false;
     #endregion

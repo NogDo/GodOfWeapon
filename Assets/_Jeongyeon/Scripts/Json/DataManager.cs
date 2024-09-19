@@ -29,12 +29,14 @@ public class DataManager : MonoBehaviour
         weaponDatas = new List<WeaponData>();
         itemDatas = new List<ItemData>();
         enemyStatsDatas = new List<EnemyStats>();
-    }
-    private void Start()
-    {
+
         LoadItem();
         LoadWeapon();
         LoadEnemy();
+    }
+    private void Start()
+    {
+        
     }
 
     public void LoadItem()
@@ -154,7 +156,11 @@ public class DataManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 적 정보를 가져온다. (Name으로 탐색)
+    /// </summary>
+    /// <param name="name">해당 적 이름</param>
+    /// <returns></returns>
     public EnemyStats GetEnemyStatsData(string name)
     {
         foreach (EnemyStats data in enemyStatsDatas)

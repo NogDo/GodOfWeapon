@@ -112,8 +112,8 @@ public class CEnemyInfo : MonoBehaviour
         {
             int index = gameObject.name.IndexOf("(Clone)");
             string name = gameObject.name.Substring(0, index);
+            CopyStats(DataManager.Instance.GetEnemyStatsData(name));
 
-            stats = DataManager.Instance.GetEnemyStatsData(name);
             SetStatsByStage();
         }
 
@@ -128,10 +128,33 @@ public class CEnemyInfo : MonoBehaviour
         stats.NowHP = stats.MaxHP;
     }
 
+    /// <summary>
+    /// 데이터 매니저에서 가져온 적 정보를 복사한다.
+    /// </summary>
+    /// <param name="enemyStatsData">데이터 매니저에서 가져온 적 정보</param>
+    public void CopyStats(EnemyStats enemyStatsData)
+    {
+        stats = new EnemyStats();
 
+        stats.Attacktype = enemyStatsData.Attacktype;
+        stats.Name = enemyStatsData.Name;
+        stats.ID = enemyStatsData.ID;
+        stats.Speed = enemyStatsData.Speed;
+        stats.MaxHP = enemyStatsData.MaxHP;
+        stats.NowHP = enemyStatsData.NowHP;
+        stats.Attack = enemyStatsData.Attack;
+        stats.AttackCooltime = enemyStatsData.AttackCooltime;
+    }
+
+    /// <summary>
+    /// 스테이지에 따른 스텟 상승량을 적용시킨다.
+    /// </summary>
     public void SetStatsByStage()
     {
+        int stageCount = CStageManager.Instance.StageCount;
 
+        stats.Attack += 0.5f * stageCount;
+        stats.MaxHP += 3.0f * stageCount;
     }
 
     /// <summary>
