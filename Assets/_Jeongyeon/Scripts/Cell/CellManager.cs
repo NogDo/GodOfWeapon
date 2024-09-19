@@ -11,7 +11,7 @@ public class CellManager : MonoBehaviour
     private int height = 12;
     private int width = 16;
     private float cellSize = 0.15f;
-
+    private PlayerInventory playerInventory;
 
     //셀 프리팹 및 인벤토리에 있는 관련 변수
     [SerializeField] GameObject gridPrefab;
@@ -57,6 +57,19 @@ public class CellManager : MonoBehaviour
         CreateGrid();
         SetCell();
         canActiveCell = new List<Pos>();
+    }
+
+    public void Init(PlayerInventory inventory)
+    {
+        playerInventory = inventory;
+    }
+
+    public PlayerInventory PlayerInventory
+    {
+        get
+        {
+            return playerInventory;
+        }
     }
 
     /// <summary>
