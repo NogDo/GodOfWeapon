@@ -15,6 +15,12 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
     [SerializeField]
     GameObject[] oFloorProps;
 
+    [Header("울타리 관련")]
+    [SerializeField]
+    GameObject[] oBasicFences;
+    [SerializeField]
+    GameObject[] oSpecFences;
+
     [Header("벽 관련")]
     [SerializeField]
     GameObject[] oBasicWalls;
@@ -22,8 +28,6 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
     GameObject[] oSpecWalls;
     [SerializeField]
     GameObject[] oWallProps;
-    [SerializeField]
-    GameObject oColumn;
 
     // 맵 끝 좌표들
     int nMinX;

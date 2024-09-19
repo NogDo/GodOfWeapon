@@ -196,6 +196,31 @@ MonoBehaviour:
     NowHP: 50
     Attack: 5
     AttackCooltime: 3
+--- !u!1 &493381675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4013135772297374813, guid: 52118a451375189428e853c56dda4121, type: 3}
+  m_PrefabInstance: {fileID: 4013135770634260436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &493381677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493381675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ab22ca73a556246a3fb5be4b034641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oBasicFloors: []
+  oSpecFloors: []
+  oFloorProps: []
+  oBasicFences: []
+  oSpecFences: []
+  oBasicWalls: []
+  oSpecWalls: []
+  oWallProps: []
 --- !u!1001 &632720881
 PrefabInstance:
   m_ObjectHideFlags: 0
