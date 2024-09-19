@@ -157,13 +157,21 @@ public class CItemDrag : MonoBehaviour
             if (itemStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
-                CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
+
+                if (!isInInventory)
+                {
+                    CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
+                }
             }
 
             else if (weaponStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, weaponStats.Level);
-                CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Level);
+
+                if (!isInInventory)
+                {
+                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Level);
+                }
             }
 
             prevCellPos = cellPos.ToList();
@@ -180,12 +188,12 @@ public class CItemDrag : MonoBehaviour
 
                 if (itemStats != null)
                 {
-                    CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
+                    CellManager.Instance.SetItem(prevCellPos, itemStats.Item.level);
                 }
 
                 else if (weaponStats != null)
                 {
-                    CellManager.Instance.SetItem(cellPos, weaponStats.Level);
+                    CellManager.Instance.SetItem(prevCellPos, weaponStats.Level);
                 }
             }
 
