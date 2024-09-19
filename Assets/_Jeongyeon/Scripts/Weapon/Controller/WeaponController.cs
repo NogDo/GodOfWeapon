@@ -22,6 +22,7 @@ public class WeaponController : MonoBehaviour
     protected Transform enemyTransform;
     protected GameObject attackParent;
     protected GameObject startParent;
+    protected PlayerInventory inventory;
     protected float coolTime = 1.0f;
     protected float setY;
     protected float time;
@@ -85,22 +86,21 @@ public class WeaponController : MonoBehaviour
     /// </summary>
     /// <param name="startPostion">무기의 현재위치를 의미하는 변수</param>
     /// <returns></returns>
-    public virtual IEnumerator EndAttack(Transform startPostion, float coolTime)
+    public virtual IEnumerator EndAttack(Transform startPostion, float endDuration)
     {
         gameObject.transform.localScale = startScale;
         gameObject.transform.parent = startParent.transform;
         float time = 0.0f;
-        float duration = 0.3f;
-        while (time <= duration)
+        while (time <= endDuration)
         {
-            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / duration);
-            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / duration);
+            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / endDuration);
+            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / endDuration);
             time += Time.deltaTime;
             yield return null;
         }
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(coolTime);
+        yield return new WaitForSeconds(0.15f);
         isAttacking = false;
         yield return null;
     }
