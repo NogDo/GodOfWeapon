@@ -41,7 +41,11 @@ public class WeaponController : MonoBehaviour
         startScale = gameObject.transform.localScale;
         targetLayer = 1 << 3;
     }
-  
+
+    public void CopyData()
+    {
+        myData = new WeaponData();
+    }
     /// <summary>
     /// 먼저 적을 찾고 공격을 준비하는 함수
     /// </summary>
