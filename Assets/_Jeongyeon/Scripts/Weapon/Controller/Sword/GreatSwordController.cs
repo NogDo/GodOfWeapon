@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongSwordController : SwordController
+public class GreatSwordController : SwordController
 {
     #region Public Fields
 
@@ -13,27 +13,24 @@ public class LongSwordController : SwordController
     private Animator anim;
     #endregion
 
-    private void Awake()
-    {
-        weaponStatInfo = GetComponent<WeaponStatInfo>();
-    }
     public override void Start()
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
-        myData = weaponStatInfo.data;
         inventory = GetComponentInParent<PlayerInventory>();
+        inventory.GetItemValues(hp: 10);
+    }
+    private void OnDestroy()
+    {
+        inventory.MinusItemValues(hp: 10);
     }
     public override void Update()
     {
-       base.Update();
+        base.Update();
     }
     private void OnEnable()
     {
-        if (myData == null)
-        {
-            myData = weaponStatInfo.data;
-        }
+        myData = weaponStatInfo.data;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
@@ -53,25 +50,25 @@ public class LongSwordController : SwordController
     }
     public override IEnumerator Pierce()
     {
-         time = 0.0f;
+        time = 0.0f;
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        while (time <= duration/2)
+        while (time <= duration / 2)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration/2));
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
         particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform, duration/2));
+        StartCoroutine(EndAttack(transform, duration / 2));
         patternCount++;
         yield return null;
     }
     public override IEnumerator Swing()
     {
-        anim.SetFloat("SwingSpeed", 1.0f+ (myData.attackSpeed + (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100))) * 0.1f);
+        anim.SetFloat("SwingSpeed", 1.0f + (myData.attackSpeed + (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100))) * 0.1f);
         anim.SetTrigger("isSwing");
         isSwing = true;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -79,7 +76,7 @@ public class LongSwordController : SwordController
         yield return new WaitForSeconds(0.5f);
         isSwing = false;
         particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform, duration/3));
+        StartCoroutine(EndAttack(transform, duration / 3));
         patternCount++;
         yield return null;
     }

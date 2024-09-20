@@ -9,21 +9,22 @@ public class DaggerController : SwordController
     #endregion
     #region Private Fields
     private Collider[] target;
+    private int count = 1;
     #endregion
 
-    private void Awake()
-    {
-       weaponStatInfo = GetComponent<WeaponStatInfo>();
-        myData = new WeaponData();
-    }
+
     public override void Start()
     {
         base.Start();
-       // myData = weaponStatInfo.data;
         inventory = GetComponentInParent<PlayerInventory>();
     }
     public override void Update()
     {
+        /*if (CStageManager.Instance.KillCount / (count * 10) == 1)
+        {
+            count++;
+            myData.damage = myData.damage + 1;
+        }*/
         if (FindTarget() == true && isAttacking == false)
         {
             StartCoroutine(PreParePierce(setY));
@@ -31,12 +32,8 @@ public class DaggerController : SwordController
     }
     private void OnEnable()
     {
-        
-        if (myData == null)
-        {
-            myData = weaponStatInfo.data;
-            Debug.Log(weaponStatInfo.data.weaponName);
-        }
+        count = 1;
+        myData = weaponStatInfo.data;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
@@ -46,9 +43,8 @@ public class DaggerController : SwordController
         {
             duration = 0.2f;
         }
-        AttackRange = myData.attackRange;
-        Debug.Log(myData.attackRange);
         monsterIndex = weaponStatInfo.index;
+        AttackRange = myData.attackRange + (inventory.myItemData.attackRange) / 100;
     }
 
     public override bool FindTarget()
@@ -96,9 +92,9 @@ public class DaggerController : SwordController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         time = 0.0f;
-        while (time <= duration/2)
+        while (time <= duration / 2)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-80, setY, 0), time / (duration/2));
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-80, setY, 0), time / (duration / 2));
             transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;

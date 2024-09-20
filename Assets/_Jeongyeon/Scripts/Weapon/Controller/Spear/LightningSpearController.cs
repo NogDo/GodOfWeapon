@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightningSpearController : SpearController
 {
     #region Private Fields
-    
+
     #endregion
 
     #region Public Fields
@@ -14,23 +14,14 @@ public class LightningSpearController : SpearController
     public Transform lightningPoint;
     #endregion
 
-    private void Awake()
-    {
-        weaponStatInfo = GetComponent<WeaponStatInfo>();
-    }
     public override void Start()
     {
         base.Start();
-        myData = weaponStatInfo.data;
         inventory = GetComponentInParent<PlayerInventory>();
     }
     private void OnEnable()
     {
-        
-        if (myData == null)
-        {
-            myData = weaponStatInfo.data;
-        }
+        myData = weaponStatInfo.data;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
@@ -40,8 +31,10 @@ public class LightningSpearController : SpearController
         {
             duration = 0.2f;
         }
-        AttackRange = myData.attackRange;
         monsterIndex = weaponStatInfo.index;
+        AttackRange = myData.attackRange + (inventory.myItemData.attackRange) / 100;
+        attackDamage = myData.damage + (inventory.myItemData.damage) / 10;
+        massValue = myData.massValue + (inventory.myItemData.massValue) / 100;
     }
     private void Update()
     {
@@ -58,13 +51,11 @@ public class LightningSpearController : SpearController
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         float particleduration = 0.01f; // 번개생성 시작시간
-        Debug.Log(duration);
-        while (time <= duration/2)
+        while (time <= duration / 2)
         {
             transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
-            if (time >= particleduration && particleCount<2)
+            if (time >= particleduration && particleCount < 2)
             {
-                Debug.Log(duration);
                 WeaponProjectile lightning = lightningPool.GetProjectile(0);
                 lightning.transform.localScale = Vector3.one;
                 lightning.Shoot(lightningPoint.position);
@@ -76,7 +67,7 @@ public class LightningSpearController : SpearController
         }
         transform.position = enemyTransform.localPosition;
         particle.SetActive(false);
-        StartCoroutine(EndAttack(transform, duration/2));
+        StartCoroutine(EndAttack(transform, duration / 2));
         yield return null;
     }
 }

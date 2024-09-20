@@ -9,6 +9,7 @@ public class CrossBowController : WeaponController
     #region Public Fields
     public WProjectilePool projectilePool;
     public Transform arrowPosition;
+  
     #endregion
     #region Private Fields
     #endregion
@@ -17,6 +18,7 @@ public class CrossBowController : WeaponController
     protected Animator anim;
     protected int positionIndex = 0;
     protected Transform[] shootPosition;
+    protected float attackSpeed;
     #endregion
     public override void Start()
     {
@@ -26,7 +28,20 @@ public class CrossBowController : WeaponController
         anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    public virtual void OnEnable()
+    {
+        myData = weaponStatInfo.data;
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<PlayerInventory>();
+        }
+        attackSpeed = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
+        if (attackSpeed < 0.01f)
+        {
+            attackSpeed = 0.01f;
+        }
+    }
+    public void Update()
     {
         if (isAttacking == false)
         {
@@ -148,7 +163,7 @@ public class CrossBowController : WeaponController
     /// <returns></returns>
     public virtual IEnumerator CoolTime()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(attackSpeed);
         isAttacking = false;
     }
 

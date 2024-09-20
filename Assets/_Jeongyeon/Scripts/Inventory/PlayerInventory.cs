@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -21,12 +23,16 @@ public class PlayerInventory : MonoBehaviour
     public GameObject[] crossbows;
 
     [HideInInspector] public ItemData myItemData;
+
     #endregion
 
     #region Private Fields
     #endregion
 
-
+    private void Awake()
+    {
+        myItemData = new ItemData("inventory");
+    }
     private void Start()
     {
         CellManager.Instance.Init(this);
@@ -40,11 +46,14 @@ public class PlayerInventory : MonoBehaviour
         playerItem.Add(item);
         GetItemValues(item);
     }
-
+    /// <summary>
+    /// 아이템이 인벤토리에서 빠져나갈때 리스트에서 삭제후 아이템 값을 빼는 메서드
+    /// </summary>
+    /// <param name="item"></param>
     public void MinusItem(ItemData item)
     {
         playerItem.Remove(item);
-        MinusItemValue(item);
+        MinusItemValues(item);
     }
     /// <summary>
     /// 인벤토리에 들어온 아이템을 리스트에 넣고 무기 종류에 따라 생성할 위치를 정하는 메서드
@@ -102,7 +111,6 @@ public class PlayerInventory : MonoBehaviour
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
                 obj.GetComponent<WeaponStatInfo>().LWeaponSetValue(level);
-                Debug.Log(parent.name);
                 break;
             }
         }
@@ -133,6 +141,7 @@ public class PlayerInventory : MonoBehaviour
     /// /// <param name="level">무기 레벨</param>
     private void CheckCSlot(GameObject weapon, int level)
     {
+        
         foreach (GameObject parent in crossbowSlot)
         {
             if (parent.transform.childCount == 0)
@@ -141,7 +150,6 @@ public class PlayerInventory : MonoBehaviour
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
                 obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);
                 break;
-
             }
         }
     }
@@ -150,7 +158,7 @@ public class PlayerInventory : MonoBehaviour
     /// 아이템이 갖고있는 값을 캐릭터에 적용하는 메서드
     /// </summary>
     /// <param name="item">인벤토리의 들어온 아이템</param>
-    private void GetItemValues(ItemData item)
+    public void GetItemValues(ItemData item)
     {
         myItemData.hp += item.hp;
         myItemData.damage += item.damage;
@@ -169,10 +177,33 @@ public class PlayerInventory : MonoBehaviour
         myItemData.enemyAmount += item.enemyAmount;
     }
     /// <summary>
+    /// 아이템 혹은 무기로 인해 변동할 값을 받는 메서드
+    /// </summary>
+    public void GetItemValues(float hp = 0, float damage = 0, float meleeDamage = 0, float rangeDamage = 0, float criticalRate = 0, float attackSpeed =0,
+        float moveSpeed = 0, float attackRange = 0, float massValue = 0, float bloodDrain =0, float defense =0, float luck = 0, float moneyRate = 0,
+        float expRate = 0, float enemyAmount = 0)
+    {
+        myItemData.hp += hp;
+        myItemData.damage += damage;
+        myItemData.meleeDamage += meleeDamage;
+        myItemData.rangeDamage += rangeDamage;
+        myItemData.criticalRate += criticalRate;
+        myItemData.attackSpeed += attackSpeed;
+        myItemData.moveSpeed += moveSpeed;
+        myItemData.attackRange += attackRange;
+        myItemData.massValue += massValue;
+        myItemData.bloodDrain += bloodDrain;
+        myItemData.defense += defense;
+        myItemData.luck +=luck;
+        myItemData.moneyRate += moneyRate;
+        myItemData.expRate += expRate;
+        myItemData.enemyAmount += enemyAmount;
+    }
+    /// <summary>
     /// 아이템이 갖고있는 값을 캐릭터에서 빼는 메서드
     /// </summary>
     /// <param name="item">인벤토리에서 빠지는 아이템</param>
-    private void MinusItemValue(ItemData item)
+    public void MinusItemValues(ItemData item)
     {
         myItemData.hp -= item.hp;
         myItemData.damage -= item.damage;
@@ -189,5 +220,28 @@ public class PlayerInventory : MonoBehaviour
         myItemData.moneyRate -= item.moneyRate;
         myItemData.expRate -= item.expRate;
         myItemData.enemyAmount -= item.enemyAmount;
+    }
+    /// <summary>
+    /// 아이템 혹은 무기로 인해 값을 빼는 메서드
+    /// </summary>
+    public void MinusItemValues(float hp = 0, float damage = 0, float meleeDamage = 0, float rangeDamage = 0, float criticalRate = 0, float attackSpeed = 0,
+        float moveSpeed = 0, float attackRange = 0, float massValue = 0, float bloodDrain = 0, float defense = 0, float luck = 0, float moneyRate = 0,
+        float expRate = 0, float enemyAmount = 0)
+    {
+        myItemData.hp -= hp;
+        myItemData.damage -= damage;
+        myItemData.meleeDamage -= meleeDamage;
+        myItemData.rangeDamage -= rangeDamage;
+        myItemData.criticalRate -= criticalRate;
+        myItemData.attackSpeed -= attackSpeed;
+        myItemData.moveSpeed -= moveSpeed;
+        myItemData.attackRange -= attackRange;
+        myItemData.massValue -= massValue;
+        myItemData.bloodDrain -= bloodDrain;
+        myItemData.defense -= defense;
+        myItemData.luck -= luck;
+        myItemData.moneyRate -= moneyRate;
+        myItemData.expRate -= expRate;
+        myItemData.enemyAmount -= enemyAmount;
     }
 }
