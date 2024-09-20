@@ -36,7 +36,7 @@ public class DataManager : MonoBehaviour
     }
     private void Start()
     {
-        
+
     }
 
     public void LoadItem()
@@ -278,18 +278,18 @@ public class WeaponData
     {
 
     }
-    public WeaponData(string weaponName, int uid, int level, int price, float damage, float massValue, float attackSpeed, float attackRange, Type weaponType, string tooltip)
+    public WeaponData(WeaponData copy)
     {
-        this.weaponName = weaponName;
-        this.uid = uid;
-        this.level = level;
-        this.price = price;
-        this.damage = damage;
-        this.massValue = massValue;
-        this.attackSpeed = attackSpeed;
-        this.attackRange = attackRange;
-        this.weaponType = weaponType;
-        this.tooltip = tooltip;
+        this.weaponName = copy.weaponName;
+        this.uid = copy.uid;
+        this.level = copy.level;
+        this.price = copy.price;
+        this.damage = copy.damage;
+        this.massValue = copy.massValue;
+        this.attackSpeed = copy.attackSpeed;
+        this.attackRange = copy.attackRange;
+        this.weaponType = copy.weaponType;
+        this.tooltip = copy.tooltip;
     }
 }
 
@@ -312,15 +312,15 @@ public class EnemyStats
 
     }
 
-    public EnemyStats(EAttackType attackType, int id, string name, float speed, float maxHP, float nowHP, float attack, float attackCooltime)
+    public EnemyStats(EnemyStats copy)
     {
-        Attacktype = attackType;
-        Name = name;
-        ID = id;
-        Speed = speed;
-        MaxHP = maxHP;
-        NowHP = nowHP;
-        Attack = attack;
-        AttackCooltime = attackCooltime;
+        Attacktype = copy.Attacktype;
+        Name = copy.Name;
+        ID = copy.ID;
+        Speed = copy.Speed;
+        MaxHP = copy.MaxHP;
+        NowHP = copy.NowHP;
+        Attack = copy.Attack;
+        AttackCooltime = copy.AttackCooltime;
     }
 }
