@@ -13,12 +13,13 @@ public class DaggerController : SwordController
 
     private void Awake()
     {
-        weaponStatInfo = GetComponent<WeaponStatInfo>();
+       weaponStatInfo = GetComponent<WeaponStatInfo>();
+        myData = new WeaponData();
     }
     public override void Start()
     {
         base.Start();
-        myData = weaponStatInfo.data;
+       // myData = weaponStatInfo.data;
         inventory = GetComponentInParent<PlayerInventory>();
     }
     public override void Update()
@@ -30,9 +31,11 @@ public class DaggerController : SwordController
     }
     private void OnEnable()
     {
+        
         if (myData == null)
         {
             myData = weaponStatInfo.data;
+            Debug.Log(weaponStatInfo.data.weaponName);
         }
         if (inventory == null)
         {
@@ -44,6 +47,7 @@ public class DaggerController : SwordController
             duration = 0.2f;
         }
         AttackRange = myData.attackRange;
+        Debug.Log(myData.attackRange);
         monsterIndex = weaponStatInfo.index;
     }
 

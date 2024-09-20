@@ -119,6 +119,7 @@ public class PlayerInventory : MonoBehaviour
             if (parent.transform.childCount == 0)
             {
                 GameObject obj = Instantiate(weapon, parent.transform);
+                Debug.Log(obj.name);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
                 obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);
                 break;
