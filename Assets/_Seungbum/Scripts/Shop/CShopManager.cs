@@ -50,7 +50,7 @@ public class CShopManager : MonoBehaviour
 
     void Start()
     {
-        //RandomItemSpawn();
+        RandomItemSpawn();
     }
 
     /// <summary>

@@ -36,11 +36,9 @@ public class SwordController : WeaponController, ISwing, IPierce
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         float time = 0.0f;
-        float duration = 0.4f;
-
-        while (time <= duration)
+        while (time <= duration/2)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / duration);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(90, setY, 0), time / (duration/2));
             transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / duration);
             time += Time.deltaTime;
             yield return null;
@@ -55,12 +53,11 @@ public class SwordController : WeaponController, ISwing, IPierce
     public virtual IEnumerator Pierce()
     {
         float time = 0.0f;
-        float duration = 0.5f;
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         //particle[0].SetActive(true);
-        while (time <= duration)
+        while (time <= duration/2)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / duration);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration/2));
             time += Time.deltaTime;
             yield return null;
         }
@@ -80,12 +77,11 @@ public class SwordController : WeaponController, ISwing, IPierce
 
         isAttacking = true;
         float time = 0.0f;
-        float duration = 0.4f;
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        while (time <= duration)
+        while (time <= duration/2)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / duration);
-            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / duration);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / (duration/2));
+            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / (duration/2));
             time += Time.deltaTime;
             yield return null;
         }
@@ -97,7 +93,7 @@ public class SwordController : WeaponController, ISwing, IPierce
 
     public virtual IEnumerator Swing()
     {
-        StartCoroutine(EndAttack(transform, coolTime));
+        StartCoroutine(EndAttack(transform, duration/2));
         yield return null;
     }
 

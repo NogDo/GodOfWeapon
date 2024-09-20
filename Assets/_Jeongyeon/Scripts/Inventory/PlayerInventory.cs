@@ -75,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
-        else
+        else if(playerWeapon[playerWeapon.Count - 1].weaponType == Type.Crossbow)
         {
             foreach (GameObject weapon in crossbows)
             {
@@ -121,7 +121,6 @@ public class PlayerInventory : MonoBehaviour
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
                 obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);
-                Debug.Log(parent.name);
                 break;
             }
         }

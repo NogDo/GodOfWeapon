@@ -36,13 +36,13 @@ public class WeaponStatInfo : MonoBehaviour
             case 0:
                 break;
             case 1:
-                data.damage += data.damage + 3;
+                data.damage += 3;
                 break;
             case 2:
-                data.damage += data.damage + 5;
+                data.damage += 5;
                 break;
             case 3:
-                data.damage += data.damage + 12;
+                data.damage += 12;
                 break;
         }
         data.attackSpeed -= data.attackSpeed * 0.06f * (level - 1);

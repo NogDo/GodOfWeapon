@@ -40,7 +40,7 @@ public class ShortSwordController : SwordController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         time = 0.0f;
-        durationSpeed = duration/3;
+        durationSpeed = duration;
         while (time <= durationSpeed)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / durationSpeed);
