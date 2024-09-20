@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -158,7 +157,7 @@ public class PlayerInventory : MonoBehaviour
     /// 아이템이 갖고있는 값을 캐릭터에 적용하는 메서드
     /// </summary>
     /// <param name="item">인벤토리의 들어온 아이템</param>
-    public void GetItemValues(ItemData item)
+    private void GetItemValues(ItemData item)
     {
         myItemData.hp += item.hp;
         myItemData.damage += item.damage;
@@ -203,7 +202,7 @@ public class PlayerInventory : MonoBehaviour
     /// 아이템이 갖고있는 값을 캐릭터에서 빼는 메서드
     /// </summary>
     /// <param name="item">인벤토리에서 빠지는 아이템</param>
-    public void MinusItemValues(ItemData item)
+    private void MinusItemValues(ItemData item)
     {
         myItemData.hp -= item.hp;
         myItemData.damage -= item.damage;
