@@ -11,24 +11,19 @@ public class NormalSpearController : SpearController
     public GameObject particle;
     #endregion
 
-    private void Awake()
-    {
-        weaponStatInfo = GetComponent<WeaponStatInfo>();
-    }
     public override void Start()
     {
         base.Start();
-        myData = weaponStatInfo.data;
         inventory = GetComponentInParent<PlayerInventory>();
+        inventory.GetItemValues(attackRange: inventory.myItemData.attackRange*0.05f);
+    }
+    private void OnDestroy()
+    {
+        inventory.MinusItemValues(attackRange: inventory.myItemData.attackRange * 0.05f);
     }
     private void OnEnable()
     {
-        
-        if (myData == null)
-        {
-            Debug.Log("myData is null");
-            myData = weaponStatInfo.data;
-        }
+        myData = weaponStatInfo.data;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
@@ -55,15 +50,15 @@ public class NormalSpearController : SpearController
         particle.SetActive(true);
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        while (time <= duration/2)
+        while (time <= duration / 2)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration/2));
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
-        transform.position = enemyTransform.localPosition;        
+        transform.position = enemyTransform.localPosition;
         particle.SetActive(false);
-        StartCoroutine(EndAttack(transform,duration/2));
+        StartCoroutine(EndAttack(transform, duration / 2));
         yield return null;
     }
 

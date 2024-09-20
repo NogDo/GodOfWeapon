@@ -1,30 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
-public class ShortSwordController : SwordController
+public class GoldSwordController : SwordController
 {
     #region Public Fields
 
     #endregion
     #region Private Fields
     private bool isSwing = false;
+    private float extraDamage = 0;
     private Animator anim;
     #endregion
 
-    private void Awake()
-    {
-        duration = 0.4f;
-    }
     public override void Start()
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
+        inventory.GetItemValues(defense: 3);
     }
-    public override void Update()
+    private void OnDestroy()
     {
-       base.Update();
+        inventory.MinusItemValues(defense: 3);
+    }
+    private void OnEnable()
+    {
+        
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<PlayerInventory>();
+        }
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
+        if (duration < 0.2f)
+        {
+            duration = 0.2f;
+        }
+        AttackRange = myData.attackRange + (inventory.myItemData.attackRange) / 100;
+        monsterIndex = weaponStatInfo.index;
     }
     /// <summary>
     /// 단검이 찌르기를 준비하는 코루틴
@@ -40,11 +52,10 @@ public class ShortSwordController : SwordController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         time = 0.0f;
-        durationSpeed = duration;
-        while (time <= durationSpeed)
+        while (time <= duration / 2)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / durationSpeed);
-            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / durationSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / (duration / 2));
+            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
@@ -61,19 +72,18 @@ public class ShortSwordController : SwordController
     public override IEnumerator Pierce()
     {
         time = 0.0f;
-        durationSpeed = duration / 3 *2;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         while (time <= durationSpeed)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
         particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform, coolTime));
+        StartCoroutine(EndAttack(transform, duration / 2));
         patternCount++;
         yield return null;
     }
@@ -90,13 +100,12 @@ public class ShortSwordController : SwordController
 
         isAttacking = true;
         time = 0.0f;
-        durationSpeed = duration / 3;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         while (time <= durationSpeed)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / durationSpeed);
-            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / durationSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / (duration / 2));
+            transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
@@ -114,10 +123,10 @@ public class ShortSwordController : SwordController
         anim.SetTrigger("isSwing");
         isSwing = true;
         particle[1].SetActive(true);
-        yield return new WaitForSeconds(duration / 3 * 2);
+        yield return new WaitForSeconds(duration / 2);
         isSwing = false;
         particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform, coolTime));
+        StartCoroutine(EndAttack(transform, duration / 2));
         patternCount++;
         yield return null;
     }

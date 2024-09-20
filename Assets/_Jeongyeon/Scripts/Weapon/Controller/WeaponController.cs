@@ -9,6 +9,8 @@ public class WeaponController : MonoBehaviour
     public LayerMask targetLayer;
     public bool isAttacking = false;
     public int monsterIndex;
+    public float attackDamage { get; protected set; }
+    public float massValue { get; protected set; }
     #endregion
 
     #region private Fields
@@ -31,6 +33,10 @@ public class WeaponController : MonoBehaviour
     protected float duration;
     protected float durationSpeed;
     #endregion
+    private void Awake()
+    {
+        weaponStatInfo = GetComponent<WeaponStatInfo>();
+    }
     public virtual void Start()
     {
         startParent = gameObject.transform.parent.gameObject;
@@ -42,10 +48,6 @@ public class WeaponController : MonoBehaviour
         targetLayer = 1 << 3;
     }
 
-    public void CopyData()
-    {
-        myData = new WeaponData();
-    }
     /// <summary>
     /// 먼저 적을 찾고 공격을 준비하는 함수
     /// </summary>

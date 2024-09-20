@@ -54,7 +54,7 @@
     "price": 24,
     "damage": 5.0,
     "massValue": 0.1,
-    "attackSpeed": 1.0,
+    "attackSpeed": 0.8,
     "attackRange": 8.0,
     "weaponType": 2,
     "tooltip": "10% 확률로 화살 2회 발사"
@@ -105,7 +105,7 @@
     "attackSpeed": 0.7,
     "attackRange": 3.2,
     "weaponType": 1,
-    "tooltip": "플레이어가 처치한 몬스터 20마리당 공격력 1증가"
+    "tooltip": "플레이어가 스테이지에서 처치한 몬스터 10마리당 공격력 1증가 (스테이지 클리어시 초기화)"
   },
   {
     "weaponName": "NormalSword",

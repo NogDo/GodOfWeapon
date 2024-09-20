@@ -5,17 +5,19 @@ using UnityEngine;
 public class LightningProjectile : WeaponProjectile
 {
     #region Private Fields
-    private float damage;
     private WProjectilePool lightningPool;
     private WeaponStatInfo weapon;
     private SphereCollider sphereCollider;
+    private LightningSpearController spearController;
+    private PlayerInventory inventory;
     #endregion
 
     private void Awake()
     {
         lightningPool = transform.parent.GetComponent<WProjectilePool>();
         sphereCollider = GetComponent<SphereCollider>();
-        weapon = transform.parent.GetComponentInParent<WeaponStatInfo>();
+        spearController = GetComponentInParent<LightningSpearController>();
+        inventory = transform.parent.GetComponentInParent<PlayerInventory>();
     }
     public override void Return()
     {
@@ -26,7 +28,6 @@ public class LightningProjectile : WeaponProjectile
 
     public override void Shoot(Vector3 direction)
     {
-        damage = weapon.data.damage;
         transform.localPosition = new Vector3(direction.x, 0.3f, direction.z);
         transform.localRotation = Quaternion.identity;
         GetComponent<ParticleSystem>().Play();
@@ -42,14 +43,14 @@ public class LightningProjectile : WeaponProjectile
             {
                 if (collider.TryGetComponent<IHittable>(out IHittable hittable))
                 {
-                    hittable.Hit(damage, 0.3f);
-                    if (CheckCritical(0.25f) == true)
+                    hittable.Hit(spearController.attackDamage * 0.8f, spearController.massValue);
+                    if (CheckCritical(inventory.myItemData.criticalRate) == true)
                     {
-                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, spearController.attackDamage * 0.8f + (spearController.attackDamage * 0.8f * 0.5f));
                     }
                     else
                     {
-                        CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                        CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, spearController.attackDamage * 0.8f);
                     }
                 }
             }

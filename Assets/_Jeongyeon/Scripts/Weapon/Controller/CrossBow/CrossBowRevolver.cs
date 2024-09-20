@@ -9,7 +9,8 @@ public class CrossBowRevolver : CrossBowController
     #region Private Fields
     private int shootCount = 1;
     #endregion
-    #region Private Fields
+    #region Public Fields
+   
     #endregion
     public override void Start()
     {
@@ -18,16 +19,19 @@ public class CrossBowRevolver : CrossBowController
         startParent = gameObject.transform.parent.gameObject;
         anim = GetComponent<Animator>();
     }
-    private void Update()
+    public override void OnEnable()
     {
-        if (isAttacking == false)
+        base.OnEnable();
+        monsterIndex = weaponStatInfo.index;
+        AttackRange = myData.attackRange + (inventory.myItemData.attackRange)/100;
+        attackDamage = myData.damage + (inventory.myItemData.damage) / 10;
+        massValue = myData.massValue + (inventory.myItemData.massValue) / 100;
+        if (massValue > 0.5f)
         {
-            if (FindTarget())
-            {
-                StartCoroutine(Shoot());
-            }
+            massValue = 0.5f;
         }
     }
+ 
     public override bool FindTarget()
     {
         return base.FindTarget();
@@ -105,11 +109,10 @@ public class CrossBowRevolver : CrossBowController
             yield return null;
         }
     }
-
     private IEnumerator Reload()
     {
         anim.SetTrigger("isReload");
-        anim.SetFloat("reloadSpeed", 1.5f);
+        anim.SetFloat("reloadSpeed", attackSpeed + 1.0f);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         shootCount = 1;
         StartCoroutine(base.CoolTime());
