@@ -23,6 +23,8 @@ public class WeaponController : MonoBehaviour
     protected GameObject attackParent;
     protected GameObject startParent;
     protected PlayerInventory inventory;
+    protected WeaponStatInfo weaponStatInfo;
+    protected WeaponData myData;
     protected float coolTime = 1.0f;
     protected float setY;
     protected float time;
@@ -85,16 +87,17 @@ public class WeaponController : MonoBehaviour
     /// 무기가 돌아오는 로직 구현 함수
     /// </summary>
     /// <param name="startPostion">무기의 현재위치를 의미하는 변수</param>
+    /// <param name="endDuration">무기의 공격속도</param>>
     /// <returns></returns>
     public virtual IEnumerator EndAttack(Transform startPostion, float endDuration)
     {
         gameObject.transform.localScale = startScale;
         gameObject.transform.parent = startParent.transform;
         float time = 0.0f;
-        while (time <= endDuration)
+        while (time <= endDuration/2)
         {
-            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / endDuration);
-            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / endDuration);
+            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / (endDuration/2));
+            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / (endDuration / 2));
             time += Time.deltaTime;
             yield return null;
         }

@@ -8,21 +8,18 @@ public class DaggerController : SwordController
 
     #endregion
     #region Private Fields
-    private int originIndex;
-    private Coroutine FirstAttack;
     private Collider[] target;
-    private Collider myCollider;
     #endregion
 
     private void Awake()
     {
-        duration = 0.8f;
-        originIndex = monsterIndex;
-        myCollider = GetComponentInChildren<Collider>();
+        weaponStatInfo = GetComponent<WeaponStatInfo>();
     }
     public override void Start()
     {
         base.Start();
+        myData = weaponStatInfo.data;
+        inventory = GetComponentInParent<PlayerInventory>();
     }
     public override void Update()
     {
@@ -31,7 +28,24 @@ public class DaggerController : SwordController
             StartCoroutine(PreParePierce(setY));
         }
     }
-
+    private void OnEnable()
+    {
+        if (myData == null)
+        {
+            myData = weaponStatInfo.data;
+        }
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<PlayerInventory>();
+        }
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
+        if (duration < 0.2f)
+        {
+            duration = 0.2f;
+        }
+        AttackRange = myData.attackRange;
+        monsterIndex = weaponStatInfo.index;
+    }
 
     public override bool FindTarget()
     {
@@ -54,7 +68,6 @@ public class DaggerController : SwordController
             }
             Vector3 postion = enemyTransform.position - gameObject.transform.position;
             gameObject.transform.forward = postion;
-
             setY = transform.localRotation.eulerAngles.y;
             if (setY > 180)
             {
@@ -79,85 +92,34 @@ public class DaggerController : SwordController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         time = 0.0f;
-        durationSpeed = duration / 3;
-        while (time <= durationSpeed)
+        while (time <= duration/2)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-80, setY, 0), time / durationSpeed);
-            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / durationSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-80, setY, 0), time / (duration/2));
+            transform.localPosition = Vector3.Lerp(startPosition, endRotatePosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
         transform.localRotation = Quaternion.Euler(-80, setY, 0);
         transform.localPosition = endRotatePosition;
-        FirstAttack = StartCoroutine(Pierce());
+        StartCoroutine(Pierce());
         yield return null;
     }
     public override IEnumerator Pierce()
     {
         time = 0.0f;
         durationSpeed = duration / 3 * 2;
-        myCollider.enabled = true;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, enemyTransform.position.y + 1.0f, enemyTransform.position.z);
-        // particle[0].SetActive(true);
-        while (time <= durationSpeed)
+        particle[0].SetActive(true);
+        while (time <= (duration / 2))
         {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
+            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = enemyTransform.localPosition;
-        // particle[0].SetActive(false);
-        myCollider.enabled = false;
-        StartCoroutine(EndAttack(transform, coolTime));
-        monsterIndex = originIndex;
+        particle[0].SetActive(false);
+        StartCoroutine(EndAttack(transform, (duration / 2)));
         yield return null;
-    }
-
-    private IEnumerator SecondPierce()
-    {
-        myCollider.enabled = true;
-        time = 0.0f;
-        durationSpeed = duration / 3 * 2;
-        transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-        transform.LookAt(enemyTransform);
-        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        // particle[0].SetActive(true);
-        while (time <= durationSpeed)
-        {
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, time / durationSpeed);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        //transform.position = enemyTransform.localPosition;
-        // particle[0].SetActive(false);
-        myCollider.enabled = false;
-        StartCoroutine(EndAttack(transform, coolTime));
-        monsterIndex = originIndex;
-        yield return null;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Èý¶Ç");
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            if (isAttacking == true)
-            {
-                if (FirstAttack != null)
-                {
-                    StopCoroutine(FirstAttack);
-                    monsterIndex++;
-                    if (FindTarget() == true)
-                    {
-                        StartCoroutine(SecondPierce());
-                    }
-                    else
-                    {
-                        StartCoroutine(EndAttack(transform, coolTime));
-                    }
-                }
-            }
-        }
     }
 }
