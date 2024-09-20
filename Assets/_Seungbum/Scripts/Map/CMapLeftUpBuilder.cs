@@ -62,6 +62,7 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
 
     public void BuildFloor()
     {
+
     }
 
     public void BuildDownWall()
