@@ -26,7 +26,6 @@ public class CCreateMapManager : MonoBehaviour
 
     #region private º¯¼ö
     CMap map;
-    CMapFloorBuilder floorBuilder;
 
     STMapSize mapSize;
 
@@ -93,8 +92,9 @@ public class CCreateMapManager : MonoBehaviour
         map = GameObject.Find("Map").GetComponent<CMap>();
 
         map.SetFloorPart(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ);
+        map.SetLeftUpPart(mapSize.minX - 4, mapSize.minX - 1, mapSize.minZ - 3, mapSize.maxZ + 4);
 
-        //map.transform.Rotate(new Vector3(0.0f, 45.0f, 0.0f));
+        map.transform.position = new Vector3(0.0f, -0.2f, 0.0f);
 
         isCreateMap = true;
     }

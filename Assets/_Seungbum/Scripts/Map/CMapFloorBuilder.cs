@@ -78,7 +78,6 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         BuildFloor();
         BuildDownWall();
         BuildUpWall();
-        BuildDeco();
     }
 
     public CMapPart GetMapPart()
@@ -335,8 +334,11 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         mapPart.AddPart(oFenceEdge, new Vector3(nMaxX * fFloorWidth, 0.0f, nMinZ * fFloorLength), Vector3.zero, upWall.transform);
     }
 
-    public void BuildDeco()
+    public void DestroyMapPart()
     {
-        // 官蹿俊 积己瞪 单内
+        foreach (Transform child in transform)
+        {
+            Destroy(child);
+        }
     }
 }

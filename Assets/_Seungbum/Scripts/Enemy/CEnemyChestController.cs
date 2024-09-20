@@ -54,8 +54,8 @@ public class CEnemyChestController : MonoBehaviour, IHittable
             float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxX - 1) * 4.0f);
             float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxZ - 1) * 4.0f);
 
-            Vector3 spawnPoint = new Vector3(randX, 7.65f, randZ);
-            Vector3 particlePoint = new Vector3(randX, 0.2f, randZ);
+            Vector3 spawnPoint = new Vector3(randX, 7.5f, randZ);
+            Vector3 particlePoint = new Vector3(randX, 0.0f, randZ);
 
             particleSpawn = Instantiate(particleSpawnPrefab, particlePoint, Quaternion.identity);
             particleSpawn.Play();

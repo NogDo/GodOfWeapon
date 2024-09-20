@@ -39,7 +39,7 @@ public interface IMapPartBuilder
     void BuildFloor();
 
     /// <summary>
-    /// 벽과 바닥에 추가 오브젝트 생성한다.
+    /// 생성했던 맵 오브젝트를 삭제한다.
     /// </summary>
-    void BuildDeco();
+    void DestroyMapPart();
 }

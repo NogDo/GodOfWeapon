@@ -12,6 +12,7 @@ public class CStageManager : MonoBehaviour
     int nLevel = 1;
     int nCurrnetLevel = 1;
     int nStageCount = 10;
+    int nKillCount = 0;
 
     bool isClick = false;
     #endregion
@@ -24,6 +25,17 @@ public class CStageManager : MonoBehaviour
         get
         {
             return nStageCount;
+        }
+    }
+
+    /// <summary>
+    /// 잡은 몬스터의 수
+    /// </summary>
+    public int KillCount
+    {
+        get
+        {
+            return nKillCount;
         }
     }
 

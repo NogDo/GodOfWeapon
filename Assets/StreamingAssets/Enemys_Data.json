@@ -4,7 +4,7 @@
     "Name": "Death",
     "ID": 1,
     "Speed": 4.0,
-    "MaxHP": 50.0,
+    "MaxHP": 15.0,
     "NowHP": 50.0,
     "Attack": 5.0,
     "AttackCooltime": 0.0
@@ -14,7 +14,7 @@
     "Name": "Vampire Bat",
     "ID": 2,
     "Speed": 3.0,
-    "MaxHP": 50.0,
+    "MaxHP": 10.0,
     "NowHP": 50.0,
     "Attack": 5.0,
     "AttackCooltime": 3.0

@@ -36,6 +36,6 @@ public class CMap : MonoBehaviour
     /// <param name="maxZ">세로 최대값</param>
     public void SetLeftUpPart(int minX, int maxX, int minZ, int maxZ)
     {
-
+        leftUpBuilder.CreateMapPart(minX, maxX, minZ, maxZ);
     }
 }
