@@ -192,6 +192,7 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
                 Vector3 rot = new Vector3(0.0f, 90.0f, 0.0f);
 
                 mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
+                mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
             }
         }
 
@@ -216,17 +217,6 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
                 {
                     mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
                 }
-            }
-        }
-
-        // ¼¼·Î º® ±âµÕ
-        for (int i = nMinZ + 1; i <= nMaxZ; i++)
-        {
-            for (int j = 1; j <= 3; j++)
-            {
-                Vector3 pos = new Vector3(nMaxX * fFloorWidth, -j * fFloorHeight, i * fFloorLength);
-
-                mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
             }
         }
     }

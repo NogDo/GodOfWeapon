@@ -121,9 +121,9 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
         downWall.transform.SetParent(mapPart.transform);
 
         // 아래 벽 생성
-        for (int i = nMinZ + 1; i <= nMaxZ; i++)
+        for (int i = nMinZ; i <= nMaxZ; i++)
         {
-            for (int j = 1; j <= 6; j++)
+            for (int j = 1; j <= 7; j++)
             {
                 int randWall = Random.Range(0, oOustsideWalls.Length);
 

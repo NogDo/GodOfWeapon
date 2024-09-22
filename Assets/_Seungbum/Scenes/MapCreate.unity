@@ -196,77 +196,6 @@ MonoBehaviour:
     NowHP: 50
     Attack: 5
     AttackCooltime: 3
---- !u!1 &493381675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4013135772297374813, guid: 52118a451375189428e853c56dda4121, type: 3}
-  m_PrefabInstance: {fileID: 4013135770634260436}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &493381677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493381675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ab22ca73a556246a3fb5be4b034641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oBasicFloors:
-  - {fileID: 1233497634938464, guid: 3787c2c5bf32cc44b9e392d10715a22d, type: 3}
-  - {fileID: 1879189327878480, guid: e25d4143b38942c40a6c45373d15bf0e, type: 3}
-  - {fileID: 1830799388287340, guid: 92323937e5140c14abfbe34c36df7bc2, type: 3}
-  oSpecFloors:
-  - {fileID: 1963129046732928, guid: 4085f97623f60ac46929c74a94c3a03b, type: 3}
-  - {fileID: 1575593397329635, guid: ce443ec5a13745c4c9b9c996387cbbb1, type: 3}
-  - {fileID: 1711849074963783, guid: dac6a7a67dceb754c8cd06d2680113f0, type: 3}
-  - {fileID: 1325622871651755, guid: 3b038b3814006094496ac2bf65234c25, type: 3}
-  - {fileID: 1510880340841844, guid: 5e895e571b0a0be45a548f3b723d4622, type: 3}
-  - {fileID: 1358713658262306, guid: 3072d7712e5cdec4fb9b8008313ec35b, type: 3}
-  - {fileID: 1143517448442619, guid: b1bd8494ea75d5a43b28bcc7f90fd8ea, type: 3}
-  - {fileID: 1453132352115824, guid: 674921f0a7a2b0648a6e4b72e13db4b1, type: 3}
-  - {fileID: 1005904030602442, guid: a62b28c6da02e844f9ddc4e9d32f2b94, type: 3}
-  oFloorProps: []
-  oBasicFences:
-  - {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
-  - {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
-  oThornFences:
-  - {fileID: 1840213228981482, guid: 329618d6a89e79a4fbf67edfa57d1e6c, type: 3}
-  - {fileID: 1228764921209307, guid: 4926d5e217470474dbc6b8126b68786a, type: 3}
-  - {fileID: 1996824112835376, guid: 9a0670ad521df9544b63559b23ca7b39, type: 3}
-  - {fileID: 1259401210400276, guid: 0621d46528787534fb03ce17800cf836, type: 3}
-  - {fileID: 1655373552538670, guid: b4a7b0eed9bdccc409ff5987c1b45d60, type: 3}
-  - {fileID: 1122199007159698, guid: f8ea2bb409ad1114f8476dff5cff9d70, type: 3}
-  oRailingFences:
-  - {fileID: 1788854485594882, guid: ae91f150bde1ec84c93831f5892d0277, type: 3}
-  oIronFences:
-  - {fileID: 84240599474797382, guid: ac37191caa55a3d4f8f1526ff0baa521, type: 3}
-  oThornIronFences:
-  - {fileID: 1596829376791992, guid: 1ea9fdc5f124f30469e78e614d3750e7, type: 3}
-  - {fileID: 1596829376791992, guid: 1ea9fdc5f124f30469e78e614d3750e7, type: 3}
-  - {fileID: 1596829376791992, guid: 1ea9fdc5f124f30469e78e614d3750e7, type: 3}
-  - {fileID: 1732211352948521, guid: 40860f88b45e7494d9d401900ceef5b6, type: 3}
-  oOustsideWalls:
-  - {fileID: 1107330999342564, guid: fc1472bffdb69f44a804d3bbfcdeb4f2, type: 3}
-  - {fileID: 1111943858909272, guid: 0bc147cde3f79d74f8fcfe0a620c5db8, type: 3}
-  - {fileID: 1172824164382093, guid: e1c45dfc04d90e04f8288ea7398900a9, type: 3}
-  - {fileID: 1371204249787896, guid: bcc0ea533b284f74baf751c54c3cf88b, type: 3}
-  oBasicWalls:
-  - {fileID: 6513753022806347116, guid: 433dab9e9362da2499bda8fec975ae4b, type: 3}
-  - {fileID: 6066057059891723652, guid: e61310e24e966ea4999f6b2310972c8e, type: 3}
-  - {fileID: 1657073426865252764, guid: 784d2ccd2ccefac46b631998cf5df3db, type: 3}
-  oSpecWalls:
-  - {fileID: 1764034428680190, guid: 2cb6b28c716b12142a8f75f80f3ee486, type: 3}
-  - {fileID: 1829523806763042, guid: 46aeaed49c2eb0a4898b7acb0cad5f8a, type: 3}
-  oWallProps:
-  - {fileID: 1527009628158640, guid: ae891d6722f9fce44a7143fe095547a7, type: 3}
-  - {fileID: 1527009628158640, guid: ae891d6722f9fce44a7143fe095547a7, type: 3}
-  - {fileID: 1527009628158640, guid: ae891d6722f9fce44a7143fe095547a7, type: 3}
-  - {fileID: 1018542481202192, guid: d7602554733b87c47bf2ab3191318357, type: 3}
-  - {fileID: 1928757043665990, guid: 742d10e6e4b425543aa43f323eaa51fa, type: 3}
-  - {fileID: 1885012938786541, guid: 5b575225a96073b43974f999c6dae3a8, type: 3}
-  oColumn: {fileID: 91277535901414533, guid: 0316319a2b0a7dd4d97ed405f6937b3b, type: 3}
 --- !u!1001 &632720881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -429,6 +358,41 @@ MonoBehaviour:
   cameraParentTransform: {fileID: 913502613}
   cameraPosition: {x: 0, y: -1, z: -9}
   cameraRotation: {x: 15.5, y: 0, z: 0}
+--- !u!1 &1136025294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4013135771430283143, guid: 52118a451375189428e853c56dda4121, type: 3}
+  m_PrefabInstance: {fileID: 4013135770634260436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1136025296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136025294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d4058c67d5f4643b4a40561d61a537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oBasicFloors:
+  - {fileID: 1233497634938464, guid: 3787c2c5bf32cc44b9e392d10715a22d, type: 3}
+  - {fileID: 1879189327878480, guid: e25d4143b38942c40a6c45373d15bf0e, type: 3}
+  - {fileID: 1830799388287340, guid: 92323937e5140c14abfbe34c36df7bc2, type: 3}
+  oSpecFloors:
+  - {fileID: 1963129046732928, guid: 4085f97623f60ac46929c74a94c3a03b, type: 3}
+  - {fileID: 1575593397329635, guid: ce443ec5a13745c4c9b9c996387cbbb1, type: 3}
+  - {fileID: 1711849074963783, guid: dac6a7a67dceb754c8cd06d2680113f0, type: 3}
+  - {fileID: 1325622871651755, guid: 3b038b3814006094496ac2bf65234c25, type: 3}
+  - {fileID: 1510880340841844, guid: 5e895e571b0a0be45a548f3b723d4622, type: 3}
+  - {fileID: 1358713658262306, guid: 3072d7712e5cdec4fb9b8008313ec35b, type: 3}
+  - {fileID: 1143517448442619, guid: b1bd8494ea75d5a43b28bcc7f90fd8ea, type: 3}
+  - {fileID: 1453132352115824, guid: 674921f0a7a2b0648a6e4b72e13db4b1, type: 3}
+  - {fileID: 1005904030602442, guid: a62b28c6da02e844f9ddc4e9d32f2b94, type: 3}
+  oBasicFences: []
+  oThornFences: []
+  oBasicWalls: []
+  oSpecWalls: []
 --- !u!1 &1532580945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1003,150 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[2]
+      value: 
+      objectReference: {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[3]
+      value: 
+      objectReference: {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[4]
+      value: 
+      objectReference: {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[5]
+      value: 
+      objectReference: {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[6]
+      value: 
+      objectReference: {fileID: 8100435324376370145, guid: 3f63f9bcd284f6d44aa8471a7dd91846, type: 3}
+    - target: {fileID: 493381677, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[7]
+      value: 
+      objectReference: {fileID: 2365486453446267022, guid: b53ba742090285648a993d75ac68dc57, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oWallProps
+      value: 
+      objectReference: {fileID: 1829523806763042, guid: 46aeaed49c2eb0a4898b7acb0cad5f8a, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oWallProps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFloors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oWallProps.Array.data[0]
+      value: 
+      objectReference: {fileID: 1764034428680190, guid: 2cb6b28c716b12142a8f75f80f3ee486, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oWallProps.Array.data[1]
+      value: 
+      objectReference: {fileID: 1829523806763042, guid: 46aeaed49c2eb0a4898b7acb0cad5f8a, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[0]
+      value: 
+      objectReference: {fileID: 1963129046732928, guid: 4085f97623f60ac46929c74a94c3a03b, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1575593397329635, guid: ce443ec5a13745c4c9b9c996387cbbb1, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1711849074963783, guid: dac6a7a67dceb754c8cd06d2680113f0, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[3]
+      value: 
+      objectReference: {fileID: 1325622871651755, guid: 3b038b3814006094496ac2bf65234c25, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[4]
+      value: 
+      objectReference: {fileID: 1510880340841844, guid: 5e895e571b0a0be45a548f3b723d4622, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[5]
+      value: 
+      objectReference: {fileID: 1358713658262306, guid: 3072d7712e5cdec4fb9b8008313ec35b, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[6]
+      value: 
+      objectReference: {fileID: 1143517448442619, guid: b1bd8494ea75d5a43b28bcc7f90fd8ea, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[7]
+      value: 
+      objectReference: {fileID: 1453132352115824, guid: 674921f0a7a2b0648a6e4b72e13db4b1, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oSpecFloors.Array.data[8]
+      value: 
+      objectReference: {fileID: 1005904030602442, guid: a62b28c6da02e844f9ddc4e9d32f2b94, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFloors.Array.data[0]
+      value: 
+      objectReference: {fileID: 1233497634938464, guid: 3787c2c5bf32cc44b9e392d10715a22d, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFloors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1879189327878480, guid: e25d4143b38942c40a6c45373d15bf0e, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFloors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1830799388287340, guid: 92323937e5140c14abfbe34c36df7bc2, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1840213228981482, guid: 329618d6a89e79a4fbf67edfa57d1e6c, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1228764921209307, guid: 4926d5e217470474dbc6b8126b68786a, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[2]
+      value: 
+      objectReference: {fileID: 1996824112835376, guid: 9a0670ad521df9544b63559b23ca7b39, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[3]
+      value: 
+      objectReference: {fileID: 1259401210400276, guid: 0621d46528787534fb03ce17800cf836, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[4]
+      value: 
+      objectReference: {fileID: 1655373552538670, guid: b4a7b0eed9bdccc409ff5987c1b45d60, type: 3}
+    - target: {fileID: 718625130, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oThornFences.Array.data[5]
+      value: 
+      objectReference: {fileID: 1122199007159698, guid: f8ea2bb409ad1114f8476dff5cff9d70, type: 3}
     - target: {fileID: 4013135771281841016, guid: 52118a451375189428e853c56dda4121, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1086,10 +1194,6 @@ PrefabInstance:
     - target: {fileID: 4013135771281841023, guid: 52118a451375189428e853c56dda4121, type: 3}
       propertyPath: m_Name
       value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 4013135771281841023, guid: 52118a451375189428e853c56dda4121, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52118a451375189428e853c56dda4121, type: 3}
