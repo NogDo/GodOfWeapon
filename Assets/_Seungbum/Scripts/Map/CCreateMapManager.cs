@@ -95,7 +95,7 @@ public class CCreateMapManager : MonoBehaviour
         map.SetLeftUpPart(mapSize.minX - 4, mapSize.minX - 1, mapSize.minZ - 3, mapSize.maxZ + 4);
         map.SetLeftDownPart(mapSize.minX, mapSize.maxX, mapSize.minZ - 4, mapSize.minZ);
         map.SetRighUpPart(mapSize.minX, mapSize.maxX, mapSize.minZ - 4, mapSize.minZ);
-        map.SetRighDownPart(mapSize.maxX, mapSize.maxX + 4, mapSize.minZ - 4, mapSize.maxZ + 3);
+        map.SetRighDownPart(mapSize.maxX, mapSize.maxX + 4, mapSize.minZ - 2, mapSize.maxZ + 3);
 
         map.transform.position = new Vector3(0.0f, -0.2f, 0.0f);
 

@@ -182,19 +182,19 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         }
 
         // 세로 벽
-        for (int i = nMinZ + 1; i <= nMaxZ; i++)
-        {
-            for (int j = 1; j <= 3; j++)
-            {
-                int randWall = randWall = Random.Range(0, oBasicWalls.Length);
+        //for (int i = nMinZ + 1; i <= nMaxZ; i++)
+        //{
+        //    for (int j = 1; j <= 3; j++)
+        //    {
+        //        int randWall = randWall = Random.Range(0, oBasicWalls.Length);
 
-                Vector3 pos = new Vector3(nMaxX * fFloorWidth, -j * fFloorHeight, i * fFloorLength);
-                Vector3 rot = new Vector3(0.0f, 90.0f, 0.0f);
+        //        Vector3 pos = new Vector3(nMaxX * fFloorWidth, -j * fFloorHeight, i * fFloorLength);
+        //        Vector3 rot = new Vector3(0.0f, 90.0f, 0.0f);
 
-                mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
-                mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
-            }
-        }
+        //        mapPart.AddPart(oBasicWalls[randWall], pos, rot, downWall.transform);
+        //        mapPart.AddPart(oColumn, pos, Vector3.zero, downWall.transform);
+        //    }
+        //}
 
         // 가로 벽 기둥
         for (int i = nMinX; i < nMaxX; i++)

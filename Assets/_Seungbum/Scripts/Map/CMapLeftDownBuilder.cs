@@ -50,7 +50,7 @@ public class CMapLeftDownBuilder : MonoBehaviour, IMapPartBuilder
         nMinZ = minZ;
         nMaxZ = maxZ;
 
-        GameObject mapPart = new GameObject("LeftUpMapPart");
+        GameObject mapPart = new GameObject("LeftDownMapPart");
         mapPart.AddComponent<CMapPart>();
         mapPart.transform.SetParent(transform);
 
