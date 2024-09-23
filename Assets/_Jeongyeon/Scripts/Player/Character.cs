@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     private int dashCount = 5;
     #endregion
 
-    #region public
+    #region Public Fields
     public Transform player;
     public Transform playerModel;
     public Transform cameraTransform;
@@ -24,18 +24,23 @@ public class Character : MonoBehaviour
     public Material[] playerMaterial;
     #endregion
 
-    #region private
+    #region Private Fields
     private int currentDashCount;
     private float dashSpeed = 15f;
     private bool isdash = false; 
     private Vector3 run; // 이동시 사용할 벡터
     private Animator anim;
-    private SMRCreator smrCreator;
-    private Rigidbody rb;
+    private SMRCreator smrCreator; // 잔상을 생성하는 클래스
+    private Rigidbody rb; 
     private IEnumerator hitCoroutine;
     #endregion
 
-    public void Awake()
+    #region Protected Fields
+    protected PlayerInventory inventory;
+    protected ItemData myData;
+    protected bool isGameStart = false;
+    #endregion
+    public virtual void Awake()
     {
         player = transform;
         playerModel = transform.GetChild(0);
@@ -47,15 +52,10 @@ public class Character : MonoBehaviour
         CreatAfterImage();
         currentHp = maxHp;
         rb = GetComponent<Rigidbody>();
+        inventory = GetComponent<PlayerInventory>();
     }
 
-    public void FixedUpdate()
-    {
-        MovePlayer();
-        rb.MovePosition(rb.position + run * Time.deltaTime);
-
-    }
-    public void Update()
+    public virtual void Update()
     {
         if (currentDashCount > 0)
         {
@@ -68,12 +68,14 @@ public class Character : MonoBehaviour
         {
             dashSpeed = 15;
         }
+        MovePlayer();
+        rb.MovePosition(rb.position + run * Time.deltaTime);
     }
     /// <summary>
     /// 플레이어가 공격 받았을때 hp를 깎는 메서드
     /// </summary>
     /// <param name="damage">받을 데미지</param>
-    public void Hit(float damage)
+    public virtual void Hit(float damage)
     {
         currentHp -= damage;
         CDamageTextPoolManager.Instance.SpawnPlayerText(transform, damage);

@@ -9,7 +9,6 @@ public class GoldSwordController : SwordController
     #endregion
     #region Private Fields
     private bool isSwing = false;
-    private float extraDamage = 0;
     private Animator anim;
     #endregion
 
@@ -19,16 +18,31 @@ public class GoldSwordController : SwordController
         anim = GetComponentInChildren<Animator>();
         inventory.GetItemValues(defense: 3);
     }
+    public override void Update()
+    {
+        if (FindTarget() == true && isAttacking == false)
+        {
+            if (patternCount % 2 == 0)
+            {
+                StartCoroutine(PreParePierce(setY));
+            }
+            else
+            {
+                StartCoroutine(PrePareSwing(setY));
+            }
+        }
+    }
     private void OnDestroy()
     {
         inventory.MinusItemValues(defense: 3);
     }
     private void OnEnable()
     {
-        
+        myData = weaponStatInfo.data;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
+            Debug.Log(inventory);
         }
         duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
         if (duration < 0.2f)
@@ -83,7 +97,7 @@ public class GoldSwordController : SwordController
         }
         transform.position = enemyTransform.localPosition;
         particle[0].SetActive(false);
-        StartCoroutine(EndAttack(transform, duration / 2));
+        StartCoroutine(EndAttack(transform, duration/2));
         patternCount++;
         yield return null;
     }

@@ -20,15 +20,30 @@ public class NormalSwordController : SwordController
         base.Start();
         anim = GetComponentInChildren<Animator>();
     }
+
+    public override void Update()
+    {
+        if (FindTarget() == true && isAttacking == false)
+        {
+            if (patternCount % 2 == 0)
+            {
+                StartCoroutine(PreParePierce(setY));
+            }
+            else
+            {
+                StartCoroutine(PrePareSwing(setY));
+            }
+        }
+    }
     private void OnEnable()
     {
-        extraDamage = inventory.playerWeapon.Count / 3;
         myData = weaponStatInfo.data;
         myData.damage = weaponStatInfo.data.damage + extraDamage;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
         }
+        extraDamage = inventory.playerWeapon.Count / 3;
         duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
         if (duration < 0.2f)
         {
@@ -74,7 +89,7 @@ public class NormalSwordController : SwordController
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
-        while (time <= durationSpeed)
+        while (time <= (duration / 2))
         {
             transform.position = Vector3.Lerp(transform.position, TargetPosition, time / (duration / 2));
             time += Time.deltaTime;
@@ -101,7 +116,7 @@ public class NormalSwordController : SwordController
         time = 0.0f;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
-        while (time <= durationSpeed)
+        while (time <= (duration / 2))
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(55, setY, 0), time / (duration / 2));
             transform.position = Vector3.Lerp(transform.transform.position, TargetPosition, time / (duration / 2));
