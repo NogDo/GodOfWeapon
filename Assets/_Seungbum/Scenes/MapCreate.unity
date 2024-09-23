@@ -340,7 +340,7 @@ Transform:
   m_Children:
   - {fileID: 1532580946}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 30, y: -40, z: 0}
 --- !u!114 &913502614
 MonoBehaviour:
@@ -960,9 +960,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1136025296, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136025296, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1214472163822312, guid: df8341f6ad86ddc48b5d91bc3f67af49, type: 3}
+    - target: {fileID: 1136025296, guid: 52118a451375189428e853c56dda4121, type: 3}
+      propertyPath: oBasicFences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1791088577917688, guid: 26e22e194564b924e9a59c323d0cc848, type: 3}
     - target: {fileID: 4013135771281841016, guid: 52118a451375189428e853c56dda4121, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4013135771281841016, guid: 52118a451375189428e853c56dda4121, type: 3}
       propertyPath: m_LocalPosition.x
