@@ -175,6 +175,8 @@ public class PlayerInventory : MonoBehaviour
         myItemData.moneyRate += item.moneyRate;
         myItemData.expRate += item.expRate;
         myItemData.enemyAmount += item.enemyAmount;
+
+        UIManager.Instance.ChangeValue(myItemData);
     }
     /// <summary>
     /// 아이템 혹은 무기로 인해 변동할 값을 받는 메서드
@@ -198,6 +200,8 @@ public class PlayerInventory : MonoBehaviour
         myItemData.moneyRate += moneyRate;
         myItemData.expRate += expRate;
         myItemData.enemyAmount += enemyAmount;
+
+        UIManager.Instance.ChangeValue(myItemData);
     }
     /// <summary>
     /// 아이템이 갖고있는 값을 캐릭터에서 빼는 메서드
@@ -220,6 +224,8 @@ public class PlayerInventory : MonoBehaviour
         myItemData.moneyRate -= item.moneyRate;
         myItemData.expRate -= item.expRate;
         myItemData.enemyAmount -= item.enemyAmount;
+
+        UIManager.Instance.ChangeValue(myItemData);
     }
     /// <summary>
     /// 아이템 혹은 무기로 인해 값을 빼는 메서드
@@ -243,5 +249,7 @@ public class PlayerInventory : MonoBehaviour
         myItemData.moneyRate -= moneyRate;
         myItemData.expRate -= expRate;
         myItemData.enemyAmount -= enemyAmount;
+
+        UIManager.Instance.ChangeValue(myItemData);
     }
 }
