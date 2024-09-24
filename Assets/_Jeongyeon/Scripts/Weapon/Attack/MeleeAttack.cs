@@ -36,6 +36,7 @@ public class MeleeAttack : WeaponAttack
             {
                 // ÈíÇ÷ ±¸Çö ÇÊ¿ä inventory.myItemData.bloodDrain
                 player.currentHp += 1;
+                UIManager.Instance.CurrentHpChange(player);
             }
         }
     }

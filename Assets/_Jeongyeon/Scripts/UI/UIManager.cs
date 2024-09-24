@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
     {
         uiValue[1].text = player.currentHp.ToString();
         ChangTextColor(player.currentHp, uiValue[1]);
+        Debug.Log(player.currentHp);
     }
     /// <summary>
     /// 텍스트의 색상을 변경하는 메서드
