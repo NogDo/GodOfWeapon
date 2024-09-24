@@ -72,6 +72,7 @@ public class CMapRightDownBuilder : MonoBehaviour, IMapPartBuilder
 
         BuildFloor();
         BuildDownWall();
+        CreateCollider();
     }
 
     public CMapPart GetMapPart()
@@ -290,5 +291,21 @@ public class CMapRightDownBuilder : MonoBehaviour, IMapPartBuilder
         {
             Destroy(child);
         }
+    }
+
+    /// <summary>
+    /// 맵 크기에 따라 박스 콜라이더를 생성한다.
+    /// </summary>
+    public void CreateCollider()
+    {
+        GameObject collider = new GameObject("Collider");
+        collider.tag = "Fence";
+        collider.AddComponent<BoxCollider>();
+        collider.transform.SetParent(mapPart.transform);
+
+        BoxCollider box = collider.GetComponent<BoxCollider>();
+
+        box.size = new Vector3(fFloorWidth, fFloorHeight, (nMaxZ - nMinZ) * fFloorLength);
+        box.center = new Vector3(nMinX * fFloorWidth + box.size.x / 2, 2.0f, box.size.z / 2 + nMinZ * fFloorLength);
     }
 }

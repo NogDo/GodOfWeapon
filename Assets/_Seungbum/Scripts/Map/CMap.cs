@@ -8,7 +8,7 @@ public class CMap : MonoBehaviour
     CMapFloorBuilder floorBuilder;
     CMapLeftUpBuilder leftUpBuilder;
     CMapLeftDownBuilder leftDownBuilder;
-
+    CMapRightUpBuilder rightUpBuilder;
     CMapRightDownBuilder rightDownBuilder;
     #endregion
 
@@ -17,7 +17,7 @@ public class CMap : MonoBehaviour
         floorBuilder = transform.GetChild(0).GetComponent<CMapFloorBuilder>();
         leftUpBuilder = transform.GetChild(1).GetComponent<CMapLeftUpBuilder>();
         leftDownBuilder = transform.GetChild(2).GetComponent<CMapLeftDownBuilder>();
-
+        rightUpBuilder = transform.GetChild(3).GetComponent<CMapRightUpBuilder>();
         rightDownBuilder = transform.GetChild(4).GetComponent<CMapRightDownBuilder>();
     }
 
@@ -66,7 +66,7 @@ public class CMap : MonoBehaviour
     /// <param name="maxZ">세로 최대값</param>
     public void SetRighUpPart(int minX, int maxX, int minZ, int maxZ)
     {
-
+        rightUpBuilder.CreateMapPart(minX, maxX, minZ, maxZ);
     }
 
     /// <summary>

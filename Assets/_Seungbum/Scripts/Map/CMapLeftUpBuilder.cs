@@ -76,6 +76,7 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
         BuildFloor();
         BuildDownWall();
         BuildUpWall();
+        CreateCollider();
     }
 
     public CMapPart GetMapPart()
@@ -204,10 +205,9 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
 
                     mapPart.AddPart(oBasicWalls[randWall], pos, rot, upWall.transform);
 
-
                     // 일반 벽 생성일 때만 데코레이션 설치
                     int randDeco = Random.Range(0, 101);
-                    
+
                     if (randDeco < nWallDecoPercent && j == 0)
                     {
                         int deco = Random.Range(0, oWallProps.Length);
@@ -234,9 +234,25 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
 
     public void DestroyMapPart()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             Destroy(child);
         }
+    }
+
+    /// <summary>
+    /// 맵 크기에 따라 박스 콜라이더를 생성한다.
+    /// </summary>
+    public void CreateCollider()
+    {
+        GameObject collider = new GameObject("Collider");
+        collider.tag = "Fence";
+        collider.AddComponent<BoxCollider>();
+        collider.transform.SetParent(mapPart.transform);
+
+        BoxCollider box = collider.GetComponent<BoxCollider>();
+
+        box.size = new Vector3(fFloorWidth, fFloorHeight, (nMaxZ - nMinZ) * fFloorLength);
+        box.center = new Vector3(nMaxX * fFloorWidth + box.size.x / 2, 2.0f, box.size.z / 2 + nMinZ * fFloorLength);
     }
 }
