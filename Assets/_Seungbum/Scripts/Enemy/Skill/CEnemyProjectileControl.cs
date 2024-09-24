@@ -62,8 +62,6 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
             StartCoroutine(ProjectileActiveFalse());
         }
 
-        // TODO : 나중에 벽이나 울타리에 IHittable같은 상호작용 가능한 인터페이스 달아놓고 그거 불러다 쓰는게 나을듯?
-        // 아니면 외곽을 Fence나 Wall이 아니라, 외곽 크기만큼 BoxCollider 생성하고 거기에 부딪히면 없어지게끔?
         else if (other.CompareTag("Fence"))
         {
             StopCoroutine(moveCoroutine);
