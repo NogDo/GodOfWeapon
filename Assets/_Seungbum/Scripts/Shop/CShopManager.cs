@@ -202,7 +202,7 @@ public class CShopManager : MonoBehaviour
                             (
                                 weaponList[containCheckList[0][j]], 
                                 itemSpawnPoint[spawnPointCount].position, 
-                                Quaternion.Euler(-30.0f, 0.0f, 0.0f)
+                                Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
                         weapon.GetComponent<CWeaponStats>().InitLevel(itemTier[spawnPointCount]);
@@ -214,7 +214,7 @@ public class CShopManager : MonoBehaviour
                             (
                                 tier1ItemList[containCheckList[1][j]],
                                 itemSpawnPoint[spawnPointCount].position,
-                                Quaternion.Euler(-30.0f, 0.0f, 0.0f)
+                                Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
                         spawnPointCount++;
@@ -225,7 +225,7 @@ public class CShopManager : MonoBehaviour
                             (
                                 tier2ItemList[containCheckList[2][j]],
                                 itemSpawnPoint[spawnPointCount].position,
-                                Quaternion.Euler(-30.0f, 0.0f, 0.0f)
+                                Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
                         spawnPointCount++;
@@ -236,7 +236,7 @@ public class CShopManager : MonoBehaviour
                             (
                                 tier3ItemList[containCheckList[3][j]],
                                 itemSpawnPoint[spawnPointCount].position,
-                                Quaternion.Euler(-30.0f, 0.0f, 0.0f)
+                                Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
                         spawnPointCount++;
@@ -247,7 +247,7 @@ public class CShopManager : MonoBehaviour
                             (
                                 tier4ItemList[containCheckList[4][j]],
                                 itemSpawnPoint[spawnPointCount].position,
-                                Quaternion.Euler(-30.0f, 0.0f, 0.0f)
+                                Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
                         spawnPointCount++;

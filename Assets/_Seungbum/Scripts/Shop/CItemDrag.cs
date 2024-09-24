@@ -44,7 +44,7 @@ public class CItemDrag : MonoBehaviour
 
         transform.position += Vector3.left * GetComponent<BoxCollider>().size.x / 10.0f;
 
-        v3StartRotation = new Vector3(-30.0f, 0.0f, 0.0f);
+        v3StartRotation = new Vector3(-30.0f, 0.0f, -30.0f);
         v3StartPosition = transform.position;
 
         nRotateCount = 0;
