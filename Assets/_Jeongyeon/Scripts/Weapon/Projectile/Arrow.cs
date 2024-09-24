@@ -13,10 +13,11 @@ public class Arrow : WeaponProjectile
     private Rigidbody rb;
     private GameObject startParent;
     private WProjectilePool arrowPool;
+    private WHitParticlePool hitParticlePool;
     private TrailRenderer trailRenderer;
     private CrossBowController crossbow;
-    private WHitParticlePool hitParticlePool;
     private PlayerInventory inventory;
+    private Character player;
     #endregion
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class Arrow : WeaponProjectile
         crossbow = startParent.GetComponentInParent<CrossBowController>();
         hitParticlePool = startParent.transform.parent.GetComponentInChildren<WHitParticlePool>();
         inventory = startParent.transform.parent.GetComponentInParent<PlayerInventory>();
+        player = startParent.transform.parent.GetComponentInParent<Character>();
         if (hitParticlePool == null)
         {
             Debug.LogError("HitParticlePool is null");
@@ -61,26 +63,31 @@ public class Arrow : WeaponProjectile
     /// <param name="other">´ë»ó</param>
     private void OnTriggerEnter(Collider other)
     {
+        float damage = crossbow.AttackDamage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10);
+        float massValue = crossbow.MassValue + (inventory.myItemData.massValue / 100);
         Vector3 hitPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             CancelInvoke("Return");
             Return();
             
-            hit.Hit(crossbow.attackDamage, crossbow.massValue);
+            hit.Hit(damage,massValue);
             if (CheckCritical(inventory.myItemData.criticalRate) == true)
             {
                 hitParticlePool.GetHitParticle(1).Play(hitPosition);   
-                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, crossbow.attackDamage + (crossbow.attackDamage * 0.5f));
+                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
             }
             else
             {
                 hitParticlePool.GetHitParticle(0).Play(hitPosition);
-                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, crossbow.attackDamage);
+                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
             }
-            if (CheckBloodDrain(0.1f) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
             {
                 // ÈíÇ÷ ±¸Çö ÇÊ¿ä
+                player.currentHp += 1;
+                UIManager.Instance.CurrentHpChange(player);
+                CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
             }
         }
     }

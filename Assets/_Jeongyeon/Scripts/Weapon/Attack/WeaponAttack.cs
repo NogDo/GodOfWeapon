@@ -12,7 +12,7 @@ public class WeaponAttack : MonoBehaviour
     public virtual bool CheckCritical(float rate)
     {
         float random = Random.Range(0.0f, 1.0f);
-        if (random <= rate)
+        if (random < rate)
         {
             return true;
         }
@@ -25,8 +25,8 @@ public class WeaponAttack : MonoBehaviour
     /// <returns></returns>
     public virtual bool CheckBloodDrain(float rate)
     {
-        float random = Random.Range(-0.1f, 1.0f);
-        if (random <= rate)
+        float random = Random.Range(0.0f, 1.0f);
+        if (random < rate)
         {
             return true;
         }

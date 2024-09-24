@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
     {
         player = transform;
         playerModel = transform.GetChild(0);
-        cameraTransform = Camera.main.transform;
+        cameraTransform = UnityEngine.Camera.main.transform;
         cameraParentTransform = cameraTransform.parent;
         anim = playerModel.GetComponent<Animator>();
         currentDashCount = dashCount;
@@ -162,6 +162,7 @@ public class Character : MonoBehaviour
         rb.velocity = Vector3.zero;
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ignore Object"), true);
         while (time <= dashTime)
         {
             rb.MovePosition(rb.position + playerModel.forward * dashSpeed * Time.deltaTime);
@@ -170,6 +171,7 @@ public class Character : MonoBehaviour
         }
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ignore Object"), false);
         rb.velocity = Vector3.zero;
         anim.SetBool("isDash", false);
         smrCreator.Create(false);

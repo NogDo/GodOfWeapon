@@ -6,7 +6,7 @@ public class ItemDragDrop : MonoBehaviour
 {
     #region Private Fields
     private Vector3 offset;
-    private Camera ShopCamera;
+    private UnityEngine.Camera ShopCamera;
     #endregion
 
     #region Public Fields
@@ -14,7 +14,7 @@ public class ItemDragDrop : MonoBehaviour
 
     private void Start()
     {
-        ShopCamera = GameObject.Find("ShopCamera").GetComponent<Camera>();
+        ShopCamera = GameObject.Find("ShopCamera").GetComponent<UnityEngine.Camera>();
     
     }
     private void OnMouseDown()

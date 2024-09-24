@@ -42,7 +42,7 @@ public class Knight : Character
 
     public void StartGame()
     {
-        cameraTransform = Camera.main.transform;
+        cameraTransform = UnityEngine.Camera.main.transform;
         cameraParentTransform = cameraTransform.parent;
         isGameStart = true;
     }

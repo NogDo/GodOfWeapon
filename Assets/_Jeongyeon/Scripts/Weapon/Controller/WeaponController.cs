@@ -5,12 +5,12 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     #region public Fields
-    public float AttackRange;
+    public float AttackRange { get; protected set; }
     public LayerMask targetLayer;
     public bool isAttacking = false;
     public int monsterIndex;
-    public float attackDamage { get; protected set; }
-    public float massValue { get; protected set; }
+    public float AttackDamage { get; protected set; }
+    public float MassValue { get; protected set; }
     #endregion
 
     #region private Fields

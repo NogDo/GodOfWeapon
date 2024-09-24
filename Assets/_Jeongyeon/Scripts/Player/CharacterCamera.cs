@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camer : MonoBehaviour
+public class CharacterCamera : MonoBehaviour
 {
     #region public Fields
     public Transform cameraTrasform;
@@ -12,23 +12,31 @@ public class Camer : MonoBehaviour
     #endregion
     #region private Fields
     private Transform player;
+    private bool isSellect = false;
     #endregion
     private void Awake()
     {
-        cameraTrasform = Camera.main.transform;
+        cameraTrasform = UnityEngine.Camera.main.transform;
         cameraParentTransform = cameraTrasform.parent;
+        //CameraDistanceControll();
     }
-    private void Start()
+   /* private void Start()
     {
         player = GameObject.FindWithTag("Character").transform;
-    }
+    }*/
     private void Update()
     {
-        CameraDistanceControll();   
+        if (isSellect == true)
+        {
+            CameraDistanceControll();
+        }
     }
     private void LateUpdate()
     {
-        cameraParentTransform.position = player.position + (Vector3.up * 5.0f);
+        if (isSellect == true)
+        {
+            cameraParentTransform.position = player.position + (Vector3.up * 5.0f);
+        }
     }
     /// <summary>
     /// 카메라의 포지션과 로테이션을 조절하는 함수
@@ -38,4 +46,13 @@ public class Camer : MonoBehaviour
         Camera.main.transform.localPosition = cameraPosition;
         Camera.main.transform.localRotation = Quaternion.Euler(cameraRotation);
     }
+
+    public void SetPlayer(Character player)
+    {
+        this.player = player.gameObject.transform;
+        isSellect = true;
+    }
+
+
+
 }
