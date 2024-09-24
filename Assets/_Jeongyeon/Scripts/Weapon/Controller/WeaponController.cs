@@ -100,10 +100,10 @@ public class WeaponController : MonoBehaviour
         gameObject.transform.localScale = startScale;
         gameObject.transform.parent = startParent.transform;
         float time = 0.0f;
-        while (time <= endDuration/2)
+        while (time <= endDuration)
         {
-            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / (endDuration/2));
-            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / (endDuration / 2));
+            transform.localPosition = Vector3.Lerp(startPostion.localPosition, new Vector3(0, 0, 0), time / (endDuration));
+            transform.localRotation = Quaternion.Slerp(startPostion.localRotation, Quaternion.Euler(0, 0, 0), time / (endDuration));
             time += Time.deltaTime;
             yield return null;
         }

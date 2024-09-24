@@ -73,10 +73,10 @@ public class GreatSwordController : SwordController
         isSwing = true;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         particle[1].SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isSwing = false;
         particle[1].SetActive(false);
-        StartCoroutine(EndAttack(transform, duration / 3));
+        StartCoroutine(EndAttack(transform, duration / 2));
         patternCount++;
         yield return null;
     }

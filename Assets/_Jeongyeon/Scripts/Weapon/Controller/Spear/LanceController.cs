@@ -23,13 +23,13 @@ public class LanceController : SpearController
 
     private void OnEnable()
     {
-        extraSpeed = inventory.playerWeapon.Count;
         myData = weaponStatInfo.data;
         myData.attackSpeed -= extraSpeed * 0.1f;
         if (inventory == null)
         {
             inventory = GetComponentInParent<PlayerInventory>();
         }
+        extraSpeed = inventory.playerWeapon.Count;
         duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
         if (duration < 0.2f)
         {
