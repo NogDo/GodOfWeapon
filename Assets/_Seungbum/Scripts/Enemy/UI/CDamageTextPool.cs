@@ -34,7 +34,7 @@ public class CDamageTextPool : MonoBehaviour
     /// <param name="target">피격당한 객체의 Transform</param>
     /// <param name="damage">데미지</param>
     /// <param name="color">텍스트 컬러값</param>
-    public void DisplayText(Transform target, float damage, Color color)
+    public void DisplayText(Transform target, float damage, Color color, bool isDamage)
     {
         if (damageTextPool.Count <= 0)
         {
@@ -42,7 +42,7 @@ public class CDamageTextPool : MonoBehaviour
             damageText.gameObject.SetActive(false);
         }
 
-        damageTextPool.Dequeue().InitText(target, damage, color);
+        damageTextPool.Dequeue().InitText(target, damage, color, isDamage);
     }
 
     /// <summary>

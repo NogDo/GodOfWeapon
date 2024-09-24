@@ -24,11 +24,11 @@ public class CrossBowRevolver : CrossBowController
         base.OnEnable();
         monsterIndex = weaponStatInfo.index;
         AttackRange = myData.attackRange + (inventory.myItemData.attackRange)/100;
-        attackDamage = myData.damage + (inventory.myItemData.damage) / 10;
-        massValue = myData.massValue + (inventory.myItemData.massValue) / 100;
-        if (massValue > 0.5f)
+        AttackDamage = myData.damage + (inventory.myItemData.damage) / 10;
+        MassValue = myData.massValue + (inventory.myItemData.massValue) / 100;
+        if (MassValue > 0.5f)
         {
-            massValue = 0.5f;
+            MassValue = 0.5f;
         }
     }
  

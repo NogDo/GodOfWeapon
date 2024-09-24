@@ -32,7 +32,7 @@ public class UIDamageTextControl : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
+            Vector3 screenPoint = UnityEngine.Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
             transform.position = screenPoint;
         }
     }
@@ -41,9 +41,17 @@ public class UIDamageTextControl : MonoBehaviour
     /// 데미지, 위치, 회전 값을 초기화 하고 텍스트를 활성화시킨다.
     /// </summary>
     /// <param name="damage">데미지</param>
-    public void InitText(Transform target, float damage, Color color)
+    public void InitText(Transform target, float damage, Color color, bool isDamage)
     {
-        text.text = damage.ToString("F1");
+        if (isDamage)
+        {
+            text.text = damage.ToString("F1");
+        }
+
+        else
+        {
+            text.text = $"+{damage.ToString("F1")}";
+        }
         text.color = color;
 
         transform.SetParent(transformCanvas);
@@ -54,7 +62,7 @@ public class UIDamageTextControl : MonoBehaviour
         v3LastEnemyPosition = target.position;
         v3LastEnemyPosition.y = 2.0f;
 
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
+        Vector3 screenPoint = UnityEngine.Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
         transform.position = screenPoint;
 
         gameObject.SetActive(true);

@@ -5,12 +5,12 @@ using UnityEngine;
 public class CMouseFollower : MonoBehaviour
 {
     #region private º¯¼ö
-    Camera cameraShop;
+    UnityEngine.Camera cameraShop;
     #endregion
 
     void Awake()
     {
-        cameraShop = GameObject.Find("ShopCamera").GetComponent<Camera>();
+        cameraShop = GameObject.Find("ShopCamera").GetComponent<UnityEngine.Camera>();
     }
 
     void Update()

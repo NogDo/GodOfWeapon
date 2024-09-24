@@ -5,11 +5,11 @@ using UnityEngine;
 public class LightningProjectile : WeaponProjectile
 {
     #region Private Fields
-    private WProjectilePool lightningPool;
-    private WeaponStatInfo weapon;
-    private SphereCollider sphereCollider;
-    private LightningSpearController spearController;
-    private PlayerInventory inventory;
+    private WProjectilePool lightningPool; // 번개 프로젝타일 풀
+    private SphereCollider sphereCollider; // 번개 피격범위 콜라이더
+    private LightningSpearController spearController; // 창의 데미지를 가지고 있는 컨트롤러
+    private PlayerInventory inventory; // 플레이어 인벤토리
+    private Character player; // 플레이어 
     #endregion
 
     private void Awake()
@@ -18,6 +18,7 @@ public class LightningProjectile : WeaponProjectile
         sphereCollider = GetComponent<SphereCollider>();
         spearController = GetComponentInParent<LightningSpearController>();
         inventory = transform.parent.GetComponentInParent<PlayerInventory>();
+        player = transform.parent.GetComponentInParent<Character>();
     }
     public override void Return()
     {
@@ -36,6 +37,8 @@ public class LightningProjectile : WeaponProjectile
 
     private void OnTriggerEnter(Collider other)
     {
+        float damage = (spearController.AttackDamage + (inventory.myItemData.damage/ 10) + (inventory.myItemData.rangeDamage / 10)) *0.8f;
+        float massValue = spearController.MassValue + (inventory.myItemData.massValue / 100);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius);
@@ -43,14 +46,20 @@ public class LightningProjectile : WeaponProjectile
             {
                 if (collider.TryGetComponent<IHittable>(out IHittable hittable))
                 {
-                    hittable.Hit(spearController.attackDamage * 0.8f, spearController.massValue);
+                    hittable.Hit(damage, massValue);
                     if (CheckCritical(inventory.myItemData.criticalRate) == true)
                     {
-                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, spearController.attackDamage * 0.8f + (spearController.attackDamage * 0.8f * 0.5f));
+                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
                     }
                     else
                     {
-                        CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, spearController.attackDamage * 0.8f);
+                        CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                    }
+                    if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
+                    {
+                        player.currentHp += 1;
+                        UIManager.Instance.CurrentHpChange(player);
+                        CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
                     }
                 }
             }

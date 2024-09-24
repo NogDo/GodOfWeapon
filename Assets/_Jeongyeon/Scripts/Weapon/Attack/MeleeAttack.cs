@@ -21,23 +21,26 @@ public class MeleeAttack : WeaponAttack
     }
     private void OnTriggerEnter(Collider other)
     {
+        float damage = weapon.data.damage + (inventory.myItemData.damage / 10) + (inventory.myItemData.meleeDamage / 10);
+        float massValue = weapon.data.massValue + (inventory.myItemData.massValue / 100);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
-            hit.Hit(weapon.data.damage, weapon.data.massValue);
-            Debug.Log(weapon.data.damage);
+            hit.Hit(damage, massValue);
+            Debug.Log(damage);
             if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
             {
-                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, weapon.data.damage + (weapon.data.damage * 0.5f));
+                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
             }
             else
             {
-                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, weapon.data.damage);
+                CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
             }
-            if (CheckBloodDrain(0.5f) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
             {
-                // ÈíÇ÷ ±¸Çö ÇÊ¿ä inventory.myItemData.bloodDrain
+                // ÈíÇ÷ ±¸Çö ÇÊ¿ä 
                 player.currentHp += 1;
                 UIManager.Instance.CurrentHpChange(player);
+                CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
             }
         }
     }

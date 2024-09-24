@@ -33,8 +33,8 @@ public class LightningSpearController : SpearController
         }
         monsterIndex = weaponStatInfo.index;
         AttackRange = myData.attackRange + (inventory.myItemData.attackRange) / 100;
-        attackDamage = myData.damage + (inventory.myItemData.damage) / 10;
-        massValue = myData.massValue + (inventory.myItemData.massValue) / 100;
+        AttackDamage = myData.damage + (inventory.myItemData.damage) / 10;
+        MassValue = myData.massValue + (inventory.myItemData.massValue) / 100;
     }
     private void Update()
     {
