@@ -117,7 +117,6 @@ public class CItemDrag : MonoBehaviour
 
     void OnMouseUp()
     {
-        transform.SetParent(null);
 
         if (isCanDrop)
         {
@@ -202,6 +201,16 @@ public class CItemDrag : MonoBehaviour
                 transform.rotation = Quaternion.Euler(v3StartRotation);
                 transform.position = v3StartPosition;
             }
+        }
+
+        if (isInInventory)
+        {
+            transform.SetParent(CShopManager.Instance.tfBuyItems);
+        }
+
+        else
+        {
+            transform.SetParent(CShopManager.Instance.tfNonBuyItems);
         }
     }
 

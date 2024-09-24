@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CShopManager : MonoBehaviour
 {
@@ -8,7 +9,17 @@ public class CShopManager : MonoBehaviour
     public static CShopManager Instance { get; private set; }
     #endregion
 
+    #region public 변수
+    public Transform tfBuyItems;
+    public Transform tfNonBuyItems;
+    #endregion
+
     #region private 변수
+    [SerializeField]
+    Button buttonReRoll;
+    [SerializeField]
+    Text textReRollCost;
+
     [SerializeField]
     Transform[] itemSpawnPoint;
     [SerializeField]
@@ -26,6 +37,8 @@ public class CShopManager : MonoBehaviour
     List<int> itemTier = new List<int>();
 
     float[,] tierPercent;
+    int nReRollCost;
+    int nReRollCount;
     #endregion
 
     void Awake()
@@ -46,11 +59,27 @@ public class CShopManager : MonoBehaviour
         {
             containCheckList.Add(new List<int>());
         }
+
+        buttonReRoll.onClick.AddListener(OnReRollButtonClick);
     }
 
     void Start()
     {
+        //RandomItemSpawn();
+        ActiveShop();
+    }
+
+    /// <summary>
+    /// 상점을 활성화 시킨다.
+    /// </summary>
+    public void ActiveShop()
+    {
+        gameObject.SetActive(true);
+
         RandomItemSpawn();
+
+        nReRollCount = 0;
+        SetReRollCost();
     }
 
     /// <summary>
@@ -207,6 +236,8 @@ public class CShopManager : MonoBehaviour
 
                         weapon.GetComponent<CWeaponStats>().InitLevel(itemTier[spawnPointCount]);
                         spawnPointCount++;
+
+                        weapon.transform.SetParent(tfNonBuyItems);
                         break;
 
                     case 1:
@@ -218,6 +249,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         spawnPointCount++;
+
+                        tier1.transform.SetParent(tfNonBuyItems);
                         break;
 
                     case 2:
@@ -229,6 +262,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         spawnPointCount++;
+
+                        tier2.transform.SetParent(tfNonBuyItems);
                         break;
 
                     case 3:
@@ -240,6 +275,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         spawnPointCount++;
+
+                        tier3.transform.SetParent(tfNonBuyItems);
                         break;
 
                     case 4:
@@ -251,6 +288,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         spawnPointCount++;
+
+                        tier4.transform.SetParent(tfNonBuyItems);
                         break;
                 }
             }
@@ -287,5 +326,39 @@ public class CShopManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// 상점 아이템을 없앤다.
+    /// </summary>
+    void RemoveShopItem()
+    {
+        foreach(Transform item in tfNonBuyItems)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// 재굴림 버튼 클릭
+    /// </summary>
+    public void OnReRollButtonClick()
+    {
+        RemoveShopItem();
+        RandomItemSpawn();
+        SetReRollCost();
+    }
+
+    /// <summary>
+    /// 재굴림 비용을 설정한다.
+    /// </summary>
+    void SetReRollCost()
+    {
+        nReRollCost = CStageManager.Instance.StageCount * 5 + nReRollCount * CStageManager.Instance.StageCount;
+        nReRollCount++;
+
+        //TODO : 여기에 플레이어(또는 스테이지)가 가지고있는 소지금이 Cost만큼 줄어들게
+
+        textReRollCost.text = $"재굴림 - <color=#ffdc00>{nReRollCost}g</color>";
     }
 }
