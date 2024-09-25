@@ -8,6 +8,7 @@ public class CharacterSelect : MonoBehaviour
     public GameObject[] character;
     public GameObject[] characterSlot;
     public Transform cameraStartPosition;
+    public IEnumerator moveCamera;
     [HideInInspector]
     public Transform cameraParent;
     #endregion
@@ -25,5 +26,17 @@ public class CharacterSelect : MonoBehaviour
         Instantiate(character[index], characterSlot[index].transform.position, Quaternion.identity);
         characterSlot[index].SetActive(false);
         cameraParent.gameObject.GetComponent<CharacterCamera>().SetPlayer(character[index].GetComponent<Character>());
+    }
+    public void StopMoving()
+    {
+        if (moveCamera != null)
+        {
+            StopCoroutine(moveCamera);
+            moveCamera = null;
+        }
+    }
+    public void StartMoving()
+    {
+        StartCoroutine(moveCamera);
     }
 }
