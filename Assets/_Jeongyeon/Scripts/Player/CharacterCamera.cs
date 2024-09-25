@@ -7,33 +7,39 @@ public class CharacterCamera : MonoBehaviour
     #region public Fields
     public Transform cameraTrasform;
     public Transform cameraParentTransform;
+    public Transform[] lobbyCharacter;
+    public Transform startPosition;
     public Vector3 cameraPosition;
     public Vector3 cameraRotation;
     #endregion
     #region private Fields
     private Transform player;
-    private bool isSellect = false;
+    private Coroutine moveCamera;
+    private bool isSelect = false;
     #endregion
     private void Awake()
     {
         cameraTrasform = UnityEngine.Camera.main.transform;
         cameraParentTransform = cameraTrasform.parent;
+        gameObject.transform.position = startPosition.position;
+        
         //CameraDistanceControll();
     }
-   /* private void Start()
-    {
-        player = GameObject.FindWithTag("Character").transform;
-    }*/
+    /* private void Start()
+     {
+         player = GameObject.FindWithTag("Character").transform;
+     }*/
     private void Update()
     {
-        if (isSellect == true)
+        if (isSelect == true)
         {
             CameraDistanceControll();
         }
+
     }
     private void LateUpdate()
     {
-        if (isSellect == true)
+        if (isSelect == true)
         {
             cameraParentTransform.position = player.position + (Vector3.up * 5.0f);
         }
@@ -50,9 +56,29 @@ public class CharacterCamera : MonoBehaviour
     public void SetPlayer(Character player)
     {
         this.player = player.gameObject.transform;
-        isSellect = true;
+        isSelect = true;
     }
 
+    public void ChangeCamera(int index)
+    {
+        if (moveCamera != null)
+        {
+            StopCoroutine(moveCamera);
+        }
+        moveCamera = StartCoroutine(ChangeCameraPosition(index));
+    }
+    private IEnumerator ChangeCameraPosition(int index)
+    {
+        float time = 0;
+        while (time <= 20.0f)
+        {
+            time += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, lobbyCharacter[index].position, time);
+            yield return null;
+        }
+        
+        yield return null;
 
 
+    }
 }

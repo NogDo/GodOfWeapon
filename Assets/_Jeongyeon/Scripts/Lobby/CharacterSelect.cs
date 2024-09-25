@@ -5,38 +5,30 @@ using UnityEngine;
 public class CharacterSelect : MonoBehaviour
 {
     #region Public Fields
-    public GameObject[] character;
-    public GameObject[] characterSlot;
-    public Transform cameraStartPosition;
-    public IEnumerator moveCamera;
-    [HideInInspector]
-    public Transform cameraParent;
+    public GameObject character;
+    public GameObject characterSlot;
+    public int myIndex;
     #endregion
     #region Pirvate Fields
+    private LightController lightController;
+    private CharacterCamera characterCamera;
     #endregion
 
     private void Awake()
     {
-        cameraParent = Camera.main.transform.parent;
-        cameraParent.position = cameraStartPosition.position;
-        cameraParent.rotation = cameraStartPosition.rotation;
+        lightController = GetComponentInParent<LightController>();
+        characterCamera = Camera.main.GetComponentInParent<CharacterCamera>();
     }
-    public void SelectCharacter(int index)
+    private void OnMouseUp()
     {
-        Instantiate(character[index], characterSlot[index].transform.position, Quaternion.identity);
-        characterSlot[index].SetActive(false);
-        cameraParent.gameObject.GetComponent<CharacterCamera>().SetPlayer(character[index].GetComponent<Character>());
+        lightController.TurnOnLights(myIndex);
+        characterCamera.ChangeCamera(myIndex);
     }
-    public void StopMoving()
+
+    public void SelectCharacter()
     {
-        if (moveCamera != null)
-        {
-            StopCoroutine(moveCamera);
-            moveCamera = null;
-        }
+        Instantiate(character, characterSlot.transform.position, Quaternion.identity, null);
+        characterSlot.SetActive(false);
     }
-    public void StartMoving()
-    {
-        StartCoroutine(moveCamera);
-    }
+
 }
