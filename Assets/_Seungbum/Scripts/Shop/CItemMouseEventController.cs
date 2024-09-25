@@ -15,7 +15,7 @@ public struct STPos
     }
 }
 
-public class CItemDrag : MonoBehaviour
+public class CItemMouseEventController : MonoBehaviour
 {
     #region private º¯¼ö
     [SerializeField]
@@ -211,6 +211,32 @@ public class CItemDrag : MonoBehaviour
         else
         {
             transform.SetParent(CShopManager.Instance.tfNonBuyItems);
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        if (itemStats != null)
+        {
+            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
+        }
+
+        if (weaponStats != null)
+        {
+            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (itemStats != null)
+        {
+            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, false);
+        }
+
+        if (weaponStats != null)
+        {
+            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
         }
     }
 

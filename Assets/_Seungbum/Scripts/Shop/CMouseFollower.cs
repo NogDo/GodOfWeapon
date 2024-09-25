@@ -26,7 +26,7 @@ public class CMouseFollower : MonoBehaviour
 
             if (transform.childCount > 0)
             {
-                GetComponentInChildren<CItemDrag>().IncreaseRotationCount();
+                GetComponentInChildren<CItemMouseEventController>().IncreaseRotationCount();
             }
         }
     }

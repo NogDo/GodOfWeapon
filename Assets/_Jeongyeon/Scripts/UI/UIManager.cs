@@ -5,10 +5,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+
+    #region static 변수
+    public static UIManager Instance { get; private set; }
+    #endregion
+
+    #region public 변수
+    [Header("플레이어 스텟 관련 UI")]
     public Text[] uiName;
     public Text[] uiValue;
 
-    public static UIManager Instance { get; private set; }
+    [Header("상점 아이템 관련 UI")]
+    public UIItemInfo shopItemInfo;
+    public UIWeaponInfo shopWeaponInfo;
+    #endregion
 
     private void Awake()
     {
@@ -18,6 +28,7 @@ public class UIManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+
     /// <summary>
     /// ui의 값과 색상을 변경하는 메서드
     /// </summary>
@@ -54,6 +65,7 @@ public class UIManager : MonoBehaviour
         ChangTextColor(playerItem.moneyRate, uiValue[13]);
         ChangTextColor(playerItem.expRate, uiValue[14]);
     }
+
     /// <summary>
     /// 플레이어의 현재 hp를 변경하는 값
     /// </summary>
@@ -63,6 +75,7 @@ public class UIManager : MonoBehaviour
         uiValue[1].text = player.currentHp.ToString();
         ChangTextColor(player.currentHp, uiValue[1]);
     }
+
     /// <summary>
     /// 텍스트의 색상을 변경하는 메서드
     /// </summary>
@@ -82,5 +95,35 @@ public class UIManager : MonoBehaviour
         {
             name.color = Color.red;
         }
+    }
+
+    /// <summary>
+    /// 상점 아이템 정보가 담긴 UI를 활성화 / 비활성화 시킨다.
+    /// </summary>
+    /// <param name="itemStats">아이템 정보</param>
+    /// <param name="active">활성화 여부</param>
+    public void ActiveShopItemInfoPanel(CItemStats itemStats, bool active)
+    {
+        if (active)
+        {
+            shopItemInfo.SetItemInfoPanel(itemStats);
+        }
+
+        shopItemInfo.gameObject.SetActive(active);
+    }
+
+    /// <summary>
+    /// 상점 무기 정보가 담긴 UI를 활성화 / 비활성화 시킨다.
+    /// </summary>
+    /// <param name="weaponStats">무기 정보</param>
+    /// <param name="active">활성화 여부</param>
+    public void ActiveShopWeaponInfoPanel(CWeaponStats weaponStats, bool active)
+    {
+        if (active)
+        {
+            shopWeaponInfo.SetItemInfoPanel(weaponStats);
+        }
+
+        shopWeaponInfo.gameObject.SetActive(false);
     }
 }

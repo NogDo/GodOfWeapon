@@ -179,6 +179,8 @@ public class DataManager : MonoBehaviour
 public class ItemData
 {
     public string name;
+    public string koreanName;
+    public string tooltip;
     public int uid;
     public int price;
     public float hp;
@@ -205,6 +207,8 @@ public class ItemData
     public ItemData(string name)
     {
         this.name = name;
+        koreanName = "";
+        tooltip = "";
         uid = 0;
         price = 0;
         hp = 0;
@@ -225,11 +229,13 @@ public class ItemData
         level = 1;
     }
 
-    public ItemData(string name, int uid, int price, float hp, float damage, float meleeDamage, float rangeDamage, float criticalRate,
+    public ItemData(string name, string koreanName, string tooltip, int uid, int price, float hp, float damage, float meleeDamage, float rangeDamage, float criticalRate,
         float attackSpeed, float moveSpeed, float attackRange, float massValue, float bloodDrain, float defense, float luck, float moneyRate,
         float expRate, float enemyAmount, int level)
     {
         this.name = name;
+        this.koreanName = koreanName;
+        this.tooltip = tooltip;
         this.uid = uid;
         this.price = price;
         this.hp = hp;

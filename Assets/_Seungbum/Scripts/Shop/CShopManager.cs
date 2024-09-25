@@ -65,7 +65,6 @@ public class CShopManager : MonoBehaviour
 
     void Start()
     {
-        //RandomItemSpawn();
         ActiveShop();
     }
 
