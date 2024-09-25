@@ -119,10 +119,10 @@ Material:
     - _FlickerValue: 1
     - _FresnelStrength: 5
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.3
     - _GlossyReflections: 1
     - _IsEmissionNoiseEnding: 0
-    - _Metallic: 0
+    - _Metallic: 0.4
     - _MetallicStrength: 0.56
     - _Mode: 0
     - _Noise2Distortion: 80
