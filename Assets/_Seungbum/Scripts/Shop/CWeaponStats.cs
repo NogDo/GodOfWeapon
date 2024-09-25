@@ -5,6 +5,14 @@ using UnityEngine;
 public class CWeaponStats : MonoBehaviour
 {
     #region private 변수
+    [SerializeField]
+    Sprite spriteItem;
+
+    [SerializeField]
+    int nWidth;
+    [SerializeField]
+    int nHeight;
+
     WeaponData weaponData;
 
     string weaponName;
@@ -22,7 +30,42 @@ public class CWeaponStats : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 무기 이미지
+    /// </summary>
+    public Sprite ItemSprite
+    {
+        get
+        {
+            return spriteItem;
+        }
+    }
 
+    /// <summary>
+    /// 무기 그리드 가로
+    /// </summary>
+    public int Width
+    {
+        get
+        {
+            return nWidth;
+        }
+    }
+
+    /// <summary>
+    /// 무기 그리드 세로
+    /// </summary>
+    public int Height
+    {
+        get
+        {
+            return nHeight;
+        }
+    }
+
+    /// <summary>
+    /// 무기 등급
+    /// </summary>
     public int Level
     {
         get
@@ -66,6 +109,7 @@ public class CWeaponStats : MonoBehaviour
         weaponData.tooltip = data.tooltip;
         weaponData.uid = data.uid;
         weaponData.weaponName = data.weaponName;
+        weaponData.weaponKoreanName = data.weaponKoreanName;
         weaponData.weaponType = data.weaponType;
     }
 }

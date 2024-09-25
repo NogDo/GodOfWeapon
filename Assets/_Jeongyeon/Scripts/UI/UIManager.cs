@@ -124,6 +124,6 @@ public class UIManager : MonoBehaviour
             shopWeaponInfo.SetItemInfoPanel(weaponStats);
         }
 
-        shopWeaponInfo.gameObject.SetActive(false);
+        shopWeaponInfo.gameObject.SetActive(active);
     }
 }

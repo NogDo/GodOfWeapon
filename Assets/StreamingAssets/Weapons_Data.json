@@ -1,6 +1,7 @@
-[
+ï»¿[
   {
     "weaponName": "Lance",
+    "weaponKoreanName": "ê¸°ë³‘ì°½",
     "uid": 1,
     "level": 1,
     "price": 50,
@@ -9,10 +10,11 @@
     "attackSpeed": 1.0,
     "attackRange": 7.2,
     "weaponType": 0,
-    "tooltip": "ÀÎº¥Åä¸®ÀÇ ¹«±â 1°³´ç °ø°İ¼Óµµ 1% Áõ°¡"
+    "tooltip": "ì¸ë²¤í† ë¦¬ì˜ ë¬´ê¸° 1ê°œë‹¹ ê³µê²©ì†ë„ 1% ì¦ê°€"
   },
   {
     "weaponName": "LightningSpear",
+    "weaponKoreanName": "ì²œë‘¥ ì°½",
     "uid": 2,
     "level": 1,
     "price": 65,
@@ -21,10 +23,11 @@
     "attackSpeed": 1.0,
     "attackRange": 7.2,
     "weaponType": 0,
-    "tooltip": "°ø°İ½Ã °ø°İ·ÂÀÇ 80%ÀÇ ¹ø°³ 2È¸ ¹ß»ı"
+    "tooltip": "ê³µê²©ì‹œ ê³µê²©ë ¥ì˜ 80%ì˜ ë²ˆê°œ 2íšŒ ë°œìƒ"
   },
   {
     "weaponName": "NormalSpear",
+    "weaponKoreanName": "ì°½",
     "uid": 3,
     "level": 1,
     "price": 40,
@@ -33,10 +36,11 @@
     "attackSpeed": 1.1,
     "attackRange": 7.2,
     "weaponType": 0,
-    "tooltip": "ÇÃ·¹ÀÌ¾îÀÇ »ç°Å¸® 5% Áõ°¡"
+    "tooltip": "í”Œë ˆì´ì–´ì˜ ì‚¬ê±°ë¦¬ 5% ì¦ê°€"
   },
   {
     "weaponName": "GreatSword",
+    "weaponKoreanName": "ëŒ€ê²€",
     "uid": 4,
     "level": 1,
     "price": 35,
@@ -45,10 +49,11 @@
     "attackSpeed": 1.4,
     "attackRange": 5.5,
     "weaponType": 0,
-    "tooltip": "ÇÃ·¹ÀÌ¾îÀÇ ÃÖ´ë Ã¼·Â 10Áõ°¡"
+    "tooltip": "í”Œë ˆì´ì–´ì˜ ìµœëŒ€ ì²´ë ¥ 10ì¦ê°€"
   },
   {
     "weaponName": "CrossBowBasic",
+    "weaponKoreanName": "ì‚°íƒ„ ì‡ ë‡Œ",
     "uid": 5,
     "level": 1,
     "price": 24,
@@ -57,10 +62,11 @@
     "attackSpeed": 0.8,
     "attackRange": 8.0,
     "weaponType": 2,
-    "tooltip": "10% È®·ü·Î È­»ì 2È¸ ¹ß»ç"
+    "tooltip": "10% í™•ë¥ ë¡œ í™”ì‚´ 2íšŒ ë°œì‚¬"
   },
   {
     "weaponName": "CrossBowRevolver",
+    "weaponKoreanName": "ìœ¡í˜ˆì‡ ë‡Œ",
     "uid": 6,
     "level": 1,
     "price": 30,
@@ -69,10 +75,11 @@
     "attackSpeed": 0.4,
     "attackRange": 8.0,
     "weaponType": 2,
-    "tooltip": "¸Å 4¹øÂ° °ø°İ½Ã 100%·Î Ä¡¸íÅ¸Àû¿ë, ´Ü 4¹øÂ° ¹ß»ç ÀÌÈÄ ÀçÀåÀü ¹ß»ı"
+    "tooltip": "ë§¤ 4ë²ˆì§¸ ê³µê²©ì‹œ 100%ë¡œ ì¹˜ëª…íƒ€ì ìš©, ë‹¨ 4ë²ˆì§¸ ë°œì‚¬ ì´í›„ ì¬ì¥ì „ ë°œìƒ"
   },
   {
     "weaponName": "CrossBowAutomatic",
+    "weaponKoreanName": "ìë™ ì‡ ë‡Œ",
     "uid": 7,
     "level": 1,
     "price": 35,
@@ -81,10 +88,11 @@
     "attackSpeed": 0.2,
     "attackRange": 8.0,
     "weaponType": 2,
-    "tooltip": "´Ù¸¥ È°º¸´Ù ¾ĞµµÀûÀ¸·Î ºü¸¥ °ø°İ¼Óµµ"
+    "tooltip": "ë‹¤ë¥¸ í™œë³´ë‹¤ ì••ë„ì ìœ¼ë¡œ ë¹ ë¥¸ ê³µê²©ì†ë„"
   },
   {
     "weaponName": "CrossBowSmall",
+    "weaponKoreanName": "ì™¸ì† ì‡ ë‡Œ",
     "uid": 8,
     "level": 1,
     "price": 24,
@@ -93,10 +101,11 @@
     "attackSpeed": 0.6,
     "attackRange": 8.0,
     "weaponType": 2,
-    "tooltip": "Á¦ÀÏ ±âº»ÀûÀÎ È°"
+    "tooltip": "ì œì¼ ê¸°ë³¸ì ì¸ í™œ"
   },
   {
     "weaponName": "Dagger",
+    "weaponKoreanName": "ì¹ í‘ ë‹¨ë„",
     "uid": 9,
     "level": 1,
     "price": 23,
@@ -105,10 +114,11 @@
     "attackSpeed": 0.7,
     "attackRange": 3.2,
     "weaponType": 1,
-    "tooltip": "ÇÃ·¹ÀÌ¾î°¡ ½ºÅ×ÀÌÁö¿¡¼­ Ã³Ä¡ÇÑ ¸ó½ºÅÍ 10¸¶¸®´ç °ø°İ·Â 1Áõ°¡ (½ºÅ×ÀÌÁö Å¬¸®¾î½Ã ÃÊ±âÈ­)"
+    "tooltip": "í”Œë ˆì´ì–´ê°€ ìŠ¤í…Œì´ì§€ì—ì„œ ì²˜ì¹˜í•œ ëª¬ìŠ¤í„° 10ë§ˆë¦¬ë‹¹ ê³µê²©ë ¥ 1ì¦ê°€ (ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ì‹œ ì´ˆê¸°í™”)"
   },
   {
     "weaponName": "NormalSword",
+    "weaponKoreanName": "ë‹¨ê²€",
     "uid": 10,
     "level": 1,
     "price": 23,
@@ -117,10 +127,11 @@
     "attackSpeed": 1.0,
     "attackRange": 4.8,
     "weaponType": 1,
-    "tooltip": "ÀÎº¥Åä¸®ÀÇ ¹«±â°¡ 3°³ ÀÌ»óÀÌ¸é µ¥¹ÌÁö 3Áõ°¡"
+    "tooltip": "ì¸ë²¤í† ë¦¬ì˜ ë¬´ê¸°ê°€ 3ê°œ ì´ìƒì´ë©´ ë°ë¯¸ì§€ 3ì¦ê°€"
   },
   {
     "weaponName": "GoldSword",
+    "weaponKoreanName": "ì¥ê²€",
     "uid": 11,
     "level": 1,
     "price": 26,
@@ -129,7 +140,7 @@
     "attackSpeed": 1.1,
     "attackRange": 4.8,
     "weaponType": 1,
-    "tooltip": "ÇÃ·¹ÀÌ¾îÀÇ ¹æ¾î·Â 3Áõ°¡"
+    "tooltip": "í”Œë ˆì´ì–´ì˜ ë°©ì–´ë ¥ 3ì¦ê°€"
   }
 
 ]

@@ -269,6 +269,7 @@ public class WeaponData
     #region Public Fields
 
     public string weaponName;
+    public string weaponKoreanName;
     public int uid;
     public int level;
     public int price;
@@ -287,6 +288,7 @@ public class WeaponData
     public WeaponData(WeaponData copy)
     {
         this.weaponName = copy.weaponName;
+        this.weaponKoreanName = copy.weaponKoreanName;
         this.uid = copy.uid;
         this.level = copy.level;
         this.price = copy.price;
