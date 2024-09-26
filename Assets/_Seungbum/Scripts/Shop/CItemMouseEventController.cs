@@ -128,7 +128,6 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseUp()
     {
-
         if (isCanDrop)
         {
             Vector3 pos = tfCell.position;
@@ -248,6 +247,19 @@ public class CItemMouseEventController : MonoBehaviour
         if (weaponStats != null)
         {
             UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
+        }
+    }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            transform.Rotate(Vector3.up * 90.0f);
+
+            if (transform.childCount > 0)
+            {
+                GetComponentInChildren<CItemMouseEventController>().IncreaseRotationCount();
+            }
         }
     }
 

@@ -86,7 +86,7 @@ public class UIWeaponInfo : MonoBehaviour
     void SetPanelPosition()
     {
         Vector3 position = weapon.transform.position;
-        position.x += 0.3f + weapon.GetComponent<BoxCollider>().size.x * 0.2f;
+        position.x += 0.4f + weapon.GetComponent<BoxCollider>().size.x * 0.2f;
         position.z += 0.3f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);

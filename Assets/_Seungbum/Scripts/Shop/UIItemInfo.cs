@@ -83,7 +83,7 @@ public class UIItemInfo : MonoBehaviour
     void SetPanelPosition()
     {
         Vector3 position = item.transform.position;
-        position.x += 0.3f + item.GetComponent<BoxCollider>().size.x * 0.2f;
+        position.x += 0.4f + item.GetComponent<BoxCollider>().size.x * 0.2f;
         position.z += 0.3f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);
