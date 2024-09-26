@@ -33,7 +33,9 @@ public class CItemMouseEventController : MonoBehaviour
 
     bool isCanDrop = false;
     bool isInInventory = false;
+    bool isGrab = false;
     int nRotateCount;
+    int nIndex;
     #endregion
 
     void Awake()
@@ -81,6 +83,8 @@ public class CItemMouseEventController : MonoBehaviour
         {
             UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
         }
+
+        isGrab = true;
     }
 
     void OnMouseDrag()
@@ -222,6 +226,8 @@ public class CItemMouseEventController : MonoBehaviour
         {
             transform.SetParent(CShopManager.Instance.tfNonBuyItems);
         }
+
+        isGrab = false;
     }
 
     void OnMouseEnter()
@@ -254,11 +260,9 @@ public class CItemMouseEventController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            transform.Rotate(Vector3.up * 90.0f);
-
-            if (transform.childCount > 0)
+            if (!isGrab)
             {
-                GetComponentInChildren<CItemMouseEventController>().IncreaseRotationCount();
+                CShopManager.Instance.LockItem(nIndex, transform);
             }
         }
     }
@@ -269,5 +273,14 @@ public class CItemMouseEventController : MonoBehaviour
     public void IncreaseRotationCount()
     {
         nRotateCount = (nRotateCount + 1 < 4) ? nRotateCount + 1 : 0;
+    }
+
+    /// <summary>
+    /// 아이템의 인덱스를 설정한다.
+    /// </summary>
+    /// <param name="index">상점 인덱스</param>
+    public void SetIndex(int index)
+    {
+        nIndex = index;
     }
 }

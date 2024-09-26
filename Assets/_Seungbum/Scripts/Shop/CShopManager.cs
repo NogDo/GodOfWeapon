@@ -49,9 +49,6 @@ public class CShopManager : MonoBehaviour
     [SerializeField]
     List<GameObject> weaponList;
 
-    List<List<int>> containCheckList = new List<List<int>>();
-    List<int> itemTier = new List<int>();
-
     STItemInfo[] shopItems = new STItemInfo[5];
 
     float[,] tierPercent;
@@ -76,15 +73,8 @@ public class CShopManager : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopItems[i].eType = EItemType.ITEM;
-            shopItems[i].nTier = -1;
             shopItems[i].nIndex = -1;
             shopItems[i].isLock = false;
-        }
-
-        // 0 >> 무기, 1 ~ 4 >> 티어별 아이템
-        for (int i = 0; i < 5; i++)
-        {
-            containCheckList.Add(new List<int>());
         }
 
         buttonReRoll.onClick.AddListener(OnReRollButtonClick);
@@ -142,9 +132,6 @@ public class CShopManager : MonoBehaviour
                             continue;
                         }
 
-                        containCheckList[1].Add(randomItemNumber);
-                        itemTier.Add(tier);
-
                         shopItems[itemCount].eType = EItemType.ITEM;
                         shopItems[itemCount].nTier = tier;
                         shopItems[itemCount].nIndex = randomItemNumber;
@@ -158,9 +145,6 @@ public class CShopManager : MonoBehaviour
                         {
                             continue;
                         }
-
-                        containCheckList[0].Add(randomWeaponNumber);
-                        itemTier.Add(tier);
 
                         shopItems[itemCount].eType = EItemType.WEAPON;
                         shopItems[itemCount].nTier = tier;
@@ -178,9 +162,6 @@ public class CShopManager : MonoBehaviour
                             continue;
                         }
 
-                        containCheckList[2].Add(randomItemNumber);
-                        itemTier.Add(tier);
-
                         shopItems[itemCount].eType = EItemType.ITEM;
                         shopItems[itemCount].nTier = tier;
                         shopItems[itemCount].nIndex = randomItemNumber;
@@ -194,9 +175,6 @@ public class CShopManager : MonoBehaviour
                         {
                             continue;
                         }
-
-                        containCheckList[0].Add(randomWeaponNumber);
-                        itemTier.Add(tier);
 
                         shopItems[itemCount].eType = EItemType.WEAPON;
                         shopItems[itemCount].nTier = tier;
@@ -214,9 +192,6 @@ public class CShopManager : MonoBehaviour
                             continue;
                         }
 
-                        containCheckList[3].Add(randomItemNumber);
-                        itemTier.Add(tier);
-
                         shopItems[itemCount].eType = EItemType.ITEM;
                         shopItems[itemCount].nTier = tier;
                         shopItems[itemCount].nIndex = randomItemNumber;
@@ -230,9 +205,6 @@ public class CShopManager : MonoBehaviour
                         {
                             continue;
                         }
-
-                        containCheckList[0].Add(randomWeaponNumber);
-                        itemTier.Add(tier);
 
                         shopItems[itemCount].eType = EItemType.WEAPON;
                         shopItems[itemCount].nTier = tier;
@@ -250,9 +222,6 @@ public class CShopManager : MonoBehaviour
                             continue;
                         }
 
-                        containCheckList[4].Add(randomItemNumber);
-                        itemTier.Add(tier);
-
                         shopItems[itemCount].eType = EItemType.ITEM;
                         shopItems[itemCount].nTier = tier;
                         shopItems[itemCount].nIndex = randomItemNumber;
@@ -267,9 +236,6 @@ public class CShopManager : MonoBehaviour
                             continue;
                         }
 
-                        containCheckList[0].Add(randomWeaponNumber);
-                        itemTier.Add(tier);
-
                         shopItems[itemCount].eType = EItemType.WEAPON;
                         shopItems[itemCount].nTier = tier;
                         shopItems[itemCount].nIndex = randomWeaponNumber;
@@ -282,84 +248,6 @@ public class CShopManager : MonoBehaviour
 
 
         // 랜덤 숫자 Index에 해당하는 아이템 생성
-        //int spawnPointCount = 0;
-
-        //for (int i = 0; i < containCheckList.Count; i++)
-        //{
-        //    for (int j = 0; j < containCheckList[i].Count; j++)
-        //    {
-        //        switch (i)
-        //        {
-        //            case 0:
-        //                GameObject weapon = Instantiate
-        //                    (
-        //                        weaponList[containCheckList[0][j]], 
-        //                        itemSpawnPoint[spawnPointCount].position, 
-        //                        Quaternion.Euler(-30.0f, 0.0f, -30.0f)
-        //                    );
-
-        //                weapon.GetComponent<CWeaponStats>().InitLevel(itemTier[spawnPointCount]);
-        //                spawnPointCount++;
-
-        //                weapon.transform.SetParent(tfNonBuyItems);
-        //                break;
-
-        //            case 1:
-        //                GameObject tier1 = Instantiate
-        //                    (
-        //                        tier1ItemList[containCheckList[1][j]],
-        //                        itemSpawnPoint[spawnPointCount].position,
-        //                        Quaternion.Euler(-30.0f, 0.0f, -30.0f)
-        //                    );
-
-        //                spawnPointCount++;
-
-        //                tier1.transform.SetParent(tfNonBuyItems);
-        //                break;
-
-        //            case 2:
-        //                GameObject tier2 = Instantiate
-        //                    (
-        //                        tier2ItemList[containCheckList[2][j]],
-        //                        itemSpawnPoint[spawnPointCount].position,
-        //                        Quaternion.Euler(-30.0f, 0.0f, -30.0f)
-        //                    );
-
-        //                spawnPointCount++;
-
-        //                tier2.transform.SetParent(tfNonBuyItems);
-        //                break;
-
-        //            case 3:
-        //                GameObject tier3 = Instantiate
-        //                    (
-        //                        tier3ItemList[containCheckList[3][j]],
-        //                        itemSpawnPoint[spawnPointCount].position,
-        //                        Quaternion.Euler(-30.0f, 0.0f, -30.0f)
-        //                    );
-
-        //                spawnPointCount++;
-
-        //                tier3.transform.SetParent(tfNonBuyItems);
-        //                break;
-
-        //            case 4:
-        //                GameObject tier4 = Instantiate
-        //                    (
-        //                        tier4ItemList[containCheckList[4][j]],
-        //                        itemSpawnPoint[spawnPointCount].position,
-        //                        Quaternion.Euler(-30.0f, 0.0f, -30.0f)
-        //                    );
-
-        //                spawnPointCount++;
-
-        //                tier4.transform.SetParent(tfNonBuyItems);
-        //                break;
-        //        }
-        //    }
-        //}
-
-
         for (int i = 0; i < shopItems.Length; i++)
         {
             if (shopItems[i].isLock)
@@ -377,6 +265,7 @@ public class CShopManager : MonoBehaviour
                             );
 
                 weapon.GetComponent<CWeaponStats>().InitLevel(shopItems[i].nTier);
+                weapon.GetComponent<CItemMouseEventController>().SetIndex(i);
                 weapon.transform.SetParent(tfNonBuyItems);
             }
 
@@ -392,6 +281,7 @@ public class CShopManager : MonoBehaviour
                                 Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
+                        tier1.GetComponent<CItemMouseEventController>().SetIndex(i);
                         tier1.transform.SetParent(tfNonBuyItems);
                         break;
 
@@ -403,6 +293,7 @@ public class CShopManager : MonoBehaviour
                                 Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
+                        tier2.GetComponent<CItemMouseEventController>().SetIndex(i);
                         tier2.transform.SetParent(tfNonBuyItems);
                         break;
 
@@ -414,17 +305,19 @@ public class CShopManager : MonoBehaviour
                                 Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
+                        tier3.GetComponent<CItemMouseEventController>().SetIndex(i);
                         tier3.transform.SetParent(tfNonBuyItems);
                         break;
 
                     case 4:
                         GameObject tier4 = Instantiate
                             (
-                                tier3ItemList[shopItems[i].nIndex],
+                                tier4ItemList[shopItems[i].nIndex],
                                 itemSpawnPoint[i].position,
                                 Quaternion.Euler(-30.0f, 0.0f, -30.0f)
                             );
 
+                        tier4.GetComponent<CItemMouseEventController>().SetIndex(i);
                         tier4.transform.SetParent(tfNonBuyItems);
                         break;
                 }
@@ -438,11 +331,6 @@ public class CShopManager : MonoBehaviour
     /// </summary>
     void ContainCheckListReset()
     {
-        for (int i = 0; i < containCheckList.Count; i++)
-        {
-            containCheckList[i].Clear();
-        }
-
         for (int i = 0; i < shopItems.Length; i++)
         {
             if (shopItems[i].isLock)
@@ -453,8 +341,6 @@ public class CShopManager : MonoBehaviour
             shopItems[i].nTier = -1;
             shopItems[i].nIndex = -1;
         }
-
-        itemTier.Clear();
     }
 
     /// <summary>
@@ -465,27 +351,22 @@ public class CShopManager : MonoBehaviour
     /// <returns></returns>
     bool ContainCheck(EItemType type, int tier, int index)
     {
-        //for (int i = 0; i < containCheckList[type].Count; i++)
-        //{
-        //    if (containCheckList[type].Contains(index))
-        //    {
-        //        return true;
-        //    }
-        //}
-
         for (int i = 0; i < shopItems.Length; i++)
         {
             if (type == EItemType.WEAPON)
             {
                 if (shopItems[i].nIndex == index)
                 {
-
+                    return true;
                 }
             }
 
             else
             {
-
+                if (shopItems[i].nTier == tier && shopItems[i].nIndex == index)
+                {
+                    return true;
+                }
             }
         }
 
@@ -530,8 +411,18 @@ public class CShopManager : MonoBehaviour
     /// 아이템 잠금을 설정한다.
     /// </summary>
     /// <param name="index">잠금 설정할 아이템의 인덱스 번호</param>
-    public void LockItem(int index)
+    public void LockItem(int index, Transform transform)
     {
         shopItems[index].isLock = !shopItems[index].isLock;
+
+        if (shopItems[index].isLock)
+        {
+            transform.SetParent(tfLockItems);
+        }
+
+        else
+        {
+            transform.SetParent(tfNonBuyItems);
+        }
     }
 }
