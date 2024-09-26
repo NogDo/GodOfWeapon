@@ -24,6 +24,8 @@ public class UIWeaponInfo : MonoBehaviour
     public RectTransform rtCellParents;
 
     public Image imageItem;
+
+    public Camera shopCamera;
     #endregion
 
     #region private 변수
@@ -52,6 +54,7 @@ public class UIWeaponInfo : MonoBehaviour
         this.weapon = weapon;
 
         SetPanelSize();
+        SetPanelPosition();
         SetItemInfoText();
         SetItemImage();
     }
@@ -75,6 +78,18 @@ public class UIWeaponInfo : MonoBehaviour
         }
 
         rtBackground.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);
+    }
+
+    /// <summary>
+    /// 패널의 위치를 지정한다.
+    /// </summary>
+    void SetPanelPosition()
+    {
+        Vector3 position = weapon.transform.position;
+        position.x += 0.3f + weapon.GetComponent<BoxCollider>().size.x * 0.2f;
+        position.z += 0.3f;
+
+        transform.position = shopCamera.WorldToScreenPoint(position);
     }
 
     /// <summary>

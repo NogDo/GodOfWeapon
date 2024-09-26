@@ -70,6 +70,17 @@ public class CItemMouseEventController : MonoBehaviour
         {
             CellManager.Instance.ResetItem(prevCellPos);
         }
+
+        // ¶ç¿öÁ®ÀÖ´ø UI ²ô±â
+        if (itemStats != null)
+        {
+            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, false);
+        }
+
+        if (weaponStats != null)
+        {
+            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
+        }
     }
 
     void OnMouseDrag()

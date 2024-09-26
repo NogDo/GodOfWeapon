@@ -21,6 +21,8 @@ public class UIItemInfo : MonoBehaviour
     public RectTransform rtCellParents;
 
     public Image imageItem;
+
+    public Camera shopCamera;
     #endregion
 
     #region private 변수
@@ -49,6 +51,7 @@ public class UIItemInfo : MonoBehaviour
         this.item = item;
 
         SetPanelSize();
+        SetPanelPosition();
         SetItemInfoText();
         SetItemImage();
     }
@@ -72,6 +75,18 @@ public class UIItemInfo : MonoBehaviour
         }
 
         rtBackground.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);
+    }
+
+    /// <summary>
+    /// 패널의 위치를 지정한다.
+    /// </summary>
+    void SetPanelPosition()
+    {
+        Vector3 position = item.transform.position;
+        position.x += 0.3f + item.GetComponent<BoxCollider>().size.x * 0.2f;
+        position.z += 0.3f;
+
+        transform.position = shopCamera.WorldToScreenPoint(position);
     }
 
     /// <summary>
