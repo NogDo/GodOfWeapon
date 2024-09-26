@@ -23,7 +23,8 @@ public class CellManager : MonoBehaviour
     #region Public Fields
     // 셀이 클릭이 되었을때 호출되는 이벤트
     public event Action OnCellClick;
-
+    public Transform weaponInstancePostion;
+    public Transform itemInstancePostion;
     #endregion
 
     /// <summary>
@@ -56,6 +57,8 @@ public class CellManager : MonoBehaviour
         CreateGrid();
         SetCell();
         canActiveCell = new List<Pos>();
+        weaponInstancePostion.position = gameGrid[5, 7].transform.position;
+        itemInstancePostion.position = gameGrid[5, 5].transform.position;
     }
 
     public void Init(PlayerInventory inventory)

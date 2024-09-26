@@ -29,7 +29,7 @@ public class CharacterSelect : MonoBehaviour
 
     private IEnumerator SetUI()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1.0f);
         UIManager.Instance.OnLobbyUI(myIndex, transform);
     }
     public void SelectCharacter(int index)
