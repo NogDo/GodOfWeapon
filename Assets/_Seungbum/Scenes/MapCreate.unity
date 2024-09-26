@@ -376,10 +376,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804486433971074502, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
       propertyPath: m_Name
-      value: ButtonContainer
+      value: ShopCost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+--- !u!114 &260852053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -943035556187258263, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+  m_PrefabInstance: {fileID: 260852052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e21db020102444bbe08aca099c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &304233638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,10 +444,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804486433971074502, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
       propertyPath: m_Name
-      value: ButtonContainer
+      value: ShopCost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+--- !u!114 &304233639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -943035556187258263, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+  m_PrefabInstance: {fileID: 304233638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e21db020102444bbe08aca099c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &346518349
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,10 +669,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804486433971074502, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
       propertyPath: m_Name
-      value: ButtonContainer
+      value: ShopCost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+--- !u!114 &702151882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -943035556187258263, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+  m_PrefabInstance: {fileID: 702151881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e21db020102444bbe08aca099c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &711638854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7139952650630140617, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
@@ -843,10 +876,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804486433971074502, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
       propertyPath: m_Name
-      value: ButtonContainer
+      value: ShopCost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+--- !u!114 &962484220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -943035556187258263, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+  m_PrefabInstance: {fileID: 962484219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e21db020102444bbe08aca099c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1084238855 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8795587869510782283, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
@@ -1132,10 +1176,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804486433971074502, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
       propertyPath: m_Name
-      value: ButtonContainer
+      value: ShopCost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+--- !u!114 &1660127111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -943035556187258263, guid: 3b702df01d9bcdf45ab8978e8632ab6f, type: 3}
+  m_PrefabInstance: {fileID: 1660127110}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193e21db020102444bbe08aca099c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1699114507 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1699114507, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
@@ -1468,6 +1523,30 @@ PrefabInstance:
       propertyPath: tfLockItems
       value: 
       objectReference: {fileID: 1118264125}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.data[0]
+      value: 
+      objectReference: {fileID: 1660127111}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.data[1]
+      value: 
+      objectReference: {fileID: 304233639}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.data[2]
+      value: 
+      objectReference: {fileID: 260852053}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.data[3]
+      value: 
+      objectReference: {fileID: 702151882}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: costController.Array.data[4]
+      value: 
+      objectReference: {fileID: 962484220}
     - target: {fileID: 1048219779414426325, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

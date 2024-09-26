@@ -48,6 +48,8 @@ public class CShopManager : MonoBehaviour
     List<GameObject> tier4ItemList;
     [SerializeField]
     List<GameObject> weaponList;
+    [SerializeField]
+    UIShopCostController[] costController;
 
     STItemInfo[] shopItems = new STItemInfo[5];
 
@@ -266,6 +268,8 @@ public class CShopManager : MonoBehaviour
 
                 weapon.GetComponent<CWeaponStats>().InitLevel(shopItems[i].nTier);
                 weapon.GetComponent<CItemMouseEventController>().SetIndex(i);
+                weapon.GetComponent<CStats>().SetCostController(costController[i]);
+
                 weapon.transform.SetParent(tfNonBuyItems);
             }
 
@@ -282,6 +286,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         tier1.GetComponent<CItemMouseEventController>().SetIndex(i);
+                        tier1.GetComponent<CStats>().SetCostController(costController[i]);
+
                         tier1.transform.SetParent(tfNonBuyItems);
                         break;
 
@@ -294,6 +300,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         tier2.GetComponent<CItemMouseEventController>().SetIndex(i);
+                        tier2.GetComponent<CStats>().SetCostController(costController[i]);
+
                         tier2.transform.SetParent(tfNonBuyItems);
                         break;
 
@@ -306,6 +314,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         tier3.GetComponent<CItemMouseEventController>().SetIndex(i);
+                        tier3.GetComponent<CStats>().SetCostController(costController[i]);
+
                         tier3.transform.SetParent(tfNonBuyItems);
                         break;
 
@@ -318,6 +328,8 @@ public class CShopManager : MonoBehaviour
                             );
 
                         tier4.GetComponent<CItemMouseEventController>().SetIndex(i);
+                        tier4.GetComponent<CStats>().SetCostController(costController[i]);
+
                         tier4.transform.SetParent(tfNonBuyItems);
                         break;
                 }
@@ -414,6 +426,8 @@ public class CShopManager : MonoBehaviour
     public void LockItem(int index, Transform transform)
     {
         shopItems[index].isLock = !shopItems[index].isLock;
+
+        costController[index].ActiveLockTag(shopItems[index].isLock);
 
         if (shopItems[index].isLock)
         {

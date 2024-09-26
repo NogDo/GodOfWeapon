@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CWeaponStats : MonoBehaviour
+public class CWeaponStats : CStats
 {
     #region private 변수
-    [SerializeField]
-    Sprite spriteItem;
-
-    [SerializeField]
-    int nWidth;
-    [SerializeField]
-    int nHeight;
-
     WeaponData weaponData;
 
     string weaponName;
@@ -27,39 +19,6 @@ public class CWeaponStats : MonoBehaviour
         get
         {
             return weaponData;
-        }
-    }
-
-    /// <summary>
-    /// 무기 이미지
-    /// </summary>
-    public Sprite ItemSprite
-    {
-        get
-        {
-            return spriteItem;
-        }
-    }
-
-    /// <summary>
-    /// 무기 그리드 가로
-    /// </summary>
-    public int Width
-    {
-        get
-        {
-            return nWidth;
-        }
-    }
-
-    /// <summary>
-    /// 무기 그리드 세로
-    /// </summary>
-    public int Height
-    {
-        get
-        {
-            return nHeight;
         }
     }
 
@@ -96,6 +55,11 @@ public class CWeaponStats : MonoBehaviour
                 CrossbowSetValue(weaponData.level);
                 break;
         }
+
+        float price = (weaponData.level - 1) * weaponData.price * 0.3f;
+        weaponData.price += Mathf.FloorToInt(price);
+
+        costController.SetCost(weaponData.price);
     }
 
     /// <summary>
@@ -128,17 +92,30 @@ public class CWeaponStats : MonoBehaviour
         weaponData.weaponType = data.weaponType;
     }
 
+    /// <summary>
+    ///  긴 무기의 스텟을 설정한다.
+    /// </summary>
+    /// <param name="level">등급</param>
     public void LWeaponSetValue(int level)
     {
         weaponData.damage += weaponData.damage * 0.25f * (level - 1);
         weaponData.attackSpeed -= weaponData.attackSpeed * 0.07f * (level - 1);
     }
+
+    /// <summary>
+    /// 짧은 무기의 스텟을 설정한다.
+    /// </summary>
+    /// <param name="level">등급</param>
     public void SWeaponSetValue(int level)
     {
         weaponData.damage += weaponData.damage * 0.25f * (level - 1);
         weaponData.attackSpeed -= 0.1f * (level - 1);
     }
 
+    /// <summary>
+    /// 석궁의 스텟을 설정한다.
+    /// </summary>
+    /// <param name="level">등급</param>
     public void CrossbowSetValue(int level)
     {
         switch (level - 1)
