@@ -8,6 +8,12 @@ public class CharacterSelect : MonoBehaviour
     public GameObject character;
     public GameObject characterSlot;
     public int myIndex;
+
+    [Header("시작시 생성해야할 무기 및 아이템")]
+    public GameObject[] myWeapons;
+    public GameObject myItems;
+
+    public int weaponIndex;
     #endregion
     #region Pirvate Fields
     private LightController lightController;
@@ -37,6 +43,8 @@ public class CharacterSelect : MonoBehaviour
         if (index == myIndex)
         {
             Instantiate(character, characterSlot.transform.position, characterSlot.transform.rotation, null);
+           /* myWeapons[weaponIndex].transform.position = CellManager.Instance.weaponInstancePostion.position;
+            myItems.transform.position = CellManager.Instance.itemInstancePostion.position;*/
             characterCamera.SetPlayer();
             characterSlot.SetActive(false);
         }

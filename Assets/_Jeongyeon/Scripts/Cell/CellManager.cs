@@ -57,8 +57,6 @@ public class CellManager : MonoBehaviour
         CreateGrid();
         SetCell();
         canActiveCell = new List<Pos>();
-        weaponInstancePostion.position = gameGrid[5, 7].transform.position;
-        itemInstancePostion.position = gameGrid[5, 5].transform.position;
     }
 
     public void Init(PlayerInventory inventory)
@@ -82,7 +80,6 @@ public class CellManager : MonoBehaviour
         gameGrid = new GameObject[width, height];
         if (gameGrid == null)
         {
-            Debug.Log("그리드가 없습니다.");
             return;
         }
         gameGrid = new GameObject[width, height];
@@ -97,6 +94,8 @@ public class CellManager : MonoBehaviour
                 checkGrid[x, z] = -1;
             }
         }
+        weaponInstancePostion = gameGrid[5, 7].transform;
+        itemInstancePostion = gameGrid[5, 5].transform;
     }
 
     /// <summary>

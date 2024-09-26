@@ -23,6 +23,8 @@ public class PlayerInventory : MonoBehaviour
 
     [HideInInspector] public ItemData myItemData;
 
+    [Header("플레이어의 기본 스탯")]
+    public CharacterDataSet characterDataSet;
     #endregion
 
     #region Private Fields
@@ -31,10 +33,12 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         myItemData = new ItemData("inventory");
+        GetItemValues(hp: characterDataSet.MaxHp,moveSpeed:characterDataSet.MoveSpeed, meleeDamage: characterDataSet.MeleeDamage, rangeDamage: characterDataSet.RangeDamage, defense: characterDataSet.Defense);
     }
     private void Start()
     {
         CellManager.Instance.Init(this);
+        UIManager.Instance.ChangeValue(myItemData);
     }
     /// <summary>
     /// 아이템이 인벤토리에 들어오면 리스트에 추가하고 아이템의 값을 캐릭터에 적용하는 메서드
