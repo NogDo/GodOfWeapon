@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,11 @@ public class UIManager : MonoBehaviour
     [Header("상점 아이템 관련 UI")]
     public UIItemInfo shopItemInfo;
     public UIWeaponInfo shopWeaponInfo;
+
+    [Header("로비 캐릭터 관련 UI")]
+    public GameObject lCharacterNameUI;
+    public GameObject[] lCharacterSetUI;
+
     #endregion
 
     private void Awake()
@@ -126,4 +132,42 @@ public class UIManager : MonoBehaviour
 
         shopWeaponInfo.gameObject.SetActive(false);
     }
+
+    /// <summary>
+    /// 캐릭터별로 로비 UI를 활성화 시키는 메서드
+    /// </summary>
+    /// <param name="index">해당 캐릭터 UI를 담는 index</param>
+    /// <param name="position">UI를 생성하는 위치</param>
+    public void OnLobbyUI(int index, Transform position)
+    {
+        if (index == 0)
+        {
+            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3));
+            lCharacterNameUI.SetActive(true);
+            lCharacterNameUI.GetComponentInChildren<Text>().text = "기사";
+            lCharacterSetUI[0].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 5));
+            lCharacterSetUI[0].SetActive(true);
+        }
+        else if (index == 1)
+        {
+            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3));
+            lCharacterNameUI.SetActive(true);
+            lCharacterNameUI.GetComponentInChildren<Text>().text = "레인저";
+            lCharacterSetUI[1].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 5));
+            lCharacterSetUI[1].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 로비 UI를 비활성화 시키는 메서드
+    /// </summary>
+    public void OffLobbyUI()
+    {
+        for (int i = 0; i < lCharacterSetUI.Length; i++)
+        {
+            lCharacterSetUI[i].SetActive(false);
+        }
+            lCharacterNameUI.SetActive(false);
+    }
+
 }

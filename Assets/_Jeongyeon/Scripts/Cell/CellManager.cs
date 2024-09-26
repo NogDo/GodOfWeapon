@@ -48,7 +48,6 @@ public class CellManager : MonoBehaviour
         {
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

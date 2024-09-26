@@ -23,12 +23,23 @@ public class CharacterSelect : MonoBehaviour
     {
         lightController.TurnOnLights(myIndex);
         characterCamera.ChangeCamera(myIndex);
+        UIManager.Instance.OffLobbyUI();
+        StartCoroutine(SetUI());
     }
 
-    public void SelectCharacter()
+    private IEnumerator SetUI()
     {
-        Instantiate(character, characterSlot.transform.position, Quaternion.identity, null);
-        characterSlot.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        UIManager.Instance.OnLobbyUI(myIndex, transform);
+    }
+    public void SelectCharacter(int index)
+    {
+        if (index == myIndex)
+        {
+            Instantiate(character, characterSlot.transform.position, characterSlot.transform.rotation, null);
+            characterCamera.SetPlayer();
+            characterSlot.SetActive(false);
+        }
     }
 
 }
