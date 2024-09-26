@@ -81,6 +81,21 @@ public class CWeaponStats : MonoBehaviour
 
         CopyData(DataManager.Instance.GetWeaponData(weaponName));
         weaponData.level = nLevel;
+
+        //switch (weaponData.weaponType)
+        //{
+        //    case Type.LWeapon:
+        //        LWeaponSetValue(weaponData.level);
+        //        break;
+
+        //    case Type.SWeapon:
+
+        //        break;
+
+        //    case Type.Crossbow:
+
+        //        break;
+        //}
     }
 
     /// <summary>
@@ -111,5 +126,37 @@ public class CWeaponStats : MonoBehaviour
         weaponData.weaponName = data.weaponName;
         weaponData.weaponKoreanName = data.weaponKoreanName;
         weaponData.weaponType = data.weaponType;
+
+        
     }
+
+    //public void LWeaponSetValue(int level)
+    //{
+    //    data.damage += data.damage * 0.25f * (level - 1);
+    //    data.attackSpeed -= data.attackSpeed * 0.07f * (level - 1);
+    //}
+    //public void SWeaponSetValue(int level)
+    //{
+    //    data.damage += data.damage * 0.25f * (level - 1);
+    //    data.attackSpeed -= 0.1f * (level - 1);
+    //}
+
+    //public void CrossbowSetValue(int level)
+    //{
+    //    switch (level - 1)
+    //    {
+    //        case 0:
+    //            break;
+    //        case 1:
+    //            data.damage += 3;
+    //            break;
+    //        case 2:
+    //            data.damage += 5;
+    //            break;
+    //        case 3:
+    //            data.damage += 12;
+    //            break;
+    //    }
+    //    data.attackSpeed -= data.attackSpeed * 0.06f * (level - 1);
+    //}
 }
