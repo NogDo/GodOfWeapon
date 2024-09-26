@@ -61,8 +61,8 @@ public class UIWeaponInfo : MonoBehaviour
     /// </summary>
     void SetPanelSize()
     {
-        float backgroundWidth = 300.0f;
-        float backgroundHeight = 300.0f;
+        float backgroundWidth = 340.0f;
+        float backgroundHeight = 340.0f;
 
         if (weapon.Width >= 3)
         {
@@ -108,16 +108,16 @@ public class UIWeaponInfo : MonoBehaviour
 
         // 중간 부분 (아이템 스텟, 툴팁)
         Text damage = Instantiate(textStats, tfStatsParents);
-        damage.text = $"<color=\"gray\">피해량: </color> {weapon.Weapon.damage}";
+        damage.text = $"<color=#888888>피해량: </color> {weapon.Weapon.damage}";
 
         Text mass = Instantiate(textStats, tfStatsParents);
-        mass.text = $"<color=\"gray\">밀치기: </color> {weapon.Weapon.massValue}";
+        mass.text = $"<color=#888888>밀치기: </color> {weapon.Weapon.massValue}";
 
         Text attackRange = Instantiate(textStats, tfStatsParents);
-        attackRange.text = $"<color=\"gray\">사거리: </color> {weapon.Weapon.attackRange * 10}";
+        attackRange.text = $"<color=#888888>사거리: </color> {weapon.Weapon.attackRange * 10}";
 
         Text attackSpeed = Instantiate(textStats, tfStatsParents);
-        attackSpeed.text = $"<color=\"gray\">공격 속도: </color> {weapon.Weapon.attackRange}s";
+        attackSpeed.text = $"<color=#888888>공격 속도: </color> {weapon.Weapon.attackRange}s";
 
         textTooltip.text = weapon.Weapon.tooltip;
     }
