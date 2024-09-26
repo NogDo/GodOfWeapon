@@ -82,20 +82,20 @@ public class CWeaponStats : MonoBehaviour
         CopyData(DataManager.Instance.GetWeaponData(weaponName));
         weaponData.level = nLevel;
 
-        //switch (weaponData.weaponType)
-        //{
-        //    case Type.LWeapon:
-        //        LWeaponSetValue(weaponData.level);
-        //        break;
+        switch (weaponData.weaponType)
+        {
+            case Type.LWeapon:
+                LWeaponSetValue(weaponData.level);
+                break;
 
-        //    case Type.SWeapon:
+            case Type.SWeapon:
+                SWeaponSetValue(weaponData.level);
+                break;
 
-        //        break;
-
-        //    case Type.Crossbow:
-
-        //        break;
-        //}
+            case Type.Crossbow:
+                CrossbowSetValue(weaponData.level);
+                break;
+        }
     }
 
     /// <summary>
@@ -126,37 +126,33 @@ public class CWeaponStats : MonoBehaviour
         weaponData.weaponName = data.weaponName;
         weaponData.weaponKoreanName = data.weaponKoreanName;
         weaponData.weaponType = data.weaponType;
-
-        
     }
 
-    //public void LWeaponSetValue(int level)
-    //{
-    //    data.damage += data.damage * 0.25f * (level - 1);
-    //    data.attackSpeed -= data.attackSpeed * 0.07f * (level - 1);
-    //}
-    //public void SWeaponSetValue(int level)
-    //{
-    //    data.damage += data.damage * 0.25f * (level - 1);
-    //    data.attackSpeed -= 0.1f * (level - 1);
-    //}
+    public void LWeaponSetValue(int level)
+    {
+        weaponData.damage += weaponData.damage * 0.25f * (level - 1);
+        weaponData.attackSpeed -= weaponData.attackSpeed * 0.07f * (level - 1);
+    }
+    public void SWeaponSetValue(int level)
+    {
+        weaponData.damage += weaponData.damage * 0.25f * (level - 1);
+        weaponData.attackSpeed -= 0.1f * (level - 1);
+    }
 
-    //public void CrossbowSetValue(int level)
-    //{
-    //    switch (level - 1)
-    //    {
-    //        case 0:
-    //            break;
-    //        case 1:
-    //            data.damage += 3;
-    //            break;
-    //        case 2:
-    //            data.damage += 5;
-    //            break;
-    //        case 3:
-    //            data.damage += 12;
-    //            break;
-    //    }
-    //    data.attackSpeed -= data.attackSpeed * 0.06f * (level - 1);
-    //}
+    public void CrossbowSetValue(int level)
+    {
+        switch (level - 1)
+        {
+            case 1:
+                weaponData.damage += 3;
+                break;
+            case 2:
+                weaponData.damage += 5;
+                break;
+            case 3:
+                weaponData.damage += 12;
+                break;
+        }
+        weaponData.attackSpeed -= weaponData.attackSpeed * 0.06f * (level - 1);
+    }
 }
