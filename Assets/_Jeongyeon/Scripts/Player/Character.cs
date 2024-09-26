@@ -8,17 +8,18 @@ public class Character : MonoBehaviour
 {
 
     #region player Info
-    public float moveSpeed = 3;
-    public float maxHp = 100;
+    [HideInInspector]
+    public float moveSpeed = 5;
+    [HideInInspector]
+    public float maxHp;
+    [HideInInspector]
     public float currentHp;
-    private int dashCount = 5;
+    private int dashCount = 1;
     #endregion
 
     #region Public Fields
     public Transform player;
     public Transform playerModel;
-    public Transform cameraTransform;
-    public Transform cameraParentTransform;
 
     public GameObject[] afterImage;
     public Material[] playerMaterial;
@@ -27,49 +28,74 @@ public class Character : MonoBehaviour
     #region Private Fields
     private int currentDashCount;
     private float dashSpeed = 15f;
-    private bool isdash = false; 
+    private bool isdash = false;
+    private bool canMove = true;
+    private bool isfirst = true;
     private Vector3 run; // 이동시 사용할 벡터
+
+    private Transform cameraTransform;
+    private Transform cameraParentTransform;
+
+    private Rigidbody rb;
     private Animator anim;
     private SMRCreator smrCreator; // 잔상을 생성하는 클래스
-    private Rigidbody rb; 
     private IEnumerator hitCoroutine;
     #endregion
 
     #region Protected Fields
     protected PlayerInventory inventory;
     protected ItemData myData;
-    protected bool isGameStart = false;
     #endregion
     public virtual void Awake()
     {
         player = transform;
         playerModel = transform.GetChild(0);
-        cameraTransform = UnityEngine.Camera.main.transform;
+        cameraTransform = Camera.main.transform;
         cameraParentTransform = cameraTransform.parent;
         anim = playerModel.GetComponent<Animator>();
         currentDashCount = dashCount;
         smrCreator = GetComponent<SMRCreator>();
         CreatAfterImage();
-        currentHp = maxHp;
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<PlayerInventory>();
     }
-
+    private void Start()
+    {
+        maxHp = inventory.myItemData.hp;
+        moveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
+        currentHp = maxHp;
+        UIManager.Instance.CurrentHpChange(this);
+    }
+    private void OnEnable()
+    {
+        moveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
+        if (isfirst == false)
+        {
+            StartCoroutine(StopMove());
+        }
+    }
+    private void OnDisable()
+    {
+        isfirst = false;
+    }
     public virtual void Update()
     {
-        if (currentDashCount > 0)
+        if (canMove == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isdash == false)
+            if (currentDashCount > 0)
             {
-                StartCoroutine(Dash());
+                if (Input.GetKeyDown(KeyCode.Space) && isdash == false)
+                {
+                    StartCoroutine(Dash());
+                }
             }
+            if (dashSpeed > 15)
+            {
+                dashSpeed = 15;
+            }
+            MovePlayer();
+            rb.MovePosition(rb.position + run * Time.deltaTime);
         }
-        if (dashSpeed > 15)
-        {
-            dashSpeed = 15;
-        }
-        MovePlayer();
-        rb.MovePosition(rb.position + run * Time.deltaTime);
     }
     /// <summary>
     /// 플레이어가 공격 받았을때 hp를 깎는 메서드
@@ -77,8 +103,14 @@ public class Character : MonoBehaviour
     /// <param name="damage">받을 데미지</param>
     public virtual void Hit(float damage)
     {
-        currentHp -= damage;
-        CDamageTextPoolManager.Instance.SpawnPlayerText(transform, damage);
+        float finalDamage = damage - myData.defense / 20;
+        if (damage - inventory.myItemData.defense / 20 == 0)
+        {
+            finalDamage = 1;
+        }
+        currentHp -= finalDamage;
+
+        CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
     }
     /// <summary>
     /// 플레이어의 회전을 조절하는 메서드
@@ -177,14 +209,14 @@ public class Character : MonoBehaviour
         smrCreator.Create(false);
         if (currentDashCount == 0)
         {
-        StartCoroutine(DashCoolTime());
+            StartCoroutine(DashCoolTime());
         }
         else
         {
             yield return new WaitForSeconds(0.1f);
             isdash = false;
         }
-        
+
         yield return null;
     }
     /// <summary>
@@ -206,7 +238,7 @@ public class Character : MonoBehaviour
             StopCoroutine(hitCoroutine);
             StartCoroutine(hitCoroutine);
             Hit(hit.GetAttackDamage());
-            
+
         }
         if (other.gameObject.CompareTag("Fence"))
         {
@@ -258,7 +290,18 @@ public class Character : MonoBehaviour
         yield return null;
     }
 
-   
+    /// <summary>
+    /// 플레이어가 스테이지 시작시 움직임을 제어하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator StopMove()
+    {
+        canMove = false;
+        rb.constraints = RigidbodyConstraints.None;
+        yield return new WaitForSeconds(1.0f);
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+        canMove = true;
+    }
 }
 
 
