@@ -142,18 +142,18 @@ public class UIManager : MonoBehaviour
     {
         if (index == 0)
         {
-            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3));
+            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3.5f));
             lCharacterNameUI.SetActive(true);
             lCharacterNameUI.GetComponentInChildren<Text>().text = "기사";
-            lCharacterSetUI[0].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 5));
+            lCharacterSetUI[0].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 7));
             lCharacterSetUI[0].SetActive(true);
         }
         else if (index == 1)
         {
-            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3));
+            lCharacterNameUI.transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.up * 3.5f));
             lCharacterNameUI.SetActive(true);
             lCharacterNameUI.GetComponentInChildren<Text>().text = "레인저";
-            lCharacterSetUI[1].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 5));
+            lCharacterSetUI[1].transform.position = Camera.main.WorldToScreenPoint(position.position + (Vector3.down * 7));
             lCharacterSetUI[1].SetActive(true);
         }
     }

@@ -45,6 +45,9 @@ public class CellColor : MonoBehaviour
             case 4:
                 myMeshRenderer.material = materials[3];
                 break;
+            case 5:
+                myMeshRenderer.material = materials[5];
+                break;
 
         }
     }
@@ -66,7 +69,7 @@ public class CellColor : MonoBehaviour
                 myMeshRenderer.material = materials_Single[3];
                 break;
         }
-    
+
     }
 
     public void ResetColor()
