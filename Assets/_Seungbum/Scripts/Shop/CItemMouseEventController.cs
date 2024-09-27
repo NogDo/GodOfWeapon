@@ -274,6 +274,19 @@ public class CItemMouseEventController : MonoBehaviour
             {
                 CShopManager.Instance.LockItem(nIndex, transform);
             }
+
+            else if (!isGrab && isInInventory)
+            {
+                if (itemStats != null)
+                {
+                    //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
+                }
+
+                if (weaponStats != null)
+                {
+                    //UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
+                }
+            }
         }
     }
 
