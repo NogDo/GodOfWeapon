@@ -164,10 +164,10 @@ public class UIWeaponExtra : MonoBehaviour
     /// </summary>
     public void OnSellButtonClick()
     {
-        Debug.Log("판매 버튼 클릭");
-
         CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level, weapon.Weapon.weaponType);
         weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
         Destroy(weapon.gameObject);
+        UIManager.Instance.TurnOffUI();
     }
+    
 }

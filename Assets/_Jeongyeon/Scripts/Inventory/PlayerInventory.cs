@@ -65,17 +65,17 @@ public class PlayerInventory : MonoBehaviour
     /// 인벤토리에 들어온 아이템을 리스트에 넣고 무기 종류에 따라 생성할 위치를 정하는 메서드
     /// </summary>
     /// <param name="uid">무기 uid</param>
-    public void CreateWeapon(int uid, int level)
+    public void CreateWeapon(CWeaponStats weaponStats)
     {
-        playerWeapon.Add(DataManager.Instance.GetWeaponData(uid));
+        playerWeapon.Add(weaponStats.Weapon);
         if (playerWeapon[playerWeapon.Count - 1].weaponType == Type.LWeapon)
         {
             foreach (GameObject weapon in lWeapons)
             {
                 if (playerWeapon[playerWeapon.Count - 1].weaponName == weapon.name)
                 {
-                    playerWeapon[playerWeapon.Count - 1].level = level;
-                    CheckLSlot(weapon, level);
+                    playerWeapon[playerWeapon.Count - 1].level = weaponStats.Weapon.level;
+                    CheckLSlot(weapon, weaponStats.Level);
                 }
             }
         }
@@ -85,8 +85,8 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (playerWeapon[playerWeapon.Count - 1].weaponName == weapon.name)
                 {
-                    playerWeapon[playerWeapon.Count - 1].level = level;
-                    CheckSSlot(weapon, level);
+                    playerWeapon[playerWeapon.Count - 1].level = weaponStats.Weapon.level;
+                    CheckSSlot(weapon, weaponStats.Weapon.level);
                 }
             }
         }
@@ -96,8 +96,8 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (playerWeapon[playerWeapon.Count - 1].weaponName == weapon.name)
                 {
-                    playerWeapon[playerWeapon.Count - 1].level = level;
-                    CheckCSlot(weapon, level);
+                    playerWeapon[playerWeapon.Count - 1].level = weaponStats.Weapon.level;
+                    CheckCSlot(weapon, weaponStats.Weapon.level);
                 }
             }
         }
@@ -133,36 +133,74 @@ public class PlayerInventory : MonoBehaviour
             case Type.LWeapon:
                 foreach (GameObject targetWeapon in lWeoponSlot)
                 {
-                    Debug.Log(targetWeapon.name);
-                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    if (targetWeapon.transform.childCount != 0)
                     {
-                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
-                        break;
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
+                            ResetIndex(exitIndex, lWeoponSlot);
+                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, crossbowSlot);
+                            Destroy(targetWeapon.transform.GetChild(0).gameObject);
+                            break;
+                        }
                     }
                 }
                 break;
             case Type.SWeapon:
                 foreach (GameObject targetWeapon in sWeoponSlot)
                 {
-                    Debug.Log(targetWeapon.name);
-                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    if (targetWeapon.transform.childCount != 0)
                     {
-                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
-                        break;
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
+                            ResetIndex(exitIndex, lWeoponSlot);
+                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, crossbowSlot);
+                            Destroy(targetWeapon.transform.GetChild(0).gameObject);
+                            break;
+                        }
                     }
                 }
                 break;
             case Type.Crossbow:
                 foreach (GameObject targetWeapon in crossbowSlot)
                 {
-                    Debug.Log(targetWeapon.name);
-                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    if (targetWeapon.transform.childCount != 0)
                     {
-                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
-                        break;
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
+                            ResetIndex(exitIndex, lWeoponSlot);
+                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, crossbowSlot);
+                            Destroy(targetWeapon.transform.GetChild(0).gameObject);
+                            break;
+                        }
                     }
                 }
                 break;
+        }
+    }
+    /// <summary>
+    /// 삭제된 무기의 몬스터 타겟 인덱스를 재정렬하는 메서드
+    /// </summary>
+    /// <param name="index">삭제된 무기 인덱스</param>
+    /// <param name="slot">지금 보유중인 무기를 담는 슬롯</param>
+    private void ResetIndex(int index, GameObject[] slot)
+    {
+        for(int i = 0; i< slot.Length; i++)
+        {
+            if (slot[i].transform.childCount != 0)
+            {
+                if (slot[i].transform.GetChild(0).GetComponent<WeaponStatInfo>().index > index)
+                {
+                    slot[i].transform.GetChild(0).GetComponent<WeaponStatInfo>().index--;
+
+                }
+            }
+            
         }
     }
     /// <summary>
@@ -176,9 +214,10 @@ public class PlayerInventory : MonoBehaviour
         {
             if (parent.transform.childCount == 0)
             {
+                
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                obj.GetComponent<WeaponStatInfo>().LWeaponSetValue(level);
+                /*obj.GetComponent<WeaponStatInfo>().LWeaponSetValue(level);*/
                 break;
             }
         }
@@ -196,7 +235,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);
+                /*obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);*/
                 break;
             }
         }
@@ -215,7 +254,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);
+                /*obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);*/
                 break;
             }
         }
