@@ -11,8 +11,10 @@ public class WeaponStatInfo : MonoBehaviour
     #endregion
     #region Private Fields
     #endregion
-
-
+    private void Awake()
+    {
+        data = new WeaponData();
+    }
     public void Init(WeaponData data, int index)
     {
         this.data = data;

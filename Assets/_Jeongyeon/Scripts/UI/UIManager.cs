@@ -200,4 +200,9 @@ public class UIManager : MonoBehaviour
             lCharacterNameUI.SetActive(false);
     }
 
+    public void TurnOffUI()
+    {
+        isExtraUIOpen = false;
+        shopWeaponExtraInfo.gameObject.SetActive(false);
+    }
 }

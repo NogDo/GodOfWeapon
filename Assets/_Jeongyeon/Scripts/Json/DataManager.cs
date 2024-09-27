@@ -121,7 +121,7 @@ public class DataManager : MonoBehaviour
 
         else
         {
-            return weaponDatas[uid - 1];
+            return new WeaponData(weaponDatas[uid - 1]);
         }
     }
 

@@ -189,7 +189,7 @@ public class CItemMouseEventController : MonoBehaviour
 
                 if (!isInInventory)
                 {
-                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Weapon.level);
+                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats);
                     CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }
