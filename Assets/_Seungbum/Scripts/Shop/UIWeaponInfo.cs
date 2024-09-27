@@ -69,12 +69,12 @@ public class UIWeaponInfo : MonoBehaviour
 
         if (weapon.Width >= 3)
         {
-            backgroundWidth = 340.0f + (weapon.Width - 2) * 40.0f;
+            backgroundWidth = 500.0f + (weapon.Width - 2) * 40.0f;
         }
 
         if (weapon.Height >= 3)
         {
-            backgroundHeight = 340.0f + (weapon.Height - 2) * 40.0f;
+            backgroundHeight = 500.0f + (weapon.Height - 2) * 40.0f;
         }
 
         rtBackground.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);

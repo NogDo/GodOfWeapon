@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         myItemData = new ItemData("inventory");
-        GetItemValues(hp: characterDataSet.MaxHp,moveSpeed:characterDataSet.MoveSpeed, meleeDamage: characterDataSet.MeleeDamage, rangeDamage: characterDataSet.RangeDamage, defense: characterDataSet.Defense);
+        GetItemValues(hp: characterDataSet.MaxHp, moveSpeed: characterDataSet.MoveSpeed, meleeDamage: characterDataSet.MeleeDamage, rangeDamage: characterDataSet.RangeDamage, defense: characterDataSet.Defense);
     }
     private void Start()
     {
@@ -89,7 +90,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
-        else if(playerWeapon[playerWeapon.Count - 1].weaponType == Type.Crossbow)
+        else if (playerWeapon[playerWeapon.Count - 1].weaponType == Type.Crossbow)
         {
             foreach (GameObject weapon in crossbows)
             {
@@ -100,7 +101,66 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
-        Debug.Log(playerWeapon[0].tooltip);
+    }
+    /// <summary>
+    /// 플레이어에 무기를 데이터를 삭제하는 메서드
+    /// </summary>
+    /// <param name="uid">해당 무기 UID</param>
+    /// <param name="level">해당 무기 레벨</param>
+    /// <param name="weaponType">해당 무기 타입</param>
+    public void DestroyWeaponData(int uid, int level, Type weaponType)
+    {
+        foreach (WeaponData target in playerWeapon)
+        {
+            if (target.uid == uid && target.level == level)
+            {
+                playerWeapon.Remove(target);
+                DestroyWeapon(target, target.weaponType);
+                break;
+            }
+        }
+
+    }
+    /// <summary>
+    /// 플레이어가 소지한 무기 오브젝트를 파괴하는 메서드
+    /// </summary>
+    /// <param name="target">파괴할 무기</param>
+    /// <param name="weapon">파괴할 무기 타입</param>
+    public void DestroyWeapon(WeaponData target, Type weapon)
+    {
+        switch (weapon)
+        {
+            case Type.LWeapon:
+                foreach (GameObject targetWeapon in lWeoponSlot)
+                {
+                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    {
+                        Destroy(targetWeapon);
+                        break;
+                    }
+                }
+                break;
+            case Type.SWeapon:
+                foreach (GameObject targetWeapon in sWeoponSlot)
+                {
+                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    {
+                        Destroy(targetWeapon);
+                        break;
+                    }
+                }
+                break;
+            case Type.Crossbow:
+                foreach (GameObject targetWeapon in crossbowSlot)
+                {
+                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    {
+                        Destroy(targetWeapon);
+                        break;
+                    }
+                }
+                break;
+        }
     }
     /// <summary>
     /// LWeapon Slot에 비어있는지 확인하고 생성하는 메서드
@@ -145,7 +205,7 @@ public class PlayerInventory : MonoBehaviour
     /// /// <param name="level">무기 레벨</param>
     private void CheckCSlot(GameObject weapon, int level)
     {
-        
+
         foreach (GameObject parent in crossbowSlot)
         {
             if (parent.transform.childCount == 0)
@@ -185,8 +245,8 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// 아이템 혹은 무기로 인해 변동할 값을 받는 메서드
     /// </summary>
-    public void GetItemValues(float hp = 0, float damage = 0, float meleeDamage = 0, float rangeDamage = 0, float criticalRate = 0, float attackSpeed =0,
-        float moveSpeed = 0, float attackRange = 0, float massValue = 0, float bloodDrain =0, float defense =0, float luck = 0, float moneyRate = 0,
+    public void GetItemValues(float hp = 0, float damage = 0, float meleeDamage = 0, float rangeDamage = 0, float criticalRate = 0, float attackSpeed = 0,
+        float moveSpeed = 0, float attackRange = 0, float massValue = 0, float bloodDrain = 0, float defense = 0, float luck = 0, float moneyRate = 0,
         float expRate = 0, float enemyAmount = 0)
     {
         myItemData.hp += hp;
@@ -200,7 +260,7 @@ public class PlayerInventory : MonoBehaviour
         myItemData.massValue += massValue;
         myItemData.bloodDrain += bloodDrain;
         myItemData.defense += defense;
-        myItemData.luck +=luck;
+        myItemData.luck += luck;
         myItemData.moneyRate += moneyRate;
         myItemData.expRate += expRate;
         myItemData.enemyAmount += enemyAmount;
