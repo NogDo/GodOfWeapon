@@ -136,6 +136,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseUp()
     {
+        // 인벤토리에 들어갈 수 있는 상태
         if (isCanDrop)
         {
             Vector3 pos = tfCell.position;
@@ -170,7 +171,7 @@ public class CItemMouseEventController : MonoBehaviour
             transform.position = pos;
             v3StartPosition = transform.position;
 
-
+            // 아이템일 경우
             if (itemStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
@@ -181,7 +182,7 @@ public class CItemMouseEventController : MonoBehaviour
                     CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }
-
+            // 무기일 경우
             else if (weaponStats != null)
             {
                 CellManager.Instance.SetItem(cellPos, weaponStats.Level);
@@ -197,7 +198,7 @@ public class CItemMouseEventController : MonoBehaviour
 
             isInInventory = true;
         }
-
+        // 인벤토리에 들어갈 수 없는 상태
         else
         {
             if (isInInventory)
@@ -291,5 +292,16 @@ public class CItemMouseEventController : MonoBehaviour
     public void SetIndex(int index)
     {
         nIndex = index;
+    }
+
+    /// <summary>
+    /// 아이템 판매 버튼을 눌렀을 때 호출될 메서드
+    /// </summary>
+    public void SellItem()
+    {
+        if (prevCellPos.Count > 0)
+        {
+            CellManager.Instance.ResetItem(prevCellPos);
+        }
     }
 }
