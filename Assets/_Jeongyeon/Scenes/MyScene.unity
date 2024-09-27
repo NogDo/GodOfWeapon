@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 764943151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5a876968aadd049817d8c196b6c6bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 631a5a8419e81e745abd7d533673fa1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rtBackground: {fileID: 686698630}
@@ -3998,6 +3998,10 @@ PrefabInstance:
     - target: {fileID: 8590533528065669242, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8945091045257068953, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
