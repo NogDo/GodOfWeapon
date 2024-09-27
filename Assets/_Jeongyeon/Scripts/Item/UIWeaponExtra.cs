@@ -73,7 +73,7 @@ public class UIWeaponExtra : MonoBehaviour
 
         if (weapon.Height >= 3)
         {
-            backgroundHeight = 500.0f + (weapon.Height - 2) * 40.0f;
+            backgroundHeight = 500.0f + (weapon.Height - 2) * 20.0f;
         }
 
         rtBackground.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);
