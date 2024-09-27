@@ -5,7 +5,7 @@ using UnityEngine;
 public class CMouseFollower : MonoBehaviour
 {
     #region private º¯¼ö
-    UnityEngine.Camera cameraShop;
+    Camera cameraShop;
     #endregion
 
     void Awake()

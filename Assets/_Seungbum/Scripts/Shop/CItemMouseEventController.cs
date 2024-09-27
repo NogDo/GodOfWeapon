@@ -42,7 +42,11 @@ public class CItemMouseEventController : MonoBehaviour
     {
         itemStats = GetComponent<CItemStats>();
         weaponStats = GetComponent<CWeaponStats>();
-        tfmouse = FindObjectOfType<CMouseFollower>().transform;
+    }
+
+    void Start()
+    {
+        tfmouse = transform.root.GetComponentInChildren<CMouseFollower>().transform;
 
         transform.position += Vector3.left * GetComponent<BoxCollider>().size.x / 10.0f;
 
@@ -174,6 +178,7 @@ public class CItemMouseEventController : MonoBehaviour
                 if (!isInInventory)
                 {
                     CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
+                    CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }
 
@@ -184,6 +189,7 @@ public class CItemMouseEventController : MonoBehaviour
                 if (!isInInventory)
                 {
                     CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats.Weapon.uid, weaponStats.Weapon.level);
+                    CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }
 
@@ -232,14 +238,17 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (itemStats != null)
+        if (!isGrab && tfmouse.childCount == 0)
         {
-            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
-        }
+            if (itemStats != null)
+            {
+                UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
+            }
 
-        if (weaponStats != null)
-        {
-            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
+            if (weaponStats != null)
+            {
+                UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
+            }
         }
     }
 
@@ -260,7 +269,7 @@ public class CItemMouseEventController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (!isGrab)
+            if (!isGrab && !isInInventory)
             {
                 CShopManager.Instance.LockItem(nIndex, transform);
             }

@@ -22,6 +22,15 @@ public class UIShopCostController : MonoBehaviour
     }
 
     /// <summary>
+    /// 가격 표시 UI를 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void ActiveShopCostUI(bool active)
+    {
+        gameObject.SetActive(active);
+    }
+
+    /// <summary>
     /// 가격 Text를 설정한다.
     /// </summary>
     /// <param name="cost">가격</param>

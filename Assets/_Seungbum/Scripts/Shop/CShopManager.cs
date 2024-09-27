@@ -404,6 +404,7 @@ public class CShopManager : MonoBehaviour
         RemoveShopItem();
         RandomItemSpawn();
         SetReRollCost();
+        ActiveShopCostUI();
     }
 
     /// <summary>
@@ -437,6 +438,28 @@ public class CShopManager : MonoBehaviour
         else
         {
             transform.SetParent(tfNonBuyItems);
+        }
+    }
+
+    /// <summary>
+    /// 아이템을 구매했을 때 상점 가격 UI를 비활성화 한다.
+    /// </summary>
+    public void InActiveShopCostUI(int index)
+    {
+        shopItems[index].isLock = false;
+
+        costController[index].ActiveShopCostUI(false);
+        costController[index].ActiveLockTag(false);
+    }
+
+    /// <summary>
+    /// 상점을 갱신할 때 모든 상점 가격 UI를 활성화 한다.
+    /// </summary>
+    public void ActiveShopCostUI()
+    {
+        for (int i = 0; i < costController.Length; i++)
+        {
+            costController[i].ActiveShopCostUI(true);
         }
     }
 }
