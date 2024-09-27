@@ -63,12 +63,12 @@ public class UIWeaponExtra : MonoBehaviour
     /// </summary>
     void SetPanelSize()
     {
-        float backgroundWidth = 500.0f;
+        float backgroundWidth = 340.0f;
         float backgroundHeight = 500.0f;
 
         if (weapon.Width >= 3)
         {
-            backgroundWidth = 500.0f + (weapon.Width - 2) * 40.0f;
+            backgroundWidth = 340.0f + (weapon.Width - 2) * 40.0f;
         }
 
         if (weapon.Height >= 3)
@@ -164,8 +164,10 @@ public class UIWeaponExtra : MonoBehaviour
     /// </summary>
     public void OnSellButtonClick()
     {
+        Debug.Log("판매 버튼 클릭");
+
         CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level, weapon.Weapon.weaponType);
-        //weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
+        weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
         Destroy(weapon.gameObject);
     }
 }

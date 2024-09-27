@@ -186,6 +186,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1750547145}
     - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
+      propertyPath: shopWeaponExtraInfo
+      value: 
+      objectReference: {fileID: 2005932622}
+    - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: uiName.Array.data[0]
       value: 
       objectReference: {fileID: 2129669166}
@@ -980,6 +984,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2005932622 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 764943153, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631a5a8419e81e745abd7d533673fa1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2107825996

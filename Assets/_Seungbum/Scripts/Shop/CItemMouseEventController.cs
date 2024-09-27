@@ -248,9 +248,9 @@ public class CItemMouseEventController : MonoBehaviour
                     //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
                 }
 
-                if (weaponStats != null)
+                if (weaponStats != null && !UIManager.Instance.ExtraUIOpen)
                 {
-                    //UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
+                    UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
                 }
             }
 

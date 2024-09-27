@@ -11,6 +11,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
     #endregion
 
+    #region private 변수
+    bool isExtraUIOpen = false;
+    #endregion
+
     #region public 변수
     [Header("플레이어 스텟 관련 UI")]
     public Text[] uiName;
@@ -24,8 +28,18 @@ public class UIManager : MonoBehaviour
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
     public GameObject[] lCharacterSetUI;
-
     #endregion
+
+    /// <summary>
+    /// 추가 UI창 열려있는지 확인
+    /// </summary>
+    public bool ExtraUIOpen
+    {
+        get
+        {
+            return isExtraUIOpen;
+        }
+    }
 
     private void Awake()
     {
@@ -147,6 +161,7 @@ public class UIManager : MonoBehaviour
         }
 
         shopWeaponExtraInfo.gameObject.SetActive(active);
+        isExtraUIOpen = active;
     }
     /// <summary>
     /// 캐릭터별로 로비 UI를 활성화 시키는 메서드

@@ -133,9 +133,10 @@ public class PlayerInventory : MonoBehaviour
             case Type.LWeapon:
                 foreach (GameObject targetWeapon in lWeoponSlot)
                 {
-                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    Debug.Log(targetWeapon.name);
+                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                     {
-                        Destroy(targetWeapon);
+                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
                         break;
                     }
                 }
@@ -143,9 +144,10 @@ public class PlayerInventory : MonoBehaviour
             case Type.SWeapon:
                 foreach (GameObject targetWeapon in sWeoponSlot)
                 {
-                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    Debug.Log(targetWeapon.name);
+                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                     {
-                        Destroy(targetWeapon);
+                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
                         break;
                     }
                 }
@@ -153,9 +155,10 @@ public class PlayerInventory : MonoBehaviour
             case Type.Crossbow:
                 foreach (GameObject targetWeapon in crossbowSlot)
                 {
-                    if (targetWeapon.transform.GetChild(0).name == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                    Debug.Log(targetWeapon.name);
+                    if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                     {
-                        Destroy(targetWeapon);
+                        Destroy(targetWeapon.transform.GetChild(0).gameObject);
                         break;
                     }
                 }
