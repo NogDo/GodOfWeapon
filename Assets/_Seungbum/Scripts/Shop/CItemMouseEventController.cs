@@ -241,14 +241,30 @@ public class CItemMouseEventController : MonoBehaviour
     {
         if (!isGrab && tfmouse.childCount == 0)
         {
-            if (itemStats != null)
+            if (isInInventory)
             {
-                UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
+                if (itemStats != null)
+                {
+                    //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
+                }
+
+                if (weaponStats != null)
+                {
+                    //UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
+                }
             }
 
-            if (weaponStats != null)
+            else
             {
-                UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
+                if (itemStats != null)
+                {
+                    UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
+                }
+
+                if (weaponStats != null)
+                {
+                    UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
+                }
             }
         }
     }
@@ -273,19 +289,6 @@ public class CItemMouseEventController : MonoBehaviour
             if (!isGrab && !isInInventory)
             {
                 CShopManager.Instance.LockItem(nIndex, transform);
-            }
-
-            else if (!isGrab && isInInventory)
-            {
-                if (itemStats != null)
-                {
-                    //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
-                }
-
-                if (weaponStats != null)
-                {
-                    //UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
-                }
             }
         }
     }
