@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [Header("상점 아이템 관련 UI")]
     public UIItemInfo shopItemInfo;
     public UIWeaponInfo shopWeaponInfo;
+    public UIWeaponExtra shopWeaponExtraInfo;
 
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
@@ -133,6 +134,20 @@ public class UIManager : MonoBehaviour
         shopWeaponInfo.gameObject.SetActive(active);
     }
 
+    /// <summary>
+    /// 상점에 판매/ 강화 등을 표시하는 UI를 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="weaponStats">무기 정보</param>
+    /// <param name="active">활성화 여부</param>
+    public void ActiveShopWeaponExtraInfoPanel(CWeaponStats weaponStats, bool active)
+    {
+        if (active)
+        {
+            shopWeaponExtraInfo.SetItemInfoPanel(weaponStats);
+        }
+
+        shopWeaponExtraInfo.gameObject.SetActive(active);
+    }
     /// <summary>
     /// 캐릭터별로 로비 UI를 활성화 시키는 메서드
     /// </summary>
