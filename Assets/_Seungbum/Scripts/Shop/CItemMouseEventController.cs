@@ -20,6 +20,8 @@ public class CItemMouseEventController : MonoBehaviour
     #region private 변수
     [SerializeField]
     Transform[] gridPoints;
+    [SerializeField]
+    CItemPreviewContoller itemPreview;
 
     CItemStats itemStats;
     CWeaponStats weaponStats;
@@ -95,6 +97,7 @@ public class CItemMouseEventController : MonoBehaviour
     {
         // 인벤토리 cell에 들어갈 수 있는지 판단
         int activeCellCount = 0;
+        tfCell = null;
         cellPos.Clear();
 
         for (int i = 0; i < gridPoints.Length; i++)
@@ -123,6 +126,7 @@ public class CItemMouseEventController : MonoBehaviour
             }
         }
 
+        // 그리드의 개수와 Cell과 충돌한 Ray의 개수가 같다면 놓을 수 있다고 판단.
         if (activeCellCount == gridPoints.Length)
         {
             isCanDrop = true;
@@ -131,6 +135,43 @@ public class CItemMouseEventController : MonoBehaviour
         else
         {
             isCanDrop = false;
+        }
+
+        // 첫번째 그리드의 Ray가 Cell과 충돌했을 경우, 놓을 곳의 아이템을 미리 보여준다.
+        if (tfCell != null)
+        {
+            Vector3 pos = tfCell.position;
+
+            switch (nRotateCount)
+            {
+                case 0:
+                    pos.x += 0.0f;
+                    pos.z += 0.0f;
+                    break;
+
+                case 1:
+                    pos.x += 0.0f;
+                    pos.z += 0.15f;
+                    break;
+
+                case 2:
+                    pos.x += 0.15f;
+                    pos.z += 0.15f;
+                    break;
+
+                case 3:
+                    pos.x += 0.15f;
+                    pos.z += 0.0f;
+                    break;
+            }
+
+            itemPreview.SetActive(true);
+            itemPreview.SetPreview(isCanDrop, pos);
+        }
+
+        else
+        {
+            itemPreview.SetActive(false);
         }
     }
 

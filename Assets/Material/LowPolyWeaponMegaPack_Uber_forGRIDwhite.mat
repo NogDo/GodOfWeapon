@@ -11,9 +11,10 @@ Material:
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _EMISSION
   m_InvalidKeywords:
   - _USEDISSOLVE
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -147,9 +148,9 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.11764706}
     - _DissolveColor: {r: 1.3490196, g: 5.992157, b: 1.1921569, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
     - _MainColor: {r: 0.75, g: 0.7323113, b: 0.7323113, a: 0}
     - _OffsetUV: {r: 0, g: 0, b: 0, a: 0}
