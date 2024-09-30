@@ -25,12 +25,18 @@ public class UIWeaponExtra : MonoBehaviour
     public Image imageItem;
 
     public Camera shopCamera;
+
+    public GameObject combineButtonImage;
     #endregion
 
     #region private º¯¼ö
     CWeaponStats weapon;
     #endregion
 
+    private void OnEnable()
+    {
+        CanCombineWeapon();
+    }
     void OnDisable()
     {
         foreach (Transform child in tfStatsParents)
@@ -171,11 +177,32 @@ public class UIWeaponExtra : MonoBehaviour
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
     }
 
-    public void OnCombineButtonClick()
+    public void OnCombineReadyButtonClick()
     {
         UIManager.Instance.canCombine = true;
         UIManager.Instance.baseWeapon = weapon;
+        UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
+    }
 
+    public void CanCombineWeapon()
+    {
+        int count = 0;
+        for (int i = 0; i < CellManager.Instance.PlayerInventory.playerWeapon.Count; i++)
+        {
+            if (weapon.Weapon.uid == CellManager.Instance.PlayerInventory.playerWeapon[i].uid && weapon.Weapon.level == CellManager.Instance.PlayerInventory.playerWeapon[i].level)
+            {
+                count++;
+            }
+        }
+
+        if (count >= 3)
+        {
+            combineButtonImage.SetActive(false);
+        }
+        else 
+        {
+            combineButtonImage.SetActive(true);
+        }
     }
 
     /// <summary>
