@@ -26,7 +26,10 @@ public class UIWeaponExtra : MonoBehaviour
 
     public Camera shopCamera;
 
+    // ui창에서 조합버튼을 눌렀을때 나오는 패널
     public GameObject combineButtonImage;
+    //조합할 아이템의 가격을 표시하는 텍스트
+    public Text combineWeaponValue;
     #endregion
 
     #region private 변수
@@ -175,42 +178,55 @@ public class UIWeaponExtra : MonoBehaviour
         weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
         Destroy(weapon.gameObject);
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
+        UIManager.Instance.SetActiveExtraUI(false);
     }
-
+    /// <summary>
+    /// UI창에서 조합버튼이 눌렸을 경우 호출되는 메서드
+    /// </summary>
     public void OnCombineReadyButtonClick()
     {
         UIManager.Instance.canCombine = true;
         UIManager.Instance.baseWeapon = weapon;
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
-    }
+        weapon.gameObject.GetComponent<CItemMouseEventController>().ClickToCombine(false);
 
+        int combinePrice = DataManager.Instance.GetWeaponData(weapon.Weapon.uid).price;
+        float price = DataManager.Instance.GetWeaponData(weapon.Weapon.uid).price * 0.3f * weapon.Weapon.level;
+        combinePrice += Mathf.FloorToInt(price);
+        combineWeaponValue.text = $"{combinePrice}";
+    }
+    /// <summary>
+    /// 최종 조합버튼을 눌렀을때 호출되는 메서드
+    /// </summary>
+    public void OnCombineButtonClick()
+    {
+
+    }
     public void CanCombineWeapon()
     {
-        int count = 0;
-        for (int i = 0; i < CellManager.Instance.PlayerInventory.playerWeapon.Count; i++)
+        if (weapon.Weapon.level < 4)
         {
-            if (weapon.Weapon.uid == CellManager.Instance.PlayerInventory.playerWeapon[i].uid && weapon.Weapon.level == CellManager.Instance.PlayerInventory.playerWeapon[i].level)
+            int count = 0;
+            for (int i = 0; i < CellManager.Instance.PlayerInventory.playerWeapon.Count; i++)
             {
-                count++;
+                if (weapon.Weapon.uid == CellManager.Instance.PlayerInventory.playerWeapon[i].uid && weapon.Weapon.level == CellManager.Instance.PlayerInventory.playerWeapon[i].level)
+                {
+                    count++;
+                }
+            }
+
+            if (count >= 3)
+            {
+                combineButtonImage.SetActive(false);
+            }
+            else
+            {
+                combineButtonImage.SetActive(true);
             }
         }
-
-        if (count >= 3)
-        {
-            combineButtonImage.SetActive(false);
-        }
-        else 
+        else
         {
             combineButtonImage.SetActive(true);
         }
-    }
-
-    /// <summary>
-    /// 취소 버튼 클릭
-    /// </summary>
-    public void OnCancelButtonClick()
-    {
-        UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
-        UIManager.Instance.SetActiveExtraUI(false);
     }
 }
