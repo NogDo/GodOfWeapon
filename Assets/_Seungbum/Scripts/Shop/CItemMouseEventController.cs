@@ -36,7 +36,6 @@ public class CItemMouseEventController : MonoBehaviour
     bool isCanDrop = false;
     bool isInInventory = false;
     bool isGrab = false;
-    bool isExtraUIOn = false;
     int nRotateCount;
     int nIndex;
     #endregion
@@ -60,6 +59,100 @@ public class CItemMouseEventController : MonoBehaviour
     }
 
     void OnMouseDown()
+    {
+        if (UIManager.Instance.canCombine)
+        {
+
+        }
+
+        else
+        {
+            Grab();
+        }
+    }
+
+    void OnMouseDrag()
+    {
+        if (UIManager.Instance.canCombine)
+        {
+
+        }
+
+        else
+        {
+            CheckGrid();
+            Preview();
+        }
+    }
+
+    void OnMouseUp()
+    {
+        if (UIManager.Instance.canCombine)
+        {
+            if (UIManager.Instance.sourceWeapon.Count < 2)
+            {
+                ClickToCombine(true);
+            }
+        }
+
+        else
+        {
+            ReleaseGrab();
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        if (UIManager.Instance.canCombine)
+        {
+
+        }
+
+        else
+        {
+            if (!isGrab && tfmouse.childCount == 0)
+            {
+                ActiveUIPanel(true);
+            }
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (UIManager.Instance.canCombine)
+        {
+
+        }
+
+        else
+        {
+            ActiveUIPanel(false);
+        }
+    }
+
+    void OnMouseOver()
+    {
+        if (!UIManager.Instance.ExtraUIOpen)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (!isGrab && !isInInventory)
+                {
+                    CShopManager.Instance.LockItem(nIndex, transform);
+                }
+
+                else if (!isGrab && isInInventory)
+                {
+                    SetExtraUI(true);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 아이템을 마우스로 집는다.
+    /// </summary>
+    void Grab()
     {
         if (!isInInventory)
         {
@@ -86,9 +179,11 @@ public class CItemMouseEventController : MonoBehaviour
         isGrab = true;
     }
 
-    void OnMouseDrag()
+    /// <summary>
+    /// 인벤토리 Cell에 아이템이 들어갈 수 있는지 판단
+    /// </summary>
+    void CheckGrid()
     {
-        // 인벤토리 cell에 들어갈 수 있는지 판단
         int activeCellCount = 0;
         tfCell = null;
         cellPos.Clear();
@@ -129,7 +224,13 @@ public class CItemMouseEventController : MonoBehaviour
         {
             isCanDrop = false;
         }
+    }
 
+    /// <summary>
+    /// 아이템이 놓일 곳을 미리 보여준다.
+    /// </summary>
+    void Preview()
+    {
         // 첫번째 그리드의 Ray가 Cell과 충돌했을 경우, 놓을 곳의 아이템을 미리 보여준다.
         if (tfCell != null)
         {
@@ -168,7 +269,10 @@ public class CItemMouseEventController : MonoBehaviour
         }
     }
 
-    void OnMouseUp()
+    /// <summary>
+    /// 아이템 Grab을 종료한다.
+    /// </summary>
+    void ReleaseGrab()
     {
         // 인벤토리에 들어갈 수 있는 상태
         if (isCanDrop)
@@ -272,33 +376,30 @@ public class CItemMouseEventController : MonoBehaviour
         itemPreview.SetActive(false);
     }
 
-    void OnMouseEnter()
+    /// <summary>
+    /// 아이템을 조합하기 위해 아이템을 클릭했을 때 실행될 메서드
+    /// </summary>
+    public void ClickToCombine(bool isSource)
     {
-        if (!isGrab && tfmouse.childCount == 0)
+        StartCoroutine(WaitCombine());
+
+        if (isSource)
         {
-            ActiveUIPanel(true);
+            UIManager.Instance.sourceWeapon.Add(weaponStats);
         }
     }
 
-    void OnMouseExit()
+    /// <summary>
+    /// 조합이 성공 또는 취소 될때 까지 기다리고 Cell의 하이라이트를 종료한다.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WaitCombine()
     {
-        ActiveUIPanel(false);
-    }
+        CellManager.Instance.HighlightCell(prevCellPos, true);
 
-    void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (!isGrab && !isInInventory)
-            {
-                CShopManager.Instance.LockItem(nIndex, transform);
-            }
+        yield return new WaitUntil(() => !UIManager.Instance.canCombine);
 
-            else if (!isGrab && isInInventory)
-            {
-                SetExtraUI(true);
-            }
-        }
+        CellManager.Instance.HighlightCell(prevCellPos, false);
     }
 
     /// <summary>
@@ -335,7 +436,7 @@ public class CItemMouseEventController : MonoBehaviour
     /// <param name="active">활성화 여부</param>
     public void SetExtraUI(bool active)
     {
-        isExtraUIOn = active;
+        UIManager.Instance.SetActiveExtraUI(active);
     }
 
     /// <summary>
@@ -346,7 +447,7 @@ public class CItemMouseEventController : MonoBehaviour
     {
         if (isInInventory)
         {
-            if (isExtraUIOn)
+            if (UIManager.Instance.ExtraUIOpen)
             {
                 return;
             }

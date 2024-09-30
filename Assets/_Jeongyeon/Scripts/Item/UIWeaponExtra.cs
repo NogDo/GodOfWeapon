@@ -177,4 +177,13 @@ public class UIWeaponExtra : MonoBehaviour
         UIManager.Instance.baseWeapon = weapon;
 
     }
+
+    /// <summary>
+    /// 취소 버튼 클릭
+    /// </summary>
+    public void OnCancelButtonClick()
+    {
+        UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
+        UIManager.Instance.SetActiveExtraUI(false);
+    }
 }

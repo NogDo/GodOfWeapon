@@ -166,7 +166,7 @@ public class UIManager : MonoBehaviour
         }
 
         shopWeaponExtraInfo.gameObject.SetActive(active);
-        isExtraUIOpen = active;
+        //isExtraUIOpen = active;
     }
     /// <summary>
     /// 캐릭터별로 로비 UI를 활성화 시키는 메서드
@@ -205,4 +205,12 @@ public class UIManager : MonoBehaviour
             lCharacterNameUI.SetActive(false);
     }
 
+    /// <summary>
+    /// 아이템, 무기 추가 UI의 상태를 지정
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void SetActiveExtraUI(bool active)
+    {
+        isExtraUIOpen = active;
+    }
 }

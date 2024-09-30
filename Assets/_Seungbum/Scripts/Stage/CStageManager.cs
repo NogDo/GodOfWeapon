@@ -12,7 +12,7 @@ public class CStageManager : MonoBehaviour
     int nLevel = 1;
     int nCurrnetLevel = 1;
     int nStageCount = 1;
-    int nKillCount = 0;
+    float fEXP = 0.0f;
 
     bool isClick = false;
     #endregion
@@ -29,13 +29,13 @@ public class CStageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 잡은 몬스터의 수
+    /// 경험치
     /// </summary>
-    public int KillCount
+    public float EXP
     {
         get
         {
-            return nKillCount;
+            return fEXP;
         }
     }
 
@@ -52,7 +52,6 @@ public class CStageManager : MonoBehaviour
     private void Start()
     {
         CellManager.Instance.OnCellClick += AddCellCheck;
-        //Invoke("StartStage", 3f);   
     }
 
     /// <summary>
