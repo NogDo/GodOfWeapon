@@ -44,6 +44,7 @@ public class UIWeaponExtra : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// 무기 정보 패널의 크기와 텍스트를 설정한다.
     /// </summary>
@@ -167,7 +168,13 @@ public class UIWeaponExtra : MonoBehaviour
         CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level, weapon.Weapon.weaponType);
         weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
         Destroy(weapon.gameObject);
-        UIManager.Instance.TurnOffUI();
+        UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
     }
-    
+
+    public void OnCombineButtonClick()
+    {
+        UIManager.Instance.canCombine = true;
+        UIManager.Instance.baseWeapon = weapon;
+
+    }
 }

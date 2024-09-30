@@ -7,6 +7,7 @@ public class CellColor : MonoBehaviour
     #region Public Fields
     public Material[] materials;
     public Material[] materials_Single;
+    public GameObject highlightCell;
     #endregion
 
     #region Private Fields
@@ -77,4 +78,13 @@ public class CellColor : MonoBehaviour
         myMeshRenderer.material = materials[4];
     }
 
+    public void Highlight()
+    {
+        highlightCell.SetActive(true);
+    }
+
+    public void ResetHighlight()
+    {
+        highlightCell.SetActive(false);
+    }
 }
