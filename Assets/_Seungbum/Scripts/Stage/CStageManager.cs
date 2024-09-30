@@ -88,12 +88,21 @@ public class CStageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 스테지를 시작한다.
+    /// 스테이지를 시작한다.
     /// </summary>
     public void StartStage()
     {
         nStageCount++;
 
         CCreateMapManager.Instance.Init(nStageCount);
+        CShopManager.Instance.InActiveShop();
+    }
+
+    /// <summary>
+    /// 상점을 시작한다.
+    /// </summary>
+    public void StartShop()
+    {
+        CShopManager.Instance.ActiveShop();
     }
 }

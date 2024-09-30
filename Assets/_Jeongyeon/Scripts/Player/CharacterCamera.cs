@@ -58,7 +58,7 @@ public class CharacterCamera : MonoBehaviour
     public void SetPlayer()
     {
         player = GameObject.FindWithTag("Character").transform;
-        cameraCount++;
+        InCreaseCameraCount();
     }
 
     public void ChangeCamera(int index)
@@ -82,5 +82,11 @@ public class CharacterCamera : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+
+
+    public void InCreaseCameraCount()
+    {
+        cameraCount++;
     }
 }

@@ -10,7 +10,12 @@ public class CMouseFollower : MonoBehaviour
 
     void Awake()
     {
-        cameraShop = GameObject.Find("ShopCamera").GetComponent<Camera>();
+        //cameraShop = GameObject.Find("ShopCamera").GetComponent<Camera>();
+    }
+
+    void Start()
+    {
+        cameraShop = CShopManager.Instance.ShopCamera;
     }
 
     void Update()

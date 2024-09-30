@@ -68,9 +68,19 @@ public class CCreateMapManager : MonoBehaviour
     /// <param name="stage">스테이지</param>
     public void Init(int stage)
     {
+        int size = CStageManager.Instance.StageCount + 10;
 
+        int width = Random.Range(size / 2 - 2, size - 2);
+        int height = size - width;
+        Debug.Log($"width : {width}, height : {height}");
 
-        SetMapSize(-5, 6, -6, 3);
+        int minX = (width % 2 == 0) ? width / 2 - 1 : width / 2;
+        int maxX = width - minX - 1;
+        int minZ = (height % 2 == 0) ? height / 2 - 1 : height / 2;
+        int maxZ = height - minZ - 1;
+        Debug.Log($"minX : {-minX}, maxX : {maxX}, minZ : {-minZ}, maxZ : {maxZ}");
+
+        SetMapSize(-minX, maxX, -minZ, maxZ);
         CreateMap();
     }
 
@@ -103,7 +113,7 @@ public class CCreateMapManager : MonoBehaviour
         map.SetRighUpPart(mapSize.minX, mapSize.maxX, mapSize.maxZ, mapSize.maxZ + 3);
         map.SetRighDownPart(mapSize.maxX, mapSize.maxX + 4, mapSize.minZ - 2, mapSize.maxZ + 3);
 
-        map.transform.position = new Vector3(0.0f, -0.2f, 0.0f);
+        map.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 
         isCreateMap = true;
     }

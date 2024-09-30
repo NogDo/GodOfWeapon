@@ -74,6 +74,7 @@ public class CWeaponStats : CStats
                 break;
         }
 
+        weaponData.price = DataManager.Instance.GetWeaponData(weaponData.uid).price;
         float price = (weaponData.level - 1) * DataManager.Instance.GetWeaponData(weaponData.uid).price * 0.3f;
         weaponData.price += Mathf.FloorToInt(price);
 

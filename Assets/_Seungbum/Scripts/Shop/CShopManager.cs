@@ -31,11 +31,21 @@ public class CShopManager : MonoBehaviour
     #endregion
 
     #region private 변수
+    [Header("상점 초기화 관련")]
+    [SerializeField]
+    Camera shopCamera;
+    [SerializeField]
+    Canvas shopCanvas;
+    [SerializeField]
+    GameObject oLights;
+
+    [Header("재굴림 관련")]
     [SerializeField]
     Button buttonReRoll;
     [SerializeField]
     Text textReRollCost;
 
+    [Header("아이템, 무기 관련")]
     [SerializeField]
     Transform[] itemSpawnPoint;
     [SerializeField]
@@ -57,6 +67,17 @@ public class CShopManager : MonoBehaviour
     int nReRollCost;
     int nReRollCount;
     #endregion
+
+    /// <summary>
+    /// 상점 카메라
+    /// </summary>
+    public Camera ShopCamera
+    {
+        get
+        {
+            return shopCamera;
+        }
+    }
 
     void Awake()
     {
@@ -92,12 +113,24 @@ public class CShopManager : MonoBehaviour
     /// </summary>
     public void ActiveShop()
     {
-        gameObject.SetActive(true);
+        shopCamera.gameObject.SetActive(true);
+        shopCanvas.gameObject.SetActive(true);
+        oLights.SetActive(true);
 
         RandomItemSpawn();
 
         nReRollCount = 0;
         SetReRollCost();
+    }
+
+    /// <summary>
+    /// 상점을 비활성화 시킨다.
+    /// </summary>
+    public void InActiveShop()
+    {
+        shopCamera.gameObject.SetActive(false);
+        shopCanvas.gameObject.SetActive(false);
+        oLights.SetActive(false);
     }
 
     /// <summary>
