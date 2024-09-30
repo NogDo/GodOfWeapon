@@ -36,6 +36,7 @@ public class CItemMouseEventController : MonoBehaviour
     bool isCanDrop = false;
     bool isInInventory = false;
     bool isGrab = false;
+    bool isExtraUIOn = false;
     int nRotateCount;
     int nIndex;
     #endregion
@@ -80,15 +81,7 @@ public class CItemMouseEventController : MonoBehaviour
         }
 
         // 띄워져있던 UI 끄기
-        if (itemStats != null)
-        {
-            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, false);
-        }
-
-        if (weaponStats != null)
-        {
-            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
-        }
+        ActiveUIPanel(false);
 
         isGrab = true;
     }
@@ -276,51 +269,20 @@ public class CItemMouseEventController : MonoBehaviour
         }
 
         isGrab = false;
+        itemPreview.SetActive(false);
     }
 
     void OnMouseEnter()
     {
         if (!isGrab && tfmouse.childCount == 0)
         {
-            if (isInInventory)
-            {
-                if (itemStats != null)
-                {
-                    //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
-                }
-
-                if (weaponStats != null && !UIManager.Instance.ExtraUIOpen)
-                {
-                    UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
-                }
-            }
-
-            else
-            {
-                if (itemStats != null)
-                {
-                    UIManager.Instance.ActiveShopItemInfoPanel(itemStats, true);
-                }
-
-                if (weaponStats != null)
-                {
-                    UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, true);
-                }
-            }
+            ActiveUIPanel(true);
         }
     }
 
     void OnMouseExit()
     {
-        if (itemStats != null)
-        {
-            UIManager.Instance.ActiveShopItemInfoPanel(itemStats, false);
-        }
-
-        if (weaponStats != null)
-        {
-            UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, false);
-        }
+        ActiveUIPanel(false);
     }
 
     void OnMouseOver()
@@ -330,6 +292,11 @@ public class CItemMouseEventController : MonoBehaviour
             if (!isGrab && !isInInventory)
             {
                 CShopManager.Instance.LockItem(nIndex, transform);
+            }
+
+            else if (!isGrab && isInInventory)
+            {
+                SetExtraUI(true);
             }
         }
     }
@@ -359,6 +326,53 @@ public class CItemMouseEventController : MonoBehaviour
         if (prevCellPos.Count > 0)
         {
             CellManager.Instance.ResetItem(prevCellPos);
+        }
+    }
+
+    /// <summary>
+    /// ExtraUI bool값을 지정한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void SetExtraUI(bool active)
+    {
+        isExtraUIOn = active;
+    }
+
+    /// <summary>
+    /// 아아템, 무기 정보를 나타내는 UI Panel을 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    void ActiveUIPanel(bool active)
+    {
+        if (isInInventory)
+        {
+            if (isExtraUIOn)
+            {
+                return;
+            }
+
+            if (itemStats != null)
+            {
+                //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, active);
+            }
+
+            if (weaponStats != null)
+            {
+                UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, active);
+            }
+        }
+
+        else
+        {
+            if (itemStats != null)
+            {
+                UIManager.Instance.ActiveShopItemInfoPanel(itemStats, active);
+            }
+
+            if (weaponStats != null)
+            {
+                UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, active);
+            }
         }
     }
 }

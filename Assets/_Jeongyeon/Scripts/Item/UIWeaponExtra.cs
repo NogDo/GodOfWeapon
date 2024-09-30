@@ -167,6 +167,7 @@ public class UIWeaponExtra : MonoBehaviour
         CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level, weapon.Weapon.weaponType);
         weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
         Destroy(weapon.gameObject);
+
         UIManager.Instance.TurnOffUI();
     }
     
