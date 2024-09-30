@@ -11,7 +11,7 @@ public class CStageManager : MonoBehaviour
     #region private 변수
     int nLevel = 1;
     int nCurrnetLevel = 1;
-    int nStageCount = 1;
+    int nStageCount = 0;
     float fEXP = 0.0f;
 
     bool isClick = false;
@@ -39,7 +39,7 @@ public class CStageManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -49,8 +49,10 @@ public class CStageManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    IEnumerator Start()
     {
+        yield return new WaitUntil(() => CellManager.Instance != null);
+
         CellManager.Instance.OnCellClick += AddCellCheck;
     }
 
@@ -83,5 +85,15 @@ public class CStageManager : MonoBehaviour
     private void AddCellCheck()
     {
         isClick = true;
+    }
+
+    /// <summary>
+    /// 스테지를 시작한다.
+    /// </summary>
+    public void StartStage()
+    {
+        nStageCount++;
+
+        CCreateMapManager.Instance.Init(nStageCount);
     }
 }

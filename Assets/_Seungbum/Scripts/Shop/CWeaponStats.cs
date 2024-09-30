@@ -39,7 +39,25 @@ public class CWeaponStats : CStats
         weaponName = gameObject.name.Substring(0, index);
 
         CopyData(DataManager.Instance.GetWeaponData(weaponName));
-        weaponData.level = nLevel;
+        Init(nLevel);
+    }
+
+    /// <summary>
+    /// 무기의 레벨을 지정한다.
+    /// </summary>
+    /// <param name="level">지정할 레벨</param>
+    public void InitLevel(int level)
+    {
+        nLevel = level;
+    }
+
+    /// <summary>
+    /// 레벨에 따른 무기의 스텟을 설정한다.
+    /// </summary>
+    /// <param name="level">레벨</param>
+    public void Init(int level)
+    {
+        weaponData.level = level;
 
         switch (weaponData.weaponType)
         {
@@ -56,19 +74,10 @@ public class CWeaponStats : CStats
                 break;
         }
 
-        float price = (weaponData.level - 1) * weaponData.price * 0.3f;
+        float price = (weaponData.level - 1) * DataManager.Instance.GetWeaponData(weaponData.uid).price * 0.3f;
         weaponData.price += Mathf.FloorToInt(price);
 
         costController.SetCost(weaponData.price);
-    }
-
-    /// <summary>
-    /// 무기의 레벨을 지정한다.
-    /// </summary>
-    /// <param name="level">지정할 레벨</param>
-    public void InitLevel(int level)
-    {
-        nLevel = level;
     }
 
     /// <summary>

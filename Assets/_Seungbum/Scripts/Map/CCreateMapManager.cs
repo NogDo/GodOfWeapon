@@ -55,15 +55,21 @@ public class CCreateMapManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    /// <summary>
+    /// 맵 생성을 한다.
+    /// </summary>
+    /// <param name="stage">스테이지</param>
+    public void Init(int stage)
     {
+
+
         SetMapSize(-5, 6, -6, 3);
         CreateMap();
     }
