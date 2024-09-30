@@ -265,5 +265,23 @@ public class CellManager : MonoBehaviour
             checkGrid[pos[i].x, pos[i].z] = 0;
         }
     }
+
+    public void HighlightCell(List<STPos> pos, bool active)
+    {
+        if (active == true)
+        {
+            for (int i = 0; i < pos.Count; i++)
+            {
+                gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().Highlight();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < pos.Count; i++)
+            {
+                gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().ResetHighlight();
+            }
+        }
+    }
 }
 

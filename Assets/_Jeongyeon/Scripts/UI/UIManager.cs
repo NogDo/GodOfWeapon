@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
     public GameObject[] lCharacterSetUI;
+
+    
+    [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
+    [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
+    [HideInInspector] public CWeaponStats baseWeapon; // 조합 아이템의 베이스 아이템을 담는 변수
     #endregion
 
     /// <summary>
@@ -200,9 +205,4 @@ public class UIManager : MonoBehaviour
             lCharacterNameUI.SetActive(false);
     }
 
-    public void TurnOffUI()
-    {
-        isExtraUIOpen = false;
-        shopWeaponExtraInfo.gameObject.SetActive(false);
-    }
 }
