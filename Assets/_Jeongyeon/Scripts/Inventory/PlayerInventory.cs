@@ -9,8 +9,8 @@ public class PlayerInventory : MonoBehaviour
 
     #region Public Fields
     // 인벤토리에 들어온 아이템과 무기를 담는 리스트
-    [HideInInspector] public List<WeaponData> playerWeapon;
-    [HideInInspector] public List<ItemData> playerItem;
+    public List<WeaponData> playerWeapon;
+    public List<ItemData> playerItem;
 
     // 아이템을 생성할 위치를 담는 배열
     public GameObject[] lWeoponSlot;
@@ -107,14 +107,14 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="uid">해당 무기 uid</param>
     /// <param name="level">해당 레벨</param>
-    public void UpgradeWeaponData(int uid, int level, Type WeaponType)
+    public void UpgradeWeaponData(WeaponData weapon)
     {
-        foreach (WeaponData target in playerWeapon)
+        for (int i = 0; i < playerWeapon.Count; i++)
         {
-            if (target.uid == uid && target.level == level)
+            if (playerWeapon[i].uid == weapon.uid && playerWeapon[i].level == weapon.level - 1)
             {
-                UpgradeWeapon(target, WeaponType);
-                target.level++;
+                UpgradeWeapon(weapon, weapon.weaponType);
+                playerWeapon[i] = weapon;
                 break;
             }
         }
@@ -133,10 +133,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level - 1)
                         {
-                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
-                           // targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().Init(target);
                             break;
                         }
                     }
@@ -147,10 +146,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level - 1)
                         {
-                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
-                           // targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().Init(target);
                             break;
                         }
                     }
@@ -161,10 +159,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level - 1)
                         {
-                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
-                            //targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().Init(target);
                             break;
                         }
                     }

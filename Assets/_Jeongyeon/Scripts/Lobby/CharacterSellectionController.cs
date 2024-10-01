@@ -7,6 +7,7 @@ public class CharacterSellectionController : MonoBehaviour
     #region Public Fields
     public Light[] lights;
     public Coroutine turnOnUI;
+    public bool selectCharacter = false;
     #endregion
     #region Private Fields
     #endregion
@@ -27,5 +28,10 @@ public class CharacterSellectionController : MonoBehaviour
             StopCoroutine(turnOnUI);
         }
         turnOnUI = StartCoroutine(coroutine);
+    }
+
+    public void OnSelcetCharacter()
+    {
+        selectCharacter = true;
     }
 }

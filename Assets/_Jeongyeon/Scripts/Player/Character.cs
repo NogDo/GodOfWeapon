@@ -40,13 +40,11 @@ public class Character : MonoBehaviour
     private Animator anim;
     private SMRCreator smrCreator; // 잔상을 생성하는 클래스
     private IEnumerator hitCoroutine;
+    private PlayerInventory inventory;
+    private ItemData myData;
     #endregion
 
-    #region Protected Fields
-    protected PlayerInventory inventory;
-    protected ItemData myData;
-    #endregion
-    public virtual void Awake()
+    public void Awake()
     {
         player = transform;
         playerModel = transform.GetChild(0);
@@ -58,6 +56,7 @@ public class Character : MonoBehaviour
         CreatAfterImage();
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<PlayerInventory>();
+        myData = inventory.myItemData;
     }
     private void Start()
     {
@@ -104,7 +103,7 @@ public class Character : MonoBehaviour
     public virtual void Hit(float damage)
     {
         float finalDamage = damage - myData.defense / 20;
-        if (damage - inventory.myItemData.defense / 20 == 0)
+        if (finalDamage == 0)
         {
             finalDamage = 1;
         }
