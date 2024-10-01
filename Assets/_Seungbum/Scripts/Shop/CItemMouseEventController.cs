@@ -431,6 +431,19 @@ public class CItemMouseEventController : MonoBehaviour
     }
 
     /// <summary>
+    /// 아이템을 강화 했을 때 호출될 메서드
+    /// </summary>
+    public void UpgradeItem()
+    {
+        weaponStats.Init(weaponStats.Weapon.level + 1);
+
+        if (prevCellPos.Count > 0)
+        {
+            CellManager.Instance.SetItem(prevCellPos, weaponStats.Weapon.level);
+        }
+    }
+
+    /// <summary>
     /// ExtraUI bool값을 지정한다.
     /// </summary>
     /// <param name="active">활성화 여부</param>

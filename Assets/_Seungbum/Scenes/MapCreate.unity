@@ -551,6 +551,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1501246524500394, guid: acd5342dc17d2494b9b69c5b88b98fd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910801273991173, guid: acd5342dc17d2494b9b69c5b88b98fd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1920716716415433, guid: acd5342dc17d2494b9b69c5b88b98fd0, type: 3}
       propertyPath: m_Name
       value: StartMap
