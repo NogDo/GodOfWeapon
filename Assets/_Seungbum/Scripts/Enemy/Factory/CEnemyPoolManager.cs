@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CEnemyPoolManager : MonoBehaviour
 {
+    #region static 변수
+    public static CEnemyPoolManager Instance { get; private set; }
+    #endregion
+
     #region private 변수
     CEnemyPool enemyPool;
 
@@ -17,6 +21,9 @@ public class CEnemyPoolManager : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         enemyPool = GetComponent<CEnemyPool>();
 
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
@@ -24,10 +31,11 @@ public class CEnemyPoolManager : MonoBehaviour
         spawnChestCoroutine = SpawnChest();
     }
 
-    IEnumerator Start()
+    /// <summary>
+    /// 풀을 초기화하고 적을 소환한다.
+    /// </summary>
+    public void StartPooling()
     {
-        yield return new WaitUntil(() => CCreateMapManager.Instance.IsCreateMap);
-
         enemyPool.InitPool();
         StartSpawn();
     }
@@ -101,7 +109,7 @@ public class CEnemyPoolManager : MonoBehaviour
         {
             float chestSpawnTime = Random.Range(10.0f, 20.0f);
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(chestSpawnTime);
 
             enemyPool.SpawnChest();
         }

@@ -16,7 +16,10 @@ public class CStageManager : MonoBehaviour
     int nLevel = 1;
     int nCurrentLevel = 1;
     int nStageCount = 0;
+
+    int nPlayeMoney = 0;
     float fEXP = 0.0f;
+
 
     bool isClick = false;
     #endregion
@@ -40,6 +43,17 @@ public class CStageManager : MonoBehaviour
         get
         {
             return fEXP;
+        }
+    }
+
+    /// <summary>
+    /// 플레이어 보유 돈
+    /// </summary>
+    public int Money
+    {
+        get
+        {
+            return nPlayeMoney;
         }
     }
 
@@ -98,13 +112,15 @@ public class CStageManager : MonoBehaviour
     {
         nStageCount = 1;
         tfCharacter = FindObjectOfType<Character>().transform;
+        tfCharacter.gameObject.SetActive(false);
 
         oStartMap.SetActive(false);
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
         Camera.main.GetComponentInParent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, 0.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -117,7 +133,8 @@ public class CStageManager : MonoBehaviour
         CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
 
-        tfCharacter.position = new Vector3(2.0f, 0.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -126,5 +143,6 @@ public class CStageManager : MonoBehaviour
     public void StartShop()
     {
         CShopManager.Instance.ActiveShop();
+        tfCharacter.gameObject.SetActive(false);
     }
 }

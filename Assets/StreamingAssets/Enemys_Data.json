@@ -6,7 +6,7 @@
     "Speed": 4.0,
     "MaxHP": 15.0,
     "NowHP": 50.0,
-    "Attack": 5.0,
+    "Attack": 3.0,
     "AttackCooltime": 0.0
   },
   {
@@ -16,7 +16,7 @@
     "Speed": 3.0,
     "MaxHP": 10.0,
     "NowHP": 50.0,
-    "Attack": 5.0,
+    "Attack": 2.0,
     "AttackCooltime": 3.0
   }
 ]
