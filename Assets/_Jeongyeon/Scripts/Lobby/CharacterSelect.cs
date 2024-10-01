@@ -16,26 +16,28 @@ public class CharacterSelect : MonoBehaviour
     public int weaponIndex;
     #endregion
     #region Pirvate Fields
-    private LightController lightController;
+    private CharacterSellectionController lightController;
     private CharacterCamera characterCamera;
+    private CharacterSellectionController characterSellectionController;
     #endregion
 
     private void Awake()
     {
-        lightController = GetComponentInParent<LightController>();
+        lightController = GetComponentInParent<CharacterSellectionController>();
         characterCamera = Camera.main.GetComponentInParent<CharacterCamera>();
+        characterSellectionController = GetComponentInParent<CharacterSellectionController>();
     }
     private void OnMouseUp()
     {
         lightController.TurnOnLights(myIndex);
         characterCamera.ChangeCamera(myIndex);
         UIManager.Instance.OffLobbyUI();
-        StartCoroutine(SetUI());
+        characterSellectionController.TurnUI(SetUI());
     }
 
     private IEnumerator SetUI()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         UIManager.Instance.OnLobbyUI(myIndex, transform);
     }
     public void SelectCharacter(int index)
@@ -43,8 +45,6 @@ public class CharacterSelect : MonoBehaviour
         if (index == myIndex)
         {
             Instantiate(character, characterSlot.transform.position, characterSlot.transform.rotation, null);
-           /* myWeapons[weaponIndex].transform.position = CellManager.Instance.weaponInstancePostion.position;
-            myItems.transform.position = CellManager.Instance.itemInstancePostion.position;*/
             characterCamera.SetPlayer();
             characterSlot.SetActive(false);
         }

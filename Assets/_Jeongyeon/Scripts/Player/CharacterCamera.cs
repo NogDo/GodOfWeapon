@@ -77,8 +77,8 @@ public class CharacterCamera : MonoBehaviour
         float time = 0;
         while (time <= 2.0f)
         {
-            time += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, lobbyCharacter[index].position, time/ 2.0f);
+            time += Time.deltaTime;
             yield return null;
         }
         yield return null;
