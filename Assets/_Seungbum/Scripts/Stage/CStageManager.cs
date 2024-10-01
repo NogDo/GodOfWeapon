@@ -17,9 +17,10 @@ public class CStageManager : MonoBehaviour
     int nCurrentLevel = 1;
     int nStageCount = 0;
 
-    int nPlayeMoney = 0;
+    int nPlayerMoney = 0;
     float fEXP = 0.0f;
 
+    float fStageTime = 0.0f;
 
     bool isClick = false;
     #endregion
@@ -53,7 +54,7 @@ public class CStageManager : MonoBehaviour
     {
         get
         {
-            return nPlayeMoney;
+            return nPlayerMoney;
         }
     }
 
@@ -111,6 +112,8 @@ public class CStageManager : MonoBehaviour
     public void StartStage()
     {
         nStageCount = 1;
+        fStageTime = 25.0f;
+
         tfCharacter = FindObjectOfType<Character>().transform;
         tfCharacter.gameObject.SetActive(false);
 
@@ -129,6 +132,36 @@ public class CStageManager : MonoBehaviour
     public void NextStage()
     {
         nStageCount++;
+
+        if (nStageCount < 3)
+        {
+            fStageTime = 30.0f;
+        }
+
+        else if (nStageCount < 6)
+        {
+            fStageTime = 35.0f;
+        }
+
+        else if (nStageCount < 8)
+        {
+            fStageTime = 40.0f;
+        }
+
+        else if (nStageCount < 10)
+        {
+            fStageTime = 45.0f;
+        }
+
+        else if (nStageCount < 20)
+        {
+            fStageTime = 60.0f;
+        }
+
+        else
+        {
+            fStageTime = 90.0f;
+        }
 
         CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
