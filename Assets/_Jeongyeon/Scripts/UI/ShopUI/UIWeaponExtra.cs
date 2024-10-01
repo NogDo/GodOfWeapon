@@ -30,8 +30,7 @@ public class UIWeaponExtra : MonoBehaviour
     //조합할 아이템의 가격을 표시하는 텍스트
     public Text combineWeaponValue;
 
-    public GameObject[] combineParticleTrail;
-    public GameObject[] combineParticleExplosion;
+   
     #endregion
 
     #region private 변수
@@ -176,10 +175,10 @@ public class UIWeaponExtra : MonoBehaviour
     /// </summary>
     public void OnSellButtonClick()
     {
-        CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level, weapon.Weapon.weaponType);
+        CellManager.Instance.PlayerInventory.DestroyWeaponData(weapon.Weapon.uid, weapon.Weapon.level);
         weapon.gameObject.GetComponent<CItemMouseEventController>().SellItem();
-        UIManager.Instance.SetActiveExtraUI(false);
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
+        UIManager.Instance.SetActiveExtraUI(false);
         Destroy(weapon.gameObject);
     }
     /// <summary>
@@ -205,15 +204,9 @@ public class UIWeaponExtra : MonoBehaviour
             combineButtonImage[1].SetActive(true);
         }
     }
-    /// <summary>
-    /// 최종 조합버튼을 눌렀을때 호출되는 메서드
-    /// </summary>
-    public void OnCombineButtonClick()
-    {
-        StartCoroutine(CombineBazier(UIManager.Instance.sourceWeapon[0], 0));
-        StartCoroutine(CombineBazier(UIManager.Instance.sourceWeapon[1], 1));
-    }
-
+   /// <summary>
+   /// 조합창에서 취소 버튼을 눌렀을때 호출되는 메서드
+   /// </summary>
     public void OnCancelCombine()
     {
         UIManager.Instance.canCombine = false;
@@ -251,32 +244,6 @@ public class UIWeaponExtra : MonoBehaviour
         {
             combineButtonImage[0].SetActive(true);
         }
-    }
-
-    private IEnumerator CombineBazier(CWeaponStats sourceWeapon, int i)
-    {
-        Vector3 endPostion = UIManager.Instance.baseWeapon.transform.position;
-        combineParticleTrail[i].transform.parent = null;
-        combineParticleExplosion[i].transform.parent = null;
-        combineParticleTrail[i].transform.position = sourceWeapon.transform.position;
-        combineParticleExplosion[i].transform.position = sourceWeapon.transform.position;
-        combineParticleTrail[i].SetActive(true);
-        combineParticleExplosion[i].SetActive(true);
-        Vector3 startPostion = sourceWeapon.transform.position;
-        Vector3 startToMidlePostion;
-        Vector3 midleToEndPosition;
-        float time = 0;
-        float duration = 1.0f;
-        while (time >= duration)
-        {
-            startToMidlePostion = Vector3.Lerp(startPostion, (endPostion - startPostion)+ (Vector3.up * 5.0f), time / duration);
-            midleToEndPosition = Vector3.Lerp(startToMidlePostion, endPostion, time / duration);
-            combineParticleTrail[i].transform.position = Vector3.Lerp(combineParticleTrail[i].transform.position, midleToEndPosition, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        combineParticleTrail[i].SetActive(false);
-        combineParticleExplosion[i].SetActive(false);
     }
 
 }

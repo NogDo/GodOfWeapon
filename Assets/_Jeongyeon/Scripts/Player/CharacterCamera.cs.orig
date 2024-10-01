@@ -75,11 +75,20 @@ public class CharacterCamera : MonoBehaviour
     private IEnumerator ChangeCameraPosition(int index)
     {
         float time = 0;
-        while (time <= 2.0f)
+        float duration = 0.75f;
+        Vector3 startPosition = transform.position;
+
+        while (time <= duration)
         {
-(??)            transform.position = Vector3.Lerp(startPosition, lobbyCharacter[index].position, time / duration);
-(??)
+<<<<<<< HEAD
+            transform.position = Vector3.Lerp(startPosition, lobbyCharacter[index].position, time / duration);
+
             time += Time.deltaTime;
+
+=======
+            transform.position = Vector3.Lerp(transform.position, lobbyCharacter[index].position, time/ 2.0f);
+            time += Time.deltaTime;
+>>>>>>> feature/jeongyeon
             yield return null;
         }
         yield return null;

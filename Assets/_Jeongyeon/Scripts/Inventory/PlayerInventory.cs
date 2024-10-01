@@ -103,12 +103,83 @@ public class PlayerInventory : MonoBehaviour
         }
     }
     /// <summary>
+    /// 인벤토리에 저장된 무기의 레벨을 업그레이드하는 메서드
+    /// </summary>
+    /// <param name="uid">해당 무기 uid</param>
+    /// <param name="level">해당 레벨</param>
+    public void UpgradeWeaponData(int uid, int level, Type WeaponType)
+    {
+        foreach (WeaponData target in playerWeapon)
+        {
+            if (target.uid == uid && target.level == level)
+            {
+                UpgradeWeapon(target, WeaponType);
+                target.level++;
+                break;
+            }
+        }
+    }
+    /// <summary>
+    /// 무기의 타입을 확인하고 해당타입의 무기가 있는 슬롯을 찾아 무기의 레벨을 업그레이드 시키는 메서드
+    /// </summary>
+    /// <param name="target">해당 무기</param>
+    /// <param name="weapon">해당 타입</param>
+    public void UpgradeWeapon(WeaponData target, Type weapon)
+    {
+        switch (weapon)
+        {
+            case Type.LWeapon:
+                foreach (GameObject targetWeapon in lWeoponSlot)
+                {
+                    if (targetWeapon.transform.childCount != 0)
+                    {
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
+                           // targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            break;
+                        }
+                    }
+                }
+                break;
+            case Type.SWeapon:
+                foreach (GameObject targetWeapon in sWeoponSlot)
+                {
+                    if (targetWeapon.transform.childCount != 0)
+                    {
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
+                           // targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            break;
+                        }
+                    }
+                }
+                break;
+            case Type.Crossbow:
+                foreach (GameObject targetWeapon in crossbowSlot)
+                {
+                    if (targetWeapon.transform.childCount != 0)
+                    {
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        {
+                            targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level++;
+                            //targetWeapon.GetComponentInChildren<WeaponStatInfo>().UpgradeWeapon(targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level);
+                            break;
+                        }
+                    }
+                }
+                break;
+
+        }
+
+    }
+    /// <summary>
     /// 플레이어에 무기를 데이터를 삭제하는 메서드
     /// </summary>
     /// <param name="uid">해당 무기 UID</param>
     /// <param name="level">해당 무기 레벨</param>
-    /// <param name="weaponType">해당 무기 타입</param>
-    public void DestroyWeaponData(int uid, int level, Type weaponType)
+    public void DestroyWeaponData(int uid, int level)
     {
         foreach (WeaponData target in playerWeapon)
         {
@@ -135,7 +206,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
                             ResetIndex(exitIndex, lWeoponSlot);
@@ -152,7 +223,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
                             ResetIndex(exitIndex, lWeoponSlot);
@@ -169,7 +240,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
-                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.weaponName == target.weaponName && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
+                        if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
                             ResetIndex(exitIndex, lWeoponSlot);
@@ -190,7 +261,7 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="slot">지금 보유중인 무기를 담는 슬롯</param>
     private void ResetIndex(int index, GameObject[] slot)
     {
-        for(int i = 0; i< slot.Length; i++)
+        for (int i = 0; i < slot.Length; i++)
         {
             if (slot[i].transform.childCount != 0)
             {
@@ -200,7 +271,7 @@ public class PlayerInventory : MonoBehaviour
 
                 }
             }
-            
+
         }
     }
     /// <summary>
@@ -214,10 +285,9 @@ public class PlayerInventory : MonoBehaviour
         {
             if (parent.transform.childCount == 0)
             {
-                
+
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                /*obj.GetComponent<WeaponStatInfo>().LWeaponSetValue(level);*/
                 break;
             }
         }
@@ -235,7 +305,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                /*obj.GetComponent<WeaponStatInfo>().SWeaponSetValue(level);*/
                 break;
             }
         }
@@ -254,7 +323,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 GameObject obj = Instantiate(weapon, parent.transform);
                 obj.GetComponent<WeaponStatInfo>().Init(playerWeapon[playerWeapon.Count - 1], playerWeapon.Count - 1);
-                /*obj.GetComponent<WeaponStatInfo>().CrossbowSetValue(level);*/
                 break;
             }
         }

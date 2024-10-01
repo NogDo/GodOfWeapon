@@ -257,6 +257,10 @@ public class CellManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 아이템의 셀색상값을 리셋하는 메서드
+    /// </summary>
+    /// <param name="pos">리셋해야 하는 셀들의 좌표값</param>
     public void ResetItem(List<STPos> pos)
     {
         for (int i = 0; i < pos.Count; i++)
@@ -266,6 +270,11 @@ public class CellManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 셀의 하이라트를 적용하는 메서드
+    /// </summary>
+    /// <param name="pos">적용해야 할 셀의 좌표값</param>
+    /// <param name="active">활성화 여부</param>
     public void HighlightCell(List<STPos> pos, bool active)
     {
         if (active == true)

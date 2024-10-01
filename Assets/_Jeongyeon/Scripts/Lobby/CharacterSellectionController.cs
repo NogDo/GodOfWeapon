@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightController : MonoBehaviour
+public class CharacterSellectionController : MonoBehaviour
 {
     #region Public Fields
     public Light[] lights;
+    public Coroutine turnOnUI;
     #endregion
     #region Private Fields
     #endregion
@@ -17,5 +18,14 @@ public class LightController : MonoBehaviour
             lights[i].intensity = 1;
         }
         lights[index].intensity = 3;
+    }
+
+    public void TurnUI(IEnumerator coroutine)
+    {
+        if (turnOnUI != null)
+        {
+            StopCoroutine(turnOnUI);
+        }
+        turnOnUI = StartCoroutine(coroutine);
     }
 }
