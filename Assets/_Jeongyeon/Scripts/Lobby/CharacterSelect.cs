@@ -29,15 +29,18 @@ public class CharacterSelect : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        lightController.TurnOnLights(myIndex);
-        characterCamera.ChangeCamera(myIndex);
-        UIManager.Instance.OffLobbyUI();
-        characterSellectionController.TurnUI(SetUI());
+        if (characterSellectionController.selectCharacter == false)
+        {
+            lightController.TurnOnLights(myIndex);
+            characterCamera.ChangeCamera(myIndex);
+            UIManager.Instance.OffLobbyUI();
+            characterSellectionController.TurnUI(SetUI());
+        }
     }
 
     private IEnumerator SetUI()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         UIManager.Instance.OnLobbyUI(myIndex, transform);
     }
     public void SelectCharacter(int index)

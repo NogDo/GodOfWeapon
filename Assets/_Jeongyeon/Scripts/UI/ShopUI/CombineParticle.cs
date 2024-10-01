@@ -12,14 +12,13 @@ public class CombineParticle : MonoBehaviour
 
     public IEnumerator CombineBazier(CWeaponStats sourceWeapon, int i)
     {
-        combineParticleTrail[i].transform.parent = null;
-        combineParticleExplosion[i].transform.parent = null;
-        combineParticleTrail[i].transform.position = sourceWeapon.transform.position;
+        combineParticleTrail[i].transform.SetParent(null);
+        combineParticleExplosion[i].transform.SetParent(null);
         combineParticleExplosion[i].transform.position = sourceWeapon.transform.position + Vector3.right / 3;
         combineParticleTrail[i].SetActive(true);
         combineParticleExplosion[i].SetActive(true);
-        Vector3 endPostion = UIManager.Instance.baseWeapon.transform.position + Vector3.right /3;
-        Vector3 startPostion = sourceWeapon.transform.position + Vector3.right / 3;
+        Vector3 startPostion = sourceWeapon.transform.position + Vector3.right / 3; // 변경 필요
+        Vector3 endPostion = UIManager.Instance.baseWeapon.transform.position + Vector3.right /3; // 변경 필요 
         Vector3 midlePosition = (endPostion + startPostion) / 2 + (Vector3.up*2f);
         Vector3 startToMidlePostion;
         Vector3 midleToEndPosition;
@@ -36,8 +35,8 @@ public class CombineParticle : MonoBehaviour
         combineParticleTrail[i].transform.position = endPostion;
         combineParticleTrail[i].SetActive(false);
         combineParticleExplosion[i].SetActive(false);
-        combineParticleTrail[i].transform.parent = transform;
-        combineParticleExplosion[i].transform.parent = transform;
+        combineParticleTrail[i].transform.SetParent(transform); 
+        combineParticleExplosion[i].transform.SetParent(transform); 
         Debug.Log("컴바인완료");
         yield return null;
     }

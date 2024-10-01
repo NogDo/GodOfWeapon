@@ -25,25 +25,30 @@ public class UICombineButton : MonoBehaviour
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 조합버튼이 눌렸을때 실행될 로직을 담은 코루틴
+    /// (인벤토리의 아이템의 데이터 변경및 셀의 색상변경) 
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Combine()
     {
 
         firstBazier = StartCoroutine(combineParticle.CombineBazier(UIManager.Instance.sourceWeapon[0], 0));
         secondBazier = StartCoroutine(combineParticle.CombineBazier(UIManager.Instance.sourceWeapon[1], 1));
         yield return null;
-        UIManager.Instance.sourceWeapon[0].GetComponent<CItemMouseEventController>().SellItem();
-        UIManager.Instance.sourceWeapon[1].GetComponent<CItemMouseEventController>().SellItem();
+        UIManager.Instance.sourceWeapon[0].GetComponent<CItemMouseEventController>().SellItem(); // 변경 필요
+        UIManager.Instance.sourceWeapon[1].GetComponent<CItemMouseEventController>().SellItem(); // 변경 필요
         CellManager.Instance.PlayerInventory.DestroyWeaponData(UIManager.Instance.sourceWeapon[0].Weapon.uid, UIManager.Instance.sourceWeapon[0].Weapon.level);
         yield return null;
         CellManager.Instance.PlayerInventory.DestroyWeaponData(UIManager.Instance.sourceWeapon[1].Weapon.uid, UIManager.Instance.sourceWeapon[1].Weapon.level);
-       
+        UIManager.Instance.canCombine = false;
         Destroy(UIManager.Instance.sourceWeapon[0].gameObject);
         Destroy(UIManager.Instance.sourceWeapon[1].gameObject);
         UIManager.Instance.sourceWeapon.Clear();
-        yield return new WaitForSeconds(1.5f);
-        UIManager.Instance.canCombine = false;
+        yield return new WaitForSeconds(1.0f);
         UIManager.Instance.SetActiveExtraUI(false);
-        //CellManager.Instance.PlayerInventory.UpgradeWeaponData(UIManager.Instance.baseWeapon.Weapon.uid, UIManager.Instance.baseWeapon.Weapon.level, UIManager.Instance.baseWeapon.Weapon.weaponType);
+        UIManager.Instance.baseWeapon.gameObject.GetComponent<CItemMouseEventController>().UpgradeItem();
+        CellManager.Instance.PlayerInventory.UpgradeWeaponData(UIManager.Instance.baseWeapon.Weapon);
         UIManager.Instance.baseWeapon = null;
     }
 }

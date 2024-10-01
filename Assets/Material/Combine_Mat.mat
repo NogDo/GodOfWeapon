@@ -11,6 +11,7 @@ Material:
   m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _COLOROVERLAY_ON
   m_InvalidKeywords:
   - ADDITIVECONFIG_ON
   - ALPHASMOOTHSTEP_ON
@@ -131,7 +132,7 @@ Material:
     - _CameraNearFadeDistance: 1
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
-    - _ColorMode: 0
+    - _ColorMode: 3
     - _ColorRampBlend: 0
     - _ColorRampLuminosity: 0
     - _Cull: 2
@@ -269,7 +270,7 @@ Material:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorAddSubDiff: {r: -1, g: 0, b: 0, a: 0}
+    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _ColorGradingDark: {r: 2.972256, g: 0, b: 8.1939125, a: 1}
     - _ColorGradingLight: {r: 0.8642081, g: 0.13979875, b: 2.6701567, a: 1}
     - _ColorGradingMiddle: {r: 9.227491, g: 0, b: 27.434624, a: 1}
