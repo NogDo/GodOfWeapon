@@ -20,7 +20,7 @@ public class UIDamageTextControl : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         damageTextPool = GetComponentInParent<CDamageTextPool>();
 
-        transformCanvas = GameObject.Find("Canvas").transform;
+        transformCanvas = GameObject.Find("MainCanvas").transform;
     }
 
     void OnDisable()

@@ -21,15 +21,10 @@ public class CEnemyPool : MonoBehaviour
         chestFactory = transform.GetChild(2).GetComponent<CChestFactory>();
     }
 
-    void Start()
-    {
-        InitPool();
-    }
-
     /// <summary>
     /// 풀에 적들을 생성한다.
     /// </summary>
-    void InitPool()
+    public void InitPool()
     {
         for (int i = 0; i < 10; i++)
         {

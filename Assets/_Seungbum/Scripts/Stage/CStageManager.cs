@@ -9,8 +9,12 @@ public class CStageManager : MonoBehaviour
     #endregion
 
     #region private 변수
+    [SerializeField]
+    GameObject oStartMap;
+    Transform tfCharacter;
+
     int nLevel = 1;
-    int nCurrnetLevel = 1;
+    int nCurrentLevel = 1;
     int nStageCount = 0;
     float fEXP = 0.0f;
 
@@ -70,7 +74,7 @@ public class CStageManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator AddCellCountCheck()
     {
-        for (int i = 0; i < nLevel; i++)
+        for (int i = 0; i < nCurrentLevel + nLevel; i++)
         {
             isClick = false;
             CellManager.Instance.AddCell();
@@ -92,10 +96,28 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void StartStage()
     {
+        nStageCount = 1;
+        tfCharacter = FindObjectOfType<Character>().transform;
+
+        oStartMap.SetActive(false);
+        CCreateMapManager.Instance.Init();
+        CShopManager.Instance.InActiveShop();
+        Camera.main.GetComponentInParent<CharacterCamera>().InCreaseCameraCount();
+
+        tfCharacter.position = new Vector3(2.0f, 0.0f, 2.0f);
+    }
+
+    /// <summary>
+    /// 다음 스테이지를 시작한다.
+    /// </summary>
+    public void NextStage()
+    {
         nStageCount++;
 
-        CCreateMapManager.Instance.Init(nStageCount);
+        CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
+
+        tfCharacter.position = new Vector3(2.0f, 0.0f, 2.0f);
     }
 
     /// <summary>

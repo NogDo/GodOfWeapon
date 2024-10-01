@@ -103,11 +103,6 @@ public class CShopManager : MonoBehaviour
         buttonReRoll.onClick.AddListener(OnReRollButtonClick);
     }
 
-    void Start()
-    {
-        ActiveShop();
-    }
-
     /// <summary>
     /// 상점을 활성화 시킨다.
     /// </summary>

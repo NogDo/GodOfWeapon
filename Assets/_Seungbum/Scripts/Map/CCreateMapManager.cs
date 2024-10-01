@@ -30,6 +30,8 @@ public class CCreateMapManager : MonoBehaviour
     STMapSize mapSize;
 
     bool isCreateMap = false;
+    int nStartWidth;
+    int nStartHeight;
     #endregion
 
     /// <summary>
@@ -63,25 +65,60 @@ public class CCreateMapManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 맵 생성을 한다.
+    /// 초기 크기를 정한 후 맵을 생성한다.
     /// </summary>
     /// <param name="stage">스테이지</param>
-    public void Init(int stage)
+    public void Init()
     {
-        int size = CStageManager.Instance.StageCount + 10;
+        nStartWidth = Random.Range(5, 11);
+        nStartHeight = 15 - nStartWidth;
 
-        int width = Random.Range(size / 2 - 2, size - 2);
-        int height = size - width;
-        Debug.Log($"width : {width}, height : {height}");
-
-        int minX = (width % 2 == 0) ? width / 2 - 1 : width / 2;
-        int maxX = width - minX - 1;
-        int minZ = (height % 2 == 0) ? height / 2 - 1 : height / 2;
-        int maxZ = height - minZ - 1;
-        Debug.Log($"minX : {-minX}, maxX : {maxX}, minZ : {-minZ}, maxZ : {maxZ}");
+        int minX = (nStartWidth % 2 == 0) ? nStartWidth / 2 - 1 : nStartWidth / 2;
+        int maxX = nStartWidth - minX - 1;
+        int minZ = (nStartHeight % 2 == 0) ? nStartHeight / 2 - 1 : nStartHeight / 2;
+        int maxZ = nStartHeight - minZ - 1;
 
         SetMapSize(-minX, maxX, -minZ, maxZ);
         CreateMap();
+    }
+
+    /// <summary>
+    /// 맵에 가로줄 또는 세로줄을 추가한 후 맵을 생성한다.
+    /// </summary>
+    public void AddLine()
+    {
+        // 최대 사이즈 10 x 10
+        int percent = Random.Range(0, 2);
+
+        if (percent == 0)
+        {
+            if (nStartWidth + 1 >= 10)
+            {
+                nStartHeight++;
+                SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
+            }
+
+            else
+            {
+                nStartWidth++;
+                SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
+            }
+        }
+
+        else
+        {
+            if (nStartHeight + 1 >= 10)
+            {
+                nStartWidth++;
+                SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
+            }
+
+            else
+            {
+                nStartHeight++;
+                SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
+            }
+        }
     }
 
     /// <summary>
@@ -113,7 +150,7 @@ public class CCreateMapManager : MonoBehaviour
         map.SetRighUpPart(mapSize.minX, mapSize.maxX, mapSize.maxZ, mapSize.maxZ + 3);
         map.SetRighDownPart(mapSize.maxX, mapSize.maxX + 4, mapSize.minZ - 2, mapSize.maxZ + 3);
 
-        map.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        map.transform.position = new Vector3(0.0f, -0.2f, 0.0f);
 
         isCreateMap = true;
     }

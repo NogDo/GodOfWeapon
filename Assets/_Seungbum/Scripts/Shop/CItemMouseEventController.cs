@@ -32,6 +32,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     Vector3 v3StartPosition;
     Vector3 v3StartRotation;
+    Vector3 v3MiddlPosition;
 
     bool isCanDrop = false;
     bool isInInventory = false;
@@ -423,6 +424,16 @@ public class CItemMouseEventController : MonoBehaviour
     /// 아이템 판매 버튼을 눌렀을 때 호출될 메서드
     /// </summary>
     public void SellItem()
+    {
+        // TODO : 아이템 팔았을 때 플레이어 돈 올리기 기능 구현
+
+        ItemCellReset();
+    }
+
+    /// <summary>
+    /// 아이템이 있었던 공간의 Cell을 Reset한다.
+    /// </summary>
+    public void ItemCellReset()
     {
         if (prevCellPos.Count > 0)
         {

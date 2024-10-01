@@ -132,7 +132,7 @@ public class UIWeaponInfo : MonoBehaviour
         attackRange.text = $"<color=#888888>사거리: </color> {weapon.Weapon.attackRange * 10}";
 
         Text attackSpeed = Instantiate(textStats, tfStatsParents);
-        attackSpeed.text = $"<color=#888888>공격 속도: </color> {weapon.Weapon.attackRange}s";
+        attackSpeed.text = $"<color=#888888>공격 속도: </color> {weapon.Weapon.attackSpeed}s";
 
         textTooltip.text = weapon.Weapon.tooltip;
     }

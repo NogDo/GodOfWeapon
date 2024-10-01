@@ -28,6 +28,7 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         yield return new WaitUntil(() => CCreateMapManager.Instance.IsCreateMap);
 
+        enemyPool.InitPool();
         StartSpawn();
     }
 
