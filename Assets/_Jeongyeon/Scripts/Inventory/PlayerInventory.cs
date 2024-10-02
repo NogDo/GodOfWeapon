@@ -64,7 +64,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// 인벤토리에 들어온 아이템을 리스트에 넣고 무기 종류에 따라 생성할 위치를 정하는 메서드
     /// </summary>
-    /// <param name="uid">무기 uid</param>
+    /// <param name="weaponStats">해당무기 정보</param>
     public void CreateWeapon(CWeaponStats weaponStats)
     {
         playerWeapon.Add(weaponStats.Weapon);
