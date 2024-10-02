@@ -228,6 +228,7 @@ public class CStageManager : MonoBehaviour
             if (fStageTime - 1.5f <= time && !isRequestStopSpawn)
             {
                 CEnemyPoolManager.Instance.StopSpawn();
+                CDamageTextPoolManager.Instance.StopSpawn();
                 isRequestStopSpawn = true;
             }
 
@@ -236,7 +237,6 @@ public class CStageManager : MonoBehaviour
             yield return null;
         }
 
-        CEnemyPoolManager.Instance.StopSpawn();
         StageEnd();
 
         yield return new WaitForSeconds(3.0f);

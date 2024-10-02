@@ -10,6 +10,8 @@ public class CDamageTextPoolManager : MonoBehaviour
 
     #region private 변수
     CDamageTextPool damageTextPool;
+
+    bool canSpawn = true;
     #endregion
 
     void Awake()
@@ -28,7 +30,10 @@ public class CDamageTextPoolManager : MonoBehaviour
     /// <param name="damage">데미지</param>
     public void SpawnEnemyNormalText(Transform target, float damage)
     {
-        damageTextPool.DisplayText(target, damage, Color.white, true);
+        if (canSpawn)
+        {
+            damageTextPool.DisplayText(target, damage, Color.white, true);
+        }
     }
 
     /// <summary>
@@ -38,7 +43,10 @@ public class CDamageTextPoolManager : MonoBehaviour
     /// <param name="damage">데미지</param>
     public void SpawnEnemyCriticalText(Transform target, float damage)
     {
-        damageTextPool.DisplayText(target, damage, new Color(1.0f, 0.65f, 0.0f), true);
+        if (canSpawn)
+        {
+            damageTextPool.DisplayText(target, damage, new Color(1.0f, 0.65f, 0.0f), true);
+        }
     }
 
     /// <summary>
@@ -48,16 +56,38 @@ public class CDamageTextPoolManager : MonoBehaviour
     /// <param name="damage">데미지</param>
     public void SpawnPlayerText(Transform target, float damage)
     {
-        damageTextPool.DisplayText(target, damage, Color.red, true);
+        if (canSpawn)
+        {
+            damageTextPool.DisplayText(target, damage, Color.red, true);
+        }
     }
 
     /// <summary>
-    /// 플레이어 힐 텍스트를 활설화시킨다.
+    /// 플레이어 힐 텍스트를 활성화시킨다.
     /// </summary>
     /// <param name="target">텍스트 소환할 위치</param>
     /// <param name="heal">힐량</param>
     public void SpawnPlayerHealText(Transform target, float heal)
     {
-        damageTextPool.DisplayText(target, heal, Color.green, false);
+        if (canSpawn)
+        {
+            damageTextPool.DisplayText(target, heal, Color.green, false);
+        }
+    }
+
+    /// <summary>
+    /// 데미지 텍스트 생산을 허용한다.
+    /// </summary>
+    public void StartSpawn()
+    {
+        canSpawn = true;
+    }
+
+    /// <summary>
+    /// 데미지 텍스트 생산을 중지한다.
+    /// </summary>
+    public void StopSpawn()
+    {
+        canSpawn = false;
     }
 }
