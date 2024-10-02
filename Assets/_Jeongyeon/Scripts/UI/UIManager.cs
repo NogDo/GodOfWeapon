@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,7 +30,11 @@ public class UIManager : MonoBehaviour
     public GameObject lCharacterNameUI;
     public GameObject[] lCharacterSetUI;
 
-    
+    [Header("스테이지 관련 UI")]
+    public TextMeshProUGUI textFloor;
+    public TextMeshProUGUI textTimer;
+
+
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
     [HideInInspector] public CWeaponStats baseWeapon; // 조합 아이템의 베이스 아이템을 담는 변수
@@ -212,5 +217,17 @@ public class UIManager : MonoBehaviour
     public void SetActiveExtraUI(bool active)
     {
         isExtraUIOpen = active;
+    }
+
+
+    public void ChangeFloorText(int floor)
+    {
+
+    }
+
+
+    public void ChangeTimerText(int time)
+    {
+
     }
 }

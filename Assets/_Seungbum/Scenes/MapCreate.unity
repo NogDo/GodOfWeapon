@@ -178,6 +178,14 @@ PrefabInstance:
       value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
+      propertyPath: textFloor
+      value: 
+      objectReference: {fileID: 3830001798848121661}
+    - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
+      propertyPath: textTimer
+      value: 
+      objectReference: {fileID: 3830001798848121660}
+    - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: shopItemInfo
       value: 
       objectReference: {fileID: 1699114507}
@@ -1477,6 +1485,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+--- !u!114 &3830001798848121660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6054748112574777177, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+  m_PrefabInstance: {fileID: 3830001798848121659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3830001798848121661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+  m_PrefabInstance: {fileID: 3830001798848121659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4013135770634260436
 PrefabInstance:
   m_ObjectHideFlags: 0
