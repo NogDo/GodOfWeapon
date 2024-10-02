@@ -52,22 +52,27 @@ public class CharacterSelect : MonoBehaviour
         if (index == myIndex)
         {
             Instantiate(character, characterSlot.transform.position, characterSlot.transform.rotation, null);
-            GameObject startWeapon = Instantiate(myWeapons[weaponIndex],CShopManager.Instance.tfBuyItems);
-            if (startWeapon.GetComponent<CWeaponStats>().Weapon.weaponType == Type.Crossbow)
-            {
-                //startWeapon.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.weaponInstancePostion.gameObject.transform.postion, 0
-                //                                                                , CellManger.Instance.weaponInstancePostion);
-            }
-            else
-            {
-                //startWeapon.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.weaponInstancePostion, 1);
-            }
-            /*startWeapon.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.weaponInstancePostion.position, 1);*/
-            GameObject startItem = Instantiate(myItems,CShopManager.Instance.tfBuyItems);
-            //startItem.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.itemInstancePostion, 1);
-            characterCamera.SetPlayer();
-            characterSlot.SetActive(false);
+            StartCoroutine(CreateItem());
         }
     }
 
+    IEnumerator CreateItem()
+    {
+        GameObject startWeapon = Instantiate(myWeapons[weaponIndex], CShopManager.Instance.tfBuyItems);
+        GameObject startItem = Instantiate(myItems, CShopManager.Instance.tfBuyItems);
+
+        yield return null;
+
+        if (startWeapon.GetComponent<CWeaponStats>().Weapon.weaponType == Type.Crossbow)
+        {
+            startWeapon.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.weaponInstancePostion.gameObject.transform.position, 0, CellManager.Instance.weaponInstancePostion);
+        }
+        else
+        {
+            startWeapon.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.weaponInstancePostion.gameObject.transform.position, 1, CellManager.Instance.weaponInstancePostion);
+        }
+        startItem.GetComponent<CItemMouseEventController>().EquipItem(CellManager.Instance.itemInstancePostion.gameObject.transform.position, 1, CellManager.Instance.itemInstancePostion);
+        characterCamera.SetPlayer();
+        characterSlot.SetActive(false);
+    }
 }

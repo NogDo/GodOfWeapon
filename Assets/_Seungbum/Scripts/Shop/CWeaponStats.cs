@@ -39,6 +39,12 @@ public class CWeaponStats : CStats
         weaponName = gameObject.name.Substring(0, index);
 
         CopyData(DataManager.Instance.GetWeaponData(weaponName));
+
+        if (nLevel == 0)
+        {
+            nLevel = 1;
+        }
+
         Init(nLevel);
     }
 
@@ -78,7 +84,10 @@ public class CWeaponStats : CStats
         float price = (weaponData.level - 1) * DataManager.Instance.GetWeaponData(weaponData.uid).price * 0.3f;
         weaponData.price += Mathf.FloorToInt(price);
 
-        costController.SetCost(weaponData.price);
+        if (costController != null)
+        {
+            costController.SetCost(weaponData.price);
+        }
     }
 
     /// <summary>

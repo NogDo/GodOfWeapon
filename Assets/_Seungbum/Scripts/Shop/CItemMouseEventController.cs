@@ -329,6 +329,11 @@ public class CItemMouseEventController : MonoBehaviour
     /// <param name="rotationCount">회전값</param>
     public void EquipItem(Vector3 position, int rotationCount, CellInfo cellinfo = null)
     {
+        if (cellinfo != null)
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 90.0f * rotationCount, 0.0f);
+        }
+
         nRotateCount = rotationCount;
 
         switch (nRotateCount)
@@ -361,7 +366,7 @@ public class CItemMouseEventController : MonoBehaviour
         transform.position = position;
         v3StartPosition = transform.position;
 
-        if (cellPos == null)
+        if (cellPos.Count == 0)
         {
             int x = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.x : (int)GetComponent<BoxCollider>().size.z;
             int z = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.z : (int)GetComponent<BoxCollider>().size.x;
@@ -394,22 +399,7 @@ public class CItemMouseEventController : MonoBehaviour
         // 무기일 경우
         else if (weaponStats != null)
         {
-            //if (cellPos == null)
-            //{
-            //    int x = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.x : (int)GetComponent<BoxCollider>().size.z;
-            //    int z = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.z : (int)GetComponent<BoxCollider>().size.x;
-
-            //    for (int i = 0; i < x; i++)
-            //    {
-            //        for (int j = 0; j < z; j++)
-            //        {
-            //            STPos cell = new STPos(cellinfo.x + i, cellinfo.z - j);
-            //            cellPos.Add(cell);
-            //        }
-            //    }
-            //}
-
-            CellManager.Instance.SetItem(cellPos, weaponStats.Level);
+            CellManager.Instance.SetItem(cellPos, weaponStats.Weapon.level);
 
             if (!isInInventory)
             {
