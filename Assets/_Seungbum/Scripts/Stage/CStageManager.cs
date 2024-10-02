@@ -10,7 +10,7 @@ public class CStageManager : MonoBehaviour
     #endregion
 
     #region public 변수
-    //public event Action 
+    public event Action OnStageEnd;
     #endregion
 
     #region private 변수
@@ -173,6 +173,14 @@ public class CStageManager : MonoBehaviour
 
         tfCharacter.position = new Vector3(2.0f, -4.5f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 현재 스테이지를 종료한다.
+    /// </summary>
+    public void StageEnd()
+    {
+        OnStageEnd?.Invoke();
     }
 
     /// <summary>

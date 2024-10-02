@@ -327,7 +327,7 @@ public class CItemMouseEventController : MonoBehaviour
     /// </summary>
     /// <param name="position">아이템이 위치할 포지션 값</param>
     /// <param name="rotationCount">회전값</param>
-    public void EquipItem(Vector3 position, int rotationCount)
+    public void EquipItem(Vector3 position, int rotationCount, CellInfo cellinfo = null)
     {
         nRotateCount = rotationCount;
 
@@ -361,6 +361,21 @@ public class CItemMouseEventController : MonoBehaviour
         transform.position = position;
         v3StartPosition = transform.position;
 
+        if (cellPos == null)
+        {
+            int x = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.x : (int)GetComponent<BoxCollider>().size.z;
+            int z = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.z : (int)GetComponent<BoxCollider>().size.x;
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < z; j++)
+                {
+                    STPos cell = new STPos(cellinfo.x + i, cellinfo.z - j);
+                    cellPos.Add(cell);
+                }
+            }
+        }
+
         // 아이템일 경우
         if (itemStats != null)
         {
@@ -379,6 +394,21 @@ public class CItemMouseEventController : MonoBehaviour
         // 무기일 경우
         else if (weaponStats != null)
         {
+            //if (cellPos == null)
+            //{
+            //    int x = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.x : (int)GetComponent<BoxCollider>().size.z;
+            //    int z = (nRotateCount == 0) ? (int)GetComponent<BoxCollider>().size.z : (int)GetComponent<BoxCollider>().size.x;
+
+            //    for (int i = 0; i < x; i++)
+            //    {
+            //        for (int j = 0; j < z; j++)
+            //        {
+            //            STPos cell = new STPos(cellinfo.x + i, cellinfo.z - j);
+            //            cellPos.Add(cell);
+            //        }
+            //    }
+            //}
+
             CellManager.Instance.SetItem(cellPos, weaponStats.Level);
 
             if (!isInInventory)
