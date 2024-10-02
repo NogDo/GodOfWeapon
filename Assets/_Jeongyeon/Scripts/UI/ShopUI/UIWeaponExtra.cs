@@ -212,8 +212,8 @@ public class UIWeaponExtra : MonoBehaviour
         UIManager.Instance.canCombine = false;
         UIManager.Instance.baseWeapon = null;
         UIManager.Instance.sourceWeapon.Clear();
-        UIManager.Instance.SetActiveExtraUI(false);
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
+        UIManager.Instance.SetActiveExtraUI(false);
     }
     /// <summary>
     /// 무기를 조합할 수 있는지 확인하는 메서드
