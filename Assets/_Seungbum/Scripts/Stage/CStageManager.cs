@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ public class CStageManager : MonoBehaviour
 {
     #region static 변수
     public static CStageManager Instance { get; private set; }
+    #endregion
+
+    #region public 변수
+    //public event Action 
     #endregion
 
     #region private 변수
@@ -122,7 +127,7 @@ public class CStageManager : MonoBehaviour
         CShopManager.Instance.InActiveShop();
         Camera.main.GetComponentInParent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.5f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
     }
 
@@ -166,7 +171,7 @@ public class CStageManager : MonoBehaviour
         CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
 
-        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.5f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
     }
 

@@ -38,7 +38,7 @@ public class CItemMouseEventController : MonoBehaviour
     bool isInInventory = false;
     bool isGrab = false;
     int nRotateCount;
-    int nIndex;
+    int nIndex = -1;
     #endregion
 
     void Awake()
@@ -280,62 +280,7 @@ public class CItemMouseEventController : MonoBehaviour
         {
             Vector3 pos = tfCell.position;
 
-            switch (nRotateCount)
-            {
-                case 0:
-                    pos.x += 0.0f;
-                    pos.z += 0.0f;
-                    v3StartRotation = new Vector3(0.0f, 0.0f, 0.0f);
-                    break;
-
-                case 1:
-                    pos.x += 0.0f;
-                    pos.z += 0.15f;
-                    v3StartRotation = new Vector3(0.0f, 90.0f, 0.0f);
-                    break;
-
-                case 2:
-                    pos.x += 0.15f;
-                    pos.z += 0.15f;
-                    v3StartRotation = new Vector3(0.0f, 180.0f, 0.0f);
-                    break;
-
-                case 3:
-                    pos.x += 0.15f;
-                    pos.z += 0.0f;
-                    v3StartRotation = new Vector3(0.0f, 270.0f, 0.0f);
-                    break;
-            }
-
-            transform.position = pos;
-            v3StartPosition = transform.position;
-
-            // 아이템일 경우
-            if (itemStats != null)
-            {
-                CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
-
-                if (!isInInventory)
-                {
-                    CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
-                    CShopManager.Instance.InActiveShopCostUI(nIndex);
-                }
-            }
-            // 무기일 경우
-            else if (weaponStats != null)
-            {
-                CellManager.Instance.SetItem(cellPos, weaponStats.Level);
-
-                if (!isInInventory)
-                {
-                    CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats);
-                    CShopManager.Instance.InActiveShopCostUI(nIndex);
-                }
-            }
-
-            prevCellPos = cellPos.ToList();
-
-            isInInventory = true;
+            EquipItem(pos, nRotateCount);
         }
         // 인벤토리에 들어갈 수 없는 상태
         else
@@ -375,6 +320,81 @@ public class CItemMouseEventController : MonoBehaviour
 
         isGrab = false;
         itemPreview.SetActive(false);
+    }
+
+    /// <summary>
+    /// 아이템을 인벤토리에 장착한다.
+    /// </summary>
+    /// <param name="position">아이템이 위치할 포지션 값</param>
+    /// <param name="rotationCount">회전값</param>
+    public void EquipItem(Vector3 position, int rotationCount)
+    {
+        nRotateCount = rotationCount;
+
+        switch (nRotateCount)
+        {
+            case 0:
+                position.x += 0.0f;
+                position.z += 0.0f;
+                v3StartRotation = new Vector3(0.0f, 0.0f, 0.0f);
+                break;
+
+            case 1:
+                position.x += 0.0f;
+                position.z += 0.15f;
+                v3StartRotation = new Vector3(0.0f, 90.0f, 0.0f);
+                break;
+
+            case 2:
+                position.x += 0.15f;
+                position.z += 0.15f;
+                v3StartRotation = new Vector3(0.0f, 180.0f, 0.0f);
+                break;
+
+            case 3:
+                position.x += 0.15f;
+                position.z += 0.0f;
+                v3StartRotation = new Vector3(0.0f, 270.0f, 0.0f);
+                break;
+        }
+
+        transform.position = position;
+        v3StartPosition = transform.position;
+
+        // 아이템일 경우
+        if (itemStats != null)
+        {
+            CellManager.Instance.SetItem(cellPos, itemStats.Item.level);
+
+            if (!isInInventory)
+            {
+                CellManager.Instance.PlayerInventory.GetItem(itemStats.Item);
+
+                if (nIndex != -1)
+                {
+                    CShopManager.Instance.InActiveShopCostUI(nIndex);
+                }
+            }
+        }
+        // 무기일 경우
+        else if (weaponStats != null)
+        {
+            CellManager.Instance.SetItem(cellPos, weaponStats.Level);
+
+            if (!isInInventory)
+            {
+                CellManager.Instance.PlayerInventory.CreateWeapon(weaponStats);
+
+                if (nIndex != -1)
+                {
+                    CShopManager.Instance.InActiveShopCostUI(nIndex);
+                }
+            }
+        }
+
+        prevCellPos = cellPos.ToList();
+
+        isInInventory = true;
     }
 
     /// <summary>
