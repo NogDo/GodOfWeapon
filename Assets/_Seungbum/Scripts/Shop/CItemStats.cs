@@ -29,6 +29,9 @@ public class CItemStats : CStats
 
         itemData = DataManager.Instance.GetItemData(itemName);
 
-        costController.SetCost(itemData.price);
+        if (costController != null)
+        {
+            costController.SetCost(itemData.price);
+        }
     }
 }

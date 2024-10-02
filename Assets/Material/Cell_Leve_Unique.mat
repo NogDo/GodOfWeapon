@@ -195,7 +195,7 @@ Material:
     - _Color: {r: 0.09433959, g: 0.08499462, b: 0.08499462, a: 0.65882355}
     - _ColorCombine: {r: 0, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0.38679248, g: 0.07115523, b: 0.08659851, a: 1}
+    - _EmissionColor: {r: 0.9716981, g: 0.8193503, b: 0.05958529, a: 1}
     - _EmissionGradientRemap: {r: 0.1, g: 1, b: 0, a: 1}
     - _FlickerAlphaRange: {r: 0, g: 0.5, b: 0, a: 0}
     - _FlickerRange: {r: 0.75, g: 1, b: 0, a: 0}
