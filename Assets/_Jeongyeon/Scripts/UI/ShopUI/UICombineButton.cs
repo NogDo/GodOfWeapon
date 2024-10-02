@@ -22,7 +22,6 @@ public class UICombineButton : MonoBehaviour
     public void OnCombineCancelButtonClick()
     {
         extraUI.OnCancelCombine();
-        gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -36,8 +35,8 @@ public class UICombineButton : MonoBehaviour
         firstBazier = StartCoroutine(combineParticle.CombineBazier(UIManager.Instance.sourceWeapon[0], 0));
         secondBazier = StartCoroutine(combineParticle.CombineBazier(UIManager.Instance.sourceWeapon[1], 1));
         yield return null;
-        UIManager.Instance.sourceWeapon[0].GetComponent<CItemMouseEventController>().SellItem(); // 변경 필요
-        UIManager.Instance.sourceWeapon[1].GetComponent<CItemMouseEventController>().SellItem(); // 변경 필요
+        UIManager.Instance.sourceWeapon[0].GetComponent<CItemMouseEventController>().ItemCellReset(); // 변경 필요
+        UIManager.Instance.sourceWeapon[1].GetComponent<CItemMouseEventController>().ItemCellReset(); // 변경 필요
         CellManager.Instance.PlayerInventory.DestroyWeaponData(UIManager.Instance.sourceWeapon[0].Weapon.uid, UIManager.Instance.sourceWeapon[0].Weapon.level);
         yield return null;
         CellManager.Instance.PlayerInventory.DestroyWeaponData(UIManager.Instance.sourceWeapon[1].Weapon.uid, UIManager.Instance.sourceWeapon[1].Weapon.level);

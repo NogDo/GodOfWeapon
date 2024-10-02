@@ -20,7 +20,8 @@
     "moneyRate": -3.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "CandleHolder",
@@ -43,7 +44,8 @@
     "moneyRate": 15.0,
     "expRate": 25.0,
     "enemyAmount": 0.0,
-    "level": 4
+    "level": 4,
+    "active": false
   },
   {
     "name": "CoinBurnt",
@@ -66,7 +68,8 @@
     "moneyRate": 5.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "CubeRed",
@@ -89,7 +92,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 3
+    "level": 3,
+    "active": false
   },
   {
     "name": "CurseDoll",
@@ -112,7 +116,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": true
   },
   {
     "name": "DeckOfCard",
@@ -135,7 +140,8 @@
     "moneyRate": 2.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 3
+    "level": 3,
+    "active": false
   },
   {
     "name": "DiceSet",
@@ -158,7 +164,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": false
   },
   {
     "name": "DiscountCard",
@@ -181,7 +188,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": false
   },
   {
     "name": "ElfShoes",
@@ -204,7 +212,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": false
   },
   {
     "name": "EnchantedFingerTab",
@@ -227,12 +236,13 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 3
+    "level": 3,
+    "active": false
   },
   {
     "name": "EnlargingDustPotion",
     "koreanName": "확장 가루",
-    "tooltip": "사용 시, 가방 공간 3칸 증가\n다음 층에 정예 1 개체 등장",
+    "tooltip": "사용 시, 다음 스테이지 시작시 레벨 1증가 \n단, 다음 층에 정예 1 개체 소환.",
     "uid": 11,
     "price": 150,
     "hp": 0.0,
@@ -250,7 +260,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": true
   },
   {
     "name": "Flag",
@@ -273,7 +284,8 @@
     "moneyRate": 10.0,
     "expRate": 0.0,
     "enemyAmount": 10.0,
-    "level": 3
+    "level": 3,
+    "active": false
   },
   {
     "name": "Glove",
@@ -296,7 +308,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": false
   },
   {
     "name": "HandleWrap",
@@ -319,7 +332,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "HandMirror",
@@ -342,7 +356,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "PineWheel",
@@ -365,7 +380,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "PocketWatch",
@@ -388,7 +404,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 2
+    "level": 2,
+    "active": false
   },
   {
     "name": "PotionHealing",
@@ -411,7 +428,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": true
   },
   {
     "name": "Quill",
@@ -434,7 +452,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "Whetstone",
@@ -457,7 +476,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 1
+    "level": 1,
+    "active": false
   },
   {
     "name": "TatteredBanner",
@@ -480,7 +500,8 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 5
+    "level": 5,
+    "active": false
   },
   {
     "name": "Antler",
@@ -503,6 +524,7 @@
     "moneyRate": 0.0,
     "expRate": 0.0,
     "enemyAmount": 0.0,
-    "level": 5
+    "level": 5,
+    "active": false
   }
 ]

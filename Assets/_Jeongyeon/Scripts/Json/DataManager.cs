@@ -199,6 +199,7 @@ public class ItemData
     public float expRate;
     public float enemyAmount;
     public int level;
+    public bool active;
 
     public ItemData()
     {
@@ -227,11 +228,12 @@ public class ItemData
         expRate = 0;
         enemyAmount = 0;
         level = 1;
+        active = false;
     }
 
     public ItemData(string name, string koreanName, string tooltip, int uid, int price, float hp, float damage, float meleeDamage, float rangeDamage, float criticalRate,
         float attackSpeed, float moveSpeed, float attackRange, float massValue, float bloodDrain, float defense, float luck, float moneyRate,
-        float expRate, float enemyAmount, int level)
+        float expRate, float enemyAmount, int level, bool active)
     {
         this.name = name;
         this.koreanName = koreanName;
@@ -254,6 +256,7 @@ public class ItemData
         this.expRate = expRate;
         this.enemyAmount = enemyAmount;
         this.level = level;
+        this.active = active;
     }
 }
 public enum Type

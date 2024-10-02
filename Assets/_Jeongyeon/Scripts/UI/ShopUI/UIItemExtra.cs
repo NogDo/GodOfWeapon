@@ -35,7 +35,7 @@ public class UIItemExtra : MonoBehaviour
     private void OnEnable()
     {
         sellText.text = $"ÆÇ¸Å : {item.Item.price * 0.8f}$";
-        if (string.IsNullOrEmpty(item.Item.tooltip))
+        if (item.Item.active == false)
         {
             activeImage.gameObject.SetActive(true);
         }
@@ -296,5 +296,29 @@ public class UIItemExtra : MonoBehaviour
         imageItem.sprite = item.ItemSprite;
         imageItem.rectTransform.sizeDelta = imageSize;
         imageItem.rectTransform.anchoredPosition = new Vector2(0.0f, -imageSize.y / 2);
+    }
+
+    public void OnSellButtonClick()
+    {
+        CellManager.Instance.PlayerInventory.MinusItem(item.Item);
+        item.GetComponent<CItemMouseEventController>().SellItem();
+       // UIManager.Instance.
+        UIManager.Instance.SetActiveExtraUI(false);
+        Destroy(gameObject);
+    }
+
+    public void OnActiveButtonClick()
+    {
+        item.gameObject.GetComponent<IActiveItem>().UseItem();
+        item.GetComponent<CItemMouseEventController>().ItemCellReset();
+        // UIManager.Instance.
+        UIManager.Instance.SetActiveExtraUI(false);
+        Destroy(gameObject);
+    }
+
+    public void OnCancelButtonClick()
+    {
+        // UIManager.Instance.
+        UIManager.Instance.SetActiveExtraUI(false);
     }
 }
