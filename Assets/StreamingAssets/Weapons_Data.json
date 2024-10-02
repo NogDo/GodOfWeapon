@@ -52,7 +52,7 @@
     "tooltip": "플레이어의 최대 체력 10증가"
   },
   {
-    "weaponName": "CrossBowBasic",
+    "weaponName": "CrossbowBasic",
     "weaponKoreanName": "산탄 쇠뇌",
     "uid": 5,
     "level": 1,
@@ -65,7 +65,7 @@
     "tooltip": "10% 확률로 화살 2회 발사"
   },
   {
-    "weaponName": "CrossBowRevolver",
+    "weaponName": "CrossbowRevolver",
     "weaponKoreanName": "육혈쇠뇌",
     "uid": 6,
     "level": 1,
@@ -78,7 +78,7 @@
     "tooltip": "매 4번째 공격시 100%로 치명타적용, 단 4번째 발사 이후 재장전 발생"
   },
   {
-    "weaponName": "CrossBowAutomatic",
+    "weaponName": "CrossbowAutomatic",
     "weaponKoreanName": "자동 쇠뇌",
     "uid": 7,
     "level": 1,
@@ -91,7 +91,7 @@
     "tooltip": "다른 활보다 압도적으로 빠른 공격속도"
   },
   {
-    "weaponName": "CrossBowSmall",
+    "weaponName": "CrossbowSmall",
     "weaponKoreanName": "외손 쇠뇌",
     "uid": 8,
     "level": 1,

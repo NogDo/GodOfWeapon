@@ -304,7 +304,7 @@ public class UIItemExtra : MonoBehaviour
         item.GetComponent<CItemMouseEventController>().SellItem();
        // UIManager.Instance.
         UIManager.Instance.SetActiveExtraUI(false);
-        Destroy(gameObject);
+        Destroy(item.gameObject);
     }
 
     public void OnActiveButtonClick()
@@ -313,7 +313,7 @@ public class UIItemExtra : MonoBehaviour
         item.GetComponent<CItemMouseEventController>().ItemCellReset();
         // UIManager.Instance.
         UIManager.Instance.SetActiveExtraUI(false);
-        Destroy(gameObject);
+        Destroy(item.gameObject);
     }
 
     public void OnCancelButtonClick()
