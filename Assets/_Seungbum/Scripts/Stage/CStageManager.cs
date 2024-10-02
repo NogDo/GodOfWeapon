@@ -125,10 +125,13 @@ public class CStageManager : MonoBehaviour
         oStartMap.SetActive(false);
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
+        UIManager.Instance.SetActiveStageUI(true);
         Camera.main.GetComponentInParent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, -4.5f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
+
+        StartCoroutine(StageTimer());
     }
 
     /// <summary>
@@ -170,9 +173,13 @@ public class CStageManager : MonoBehaviour
 
         CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
+        UIManager.Instance.SetActiveStageUI(true);
+        Camera.main.transform.parent.gameObject.SetActive(true);
 
-        tfCharacter.position = new Vector3(2.0f, -4.5f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
+
+        StartCoroutine(StageTimer());
     }
 
     /// <summary>
@@ -181,6 +188,7 @@ public class CStageManager : MonoBehaviour
     public void StageEnd()
     {
         OnStageEnd?.Invoke();
+        Camera.main.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -189,6 +197,33 @@ public class CStageManager : MonoBehaviour
     public void StartShop()
     {
         CShopManager.Instance.ActiveShop();
+        UIManager.Instance.SetActiveStageUI(false);
+
         tfCharacter.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 스테이지 타이머를 진행하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator StageTimer()
+    {
+        float time = 0.0f;
+
+        yield return new WaitForSeconds(1.0f);
+
+        while (time <= fStageTime)
+        {
+            UIManager.Instance.ChangeTimerText(fStageTime - time);
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
+        CEnemyPoolManager.Instance.StopSpawn();
+        StageEnd();
+        StartShop();
+
+        yield return null;
     }
 }

@@ -79,7 +79,6 @@ public class CEnemyChestController : MonoBehaviour, IHittable
 
     public void Die()
     {
-
         mesh.enabled = false;
         col.enabled = false;
 
@@ -110,6 +109,14 @@ public class CEnemyChestController : MonoBehaviour, IHittable
                 Instantiate(oBomb, transform.position, Quaternion.identity);
                 break;
         }
+    }
+
+    public void StageEnd()
+    {
+        mesh.enabled = false;
+        col.enabled = false;
+
+
     }
 
     public void Hit(float damage, float mass)

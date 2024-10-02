@@ -18,4 +18,9 @@ public interface IHittable
     /// 피격당할 수 있는 오브젝트의 체력이 0이하로 떨어졌을 시
     /// </summary>
     void Die();
+
+    /// <summary>
+    /// 스테이지 종료 후 활성화된 객체들이 실행될 메서드
+    /// </summary>
+    void StageEnd();
 }

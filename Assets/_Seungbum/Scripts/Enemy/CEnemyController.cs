@@ -80,6 +80,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+
+        CStageManager.Instance.OnStageEnd += StageEnd;
     }
 
     void OnEnable()
@@ -192,6 +194,17 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         CGoldIngotPoolManager.Instance.SpawnTier1GoldIngot(spawnPosition);
 
         StartCoroutine(DeSpawn());
+    }
+
+
+    public void StageEnd()
+    {
+        stateMachine.ChangeState(stateMachine.DieState);
+
+        rb.velocity = Vector3.zero;
+        col.enabled = false;
+
+        OnDie?.Invoke();
     }
 
     /// <summary>

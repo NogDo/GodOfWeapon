@@ -31,9 +31,9 @@ public class UIManager : MonoBehaviour
     public GameObject[] lCharacterSetUI;
 
     [Header("스테이지 관련 UI")]
+    public GameObject oStageUI;
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
-
 
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
@@ -219,15 +219,32 @@ public class UIManager : MonoBehaviour
         isExtraUIOpen = active;
     }
 
-
-    public void ChangeFloorText(int floor)
+    /// <summary>
+    /// 스테이지 UI를 활성화 / 비활성화 한다.
+    /// </summary>
+    public void SetActiveStageUI(bool active)
     {
-
+        oStageUI.SetActive(active);
     }
 
-
-    public void ChangeTimerText(int time)
+    /// <summary>
+    /// 층수 텍스트를 바꾼다.
+    /// </summary>
+    /// <param name="floor">몇층인지</param>
+    public void ChangeFloorText(int floor)
     {
+        textFloor.text = $"{floor}층";
+    }
 
+    /// <summary>
+    /// 타이머 텍스트를 바꾼다.
+    /// </summary>
+    /// <param name="time">남은 시간</param>
+    public void ChangeTimerText(float time)
+    {
+        int minute = (int)(time / 60);
+        int second = (int)(time);
+
+        textTimer.text = $"{minute}:{second}";
     }
 }
