@@ -135,15 +135,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2940096536873250244, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1300.0275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2940096536873250244, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 500.768
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2940096536873250244, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.8485565
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2940096536873250244, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: lCharacterNameUI
       value: 
       objectReference: {fileID: 1178245811}
+    - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
+      propertyPath: shopItemExtraInfo
+      value: 
+      objectReference: {fileID: 683361602}
     - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: shopWeaponExtraInfo
       value: 
@@ -424,6 +428,28 @@ MonoBehaviour:
     NowHP: 50
     Attack: 5
     AttackCooltime: 3
+--- !u!114 &551645054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 782665989, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &683361602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7903472187183521990, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54b196f0fb73eb49b9be02c44b74846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &711638854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7139952650630140617, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
@@ -750,6 +776,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 453dedabd90c39f479a997224b0593a0, type: 3}
+--- !u!114 &1487863779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1090386487, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1554587667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1085305700845906097, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
@@ -1847,6 +1884,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -462.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7903472187183521990, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: sellText
+      value: 
+      objectReference: {fileID: 1487863779}
+    - target: {fileID: 7903472187183521990, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: activeImage
+      value: 
+      objectReference: {fileID: 551645054}
     - target: {fileID: 7969223232147915874, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2278,10 +2323,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyPool
       objectReference: {fileID: 0}
-    - target: {fileID: 1650119917306241865, guid: e01707d50c096464cbb31b502707c246, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1650119917306241866, guid: e01707d50c096464cbb31b502707c246, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2338,10 +2379,6 @@ PrefabInstance:
     - target: {fileID: 3481003004601277084, guid: c1422a3c92cd60745945d9ede49a4e76, type: 3}
       propertyPath: m_Name
       value: GoldIngotPool
-      objectReference: {fileID: 0}
-    - target: {fileID: 3481003004601277084, guid: c1422a3c92cd60745945d9ede49a4e76, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3481003004601277085, guid: c1422a3c92cd60745945d9ede49a4e76, type: 3}
       propertyPath: m_RootOrder
@@ -2576,10 +2613,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyIndicatorPool
       objectReference: {fileID: 0}
-    - target: {fileID: 4575251868085864785, guid: 8c76a31ce85a6524ebadc834f4c3d6b6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4575251868085864790, guid: 8c76a31ce85a6524ebadc834f4c3d6b6, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2693,10 +2726,6 @@ PrefabInstance:
     - target: {fileID: 9052117205237229524, guid: 26ef72b84d5e6db4aa96bfd1ddd68308, type: 3}
       propertyPath: m_Name
       value: EnemyProjectilePool
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052117205237229524, guid: 26ef72b84d5e6db4aa96bfd1ddd68308, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9052117205237229525, guid: 26ef72b84d5e6db4aa96bfd1ddd68308, type: 3}
       propertyPath: m_RootOrder

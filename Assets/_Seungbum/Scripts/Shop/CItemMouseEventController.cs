@@ -375,7 +375,7 @@ public class CItemMouseEventController : MonoBehaviour
             {
                 for (int j = 0; j < z; j++)
                 {
-                    STPos cell = new STPos(cellinfo.x + i, cellinfo.z - j);
+                    STPos cell = new STPos(cellinfo.x + i, cellinfo.z + j);
                     cellPos.Add(cell);
                 }
             }
@@ -518,7 +518,7 @@ public class CItemMouseEventController : MonoBehaviour
 
             if (itemStats != null)
             {
-                //UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, active);
+                UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, active);
             }
 
             if (weaponStats != null)
