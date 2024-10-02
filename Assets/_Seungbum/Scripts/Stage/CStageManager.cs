@@ -194,6 +194,8 @@ public class CStageManager : MonoBehaviour
     public void StageEnd()
     {
         OnStageEnd?.Invoke();
+
+        UIManager.Instance.SetActiveClearText(true);
     }
 
     /// <summary>

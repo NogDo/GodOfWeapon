@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     public GameObject oStageUI;
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
+    public GameObject oClearText;
 
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
@@ -239,8 +240,14 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// 스테이지 UI를 활성화 / 비활성화 한다.
     /// </summary>
+    /// <param name="active">활성화 여부</param>
     public void SetActiveStageUI(bool active)
     {
+        if (!active)
+        {
+            SetActiveClearText(active);
+        }
+
         oStageUI.SetActive(active);
     }
 
@@ -263,5 +270,14 @@ public class UIManager : MonoBehaviour
         int second = (int)(time);
 
         textTimer.text = $"{minute}:{second}";
+    }
+
+    /// <summary>
+    /// 클리어 텍스트를 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void SetActiveClearText(bool active)
+    {
+        oClearText.SetActive(active);
     }
 }
