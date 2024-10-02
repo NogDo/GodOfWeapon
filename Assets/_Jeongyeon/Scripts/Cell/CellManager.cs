@@ -23,8 +23,8 @@ public class CellManager : MonoBehaviour
     #region Public Fields
     // 셀이 클릭이 되었을때 호출되는 이벤트
     public event Action OnCellClick;
-    public Transform weaponInstancePostion;
-    public Transform itemInstancePostion;
+    public CellInfo weaponInstancePostion;
+    public CellInfo itemInstancePostion;
     #endregion
 
     /// <summary>
@@ -94,8 +94,8 @@ public class CellManager : MonoBehaviour
                 checkGrid[x, z] = -1;
             }
         }
-        weaponInstancePostion = gameGrid[5, 7].transform;
-        itemInstancePostion = gameGrid[5, 5].transform;
+        weaponInstancePostion = gameGrid[5, 7].GetComponent<CellInfo>();
+        itemInstancePostion = gameGrid[5, 5].GetComponent<CellInfo>();
     }
 
     /// <summary>
