@@ -94,7 +94,7 @@ public class CellManager : MonoBehaviour
                 checkGrid[x, z] = -1;
             }
         }
-        weaponInstancePostion = gameGrid[5, 7].GetComponent<CellInfo>();
+        weaponInstancePostion = gameGrid[5, 6].GetComponent<CellInfo>();
         itemInstancePostion = gameGrid[5, 5].GetComponent<CellInfo>();
     }
 
