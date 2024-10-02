@@ -133,7 +133,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.ChangeFloorText(nStageCount);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         StartCoroutine(StageTimer());
@@ -182,7 +182,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.ChangeFloorText(nStageCount);
         oMainCamera.SetActive(true);
 
-        tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         StartCoroutine(StageTimer());
@@ -215,12 +215,20 @@ public class CStageManager : MonoBehaviour
     IEnumerator StageTimer()
     {
         float time = 0.0f;
+        bool isRequestStopSpawn = false;
 
         yield return new WaitForSeconds(1.0f);
 
         while (time <= fStageTime)
         {
             UIManager.Instance.ChangeTimerText(fStageTime - time);
+
+            if (fStageTime - 1.5f <= time && !isRequestStopSpawn)
+            {
+                CEnemyPoolManager.Instance.StopSpawn();
+                isRequestStopSpawn = true;
+            }
+
             time += Time.deltaTime;
 
             yield return null;

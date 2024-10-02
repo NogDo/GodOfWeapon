@@ -24,6 +24,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     Collider col;
     Animator animator;
 
+    IEnumerator afterSpawn;
+
     float fRotationSpeed = 5.0f;
 
     int nCurrentSkillNum;
@@ -111,7 +113,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         OnSpawn?.Invoke();
 
-        StartCoroutine(AfterSpawn());
+        afterSpawn = AfterSpawn();
+        StartCoroutine(afterSpawn);
     }
 
     /// <summary>
@@ -133,6 +136,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         {
             stateMachine.ChangeState(stateMachine.ChaseState);
         }
+
+        afterSpawn = null;
 
         yield return null;
     }
@@ -209,12 +214,18 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
             return;
         }
 
-        stateMachine.ChangeState(stateMachine.DieState);
-
         rb.velocity = Vector3.zero;
         col.enabled = false;
 
+        if (afterSpawn != null)
+        {
+            StopCoroutine(afterSpawn);
+            animator.SetTrigger("isSpawn");
+        }
+
+        stateMachine.ChangeState(stateMachine.DieState);
         OnDie?.Invoke();
+
         Invoke("InActiveEnemy", 3.0f);
     }
 
