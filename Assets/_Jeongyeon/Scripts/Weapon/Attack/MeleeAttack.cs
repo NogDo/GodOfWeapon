@@ -26,7 +26,6 @@ public class MeleeAttack : WeaponAttack
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             hit.Hit(damage, massValue);
-            Debug.Log(damage);
             if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
             {
                 CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
