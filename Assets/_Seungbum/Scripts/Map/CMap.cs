@@ -80,4 +80,16 @@ public class CMap : MonoBehaviour
     {
         rightDownBuilder.CreateMapPart(minX, maxX, minZ, maxZ);
     }
+
+    /// <summary>
+    /// 생성했던 맵 부분들을 파괴한다.
+    /// </summary>
+    public void DestoryMapPart()
+    {
+        floorBuilder.DestroyMapPart();
+        leftUpBuilder.DestroyMapPart();
+        leftDownBuilder.DestroyMapPart();
+        rightUpBuilder.DestroyMapPart();
+        rightDownBuilder.DestroyMapPart();
+    }
 }

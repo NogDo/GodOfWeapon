@@ -99,6 +99,11 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         enemyPool.ReturnPool(gameObject, enemyInfo.AttackType);
     }
 
+    void OnDestroy()
+    {
+        CStageManager.Instance.OnStageEnd -= StageEnd;
+    }
+
     /// <summary>
     /// 적이 맵에 소환되었을 때 실행할 메서드, Spawn Animation을 재생하고 일정시간 이후 State를 변경한다.
     /// </summary>
@@ -199,12 +204,26 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
     public void StageEnd()
     {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         stateMachine.ChangeState(stateMachine.DieState);
 
         rb.velocity = Vector3.zero;
         col.enabled = false;
 
         OnDie?.Invoke();
+        Invoke("InActiveEnemy", 3.0f);
+    }
+
+    /// <summary>
+    /// 적 오브젝트를 비활성화한다.
+    /// </summary>
+    void InActiveEnemy()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>

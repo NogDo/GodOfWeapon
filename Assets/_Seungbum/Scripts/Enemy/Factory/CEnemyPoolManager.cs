@@ -25,16 +25,12 @@ public class CEnemyPoolManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         enemyPool = GetComponent<CEnemyPool>();
-
-        spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
-        spawnRangeEnemyCoroutine = SpawnRangeEnemy();
-        spawnChestCoroutine = SpawnChest();
     }
 
     /// <summary>
     /// 풀을 초기화하고 적을 소환한다.
     /// </summary>
-    public void StartPooling()
+    public void InitPooling()
     {
         enemyPool.InitPool();
         StartSpawn();
@@ -45,6 +41,10 @@ public class CEnemyPoolManager : MonoBehaviour
     /// </summary>
     public void StartSpawn()
     {
+        spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
+        spawnRangeEnemyCoroutine = SpawnRangeEnemy();
+        spawnChestCoroutine = SpawnChest();
+
         StartCoroutine(spawnMeleeEnemyCoroutine);
         StartCoroutine(spawnRangeEnemyCoroutine);
         StartCoroutine(spawnChestCoroutine);
@@ -69,9 +69,9 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            float meleeEnemySpawnTime = Random.Range(1.0f, 7.0f);
+            float meleeEnemySpawnCount = Random.Range(1.0f, 7.0f);
 
-            for (int i = 0; i < meleeEnemySpawnTime; i++)
+            for (int i = 0; i < meleeEnemySpawnCount; i++)
             {
                 enemyPool.SpawnMeleeEnemy();
             }
@@ -88,9 +88,9 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            float rangeEnemySpawnTime = Random.Range(0.0f, 3.0f);
+            float rangeEnemySpawnCount = Random.Range(0.0f, 3.0f);
 
-            for (int i = 0; i < rangeEnemySpawnTime; i++)
+            for (int i = 0; i < rangeEnemySpawnCount; i++)
             {
                 enemyPool.SpawnRangeEnemy();
             }

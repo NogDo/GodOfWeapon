@@ -116,7 +116,7 @@ public class CEnemyChestController : MonoBehaviour, IHittable
         mesh.enabled = false;
         col.enabled = false;
 
-
+        gameObject.SetActive(false);
     }
 
     public void Hit(float damage, float mass)

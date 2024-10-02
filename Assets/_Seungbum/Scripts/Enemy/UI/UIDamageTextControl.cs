@@ -21,6 +21,8 @@ public class UIDamageTextControl : MonoBehaviour
         damageTextPool = GetComponentInParent<CDamageTextPool>();
 
         transformCanvas = GameObject.Find("MainCanvas").transform;
+
+        CStageManager.Instance.OnStageEnd += StageEnd;
     }
 
     void OnDisable()
@@ -28,11 +30,16 @@ public class UIDamageTextControl : MonoBehaviour
         damageTextPool.ReturnPool(this);
     }
 
+    void OnDestroy()
+    {
+        CStageManager.Instance.OnStageEnd -= StageEnd;
+    }
+
     void LateUpdate()
     {
         if (gameObject.activeSelf)
         {
-            Vector3 screenPoint = UnityEngine.Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(v3LastEnemyPosition);
             transform.position = screenPoint;
         }
     }
@@ -45,12 +52,12 @@ public class UIDamageTextControl : MonoBehaviour
     {
         if (isDamage)
         {
-            text.text = damage.ToString("F1");
+            text.text = Mathf.FloorToInt(damage).ToString();
         }
 
         else
         {
-            text.text = $"+{damage.ToString("F1")}";
+            text.text = $"+{Mathf.FloorToInt(damage)}";
         }
         text.color = color;
 
@@ -97,5 +104,14 @@ public class UIDamageTextControl : MonoBehaviour
         gameObject.SetActive(false);
 
         yield return null;
+    }
+
+    /// <summary>
+    /// 스테이지가 종료되었을 때 활성화 된 객체들은 전부 비활성화 해준다.
+    /// </summary>
+    void StageEnd()
+    {
+        transform.SetParent(damageTextPool.transform);
+        gameObject.SetActive(false);
     }
 }

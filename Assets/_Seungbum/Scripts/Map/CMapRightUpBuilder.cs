@@ -325,7 +325,7 @@ public class CMapRightUpBuilder : MonoBehaviour, IMapPartBuilder
     {
         foreach (Transform child in transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
     }
 

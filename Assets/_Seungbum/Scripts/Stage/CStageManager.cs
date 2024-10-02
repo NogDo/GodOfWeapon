@@ -16,6 +16,8 @@ public class CStageManager : MonoBehaviour
     #region private º¯¼ö
     [SerializeField]
     GameObject oStartMap;
+
+    GameObject oMainCamera;
     Transform tfCharacter;
 
     int nLevel = 1;
@@ -71,6 +73,8 @@ public class CStageManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        oMainCamera = Camera.main.transform.parent.gameObject;
     }
 
     IEnumerator Start()
@@ -117,7 +121,7 @@ public class CStageManager : MonoBehaviour
     public void StartStage()
     {
         nStageCount = 1;
-        fStageTime = 25.0f;
+        fStageTime = 5.0f;
 
         tfCharacter = FindObjectOfType<Character>().transform;
         tfCharacter.gameObject.SetActive(false);
@@ -126,7 +130,8 @@ public class CStageManager : MonoBehaviour
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
-        Camera.main.GetComponentInParent<CharacterCamera>().InCreaseCameraCount();
+        UIManager.Instance.ChangeFloorText(nStageCount);
+        oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
         tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
@@ -174,7 +179,8 @@ public class CStageManager : MonoBehaviour
         CCreateMapManager.Instance.AddLine();
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
-        Camera.main.transform.parent.gameObject.SetActive(true);
+        UIManager.Instance.ChangeFloorText(nStageCount);
+        oMainCamera.SetActive(true);
 
         tfCharacter.position = new Vector3(2.0f, -4.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
@@ -188,7 +194,6 @@ public class CStageManager : MonoBehaviour
     public void StageEnd()
     {
         OnStageEnd?.Invoke();
-        Camera.main.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -198,6 +203,7 @@ public class CStageManager : MonoBehaviour
     {
         CShopManager.Instance.ActiveShop();
         UIManager.Instance.SetActiveStageUI(false);
+        CCreateMapManager.Instance.DestroyMap();
 
         tfCharacter.gameObject.SetActive(false);
     }
@@ -222,6 +228,10 @@ public class CStageManager : MonoBehaviour
 
         CEnemyPoolManager.Instance.StopSpawn();
         StageEnd();
+
+        yield return new WaitForSeconds(3.0f);
+
+        oMainCamera.SetActive(false);
         StartShop();
 
         yield return null;

@@ -297,7 +297,7 @@ public class CItemMouseEventController : MonoBehaviour
 
                 else if (weaponStats != null)
                 {
-                    CellManager.Instance.SetItem(prevCellPos, weaponStats.Level);
+                    CellManager.Instance.SetItem(prevCellPos, weaponStats.Weapon.level);
                 }
             }
 

@@ -119,6 +119,8 @@ public class CCreateMapManager : MonoBehaviour
                 SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
             }
         }
+
+        CreateMap();
     }
 
     /// <summary>
@@ -153,5 +155,13 @@ public class CCreateMapManager : MonoBehaviour
         map.transform.position = new Vector3(0.0f, -0.2f, 0.0f);
 
         isCreateMap = true;
+    }
+
+    /// <summary>
+    /// »ý¼ºÇß´ø ¸ÊÀ» ÆÄ±«ÇÑ´Ù.
+    /// </summary>
+    public void DestroyMap()
+    {
+        map.DestoryMapPart();
     }
 }

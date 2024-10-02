@@ -236,7 +236,7 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
     {
         foreach (Transform child in transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
     }
 
