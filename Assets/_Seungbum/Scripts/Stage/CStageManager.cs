@@ -145,10 +145,13 @@ public class CStageManager : MonoBehaviour
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
         UIManager.Instance.ChangeFloorText(nStageCount);
+        UIManager.Instance.SetHPUI(tfCharacter.GetComponent<Character>().maxHp, tfCharacter.GetComponent<Character>().currentHp);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
         tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
+
+        isStageEnd = false;
 
         StartCoroutine(StageTimer());
     }

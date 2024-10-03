@@ -112,6 +112,7 @@ public class Character : MonoBehaviour
         }
         currentHp -= finalDamage;
 
+        UIManager.Instance.SetHPUI(maxHp, currentHp);
         CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
     }
     /// <summary>
@@ -234,7 +235,7 @@ public class Character : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.TryGetComponent<IAttackable>(out IAttackable hit))
+        if (other.gameObject.TryGetComponent<IAttackable>(out IAttackable hit) && !CStageManager.Instance.IsStageEnd)
         {
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);

@@ -83,6 +83,12 @@ public class CEnemyChestController : MonoBehaviour, IHittable
 
     void OnDisable()
     {
+        for (int i = 0; i < oBrokenChest.Length; i++)
+        {
+            oBrokenChest[i].SetActive(false);
+            oBrokenChest[i].transform.localPosition = Vector3.zero;
+        }
+
         enemyPool.ReturnPool(gameObject, EAttackType.NONE);
     }
 
@@ -169,7 +175,7 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     }
 
     /// <summary>
-    /// 상자를 비활성화 시킨다.
+    /// 상자를 비활성화 시키고 
     /// </summary>
     void InActiveChest()
     {

@@ -41,6 +41,17 @@ public class CItemMouseEventController : MonoBehaviour
     int nIndex = -1;
     #endregion
 
+    /// <summary>
+    /// 아이템 중앙 포지션 값
+    /// </summary>
+    public Vector3 MiddlePos
+    {
+        get
+        {
+            return v3MiddlPosition;
+        }
+    }
+
     void Awake()
     {
         itemStats = GetComponent<CItemStats>();
@@ -55,6 +66,7 @@ public class CItemMouseEventController : MonoBehaviour
 
         v3StartRotation = new Vector3(-30.0f, 0.0f, -30.0f);
         v3StartPosition = transform.position;
+        v3MiddlPosition = transform.GetChild(0).position;
 
         nRotateCount = 0;
     }

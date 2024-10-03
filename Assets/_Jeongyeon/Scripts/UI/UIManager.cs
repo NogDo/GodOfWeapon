@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
     public TextMeshProUGUI textMoney;
+    public TextMeshProUGUI textHP;
+    public Image imageHP;
+    public Image imageEXP;
 
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
@@ -289,5 +292,16 @@ public class UIManager : MonoBehaviour
     public void SetStageMoneyText(int money)
     {
         textMoney.text = money.ToString();
+    }
+
+    /// <summary>
+    /// 플레이어 HP UI의 값을 설정한다.
+    /// </summary>
+    /// <param name="maxHP">최대 체력</param>
+    /// <param name="nowHP">현재 체력</param>
+    public void SetHPUI(float maxHP, float nowHP)
+    {
+        textHP.text = $"{Mathf.CeilToInt(nowHP)}/{Mathf.CeilToInt(maxHP)}";
+        imageHP.fillAmount = nowHP / maxHP;
     }
 }
