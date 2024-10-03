@@ -114,6 +114,7 @@ public class CShopManager : MonoBehaviour
 
         RemoveShopItem();
         RandomItemSpawn();
+        ActiveShopCostUI();
 
         nReRollCount = 0;
         SetReRollCost();
