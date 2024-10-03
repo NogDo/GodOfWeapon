@@ -275,4 +275,15 @@ public class CStageManager : MonoBehaviour
 
         UIManager.Instance.SetStageMoneyText(nPlayerMoney);
     }
+
+    /// <summary>
+    /// 플레이어 보유 돈을 감소시킨다.
+    /// </summary>
+    /// <param name="money">감소할 돈</param>
+    public void DecreaseMoney(int money)
+    {
+        nPlayerMoney -= money;
+
+        UIManager.Instance.SetStageMoneyText(nPlayerMoney);
+    }
 }
