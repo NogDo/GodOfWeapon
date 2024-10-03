@@ -30,6 +30,7 @@ public class CStageManager : MonoBehaviour
     float fStageTime = 0.0f;
 
     bool isClick = false;
+    bool isStageEnd = true;
     #endregion
 
     /// <summary>
@@ -62,6 +63,17 @@ public class CStageManager : MonoBehaviour
         get
         {
             return nPlayerMoney;
+        }
+    }
+
+    /// <summary>
+    /// 스테이지가 끝났는지 판단
+    /// </summary>
+    public bool IsStageEnd
+    {
+        get
+        {
+            return isStageEnd;
         }
     }
 
@@ -185,6 +197,8 @@ public class CStageManager : MonoBehaviour
         tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
+        isStageEnd = false;
+
         StartCoroutine(StageTimer());
     }
 
@@ -194,6 +208,7 @@ public class CStageManager : MonoBehaviour
     public void StageEnd()
     {
         OnStageEnd?.Invoke();
+        isStageEnd = true;
 
         UIManager.Instance.SetActiveClearText(true);
     }
