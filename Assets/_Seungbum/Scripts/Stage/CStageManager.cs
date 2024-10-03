@@ -261,4 +261,12 @@ public class CStageManager : MonoBehaviour
 
         yield return null;
     }
+
+    /// <summary>
+    /// 플레이어 보유 돈을 증가시킨다.
+    /// </summary>
+    public void IncreaseMoney()
+    {
+        nPlayerMoney++;
+    }
 }

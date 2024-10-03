@@ -37,6 +37,8 @@ public class CGoldIngotController : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
+            CStageManager.Instance.IncreaseMoney();
+
             gameObject.SetActive(false);
         }
     }
