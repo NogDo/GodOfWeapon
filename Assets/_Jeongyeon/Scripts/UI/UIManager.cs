@@ -288,10 +288,10 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 스테이지 돈 UI의 Text를 설정한다.
+    /// 스테이지와 상점의 돈 UI의 Text를 설정한다.
     /// </summary>
     /// <param name="money">보유한 돈</param>
-    public void SetStageMoneyText(int money)
+    public void SetMoneyText(int money)
     {
         textMoney.text = money.ToString();
     }

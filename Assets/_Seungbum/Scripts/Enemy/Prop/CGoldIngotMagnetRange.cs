@@ -15,7 +15,7 @@ public class CGoldIngotMagnetRange : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Character"))
+        if (other.CompareTag("Character") && !CStageManager.Instance.IsStageEnd)
         {
             goldIngotController.StartMagnet(other.transform);
         }

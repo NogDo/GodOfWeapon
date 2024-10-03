@@ -284,7 +284,7 @@ public class CStageManager : MonoBehaviour
 
         nPlayerMoney += money;
 
-        UIManager.Instance.SetStageMoneyText(nPlayerMoney);
+        UIManager.Instance.SetMoneyText(nPlayerMoney);
     }
 
     /// <summary>
@@ -295,7 +295,7 @@ public class CStageManager : MonoBehaviour
     {
         nPlayerMoney -= money;
 
-        UIManager.Instance.SetStageMoneyText(nPlayerMoney);
+        UIManager.Instance.SetMoneyText(nPlayerMoney);
     }
 
     /// <summary>
