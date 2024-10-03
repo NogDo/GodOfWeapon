@@ -145,10 +145,11 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseOver()
     {
-        if (!UIManager.Instance.ExtraUIOpen)
+        if (Input.GetMouseButtonDown(1))
         {
-            if (Input.GetMouseButtonDown(1))
+            if (!UIManager.Instance.ExtraUIOpen)
             {
+
                 if (!isGrab && !isInInventory)
                 {
                     CShopManager.Instance.LockItem(nIndex, transform);
@@ -156,7 +157,8 @@ public class CItemMouseEventController : MonoBehaviour
 
                 else if (!isGrab && isInInventory)
                 {
-                    SetExtraUI(true);
+                    LockExtraUIPanel();
+                    UIManager.Instance.SetActiveExtraUI(true);
                 }
             }
         }
@@ -509,18 +511,10 @@ public class CItemMouseEventController : MonoBehaviour
     }
 
     /// <summary>
-    /// ExtraUI bool값을 지정한다.
-    /// </summary>
-    /// <param name="active">활성화 여부</param>
-    public void SetExtraUI(bool active)
-    {
-        UIManager.Instance.SetActiveExtraUI(active);
-    }
-
-    /// <summary>
     /// 아아템, 무기 정보를 나타내는 UI Panel을 활성화 / 비활성화 한다.
     /// </summary>
     /// <param name="active">활성화 여부</param>
+    /// <param name="UILock">추가 UI 고정인지 확인</param>
     void ActiveUIPanel(bool active)
     {
         if (isInInventory)
@@ -552,6 +546,22 @@ public class CItemMouseEventController : MonoBehaviour
             {
                 UIManager.Instance.ActiveShopWeaponInfoPanel(weaponStats, active);
             }
+        }
+    }
+
+    /// <summary>
+    /// 추가 UI를 계속 활성화한다.
+    /// </summary>
+    void LockExtraUIPanel()
+    {
+        if (itemStats != null && !UIManager.Instance.shopItemExtraInfo.gameObject.activeSelf)
+        {
+            UIManager.Instance.ActiveShopItemExtraInfoPanel(itemStats, true);
+        }
+
+        if (weaponStats != null && !UIManager.Instance.shopWeaponExtraInfo.gameObject.activeSelf)
+        {
+            UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weaponStats, true);
         }
     }
 }
