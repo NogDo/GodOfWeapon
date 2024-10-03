@@ -21,11 +21,12 @@ public class CStageManager : MonoBehaviour
     Transform tfCharacter;
     PlayerInventory player;
 
+    int nStageCount = 0;
     int nLevel = 1;
     int nCurrentLevel = 1;
-    int nStageCount = 0;
-
     int nPlayerMoney = 0;
+    int nKillCount = 0;
+    float fMaxEXP = 10.0f;
     float fEXP = 0.0f;
 
     float fStageTime = 0.0f;
@@ -111,12 +112,16 @@ public class CStageManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator AddCellCountCheck()
     {
-        for (int i = 0; i < nCurrentLevel + nLevel; i++)
+        int nAddCellCount = (nCurrentLevel - nLevel) * 2;
+
+        for (int i = 0; i < nAddCellCount; i++)
         {
             isClick = false;
             CellManager.Instance.AddCell();
             yield return new WaitUntil(() => isClick);
         }
+
+        nLevel = nCurrentLevel;
         yield return null;
     }
 
@@ -224,8 +229,11 @@ public class CStageManager : MonoBehaviour
     public void StartShop()
     {
         CShopManager.Instance.ActiveShop();
+        UIManager.Instance.SetActiveLevelUpUI(false);
         UIManager.Instance.SetActiveStageUI(false);
         CCreateMapManager.Instance.DestroyMap();
+
+        EndStage();
 
         tfCharacter.gameObject.SetActive(false);
     }
@@ -288,5 +296,36 @@ public class CStageManager : MonoBehaviour
         nPlayerMoney -= money;
 
         UIManager.Instance.SetStageMoneyText(nPlayerMoney);
+    }
+
+    /// <summary>
+    /// 플레이어 경험치를 증가시킨다.
+    /// </summary>
+    public void InCreaseExp()
+    {
+        float exp = 1 + player.myItemData.expRate * 0.01f;
+        fEXP += exp;
+
+        if (fEXP >= fMaxEXP)
+        {
+            fEXP -= fMaxEXP;
+            fMaxEXP += fMaxEXP * 0.1f;
+            LevelUp();
+        }
+
+        UIManager.Instance.SetExpUI(fMaxEXP, fEXP);
+
+        nKillCount++;
+    }
+
+    /// <summary>
+    /// 플레이어 레벨을 증가시킨다.
+    /// </summary>
+    public void LevelUp()
+    {
+        nCurrentLevel++;
+
+        UIManager.Instance.SetActiveLevelUpUI(true);
+        UIManager.Instance.SetLevelUpText(nCurrentLevel - nLevel);
     }
 }

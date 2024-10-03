@@ -202,6 +202,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         spawnPosition.y = 1.0f;
 
         CGoldIngotPoolManager.Instance.SpawnTier1GoldIngot(spawnPosition);
+        CStageManager.Instance.InCreaseExp();
 
         StartCoroutine(DeSpawn());
     }

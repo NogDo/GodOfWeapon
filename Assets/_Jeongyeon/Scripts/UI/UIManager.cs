@@ -34,10 +34,12 @@ public class UIManager : MonoBehaviour
     [Header("스테이지 관련 UI")]
     public GameObject oStageUI;
     public GameObject oClearText;
+    public GameObject oLevelUpUI;
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
     public TextMeshProUGUI textMoney;
     public TextMeshProUGUI textHP;
+    public TextMeshProUGUI textLevelUp;
     public Image imageHP;
     public Image imageEXP;
 
@@ -303,5 +305,33 @@ public class UIManager : MonoBehaviour
     {
         textHP.text = $"{Mathf.CeilToInt(nowHP)}/{Mathf.CeilToInt(maxHP)}";
         imageHP.fillAmount = nowHP / maxHP;
+    }
+
+    /// <summary>
+    /// 플레이어 EXP UI의 값을 설정한다.
+    /// </summary>
+    /// <param name="maxExp">최대 경험치</param>
+    /// <param name="nowExp">현재 경험치</param>
+    public void SetExpUI(float maxExp, float nowExp)
+    {
+        imageEXP.fillAmount = nowExp / maxExp;
+    }
+
+    /// <summary>
+    /// 플레이어의 레벨업 텍스트를 설정한다.
+    /// </summary>
+    /// <param name="level"></param>
+    public void SetLevelUpText(int level)
+    {
+        textLevelUp.text = $"+{level}";
+    }
+
+    /// <summary>
+    /// 레벨업 UI를 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void SetActiveLevelUpUI(bool active)
+    {
+        oLevelUpUI.SetActive(active);
     }
 }
