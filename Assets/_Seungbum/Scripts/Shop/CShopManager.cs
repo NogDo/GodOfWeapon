@@ -112,6 +112,7 @@ public class CShopManager : MonoBehaviour
         shopCanvas.gameObject.SetActive(true);
         oLights.SetActive(true);
 
+        RemoveShopItem();
         RandomItemSpawn();
 
         nReRollCount = 0;
