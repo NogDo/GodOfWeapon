@@ -302,7 +302,7 @@ public class UIItemExtra : MonoBehaviour
     {
         CellManager.Instance.PlayerInventory.MinusItem(item.Item);
         item.GetComponent<CItemMouseEventController>().SellItem();
-       // UIManager.Instance.
+        UIManager.Instance.ActiveShopItemExtraInfoPanel(item,false);
         UIManager.Instance.SetActiveExtraUI(false);
         Destroy(item.gameObject);
     }
@@ -311,14 +311,14 @@ public class UIItemExtra : MonoBehaviour
     {
         item.gameObject.GetComponent<IActiveItem>().UseItem();
         item.GetComponent<CItemMouseEventController>().ItemCellReset();
-        // UIManager.Instance.
+        UIManager.Instance.ActiveShopItemExtraInfoPanel(item, false);
         UIManager.Instance.SetActiveExtraUI(false);
         Destroy(item.gameObject);
     }
 
     public void OnCancelButtonClick()
     {
-        // UIManager.Instance.
+        UIManager.Instance.ActiveShopItemExtraInfoPanel(item, false);
         UIManager.Instance.SetActiveExtraUI(false);
     }
 }

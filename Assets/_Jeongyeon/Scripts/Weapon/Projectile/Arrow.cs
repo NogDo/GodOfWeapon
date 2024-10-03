@@ -72,7 +72,7 @@ public class Arrow : WeaponProjectile
             Return();
             
             hit.Hit(damage,massValue);
-            if (CheckCritical(inventory.myItemData.criticalRate) == true)
+            if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
             {
                 hitParticlePool.GetHitParticle(1).Play(hitPosition);   
                 CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
@@ -84,7 +84,6 @@ public class Arrow : WeaponProjectile
             }
             if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
             {
-                // ÈíÇ÷ ±¸Çö ÇÊ¿ä
                 player.currentHp += 1;
                 UIManager.Instance.CurrentHpChange(player);
                 CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);

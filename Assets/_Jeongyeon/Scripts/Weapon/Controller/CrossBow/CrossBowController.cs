@@ -7,14 +7,15 @@ using System;
 public class CrossBowController : WeaponController
 {
     #region Public Fields
-    public WProjectilePool projectilePool;
-    public Transform arrowPosition;
-  
+    public WProjectilePool projectilePool; // 화살을 관리하는 풀
+    public Transform arrowPosition; // 화살의 발사 위치
     #endregion
+
     #region Private Fields
     #endregion
+
     #region Protected Fields
-    protected PositionInfo positionInfo;
+    protected PositionInfo positionInfo; // 화살의 발사 위치를 가지고 있는 클래스
     protected Animator anim;
     protected int positionIndex = 0;
     protected Transform[] shootPosition;
@@ -30,6 +31,12 @@ public class CrossBowController : WeaponController
 
     public virtual void OnEnable()
     {
+        if (startParent != null)
+        {
+            gameObject.transform.parent = startParent.transform;
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
         myData = weaponStatInfo.data;
         if (inventory == null)
         {
@@ -41,6 +48,7 @@ public class CrossBowController : WeaponController
             attackSpeed = 0.01f;
         }
     }
+
     public void Update()
     {
         if (isAttacking == false)
@@ -51,7 +59,7 @@ public class CrossBowController : WeaponController
             }
         }
     }
-    
+
     public override bool FindTarget()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, AttackRange, targetLayer);
@@ -126,8 +134,8 @@ public class CrossBowController : WeaponController
                 {
                     break;
                 }
-                else 
-                { 
+                else
+                {
                     positionIndex++;
                 }
             }
