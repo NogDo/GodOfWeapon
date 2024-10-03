@@ -39,6 +39,8 @@ public class CEnemyChestController : MonoBehaviour, IHittable
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         mesh = GetComponent<MeshRenderer>();
+
+        CStageManager.Instance.OnStageEnd += StageEnd;
     }
 
     void OnEnable()
@@ -48,14 +50,21 @@ public class CEnemyChestController : MonoBehaviour, IHittable
             col.enabled = false;
             mesh.enabled = true;
 
-            fMaxHP = 50.0f;
+            float hp = 20 + CStageManager.Instance.StageCount * 2;
+
+            if (hp > 50)
+            {
+                hp = 50;
+            }
+
+            fMaxHP = hp;
             fNowHP = fMaxHP;
 
             float randX = Random.Range((CCreateMapManager.Instance.MapSize.minX + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxX - 1) * 4.0f);
             float randZ = Random.Range((CCreateMapManager.Instance.MapSize.minZ + 2) * 4.0f, (CCreateMapManager.Instance.MapSize.maxZ - 1) * 4.0f);
 
             Vector3 spawnPoint = new Vector3(randX, 7.5f, randZ);
-            Vector3 particlePoint = new Vector3(randX, 0.0f, randZ);
+            Vector3 particlePoint = new Vector3(randX, 0.2f, randZ);
 
             particleSpawn = Instantiate(particleSpawnPrefab, particlePoint, Quaternion.identity);
             particleSpawn.Play();
@@ -75,6 +84,11 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     void OnDisable()
     {
         enemyPool.ReturnPool(gameObject, EAttackType.NONE);
+    }
+
+    void OnDestroy()
+    {
+        CStageManager.Instance.OnStageEnd -= StageEnd;
     }
 
     public void Die()
@@ -113,10 +127,14 @@ public class CEnemyChestController : MonoBehaviour, IHittable
 
     public void StageEnd()
     {
-        mesh.enabled = false;
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         col.enabled = false;
 
-        gameObject.SetActive(false);
+        Invoke("InActiveChest", 3.0f);
     }
 
     public void Hit(float damage, float mass)
@@ -148,5 +166,13 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     void AnimationStart()
     {
         animator.SetTrigger("Down");
+    }
+
+    /// <summary>
+    /// 상자를 비활성화 시킨다.
+    /// </summary>
+    void InActiveChest()
+    {
+        gameObject.SetActive(false);
     }
 }

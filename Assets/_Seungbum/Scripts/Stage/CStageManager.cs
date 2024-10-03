@@ -19,6 +19,7 @@ public class CStageManager : MonoBehaviour
 
     GameObject oMainCamera;
     Transform tfCharacter;
+    PlayerInventory player;
 
     int nLevel = 1;
     int nCurrentLevel = 1;
@@ -37,7 +38,7 @@ public class CStageManager : MonoBehaviour
     /// 현재 스테이지
     /// </summary>
     public int StageCount
-    { 
+    {
         get
         {
             return nStageCount;
@@ -133,9 +134,10 @@ public class CStageManager : MonoBehaviour
     public void StartStage()
     {
         nStageCount = 1;
-        fStageTime = 5.0f;
+        fStageTime = 25.0f;
 
-        tfCharacter = FindObjectOfType<Character>().transform;
+        player = FindObjectOfType<PlayerInventory>();
+        tfCharacter = player.transform;
         tfCharacter.gameObject.SetActive(false);
 
         oStartMap.SetActive(false);
@@ -267,6 +269,10 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void IncreaseMoney()
     {
-        nPlayerMoney++;
+        int money = Mathf.RoundToInt(1 + 0.01f * player.myItemData.moneyRate);
+
+        nPlayerMoney += money;
+
+        UIManager.Instance.SetStageMoneyText(nPlayerMoney);
     }
 }

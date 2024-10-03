@@ -33,9 +33,10 @@ public class UIManager : MonoBehaviour
 
     [Header("스테이지 관련 UI")]
     public GameObject oStageUI;
+    public GameObject oClearText;
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
-    public GameObject oClearText;
+    public TextMeshProUGUI textMoney;
 
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
@@ -279,5 +280,14 @@ public class UIManager : MonoBehaviour
     public void SetActiveClearText(bool active)
     {
         oClearText.SetActive(active);
+    }
+
+    /// <summary>
+    /// 스테이지 돈 UI의 Text를 설정한다.
+    /// </summary>
+    /// <param name="money">보유한 돈</param>
+    public void SetStageMoneyText(int money)
+    {
+        textMoney.text = money.ToString();
     }
 }
