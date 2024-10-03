@@ -69,11 +69,26 @@ public class SMRCreator : MonoBehaviour
         {
             if (createCoroutine == null)
             {
-                createCoroutine = new Coroutine[smrs.Length]; 
+                createCoroutine = new Coroutine[smrs.Length];
                 for (int i = 0; i < smrs.Length; i++)
                 {
                     createCoroutine[i] = StartCoroutine(CreateImage(i));
                 }
+            }
+        }
+        else
+        {
+            if (createCoroutine != null)
+            {
+                for (int i = 0; i < createCoroutine.Length; i++)
+                {
+                    if (createCoroutine[i] != null)
+                    {
+                        StopCoroutine(createCoroutine[i]);
+                        createCoroutine[i] = null;
+                    }
+                }
+                createCoroutine = null;
             }
         }
     }

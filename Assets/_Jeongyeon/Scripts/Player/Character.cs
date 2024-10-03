@@ -9,28 +9,28 @@ public class Character : MonoBehaviour
 
     #region player Info
     [HideInInspector]
-    public float moveSpeed = 5;
+    public float moveSpeed = 5; // 기본 이동속도
     [HideInInspector]
-    public float maxHp;
+    public float maxHp; // 캐릭터 최대 Hp
     [HideInInspector]
-    public float currentHp;
-    private int dashCount = 1;
+    public float currentHp; // 현재 Hp
+    private int dashCount = 1; // 시작 대쉬 횟수
     #endregion
 
     #region Public Fields
-    public Transform player;
-    public Transform playerModel;
+    public Transform player; // 플레이어의 Transform
+    public Transform playerModel; // 플레이어의 모델 Transform
 
-    public GameObject[] afterImage;
-    public Material[] playerMaterial;
+    public GameObject[] afterImage; // 잔상을 생성할 오브젝트
+    public Material[] playerMaterial; // 플레이어의 메테리얼
     #endregion
 
     #region Private Fields
-    private int currentDashCount;
-    private float dashSpeed = 15f;
-    private bool isdash = false;
-    private bool canMove = true;
-    private bool isfirst = true;
+    private int currentDashCount; // 현재 대쉬 횟수
+    private float dashSpeed = 15f; // 대쉬 속도
+    private bool isdash = false; // 대쉬중인지 확인하는 변수
+    private bool canMove = true; // 플레이어 움직임을 제어하는 변수
+    private bool isfirst = true; // 로비에서 시작시 움직임 제어를 막는 변수
     private Vector3 run; // 이동시 사용할 벡터
 
     private Transform cameraTransform;
@@ -72,12 +72,15 @@ public class Character : MonoBehaviour
         {
             StartCoroutine(StopMove());
         }
+        currentDashCount = dashCount;
     }
     private void OnDisable()
     {
         isfirst = false;
+        isdash = false;
+        smrCreator.Create(false);
     }
-    public virtual void Update()
+    public void Update()
     {
         if (canMove == true)
         {
