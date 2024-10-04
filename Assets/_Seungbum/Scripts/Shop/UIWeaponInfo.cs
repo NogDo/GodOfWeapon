@@ -30,6 +30,7 @@ public class UIWeaponInfo : MonoBehaviour
 
     #region private º¯¼ö
     CWeaponStats weapon;
+    CItemMouseEventController mouseEventController;
     #endregion
 
     void OnDisable()
@@ -52,6 +53,7 @@ public class UIWeaponInfo : MonoBehaviour
     public void SetItemInfoPanel(CWeaponStats weapon)
     {
         this.weapon = weapon;
+        mouseEventController = this.weapon.GetComponent<CItemMouseEventController>();
 
         SetPanelSize();
         SetPanelPosition();
@@ -85,9 +87,8 @@ public class UIWeaponInfo : MonoBehaviour
     /// </summary>
     void SetPanelPosition()
     {
-        Vector3 position = weapon.transform.position;
-        position.x += 0.4f + weapon.GetComponent<BoxCollider>().size.x * 0.2f;
-        position.z += 0.3f;
+        Vector3 position = mouseEventController.MiddlePos;
+        position.x += 0.6f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);
     }

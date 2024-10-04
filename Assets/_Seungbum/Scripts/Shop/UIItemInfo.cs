@@ -27,6 +27,7 @@ public class UIItemInfo : MonoBehaviour
 
     #region private º¯¼ö
     CItemStats item;
+    CItemMouseEventController mouseEventController;
     #endregion
 
     void OnDisable()
@@ -49,6 +50,7 @@ public class UIItemInfo : MonoBehaviour
     public void SetItemInfoPanel(CItemStats item)
     {
         this.item = item;
+        mouseEventController = this.item.GetComponent<CItemMouseEventController>();
 
         SetPanelSize();
         SetPanelPosition();
@@ -82,9 +84,8 @@ public class UIItemInfo : MonoBehaviour
     /// </summary>
     void SetPanelPosition()
     {
-        Vector3 position = item.transform.position;
-        position.x += 0.4f + item.GetComponent<BoxCollider>().size.x * 0.2f;
-        position.z += 0.3f;
+        Vector3 position = mouseEventController.MiddlePos;
+        position.x += 0.6f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);
     }

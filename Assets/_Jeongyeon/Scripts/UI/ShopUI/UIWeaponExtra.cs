@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class UIWeaponExtra : MonoBehaviour
 {
     #region public 변수
+    [Header("버튼 관련")]
+    public Text sellText;
+
     [Header("아이템 정보 창")]
     public RectTransform rtBackground;
 
@@ -35,10 +38,13 @@ public class UIWeaponExtra : MonoBehaviour
 
     #region private 변수
     CWeaponStats weapon;
+    CItemMouseEventController mouseEventController;
     #endregion
 
     private void OnEnable()
     {
+        sellText.text = sellText.text = $"판매 : {Mathf.RoundToInt(weapon.Weapon.price * 0.8f)}$";
+
         CanCombineWeapon();
     }
     void OnDisable()
@@ -62,6 +68,7 @@ public class UIWeaponExtra : MonoBehaviour
     public void SetItemInfoPanel(CWeaponStats weapon)
     {
         this.weapon = weapon;
+        mouseEventController = this.weapon.GetComponent<CItemMouseEventController>();
 
         SetPanelSize();
         SetPanelPosition();
@@ -95,9 +102,8 @@ public class UIWeaponExtra : MonoBehaviour
     /// </summary>
     void SetPanelPosition()
     {
-        Vector3 position = weapon.transform.position;
-        position.x += 0.4f + weapon.GetComponent<BoxCollider>().size.x * 0.2f;
-        position.z += 0.3f;
+        Vector3 position = mouseEventController.MiddlePos;
+        position.x += 0.6f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);
     }

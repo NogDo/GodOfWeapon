@@ -30,11 +30,12 @@ public class UIItemExtra : MonoBehaviour
 
     #region private 변수
     CItemStats item;
+    CItemMouseEventController mouseEventController;
     #endregion
 
     private void OnEnable()
     {
-        sellText.text = $"판매 : {item.Item.price * 0.8f}$";
+        sellText.text = $"판매 : {Mathf.Round(item.Item.price * 0.8f)}$";
         if (item.Item.active == false)
         {
             activeImage.gameObject.SetActive(true);
@@ -64,6 +65,7 @@ public class UIItemExtra : MonoBehaviour
     public void SetItemInfoPanel(CItemStats item)
     {
         this.item = item;
+        mouseEventController = this.item.GetComponent<CItemMouseEventController>();
 
         SetPanelSize();
         SetPanelPosition();
@@ -97,9 +99,8 @@ public class UIItemExtra : MonoBehaviour
     /// </summary>
     void SetPanelPosition()
     {
-        Vector3 position = item.transform.position;
-        position.x += 0.4f + item.GetComponent<BoxCollider>().size.x * 0.2f;
-        position.z += 0.3f;
+        Vector3 position = mouseEventController.MiddlePos;
+        position.x += 0.6f;
 
         transform.position = shopCamera.WorldToScreenPoint(position);
     }
