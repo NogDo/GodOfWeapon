@@ -16,7 +16,6 @@ public class CellManager : MonoBehaviour
     //셀 프리팹 및 인벤토리에 있는 관련 변수
     [SerializeField] GameObject gridPrefab;
     private GameObject[,] gameGrid;
-    private int[,] checkGrid;
     private List<Pos> canActiveCell;
     #endregion
 
@@ -25,6 +24,8 @@ public class CellManager : MonoBehaviour
     public event Action OnCellClick;
     public CellInfo weaponInstancePostion;
     public CellInfo itemInstancePostion;
+    //셀의 활성화 상태를 저장하는 배열
+    public int[,] checkGrid;
     #endregion
 
     /// <summary>
@@ -298,6 +299,25 @@ public class CellManager : MonoBehaviour
                 gameGrid[pos[i].x, pos[i].z].transform.GetChild(1).GetComponent<CellColor>().ResetHighlight();
             }
         }
+    }
+    /// <summary>
+    /// 게임중 총얻은 셀의 갯수를 확인하는 메서드
+    /// </summary>
+    /// <returns></returns>
+    public int TotalCell()
+    {
+        int CellCount = 0;
+        for (int i = 0; i < checkGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < checkGrid.GetLength(1); j++)
+            {
+                if (checkGrid[i, j] != 0)
+                {
+                    CellCount++;
+                }
+            }
+        }
+        return CellCount;
     }
 }
 
