@@ -12,6 +12,9 @@ public class MainButton : MonoBehaviour
     {
         CEnemyPoolManager.Instance.DestroyPool();
         CEnemyProjectilePoolManager.Instance.DestroyPool();
+        CShopManager.Instance.RemoveInventoryItem();
+        CShopManager.Instance.UnLockAllItem();
+        CCreateMapManager.Instance.DestroyMap();
         CStageManager.Instance.CreateStartMap();
         CellManager.Instance.PlayerInventory.ResetAllData();
         CellManager.Instance.ReStart();

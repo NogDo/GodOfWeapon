@@ -427,6 +427,22 @@ public class CShopManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 인벤토리에 있는 아이템과 잠겨있는 아이템을 없앤다.
+    /// </summary>
+    public void RemoveInventoryItem()
+    {
+        foreach (Transform item in tfBuyItems)
+        {
+            Destroy(item.gameObject);
+        }
+
+        foreach (Transform item in tfLockItems)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    /// <summary>
     /// 재굴림 버튼 클릭
     /// </summary>
     public void OnReRollButtonClick()
@@ -482,6 +498,21 @@ public class CShopManager : MonoBehaviour
         else
         {
             transform.SetParent(tfNonBuyItems);
+        }
+    }
+
+    /// <summary>
+    /// 모든 아이템의 잠금 상태를 해제한다.
+    /// </summary>
+    public void UnLockAllItem()
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            shopItems[i].eType = EItemType.ITEM;
+            shopItems[i].nIndex = -1;
+            shopItems[i].isLock = false;
+
+            InActiveShopCostUI(i);
         }
     }
 
