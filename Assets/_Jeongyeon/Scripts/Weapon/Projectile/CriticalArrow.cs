@@ -57,6 +57,7 @@ public class CriticalArrow : WeaponProjectile
             hitParticlePool.GetHitParticle(1).Play(hitPosition);
             hit.Hit(damage + (damage * 0.5f), massValue);
             CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+            CStageManager.Instance.AddTotalDamage(damage + (damage * 0.5f));
         }
         if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
         {

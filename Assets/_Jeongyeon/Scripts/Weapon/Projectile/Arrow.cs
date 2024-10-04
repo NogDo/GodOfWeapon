@@ -56,7 +56,7 @@ public class Arrow : WeaponProjectile
         trailRenderer.enabled = true;
         Invoke("Return", 3.0f);
     }
-  
+
     /// <summary>
     /// 충돌을 감지하는 메서드
     /// </summary>
@@ -70,19 +70,22 @@ public class Arrow : WeaponProjectile
         {
             CancelInvoke("Return");
             Return();
-            
-            hit.Hit(damage,massValue);
-            if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
+            if (CheckCritical(inventory.myItemData.criticalRate / 100) == true)
             {
-                hitParticlePool.GetHitParticle(1).Play(hitPosition);   
-                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+                float criticalDamage = damage + (damage * 0.5f);
+                hitParticlePool.GetHitParticle(1).Play(hitPosition);
+                hit.Hit(criticalDamage, massValue);
+                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, criticalDamage);
+                CStageManager.Instance.AddTotalDamage(criticalDamage);
             }
             else
             {
                 hitParticlePool.GetHitParticle(0).Play(hitPosition);
+                hit.Hit(damage, massValue);
                 CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                CStageManager.Instance.AddTotalDamage(damage);
             }
-            if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
             {
                 player.currentHp += 1;
                 UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);

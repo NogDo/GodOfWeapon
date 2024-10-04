@@ -37,7 +37,7 @@ public class LightningProjectile : WeaponProjectile
 
     private void OnTriggerEnter(Collider other)
     {
-        float damage = (spearController.AttackDamage + (inventory.myItemData.damage/ 10) + (inventory.myItemData.rangeDamage / 10)) *0.8f;
+        float damage = (spearController.AttackDamage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10)) * 0.8f;
         float massValue = spearController.MassValue + (inventory.myItemData.massValue / 100);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
@@ -46,16 +46,20 @@ public class LightningProjectile : WeaponProjectile
             {
                 if (collider.TryGetComponent<IHittable>(out IHittable hittable))
                 {
-                    hittable.Hit(damage, massValue);
-                    if (CheckCritical(inventory.myItemData.criticalRate) == true)
+                    if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
                     {
-                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+                        float criticalDamage = damage + (damage * 0.5f);
+                        hittable.Hit(criticalDamage, massValue);
+                        CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, criticalDamage);
+                        CStageManager.Instance.AddTotalDamage(criticalDamage);
                     }
                     else
                     {
+                        hittable.Hit(damage, massValue);
                         CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                        CStageManager.Instance.AddTotalDamage(damage);
                     }
-                    if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
+                    if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
                     {
                         player.currentHp += 1;
                         UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
