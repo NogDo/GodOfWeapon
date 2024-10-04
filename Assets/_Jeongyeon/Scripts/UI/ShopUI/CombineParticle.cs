@@ -12,13 +12,13 @@ public class CombineParticle : MonoBehaviour
 
     public IEnumerator CombineBazier(CWeaponStats sourceWeapon, int i)
     {
+        Vector3 startPostion = sourceWeapon.GetComponent<CItemMouseEventController>().MiddlePos; //transform.position + Vector3.right / 3; // 변경 필요
+        Vector3 endPostion = UIManager.Instance.baseWeapon.GetComponent<CItemMouseEventController>().MiddlePos;//transform.position + Vector3.right /3; // 변경 필요 
         combineParticleTrail[i].transform.SetParent(null);
         combineParticleExplosion[i].transform.SetParent(null);
-        combineParticleExplosion[i].transform.position = sourceWeapon.transform.position + Vector3.right / 3;
+        combineParticleExplosion[i].transform.position = startPostion;
         combineParticleTrail[i].SetActive(true);
         combineParticleExplosion[i].SetActive(true);
-        Vector3 startPostion = sourceWeapon.transform.position + Vector3.right / 3; // 변경 필요
-        Vector3 endPostion = UIManager.Instance.baseWeapon.transform.position + Vector3.right /3; // 변경 필요 
         Vector3 midlePosition = (endPostion + startPostion) / 2 + (Vector3.up*2f);
         Vector3 startToMidlePostion;
         Vector3 midleToEndPosition;
