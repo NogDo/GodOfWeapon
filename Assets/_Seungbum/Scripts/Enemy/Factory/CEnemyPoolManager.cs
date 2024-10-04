@@ -56,6 +56,9 @@ public class CEnemyPoolManager : MonoBehaviour
         }
 
         nExtraEliteSpawnCount = 0;
+        
+        nMeleeEnemySpawnCountMax = 5 + CStageManager.Instance.StageCount / 2;
+        nRangeEnemySpawnCountMax = 3 + CStageManager.Instance.StageCount / 2;
 
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
         spawnRangeEnemyCoroutine = SpawnRangeEnemy();
@@ -110,16 +113,15 @@ public class CEnemyPoolManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpawnMeleeEnemy()
     {
+        float meleeEnemySpawnTime = fMeleeEnemySpawnTime - (fEnemySpawnRate / 0.01f);
+
         while (true)
         {
-            float meleeEnemySpawnCount = Random.Range(1.0f, 7.0f);
+            int meleeEnemySpawnCount = Random.Range(nMeleeEnemySpawnCountMax - 3, nMeleeEnemySpawnCountMax);
 
-            for (int i = 0; i < meleeEnemySpawnCount; i++)
-            {
-                enemyPool.SpawnMeleeEnemy();
-            }
+            StartCoroutine(DelaySpawn(meleeEnemySpawnCount, EAttackType.MELEE));
 
-            yield return new WaitForSeconds(fMeleeEnemySpawnTime);
+            yield return new WaitForSeconds(meleeEnemySpawnTime);
         }
     }
 
@@ -129,16 +131,62 @@ public class CEnemyPoolManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpawnRangeEnemy()
     {
+        float rangeEnemySpawnTime = fRangeEnemySpawnTime - (fEnemySpawnRate / 0.01f);
+
         while (true)
         {
-            float rangeEnemySpawnCount = Random.Range(0.0f, 3.0f);
+            int rangeEnemySpawnCount = Random.Range(nRangeEnemySpawnCountMax - 3, nRangeEnemySpawnCountMax);
 
-            for (int i = 0; i < rangeEnemySpawnCount; i++)
+            StartCoroutine(DelaySpawn(rangeEnemySpawnCount, EAttackType.RANGE));
+
+            yield return new WaitForSeconds(rangeEnemySpawnTime);
+        }
+    }
+
+    /// <summary>
+    /// 적들 생성 중간중간에 딜레이를 주고 생성하는 코루틴
+    /// </summary>
+    /// <param name="spawnCount"></param>
+    /// <param name="attackType"></param>
+    /// <returns></returns>
+    IEnumerator DelaySpawn(int spawnCount, EAttackType attackType)
+    {
+        while (spawnCount > 0)
+        {
+            int randSpawnCount = Random.Range(1, 3);
+            float spawnDelay = Random.Range(0.0f, 0.2f);
+
+            if (spawnCount - randSpawnCount < 0)
             {
-                enemyPool.SpawnRangeEnemy();
+                randSpawnCount = spawnCount;
             }
 
-            yield return new WaitForSeconds(fRangeEnemySpawnTime);
+            spawnCount -= randSpawnCount;
+
+            for (int i = 0; i < randSpawnCount; i++)
+            {
+                switch (attackType)
+                {
+                    case EAttackType.MELEE:
+                        enemyPool.SpawnMeleeEnemy();
+                        break;
+
+                    case EAttackType.RANGE:
+                        enemyPool.SpawnRangeEnemy();
+                        break;
+
+                    case EAttackType.BOTH:
+                        break;
+
+                    case EAttackType.NONE:
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 

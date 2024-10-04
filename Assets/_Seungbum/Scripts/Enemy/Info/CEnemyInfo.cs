@@ -114,9 +114,10 @@ public class CEnemyInfo : MonoBehaviour
             string name = gameObject.name.Substring(0, index);
 
             stats = new EnemyStats(DataManager.Instance.GetEnemyStatsData(name));
-
-            SetStatsByStage();
         }
+
+        SetStatsByStage();
+        stats.NowHP = stats.MaxHP;
 
         if (!isSkillInit)
         {
@@ -125,8 +126,6 @@ public class CEnemyInfo : MonoBehaviour
                 skills[i].Init();
             }
         }
-
-        stats.NowHP = stats.MaxHP;
     }
 
     /// <summary>

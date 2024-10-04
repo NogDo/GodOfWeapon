@@ -25,11 +25,15 @@ public class CStageManager : MonoBehaviour
     int nLevel = 1;
     int nCurrentLevel = 1;
     int nPlayerMoney = 0;
-    int nKillCount = 0;
     float fMaxEXP = 10.0f;
     float fEXP = 0.0f;
 
     float fStageTime = 0.0f;
+
+    int nTotalMoney = 0;
+    int nTotalKillCount = 0;
+    float fTotalDamage = 0.0f;
+    float fTotalTime = 0.0f;
 
     bool isClick = false;
     bool isStageEnd = true;
@@ -160,6 +164,11 @@ public class CStageManager : MonoBehaviour
 
         isStageEnd = false;
 
+        nTotalMoney = 0;
+        nTotalKillCount = 0;
+        fTotalDamage = 0.0f;
+        fTotalTime = 0.0f;
+
         StartCoroutine(StageTimer());
     }
 
@@ -286,6 +295,7 @@ public class CStageManager : MonoBehaviour
         int money = Mathf.RoundToInt(1 + 0.01f * player.myItemData.moneyRate);
 
         nPlayerMoney += money;
+        nTotalMoney += money;
 
         UIManager.Instance.SetMoneyText(nPlayerMoney);
     }
@@ -318,7 +328,7 @@ public class CStageManager : MonoBehaviour
 
         UIManager.Instance.SetExpUI(fMaxEXP, fEXP);
 
-        nKillCount++;
+        nTotalKillCount++;
     }
 
     /// <summary>
@@ -332,6 +342,9 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.SetLevelUpText(nCurrentLevel - nLevel);
     }
 
+    /// <summary>
+    /// 의식 인형의 개수를 확인하고, 플레이어의 HP를 조정한다.
+    /// </summary>
     public void CheckCurseDoll()
     {
         int curseDollCount = 0;
@@ -349,5 +362,14 @@ public class CStageManager : MonoBehaviour
             nCurseDollCount = curseDollCount;
         }
         nCurseDollCount = curseDollCount;
+    }
+
+    /// <summary>
+    /// 플레이어가 입힌 데미지를 총 피해량에 더한다
+    /// </summary>
+    /// <param name="damage">플레이어가 입힌 데미지</param>
+    public void AddTotalDamage(float damage)
+    {
+        fTotalDamage += damage;
     }
 }
