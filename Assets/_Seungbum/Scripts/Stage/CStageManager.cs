@@ -15,6 +15,7 @@ public class CStageManager : MonoBehaviour
 
     #region private 변수
     [SerializeField]
+    GameObject oStartMapPrefab;
     GameObject oStartMap;
 
     GameObject oMainCamera;
@@ -105,6 +106,15 @@ public class CStageManager : MonoBehaviour
         yield return new WaitUntil(() => CellManager.Instance != null);
 
         CellManager.Instance.OnCellClick += AddCellCheck;
+        CreateStartMap();
+    }
+
+    /// <summary>
+    /// 스타트 맵을 생성한다.
+    /// </summary>
+    public void CreateStartMap()
+    {
+        oStartMap = Instantiate(oStartMapPrefab, new Vector3(100.0f, 0.0f, 20.0f), Quaternion.identity);
     }
 
     /// <summary>
@@ -154,7 +164,7 @@ public class CStageManager : MonoBehaviour
         tfCharacter = player.transform;
         tfCharacter.gameObject.SetActive(false);
 
-        oStartMap.SetActive(false);
+        Destroy(oStartMap);
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
