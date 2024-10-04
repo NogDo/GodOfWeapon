@@ -21,6 +21,9 @@ public class CStageManager : MonoBehaviour
     Transform tfCharacter;
     PlayerInventory player;
 
+    IEnumerator stageTimerCoroutine;
+    IEnumerator totalTimerCoroutine;
+
     int nStageCount = 0;
     int nLevel = 1;
     int nCurrentLevel = 1;
@@ -169,7 +172,10 @@ public class CStageManager : MonoBehaviour
         fTotalDamage = 0.0f;
         fTotalTime = 0.0f;
 
-        StartCoroutine(StageTimer());
+        stageTimerCoroutine = StageTimer();
+        totalTimerCoroutine = TotalTimer();
+        StartCoroutine(stageTimerCoroutine);
+        StartCoroutine(totalTimerCoroutine);
     }
 
     /// <summary>
@@ -220,7 +226,9 @@ public class CStageManager : MonoBehaviour
 
         isStageEnd = false;
 
-        StartCoroutine(StageTimer());
+        stageTimerCoroutine = StageTimer();
+        StartCoroutine(stageTimerCoroutine);
+
         CheckCurseDoll();
     }
 
@@ -285,6 +293,20 @@ public class CStageManager : MonoBehaviour
         StartShop();
 
         yield return null;
+    }
+
+    /// <summary>
+    /// 총 게임 타이머를 진행하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TotalTimer()
+    {
+        while (true)
+        {
+            fTotalTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -371,5 +393,20 @@ public class CStageManager : MonoBehaviour
     public void AddTotalDamage(float damage)
     {
         fTotalDamage += damage;
+    }
+
+    /// <summary>
+    /// 플레이어가 죽거나 모든 스테이지를 클리어해서 결과를 보여준다.
+    /// </summary>
+    /// <param name="isClear">클리어 여부</param>
+    public void Result(bool isClear)
+    {
+        StopCoroutine(stageTimerCoroutine);
+        StopCoroutine(totalTimerCoroutine);
+
+        CEnemyPoolManager.Instance.StopSpawn();
+        CDamageTextPoolManager.Instance.StopSpawn();
+
+        UIManager.Instance.StageOver(isClear, nStageCount, nTotalMoney, nTotalKillCount, Mathf.RoundToInt(fTotalDamage), fTotalTime);
     }
 }

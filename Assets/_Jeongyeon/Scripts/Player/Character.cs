@@ -342,6 +342,8 @@ public class Character : MonoBehaviour
         }
         anim.SetTrigger("isDie");
         canMove = false;
+
+        CStageManager.Instance.Result(false);
     }
 }
 
