@@ -43,6 +43,7 @@ public class CharacterCamera : MonoBehaviour
     {
         cameraCount = 0;
         Camera.main.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        Camera.main.transform.localPosition = lobbyCameraPosition;
         gameObject.transform.position = startPosition.position;
     }
     /// <summary>

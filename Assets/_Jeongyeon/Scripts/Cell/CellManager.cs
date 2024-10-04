@@ -62,7 +62,7 @@ public class CellManager : MonoBehaviour
 
     public void ReStart()
     {
-        checkGrid = new int[width, height];
+        ResetAllCell();
         CreateGrid();
         SetCell();
         canActiveCell = new List<Pos>();
@@ -318,6 +318,17 @@ public class CellManager : MonoBehaviour
             }
         }
         return CellCount;
+    }
+    public void ResetAllCell()
+    {
+        for (int i = 0; i < gameGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j<gameGrid.GetLength(1); j++)
+            {
+                Destroy(gameGrid[i, j]);
+            }
+        }
+        
     }
 }
 

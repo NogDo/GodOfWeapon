@@ -74,6 +74,9 @@ public class Character : MonoBehaviour
             StartCoroutine(StopMove());
         }
         currentDashCount = dashCount;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ignore Object"), false);
     }
     private void OnDisable()
     {
