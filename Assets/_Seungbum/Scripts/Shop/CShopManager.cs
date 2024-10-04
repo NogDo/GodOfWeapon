@@ -460,9 +460,6 @@ public class CShopManager : MonoBehaviour
             buttonReRoll.interactable = false;
         }
 
-        //TODO : 여기에 플레이어(또는 스테이지)가 가지고있는 소지금이 Cost만큼 줄어들게
-        
-
         textReRollCost.text = $"재굴림 - <color=#ffdc00>{nReRollCost}g</color>";
         nReRollCount++;
     }

@@ -169,6 +169,14 @@ public class CItemMouseEventController : MonoBehaviour
     {
         if (!isInInventory)
         {
+            int price = (itemStats == null) ? weaponStats.Weapon.price : itemStats.Item.price;
+
+            // 보유한 돈이 가격보다 적다면 그랩을 할 수 없음
+            if (CStageManager.Instance.Money < price)
+            {
+                return;
+            }
+
             transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
