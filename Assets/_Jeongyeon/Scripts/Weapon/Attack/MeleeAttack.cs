@@ -25,16 +25,19 @@ public class MeleeAttack : WeaponAttack
         float massValue = weapon.data.massValue + (inventory.myItemData.massValue / 100);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
-            hit.Hit(damage, massValue);
-            if (CheckCritical(inventory.myItemData.criticalRate/100) == true)
+            if (CheckCritical(inventory.myItemData.criticalRate / 100) == true)
             {
-                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
+                float criticalDamage = damage + (damage * 0.5f);
+                hit.Hit(criticalDamage, massValue);
+                CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, criticalDamage);
+                
             }
             else
             {
+                hit.Hit(damage, massValue);
                 CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
             }
-            if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
             {
                 player.currentHp += 1;
                 UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);

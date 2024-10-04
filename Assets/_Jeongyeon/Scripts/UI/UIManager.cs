@@ -46,6 +46,16 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public bool canCombine = false; // 무기 조합상태인지를 확인하는 변수
     [HideInInspector] public List<CWeaponStats> sourceWeapon; // 조합 아이템의 소스 아이템을 담는 리스트
     [HideInInspector] public CWeaponStats baseWeapon; // 조합 아이템의 베이스 아이템을 담는 변수
+
+    [Header("결과창 관련 UI")]
+    public GameObject rResultUI;
+    public Text rTitle;
+    public Text rTotalStage;
+    public Text rTotalCell;
+    public Text rTotalMoney;
+    public Text rTotalKill;
+    public Text rTotalDamage;
+    public Text rTotalRuntime;
     #endregion
 
     /// <summary>
@@ -334,4 +344,35 @@ public class UIManager : MonoBehaviour
     {
         oLevelUpUI.SetActive(active);
     }
+    /// <summary>
+    /// 게임 종료시 활성화되는 UI의 값을 넣는 메서드
+    /// </summary>
+    /// <param name="Result">결과값(Ture:승리 , False:패배)</param>
+    /// <param name="stageCount">도달한 층</param>
+    /// <param name="totalMoney">획득 금화</param>
+    /// <param name="killCount">처치한 적</param>
+    /// <param name="totalDamage">총 피해량</param>
+    /// <param name="runtime">걸린 시간</param>
+    public void StageOver(bool Result, int stageCount, int totalMoney,int killCount, int totalDamage, float runtime)
+    {
+        int minute = (int)(runtime / 60);
+        int second = (int)(runtime);
+        rResultUI.SetActive(true);
+        if (Result == true)
+        {
+            rTitle.text = "승리!";
+        }
+        else
+        {
+            rTitle.text = "패배!";
+        }
+        rTotalStage.text = stageCount.ToString();
+        rTotalCell.text = CellManager.Instance.TotalCell().ToString();
+        rTotalMoney.text = totalMoney.ToString();
+        rTotalKill.text = killCount.ToString();
+        rTotalDamage.text = totalDamage.ToString();
+        rTotalRuntime.text = $"{minute}:{second}";
+    }
+
+  
 }
