@@ -30,6 +30,19 @@ public class CEnemyProjectilePool : MonoBehaviour
     }
 
     /// <summary>
+    /// 생성된 풀을 제거한다.
+    /// </summary>
+    public void DestroyPool()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        enemyProjectilePool.Clear();
+    }
+
+    /// <summary>
     /// 투사체를 활성화 시키기 위해 풀에서 가져온다.
     /// </summary>
     /// <param name="particle">가져올 투사체</param>

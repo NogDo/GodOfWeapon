@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public UIItemExtra shopItemExtraInfo;
     public UIWeaponInfo shopWeaponInfo;
     public UIWeaponExtra shopWeaponExtraInfo;
+    public TextMeshProUGUI textShopMoney;
 
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
@@ -37,7 +38,7 @@ public class UIManager : MonoBehaviour
     public GameObject oLevelUpUI;
     public TextMeshProUGUI textFloor;
     public TextMeshProUGUI textTimer;
-    public TextMeshProUGUI textMoney;
+    public TextMeshProUGUI textStageMoney;
     public TextMeshProUGUI textHP;
     public TextMeshProUGUI textLevelUp;
     public Image imageHP;
@@ -304,7 +305,8 @@ public class UIManager : MonoBehaviour
     /// <param name="money">보유한 돈</param>
     public void SetMoneyText(int money)
     {
-        textMoney.text = money.ToString();
+        textStageMoney.text = money.ToString();
+        textShopMoney.text = money.ToString();
     }
 
     /// <summary>

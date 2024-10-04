@@ -35,4 +35,12 @@ public class CEnemyProjectilePoolManager : MonoBehaviour
 
         spawnParticle = enemyProjectilePool.SpawnProjectile(particle, key);
     }
+
+    /// <summary>
+    /// 생성된 풀들을 제거한다.
+    /// </summary>
+    public void DestroyPool()
+    {
+        enemyProjectilePool.DestroyPool();
+    }
 }

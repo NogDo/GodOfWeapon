@@ -44,6 +44,14 @@ public class CEnemyPoolManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 풀에 생성된 적들을 제거한다.
+    /// </summary>
+    public void DestroyPool()
+    {
+        enemyPool.DestroyEnemys();
+    }
+
+    /// <summary>
     /// 적 소환 코루틴들을 실행한다.
     /// </summary>
     public void StartSpawn()
@@ -56,7 +64,7 @@ public class CEnemyPoolManager : MonoBehaviour
         }
 
         nExtraEliteSpawnCount = 0;
-        
+
         nMeleeEnemySpawnCountMax = 5 + CStageManager.Instance.StageCount / 2;
         nRangeEnemySpawnCountMax = 3 + CStageManager.Instance.StageCount / 2;
 

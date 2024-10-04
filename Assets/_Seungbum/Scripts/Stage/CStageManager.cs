@@ -157,8 +157,7 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void StartStage()
     {
-        nStageCount = 1;
-        fStageTime = 25.0f;
+        InitStageStats();
 
         player = FindObjectOfType<PlayerInventory>();
         tfCharacter = player.transform;
@@ -168,24 +167,45 @@ public class CStageManager : MonoBehaviour
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
+        UIManager.Instance.SetMoneyText(Money);
         UIManager.Instance.ChangeFloorText(nStageCount);
         UIManager.Instance.SetHPUI(tfCharacter.GetComponent<Character>().maxHp, tfCharacter.GetComponent<Character>().currentHp);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.8f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         isStageEnd = false;
+
+        stageTimerCoroutine = StageTimer();
+        totalTimerCoroutine = TotalTimer();
+        StartCoroutine(stageTimerCoroutine);
+        StartCoroutine(totalTimerCoroutine);
+    }
+
+    /// <summary>
+    /// 스테이지에 쓰이는 변수들의 값을 초기화 한다.
+    /// </summary>
+    void InitStageStats()
+    {
+        nStageCount = 0;
+        nLevel = 1;
+        nCurrentLevel = 1;
+        nPlayerMoney = 100;
+        fMaxEXP = 10.0f;
+        fEXP = 0.0f;
+
+        fStageTime = 0.0f;
 
         nTotalMoney = 0;
         nTotalKillCount = 0;
         fTotalDamage = 0.0f;
         fTotalTime = 0.0f;
 
-        stageTimerCoroutine = StageTimer();
-        totalTimerCoroutine = TotalTimer();
-        StartCoroutine(stageTimerCoroutine);
-        StartCoroutine(totalTimerCoroutine);
+        isClick = false;
+        isStageEnd = true;
+
+        nCurseDollCount = 0;
     }
 
     /// <summary>
@@ -231,7 +251,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.ChangeFloorText(nStageCount);
         oMainCamera.SetActive(true);
 
-        tfCharacter.position = new Vector3(2.0f, -5.0f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.8f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         isStageEnd = false;

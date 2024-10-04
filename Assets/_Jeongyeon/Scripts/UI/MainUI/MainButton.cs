@@ -10,6 +10,8 @@ public class MainButton : MonoBehaviour
     /// </summary>
     public void OnMainButtonClick()
     {
+        CEnemyPoolManager.Instance.DestroyPool();
+        CEnemyProjectilePoolManager.Instance.DestroyPool();
         CStageManager.Instance.CreateStartMap();
         CellManager.Instance.PlayerInventory.ResetAllData();
         CellManager.Instance.ReStart();

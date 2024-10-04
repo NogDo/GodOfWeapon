@@ -34,6 +34,31 @@ public class CEnemyPool : MonoBehaviour
     }
 
     /// <summary>
+    /// 풀에 생성된 적들을 제거한다.
+    /// </summary>
+    public void DestroyEnemys()
+    {
+        foreach (Transform child in meleeEnemyFactory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in rangeEnemyFactory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in chestFactory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        meleeEnemyPool.Clear();
+        rangeEnemyPool.Clear();
+        enemyChestPool.Clear();
+    }
+
+    /// <summary>
     /// 근거리 적을 활성화 시킨다.
     /// </summary>
     public void SpawnMeleeEnemy()
