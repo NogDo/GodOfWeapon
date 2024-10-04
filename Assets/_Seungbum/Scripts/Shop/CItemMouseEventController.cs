@@ -487,7 +487,8 @@ public class CItemMouseEventController : MonoBehaviour
     /// </summary>
     public void SellItem()
     {
-        // TODO : 아이템 팔았을 때 플레이어 돈 올리기 기능 구현
+        int price = (itemStats == null) ? Mathf.RoundToInt(weaponStats.Weapon.price * 0.8f) : Mathf.RoundToInt(itemStats.Item.price * 0.8f);
+        CStageManager.Instance.IncreaseMoney(price);
 
         ItemCellReset();
     }

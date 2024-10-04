@@ -27,7 +27,7 @@ public class CStageManager : MonoBehaviour
     int nStageCount = 0;
     int nLevel = 1;
     int nCurrentLevel = 1;
-    int nPlayerMoney = 0;
+    int nPlayerMoney = 100;
     float fMaxEXP = 10.0f;
     float fEXP = 0.0f;
 
@@ -312,9 +312,19 @@ public class CStageManager : MonoBehaviour
     /// <summary>
     /// 플레이어 보유 돈을 증가시킨다.
     /// </summary>
-    public void IncreaseMoney()
+    public void IncreaseMoney(int amount)
     {
-        int money = Mathf.RoundToInt(1 + 0.01f * player.myItemData.moneyRate);
+        int money = 0;
+
+        if (amount == 1)
+        {
+            money = Mathf.RoundToInt(1 + 0.01f * player.myItemData.moneyRate);
+        }
+
+        else
+        {
+            money = amount;
+        }
 
         nPlayerMoney += money;
         nTotalMoney += money;
@@ -343,8 +353,6 @@ public class CStageManager : MonoBehaviour
 
         if (fEXP >= fMaxEXP)
         {
-            fEXP -= fMaxEXP;
-            fMaxEXP += fMaxEXP * 0.1f;
             LevelUp();
         }
 
@@ -358,6 +366,9 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
+        fEXP -= fMaxEXP;
+        fMaxEXP += fMaxEXP * 0.1f;
+
         nCurrentLevel++;
 
         UIManager.Instance.SetActiveLevelUpUI(true);

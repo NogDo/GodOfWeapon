@@ -35,7 +35,7 @@ public class UIItemExtra : MonoBehaviour
 
     private void OnEnable()
     {
-        sellText.text = $"판매 : {Mathf.Round(item.Item.price * 0.8f)}$";
+        sellText.text = $"판매 : {Mathf.RoundToInt(item.Item.price * 0.8f)}$";
         if (item.Item.active == false)
         {
             activeImage.gameObject.SetActive(true);
