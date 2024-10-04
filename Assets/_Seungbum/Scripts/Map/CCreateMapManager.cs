@@ -70,6 +70,8 @@ public class CCreateMapManager : MonoBehaviour
     /// <param name="stage">스테이지</param>
     public void Init()
     {
+        transform.position = Vector3.zero;
+
         nStartWidth = Random.Range(5, 11);
         nStartHeight = 15 - nStartWidth;
 

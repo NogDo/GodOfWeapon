@@ -188,14 +188,14 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     void InitStageStats()
     {
-        nStageCount = 0;
+        nStageCount = 1;
         nLevel = 1;
         nCurrentLevel = 1;
         nPlayerMoney = 100;
         fMaxEXP = 10.0f;
         fEXP = 0.0f;
 
-        fStageTime = 0.0f;
+        fStageTime = 25.0f;
 
         nTotalMoney = 0;
         nTotalKillCount = 0;
