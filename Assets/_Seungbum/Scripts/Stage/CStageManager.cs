@@ -28,7 +28,7 @@ public class CStageManager : MonoBehaviour
     int nStageCount = 0;
     int nLevel = 1;
     int nCurrentLevel = 1;
-    int nPlayerMoney = 100;
+    int nPlayerMoney = 200;
     float fMaxEXP = 10.0f;
     float fEXP = 0.0f;
 
@@ -191,7 +191,7 @@ public class CStageManager : MonoBehaviour
         nStageCount = 1;
         nLevel = 1;
         nCurrentLevel = 1;
-        nPlayerMoney = 100;
+        nPlayerMoney = 200;
         fMaxEXP = 10.0f;
         fEXP = 0.0f;
 

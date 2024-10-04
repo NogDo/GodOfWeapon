@@ -60,6 +60,7 @@ public class CShopManager : MonoBehaviour
     List<GameObject> weaponList;
     [SerializeField]
     UIShopCostController[] costController;
+    PlayerInventory player;
 
     STItemInfo[] shopItems = new STItemInfo[5];
 
@@ -108,6 +109,8 @@ public class CShopManager : MonoBehaviour
     /// </summary>
     public void ActiveShop()
     {
+        player = FindObjectOfType<PlayerInventory>();
+
         shopCamera.gameObject.SetActive(true);
         shopCanvas.gameObject.SetActive(true);
         oLights.SetActive(true);
@@ -148,8 +151,10 @@ public class CShopManager : MonoBehaviour
 
             // Tier 정하기
             // TODO : 나중에 인벤토리 또는 플레이어의 운 가져와서 그걸로 확률 적용
-            int tier = Random.Range(1, 5);
+            int tier = 0;
             int itemType = Random.Range(0, 2);
+
+            SetTier(out tier);
 
             // 아이템 생성
             switch (tier)
@@ -363,6 +368,93 @@ public class CShopManager : MonoBehaviour
                         tier4.transform.SetParent(tfNonBuyItems);
                         break;
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 아이템 티어를 설정한다.
+    /// </summary>
+    /// <param name="tier">아이템 티어</param>
+    void SetTier(out int tier)
+    {
+        float percent = Random.Range(0.0f, 100.0f);
+        tier = 0;
+
+        if (player.myItemData.luck < 20)
+        {
+            if (percent < tierPercent[0, 0])
+            {
+                tier = 1;
+            }
+
+            else if (percent < tierPercent[0, 0] + tierPercent[0, 1])
+            {
+                tier = 2;
+            }
+        }
+
+        else if (player.myItemData.luck < 30)
+        {
+            if (percent < tierPercent[1, 0])
+            {
+                tier = 1;
+            }
+
+            else if (percent < tierPercent[1, 0] + tierPercent[1, 1])
+            {
+                tier = 2;
+            }
+
+            else if (percent < tierPercent[1, 0] + tierPercent[1, 1] + tierPercent[1, 2])
+            {
+                tier = 3;
+            }
+        }
+
+        else if (player.myItemData.luck < 40)
+        {
+            if (percent < tierPercent[2, 0])
+            {
+                tier = 1;
+            }
+
+            else if (percent < tierPercent[2, 0] + tierPercent[2, 1])
+            {
+                tier = 2;
+            }
+
+            else if (percent < tierPercent[2, 0] + tierPercent[2, 1] + tierPercent[2, 2])
+            {
+                tier = 3;
+            }
+
+            else
+            {
+                tier = 4;
+            }
+        }
+
+        else
+        {
+            if (percent < tierPercent[3, 0])
+            {
+                tier = 1;
+            }
+
+            else if (percent < tierPercent[3, 0] + tierPercent[3, 1])
+            {
+                tier = 2;
+            }
+
+            else if (percent < tierPercent[3, 0] + tierPercent[3, 1] + tierPercent[3, 2])
+            {
+                tier = 3;
+            }
+
+            else
+            {
+                tier = 4;
             }
         }
     }
