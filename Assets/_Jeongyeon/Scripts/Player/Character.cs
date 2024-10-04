@@ -266,7 +266,7 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IAttackable>(out IAttackable hit))
+        if (other.TryGetComponent<IAttackable>(out IAttackable hit) && !CStageManager.Instance.IsStageEnd)
         {
             Hit(hit.GetAttackDamage());
             hitCoroutine = HitEffect();

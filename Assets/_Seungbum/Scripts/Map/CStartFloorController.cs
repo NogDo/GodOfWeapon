@@ -58,6 +58,8 @@ public class CStartFloorController : MonoBehaviour
             CEnemyPoolManager.Instance.StartSpawn();
         }
 
+        CDamageTextPoolManager.Instance.StartSpawn();
+
         yield return null;
     }
 }

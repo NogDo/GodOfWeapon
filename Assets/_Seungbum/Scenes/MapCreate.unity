@@ -1605,6 +1605,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryViewModeComp
       objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855457, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5465698703838855547, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1652,6 +1656,30 @@ PrefabInstance:
     - target: {fileID: 5465698703838855620, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855941, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855944, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855945, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855946, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855947, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855950, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5620536367618759396, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchorMax.y
