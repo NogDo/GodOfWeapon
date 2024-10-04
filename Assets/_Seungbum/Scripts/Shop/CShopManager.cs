@@ -150,10 +150,8 @@ public class CShopManager : MonoBehaviour
             }
 
             // Tier 정하기
-            // TODO : 나중에 인벤토리 또는 플레이어의 운 가져와서 그걸로 확률 적용
             int tier = 0;
             int itemType = Random.Range(0, 2);
-
             SetTier(out tier);
 
             // 아이템 생성
