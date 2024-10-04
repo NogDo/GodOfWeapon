@@ -9,8 +9,6 @@ public class Character : MonoBehaviour
 
     #region player Info
     [HideInInspector]
-    public float moveSpeed = 5; // 기본 이동속도
-    [HideInInspector]
     public float maxHp; // 캐릭터 최대 Hp
     [HideInInspector]
     public float currentHp; // 현재 Hp
@@ -26,6 +24,8 @@ public class Character : MonoBehaviour
     #endregion
 
     #region Private Fields
+    private float moveSpeed = 5; // 기본 이동속도
+    private float currentMoveSpeed; // 현재 이동속도
     private int currentDashCount; // 현재 대쉬 횟수
     private float dashSpeed = 15f; // 대쉬 속도
     private bool isdash = false; // 대쉬중인지 확인하는 변수
@@ -61,13 +61,13 @@ public class Character : MonoBehaviour
     private void Start()
     {
         maxHp = inventory.myItemData.hp;
-        moveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
+        currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         currentHp = maxHp;
         UIManager.Instance.CurrentHpChange(this);
     }
     private void OnEnable()
     {
-        moveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
+        currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         if (isfirst == false)
         {
             StartCoroutine(StopMove());
@@ -129,11 +129,11 @@ public class Character : MonoBehaviour
 
         if (inputMagnitude <= 1)
         {
-            move *= moveSpeed;
+            move *= currentMoveSpeed;
         }
         else
         {
-            move = move.normalized * moveSpeed;
+            move = move.normalized * currentMoveSpeed;
         }
 
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
@@ -146,7 +146,7 @@ public class Character : MonoBehaviour
                     cameraRotation,
                     20.0f * Time.deltaTime
                 );
-            run = Vector3.MoveTowards(run, move, moveSpeed);
+            run = Vector3.MoveTowards(run, move, currentMoveSpeed);
             if (run != Vector3.zero)
             {
 
