@@ -73,7 +73,7 @@ public class NormalSwordController : SwordController
     {
         time = 0.0f;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y - 0.5f, enemyTransform.position.z);
         particle[0].SetActive(true);
         while (time <= (duration / 2))
         {
@@ -101,7 +101,7 @@ public class NormalSwordController : SwordController
         isAttacking = true;
         time = 0.0f;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y+0.5f, enemyTransform.position.z);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y+0.7f, enemyTransform.position.z);
         while (time <= (duration / 2))
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / (duration / 2));
