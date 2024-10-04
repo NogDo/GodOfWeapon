@@ -17,6 +17,13 @@ public class CEnemyPoolManager : MonoBehaviour
 
     float fMeleeEnemySpawnTime = 3.0f;
     float fRangeEnemySpawnTime = 5.0f;
+
+    int nMeleeEnemySpawnCountMax;
+    int nRangeEnemySpawnCountMax;
+
+    float fEnemySpawnRate = 0.0f;
+    int nEliteSpawnCount = 0;
+    int nExtraEliteSpawnCount = 0;
     #endregion
 
     void Awake()
@@ -41,6 +48,15 @@ public class CEnemyPoolManager : MonoBehaviour
     /// </summary>
     public void StartSpawn()
     {
+        nEliteSpawnCount = nExtraEliteSpawnCount;
+
+        if (CStageManager.Instance.StageCount == 10)
+        {
+            nEliteSpawnCount++;
+        }
+
+        nExtraEliteSpawnCount = 0;
+
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
         spawnRangeEnemyCoroutine = SpawnRangeEnemy();
         spawnChestCoroutine = SpawnChest();
@@ -59,6 +75,33 @@ public class CEnemyPoolManager : MonoBehaviour
         StopCoroutine(spawnMeleeEnemyCoroutine);
         StopCoroutine(spawnRangeEnemyCoroutine);
         StopCoroutine(spawnChestCoroutine);
+    }
+
+    /// <summary>
+    /// 적 생성량을 늘린다.
+    /// </summary>
+    /// <param name="rate">늘어날 생성량</param>
+    public void IncreaseEnemySpawnRate(float rate)
+    {
+        fEnemySpawnRate += rate;
+    }
+
+    /// <summary>
+    /// 적 생성량을 줄인다.
+    /// </summary>
+    /// <param name="rate">줄어들 생성량</param>
+    public void DecreaseEnemySpawnRate(float rate)
+    {
+        fEnemySpawnRate -= rate;
+    }
+
+    /// <summary>
+    /// 정예 적 생성 횟수를 늘린다.
+    /// </summary>
+    /// <param name="count">생성 횟수</param>
+    public void IncreaseEliteSpawnCount(int count)
+    {
+        nExtraEliteSpawnCount = count;
     }
 
     /// <summary>
