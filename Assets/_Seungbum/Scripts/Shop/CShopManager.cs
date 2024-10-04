@@ -442,12 +442,29 @@ public class CShopManager : MonoBehaviour
     /// </summary>
     void SetReRollCost()
     {
+        if (nReRollCount != 0)
+        {
+            CStageManager.Instance.DecreaseMoney(nReRollCost);
+        }
+
         nReRollCost = CStageManager.Instance.StageCount * 5 + nReRollCount * CStageManager.Instance.StageCount;
-        nReRollCount++;
+
+        // 보유 돈이 부족하다면 버튼을 비활성화 시킨다.
+        if (CStageManager.Instance.Money >= nReRollCost)
+        {
+            buttonReRoll.interactable = true;
+        }
+
+        else
+        {
+            buttonReRoll.interactable = false;
+        }
 
         //TODO : 여기에 플레이어(또는 스테이지)가 가지고있는 소지금이 Cost만큼 줄어들게
+        
 
         textReRollCost.text = $"재굴림 - <color=#ffdc00>{nReRollCost}g</color>";
+        nReRollCount++;
     }
 
     /// <summary>
