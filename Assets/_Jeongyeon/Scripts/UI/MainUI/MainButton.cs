@@ -10,7 +10,7 @@ public class MainButton : MonoBehaviour
     /// </summary>
     public void OnMainButtonClick()
     {
-        //Instantiate(CellManager.Instance);
+        CStageManager.Instance.CreateStartMap();
         CellManager.Instance.PlayerInventory.ResetAllData();
         CellManager.Instance.ReStart();
         Destroy(CellManager.Instance.PlayerInventory.gameObject);

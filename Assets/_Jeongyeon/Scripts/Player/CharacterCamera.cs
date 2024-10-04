@@ -42,6 +42,7 @@ public class CharacterCamera : MonoBehaviour
     public void SetStartPosition()
     {
         cameraCount = 0;
+        Camera.main.transform.localRotation = Quaternion.Euler(Vector3.zero);
         gameObject.transform.position = startPosition.position;
     }
     /// <summary>
