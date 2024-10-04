@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
 
     [Header("결과창 관련 UI")]
     public GameObject rResultUI;
+    public GameObject mainMenueBT;
     public Text rTitle;
     public Text rTotalStage;
     public Text rTotalCell;
@@ -358,6 +359,7 @@ public class UIManager : MonoBehaviour
         int minute = (int)(runtime / 60);
         int second = (int)(runtime);
         rResultUI.SetActive(true);
+        mainMenueBT.SetActive(true);
         if (Result == true)
         {
             rTitle.text = "승리!";
