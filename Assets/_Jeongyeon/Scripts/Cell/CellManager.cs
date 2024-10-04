@@ -311,7 +311,7 @@ public class CellManager : MonoBehaviour
         {
             for (int j = 0; j < checkGrid.GetLength(1); j++)
             {
-                if (checkGrid[i, j] != 0)
+                if (checkGrid[i, j] != -1)
                 {
                     CellCount++;
                 }

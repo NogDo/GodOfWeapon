@@ -30,12 +30,13 @@ public class MeleeAttack : WeaponAttack
                 float criticalDamage = damage + (damage * 0.5f);
                 hit.Hit(criticalDamage, massValue);
                 CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, criticalDamage);
-                
+                CStageManager.Instance.AddTotalDamage(criticalDamage);
             }
             else
             {
                 hit.Hit(damage, massValue);
                 CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
+                CStageManager.Instance.AddTotalDamage(damage);
             }
             if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
             {
