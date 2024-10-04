@@ -24,8 +24,7 @@ public class CharacterCamera : MonoBehaviour
     #endregion
     private void Awake()
     {
-        cameraTrasform = UnityEngine.Camera.main.transform;
-        gameObject.transform.position = startPosition.position;
+        cameraTrasform = Camera.main.transform;
     }
 
     private void Update()
@@ -38,6 +37,12 @@ public class CharacterCamera : MonoBehaviour
         {
             gameObject.transform.position = player.localPosition + (Vector3.up * 5.0f);
         }
+    }
+
+    public void SetStartPosition()
+    {
+        cameraCount = 0;
+        gameObject.transform.position = startPosition.position;
     }
     /// <summary>
     /// 스테이지에서의 카메라의 포지션과 로테이션을 조절하는 함수
