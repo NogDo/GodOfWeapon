@@ -36,8 +36,8 @@ public class MeleeAttack : WeaponAttack
             }
             if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
             {
-                // ÈíÇ÷ ±¸Çö ÇÊ¿ä 
                 player.currentHp += 1;
+                UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
                 UIManager.Instance.CurrentHpChange(player);
                 CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
             }

@@ -59,6 +59,13 @@ public class CellManager : MonoBehaviour
         canActiveCell = new List<Pos>();
     }
 
+    public void ReStart()
+    {
+        checkGrid = new int[width, height];
+        CreateGrid();
+        SetCell();
+        canActiveCell = new List<Pos>();
+    }
     public void Init(PlayerInventory inventory)
     {
         playerInventory = inventory;

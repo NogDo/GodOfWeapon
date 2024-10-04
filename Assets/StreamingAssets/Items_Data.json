@@ -117,7 +117,7 @@
     "expRate": 0.0,
     "enemyAmount": 0.0,
     "level": 2,
-    "active": true
+    "active": false
   },
   {
     "name": "DeckOfCard",

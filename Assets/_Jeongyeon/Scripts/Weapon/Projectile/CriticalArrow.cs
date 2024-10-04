@@ -61,6 +61,7 @@ public class CriticalArrow : WeaponProjectile
         if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
         {
             player.currentHp += 1;
+            UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
             UIManager.Instance.CurrentHpChange(player);
             CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
         }

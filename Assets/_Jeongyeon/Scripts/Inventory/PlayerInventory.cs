@@ -9,12 +9,12 @@ public class PlayerInventory : MonoBehaviour
 
     #region Public Fields
     // 인벤토리에 들어온 아이템과 무기를 담는 리스트
-    public List<WeaponData> playerWeapon;
-    public List<ItemData> playerItem;
+    [HideInInspector] public List<WeaponData> playerWeapon;
+    [HideInInspector] public List<ItemData> playerItem;
 
     // 아이템을 생성할 위치를 담는 배열
-    public GameObject[] lWeoponSlot;
-    public GameObject[] sWeoponSlot;
+    public GameObject[] lWeaponSlot;
+    public GameObject[] sWeaponSlot;
     public GameObject[] crossbowSlot;
 
     //생성할 아이템 프리펩들을 담는 배열
@@ -129,7 +129,7 @@ public class PlayerInventory : MonoBehaviour
         switch (weapon)
         {
             case Type.LWeapon:
-                foreach (GameObject targetWeapon in lWeoponSlot)
+                foreach (GameObject targetWeapon in lWeaponSlot)
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
@@ -142,7 +142,7 @@ public class PlayerInventory : MonoBehaviour
                 }
                 break;
             case Type.SWeapon:
-                foreach (GameObject targetWeapon in sWeoponSlot)
+                foreach (GameObject targetWeapon in sWeaponSlot)
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
@@ -199,15 +199,15 @@ public class PlayerInventory : MonoBehaviour
         switch (weapon)
         {
             case Type.LWeapon:
-                foreach (GameObject targetWeapon in lWeoponSlot)
+                foreach (GameObject targetWeapon in lWeaponSlot)
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
                         if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
-                            ResetIndex(exitIndex, lWeoponSlot);
-                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, lWeaponSlot);
+                            ResetIndex(exitIndex, sWeaponSlot);
                             ResetIndex(exitIndex, crossbowSlot);
                             Destroy(targetWeapon.transform.GetChild(0).gameObject);
                             break;
@@ -216,15 +216,15 @@ public class PlayerInventory : MonoBehaviour
                 }
                 break;
             case Type.SWeapon:
-                foreach (GameObject targetWeapon in sWeoponSlot)
+                foreach (GameObject targetWeapon in sWeaponSlot)
                 {
                     if (targetWeapon.transform.childCount != 0)
                     {
                         if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
-                            ResetIndex(exitIndex, lWeoponSlot);
-                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, lWeaponSlot);
+                            ResetIndex(exitIndex, sWeaponSlot);
                             ResetIndex(exitIndex, crossbowSlot);
                             Destroy(targetWeapon.transform.GetChild(0).gameObject);
                             break;
@@ -240,8 +240,8 @@ public class PlayerInventory : MonoBehaviour
                         if (targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.uid == target.uid && targetWeapon.GetComponentInChildren<WeaponStatInfo>().data.level == target.level)
                         {
                             int exitIndex = targetWeapon.GetComponentInChildren<WeaponStatInfo>().index;
-                            ResetIndex(exitIndex, lWeoponSlot);
-                            ResetIndex(exitIndex, sWeoponSlot);
+                            ResetIndex(exitIndex, lWeaponSlot);
+                            ResetIndex(exitIndex, sWeaponSlot);
                             ResetIndex(exitIndex, crossbowSlot);
                             Destroy(targetWeapon.transform.GetChild(0).gameObject);
                             break;
@@ -278,7 +278,7 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="level">무기 레벨</param>
     public void CheckLSlot(GameObject weapon, int level)
     {
-        foreach (GameObject parent in lWeoponSlot)
+        foreach (GameObject parent in lWeaponSlot)
         {
             if (parent.transform.childCount == 0)
             {
@@ -296,7 +296,7 @@ public class PlayerInventory : MonoBehaviour
     /// /// <param name="level">무기 레벨</param>
     private void CheckSSlot(GameObject weapon, int level)
     {
-        foreach (GameObject parent in sWeoponSlot)
+        foreach (GameObject parent in sWeaponSlot)
         {
             if (parent.transform.childCount == 0)
             {
@@ -422,5 +422,14 @@ public class PlayerInventory : MonoBehaviour
         myItemData.enemyAmount -= enemyAmount;
 
         UIManager.Instance.ChangeValue(myItemData);
+    }
+    /// <summary>
+    /// 캐릭터가 사망시 모든 데이터를 초기화하는 메서드
+    /// </summary>
+    public void ResetAllData()
+    {
+        playerItem.Clear();
+        playerWeapon.Clear();
+        myItemData = new ItemData("");
     }
 }

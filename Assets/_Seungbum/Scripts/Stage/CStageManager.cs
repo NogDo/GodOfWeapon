@@ -33,6 +33,8 @@ public class CStageManager : MonoBehaviour
 
     bool isClick = false;
     bool isStageEnd = true;
+
+    private int nCurseDollCount = 0;
     #endregion
 
     /// <summary>
@@ -210,6 +212,7 @@ public class CStageManager : MonoBehaviour
         isStageEnd = false;
 
         StartCoroutine(StageTimer());
+        CheckCurseDoll();
     }
 
     /// <summary>
@@ -327,5 +330,24 @@ public class CStageManager : MonoBehaviour
 
         UIManager.Instance.SetActiveLevelUpUI(true);
         UIManager.Instance.SetLevelUpText(nCurrentLevel - nLevel);
+    }
+
+    public void CheckCurseDoll()
+    {
+        int curseDollCount = 0;
+        for (int i = 0; i < CellManager.Instance.PlayerInventory.playerItem.Count; i++)
+        {
+            if (CellManager.Instance.PlayerInventory.playerItem[i].uid == 5)
+            {
+                curseDollCount++;
+            }
+        }
+
+        if (nCurseDollCount < curseDollCount)
+        {
+            CellManager.Instance.PlayerInventory.GetComponent<Character>().GetCurseDoll();
+            nCurseDollCount = curseDollCount;
+        }
+        nCurseDollCount = curseDollCount;
     }
 }
