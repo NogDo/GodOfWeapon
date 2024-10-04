@@ -32,7 +32,6 @@ public class CItemMouseEventController : MonoBehaviour
 
     Vector3 v3StartPosition;
     Vector3 v3StartRotation;
-    Vector3 v3MiddlPosition;
 
     bool isCanDrop = false;
     bool isInInventory = false;
@@ -48,7 +47,7 @@ public class CItemMouseEventController : MonoBehaviour
     {
         get
         {
-            return v3MiddlPosition;
+            return transform.GetChild(0).position;
         }
     }
 
@@ -66,7 +65,6 @@ public class CItemMouseEventController : MonoBehaviour
 
         v3StartRotation = new Vector3(-30.0f, 0.0f, -30.0f);
         v3StartPosition = transform.position;
-        v3MiddlPosition = transform.GetChild(0).position;
 
         nRotateCount = 0;
     }
