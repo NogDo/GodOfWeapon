@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
 
     public GameObject[] afterImage; // 잔상을 생성할 오브젝트
     public Material[] playerMaterial; // 플레이어의 메테리얼
+    public GameObject[] weaponPostion; // 무기를 장착하는 위치
     #endregion
 
     #region Private Fields
@@ -98,6 +99,7 @@ public class Character : MonoBehaviour
             MovePlayer();
             rb.MovePosition(rb.position + run * Time.deltaTime);
         }
+       
     }
     /// <summary>
     /// 플레이어가 공격 받았을때 hp를 깎는 메서드
@@ -111,7 +113,12 @@ public class Character : MonoBehaviour
             finalDamage = 1;
         }
         currentHp -= finalDamage;
-
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            PlayerDie();
+        }
+        UIManager.Instance.CurrentHpChange(this);
         UIManager.Instance.SetHPUI(maxHp, currentHp);
         CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
     }
@@ -304,6 +311,37 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         canMove = true;
+    }
+    /// <summary>
+    /// 힐링포션을 사용했을때 부르는 메서드
+    /// </summary>
+    public void UseHealingPotion()
+    {
+        currentHp += myData.hp * 0.4f;
+        UIManager.Instance.SetHPUI(maxHp, currentHp);
+    }
+    /// <summary>
+    /// 의식인형이 인벤토리에 들어왔을 경우 실행되는 메서드
+    /// </summary>
+    public void GetCurseDoll()
+    {
+        currentHp = 1.0f;
+        UIManager.Instance.SetHPUI(maxHp, currentHp);
+    }
+
+    /// <summary>
+    /// 플레이어가 죽었을때 실행되는 메서드
+    /// </summary>
+    public void PlayerDie()
+    {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
+        for (int i = 0; i < weaponPostion.Length; i++)
+        {
+            weaponPostion[i].SetActive(false);
+        }
+        anim.SetTrigger("isDie");
+        canMove = false;
     }
 }
 
