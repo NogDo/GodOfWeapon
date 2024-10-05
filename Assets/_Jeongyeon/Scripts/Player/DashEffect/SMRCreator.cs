@@ -9,6 +9,7 @@ public class SMRCreator : MonoBehaviour
 
     #region Public Fields
     public Transform parentTransform;
+    public GameObject clone;
     #endregion
 
     #region Private Fields
@@ -20,10 +21,8 @@ public class SMRCreator : MonoBehaviour
     private float remainingTime;
     private float interval;
     private Coroutine[] createCoroutine = null;
-
-    bool isCreating = false;
     #endregion
-
+    bool isCreating = false;
     /// <summary>
     /// 잔상 이미지의 설정값을 넣는 메서드
     /// </summary>
@@ -45,14 +44,13 @@ public class SMRCreator : MonoBehaviour
     private void CreateImageClone()
     {
         afterImages = new AfterImage[smrs.Length][]; 
-
+        
         for (int i = 0; i < smrs.Length; i++)
         {
             afterImages[i] = new AfterImage[afterImageCount];
             for (int j = 0; j < afterImages[i].Length; j++)
             {
-                GameObject obj = new GameObject();
-                afterImages[i][j] = obj.AddComponent<AfterImage>();
+                afterImages[i][j] = Instantiate(clone,parentTransform).AddComponent<AfterImage>();
                 afterImages[i][j].Init(afterImageMaterial);
             }
         }
@@ -105,11 +103,11 @@ public class SMRCreator : MonoBehaviour
             if (time >= interval)
             {
                 smrs[index].BakeMesh(afterImages[index][currentIndex].Mesh);
-                afterImages[index][currentIndex].Create(parentTransform.parent.position, parentTransform.rotation, remainingTime);
+                afterImages[index][currentIndex].Create(parentTransform.parent.position, parentTransform.rotation, remainingTime,parentTransform);
                 currentIndex = (currentIndex + 1) % afterImageCount;
                 time -= interval;
             }
-            yield return null;
+            yield return null; 
         }
         createCoroutine = null;
     }
