@@ -20,6 +20,8 @@ public class CEnemyChestController : MonoBehaviour, IHittable
     GameObject oGoldIngotPrefab;
     [SerializeField]
     GameObject oBomb;
+    [SerializeField]
+    CChestItem[] chestItems;
 
     CEnemyPool enemyPool;
     ParticleSystem particleSpawn;
@@ -108,7 +110,7 @@ public class CEnemyChestController : MonoBehaviour, IHittable
             oBrokenChest[i].SetActive(true);
         }
 
-        int rewardNum = Random.Range(0, 2);
+        int rewardNum = Random.Range(0, 3);
 
         switch (rewardNum)
         {
@@ -127,6 +129,19 @@ public class CEnemyChestController : MonoBehaviour, IHittable
             case 1:
                 // ∆¯≈∫
                 Instantiate(oBomb, transform.position, Quaternion.identity);
+                break;
+
+
+            case 2:
+                // æ∆¿Ã≈€ ∫∏ªÛ
+                int randItem = Random.Range(0, chestItems.Length);
+                Vector3 spawnPosition = transform.position;
+                spawnPosition.y = 1.0f;
+
+                Vector3 rotation = Vector3.zero;
+                rotation.y = Random.Range(0.0f, 360.0f);
+
+                CChestItem item = Instantiate(chestItems[randItem], spawnPosition, Quaternion.Euler(rotation));
                 break;
         }
     }

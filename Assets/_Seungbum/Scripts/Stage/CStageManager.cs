@@ -190,7 +190,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.SetHPUI(tfCharacter.GetComponent<Character>().maxHp, tfCharacter.GetComponent<Character>().currentHp);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
-        tfCharacter.position = new Vector3(2.0f, -4.8f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.95f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         isStageEnd = false;
@@ -270,7 +270,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.ChangeFloorText(nStageCount);
         oMainCamera.SetActive(true);
 
-        tfCharacter.position = new Vector3(2.0f, -4.8f, 2.0f);
+        tfCharacter.position = new Vector3(2.0f, -4.95f, 2.0f);
         tfCharacter.gameObject.SetActive(true);
 
         isStageEnd = false;
@@ -415,8 +415,16 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
-        fEXP -= fMaxEXP;
-        fMaxEXP += fMaxEXP * 0.1f;
+        if (fEXP < fMaxEXP)
+        {
+            fMaxEXP += fMaxEXP * 0.1f;
+        }
+
+        else
+        {
+            fEXP -= fMaxEXP;
+            fMaxEXP += fMaxEXP * 0.1f;
+        }
 
         nCurrentLevel++;
 

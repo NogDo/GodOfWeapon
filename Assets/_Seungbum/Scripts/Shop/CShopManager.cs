@@ -39,7 +39,7 @@ public class CShopManager : MonoBehaviour
     [SerializeField]
     GameObject oLights;
     [SerializeField]
-    GameObject oShopItemLight;
+    GameObject[] oShopItemLight;
 
     [Header("재굴림 관련")]
     [SerializeField]
@@ -141,7 +141,10 @@ public class CShopManager : MonoBehaviour
     /// <param name="active">활성화 여부</param>
     public void SetActiveShopItemLight(bool active)
     {
-        oShopItemLight.SetActive(active);
+        foreach (GameObject light in oShopItemLight)
+        {
+            light.SetActive(active);
+        }
     }
 
     /// <summary>
