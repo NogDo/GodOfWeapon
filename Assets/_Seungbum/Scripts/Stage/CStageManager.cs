@@ -39,6 +39,7 @@ public class CStageManager : MonoBehaviour
     float fTotalDamage = 0.0f;
     float fTotalTime = 0.0f;
 
+    bool isAddCell = false;
     bool isClick = false;
     bool isStageEnd = true;
 
@@ -75,6 +76,17 @@ public class CStageManager : MonoBehaviour
         get
         {
             return nPlayerMoney;
+        }
+    }
+
+    /// <summary>
+    /// 현재 인벤토리 Cell 추가 작업중인지 판단
+    /// </summary>
+    public bool IsAddCell
+    {
+        get
+        {
+            return isAddCell;
         }
     }
 
@@ -133,12 +145,18 @@ public class CStageManager : MonoBehaviour
     {
         int nAddCellCount = (nCurrentLevel - nLevel) * 2;
 
+        isAddCell = true;
+        CShopManager.Instance.SetActiveShopItemLight(false);
+
         for (int i = 0; i < nAddCellCount; i++)
         {
             isClick = false;
             CellManager.Instance.AddCell();
             yield return new WaitUntil(() => isClick);
         }
+
+        isAddCell = false;
+        CShopManager.Instance.SetActiveShopItemLight(true);
 
         nLevel = nCurrentLevel;
         yield return null;
@@ -202,6 +220,7 @@ public class CStageManager : MonoBehaviour
         fTotalDamage = 0.0f;
         fTotalTime = 0.0f;
 
+        isAddCell = false;
         isClick = false;
         isStageEnd = true;
 

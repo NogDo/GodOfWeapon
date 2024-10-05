@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &57236605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5465698703838855944, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &140437334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1207,6 +1212,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 770087750438647666, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: oShopItemLight
+      value: 
+      objectReference: {fileID: 57236605}
     - target: {fileID: 1048219779414426325, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1671,6 +1680,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryViewModeComp
       objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855457, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855547, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5465698703838855620, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -1714,6 +1731,22 @@ PrefabInstance:
     - target: {fileID: 5465698703838855620, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855941, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855944, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855945, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465698703838855947, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5620536367618759396, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2594,14 +2627,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
       propertyPath: m_text
-      value: 
+      value: "1\uCE35"
       objectReference: {fileID: 0}
     - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
       propertyPath: m_fontSize
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41e8aa88c4b545c4abcc2f3242b2fe50, type: 2}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3458104391707619138, guid: 41e8aa88c4b545c4abcc2f3242b2fe50, type: 2}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
       propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

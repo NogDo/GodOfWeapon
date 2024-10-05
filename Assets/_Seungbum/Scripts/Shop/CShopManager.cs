@@ -38,6 +38,8 @@ public class CShopManager : MonoBehaviour
     Canvas shopCanvas;
     [SerializeField]
     GameObject oLights;
+    [SerializeField]
+    GameObject oShopItemLight;
 
     [Header("재굴림 관련")]
     [SerializeField]
@@ -131,6 +133,15 @@ public class CShopManager : MonoBehaviour
         shopCamera.gameObject.SetActive(false);
         shopCanvas.gameObject.SetActive(false);
         oLights.SetActive(false);
+    }
+
+    /// <summary>
+    /// 상점 아이템을 비추는 Light를 활성화 / 비활성화 한다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    public void SetActiveShopItemLight(bool active)
+    {
+        oShopItemLight.SetActive(active);
     }
 
     /// <summary>

@@ -71,7 +71,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (UIManager.Instance.canCombine)
+        if (UIManager.Instance.canCombine || CStageManager.Instance.IsAddCell)
         {
 
         }
@@ -84,7 +84,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if (UIManager.Instance.canCombine)
+        if (UIManager.Instance.canCombine || CStageManager.Instance.IsAddCell)
         {
 
         }
@@ -114,7 +114,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (UIManager.Instance.canCombine)
+        if (UIManager.Instance.canCombine || CStageManager.Instance.IsAddCell)
         {
 
         }
@@ -130,7 +130,7 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (UIManager.Instance.canCombine)
+        if (UIManager.Instance.canCombine || CStageManager.Instance.IsAddCell)
         {
 
         }
@@ -143,6 +143,11 @@ public class CItemMouseEventController : MonoBehaviour
 
     void OnMouseOver()
     {
+        if (CStageManager.Instance.IsAddCell)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             if (!UIManager.Instance.ExtraUIOpen)
