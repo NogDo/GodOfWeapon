@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     public GameObject[] afterImage; // 잔상을 생성할 오브젝트
     public Material[] playerMaterial; // 플레이어의 메테리얼
     public GameObject[] weaponPostion; // 무기를 장착하는 위치
+
+    public ParticleSystem[] Barrier; // 플레이어의 보호막 파티클
     #endregion
 
     #region Private Fields
@@ -65,6 +67,7 @@ public class Character : MonoBehaviour
         currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         currentHp = maxHp;
         UIManager.Instance.CurrentHpChange(this);
+        GetBarrier();
     }
     private void OnEnable()
     {
@@ -102,7 +105,7 @@ public class Character : MonoBehaviour
             MovePlayer();
             rb.MovePosition(rb.position + run * Time.deltaTime);
         }
-       
+
     }
     /// <summary>
     /// 플레이어가 공격 받았을때 hp를 깎는 메서드
@@ -347,6 +350,30 @@ public class Character : MonoBehaviour
         canMove = false;
 
         CStageManager.Instance.Result(false);
+    }
+
+    public void GetBarrier()
+    {
+        StartCoroutine(BarrierEffect());
+    }
+
+    private IEnumerator BarrierEffect()
+    {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
+        Barrier[0].gameObject.SetActive(true);
+        Barrier[0].Play();
+        yield return new WaitForSeconds(4.0f);
+        Barrier[1].gameObject.SetActive(true);
+        Barrier[1].Play();
+        yield return new WaitForSeconds(1.1f);
+        Barrier[0].gameObject.SetActive(false);
+        Barrier[0].Stop();
+        yield return new WaitForSeconds(2.9f);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
+        Barrier[1].gameObject.SetActive(false);
+        Barrier[1].Stop();
     }
 }
 
