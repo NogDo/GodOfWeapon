@@ -11,7 +11,7 @@ public class CMeleeEnemyFactory : CEnemyFactory
 
     public override void CreateEnemy()
     {
-        GameObject enemy = Instantiate(oMeleeEnemyPrefabs[0], transform);
+        GameObject enemy = Instantiate(oMeleeEnemyPrefabs[1], transform);
         enemy.SetActive(false);
     }
 }

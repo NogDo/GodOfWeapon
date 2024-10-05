@@ -6,7 +6,7 @@
     "Speed": 4.0,
     "MaxHP": 15.0,
     "NowHP": 15.0,
-    "Attack": 3.0,
+    "Attack": 2.0,
     "AttackCooltime": 0.0
   },
   {
@@ -16,7 +16,17 @@
     "Speed": 3.0,
     "MaxHP": 10.0,
     "NowHP": 10.0,
-    "Attack": 2.0,
+    "Attack": 1.0,
     "AttackCooltime": 3.0
+  },
+  {
+    "Attacktype": 0,
+    "Name": "Skeleton",
+    "ID": 3,
+    "Speed": 3.5,
+    "MaxHP": 15.0,
+    "NowHP": 15.0,
+    "Attack": 2.0,
+    "AttackCooltime": 0.0
   }
 ]
