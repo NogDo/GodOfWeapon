@@ -52,5 +52,9 @@ public class UICombineButton : MonoBehaviour
 
         CStageManager.Instance.DecreaseMoney(extraUI.nCombineCost);
         CShopManager.Instance.SetInteractableReRellButton();
+
+        gameObject.SetActive(false);
+
+        yield return null;
     }
 }
