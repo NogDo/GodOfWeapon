@@ -285,7 +285,7 @@ public class UIManager : MonoBehaviour
     public void ChangeTimerText(float time)
     {
         int minute = (int)(time / 60);
-        int second = (int)(time);
+        int second = (int)(time % 60);
 
         textTimer.text = $"{minute}:{second}";
     }
@@ -359,7 +359,7 @@ public class UIManager : MonoBehaviour
     public void StageOver(bool Result, int stageCount, int totalMoney,int killCount, int totalDamage, float runtime)
     {
         int minute = (int)(runtime / 60);
-        int second = (int)(runtime);
+        int second = (int)(runtime % 60);
         rResultUI.SetActive(true);
         mainMenueBT.SetActive(true);
         if (Result == true)

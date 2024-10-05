@@ -5,7 +5,7 @@
     "ID": 1,
     "Speed": 4.0,
     "MaxHP": 15.0,
-    "NowHP": 50.0,
+    "NowHP": 15.0,
     "Attack": 3.0,
     "AttackCooltime": 0.0
   },
@@ -15,7 +15,7 @@
     "ID": 2,
     "Speed": 3.0,
     "MaxHP": 10.0,
-    "NowHP": 50.0,
+    "NowHP": 10.0,
     "Attack": 2.0,
     "AttackCooltime": 3.0
   }

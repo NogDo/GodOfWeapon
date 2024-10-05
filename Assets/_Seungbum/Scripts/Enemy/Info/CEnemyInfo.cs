@@ -13,6 +13,7 @@ public enum EAttackType
 public class CEnemyInfo : MonoBehaviour
 {
     #region private º¯¼ö
+    EnemyStats initStats;
     EnemyStats stats;
 
     [SerializeField]
@@ -108,12 +109,13 @@ public class CEnemyInfo : MonoBehaviour
     /// </summary>
     public void Init()
     {
-        if (stats == null)
+        if (initStats == null)
         {
             int index = gameObject.name.IndexOf("(Clone)");
             string name = gameObject.name.Substring(0, index);
 
-            stats = new EnemyStats(DataManager.Instance.GetEnemyStatsData(name));
+            initStats = new EnemyStats(DataManager.Instance.GetEnemyStatsData(name));
+            stats = new EnemyStats(initStats);
         }
 
         SetStatsByStage();
@@ -135,8 +137,8 @@ public class CEnemyInfo : MonoBehaviour
     {
         int stageCount = CStageManager.Instance.StageCount - 1;
 
-        stats.Attack += 0.5f * stageCount;
-        stats.MaxHP += 3.0f * stageCount;
+        stats.Attack = initStats.Attack + 0.5f * stageCount;
+        stats.MaxHP = initStats.MaxHP + 3.0f * stageCount;
     }
 
     /// <summary>
