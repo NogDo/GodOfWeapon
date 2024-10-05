@@ -15,6 +15,7 @@ public class AfterImage : MonoBehaviour
     private Coroutine fadeOut;
     private float originAlpha;
     private Coroutine fOCoroutine = null;
+    private Transform parentTransform;
     #endregion
 
     /// <summary>
@@ -36,16 +37,16 @@ public class AfterImage : MonoBehaviour
     /// 잔상을 생성하는 메서드
     /// </summary>
     /// <param name ="position">오브젝트의 현재위치<param name= "rot">로테이션값<param name="time">생성시간</param>
-    public void Create(Vector3 position,Quaternion rot, float time)
+    public void Create(Vector3 position,Quaternion rot, float time ,Transform parent)
     {
         if (fOCoroutine == null)
-        {
+        { 
+            gameObject.transform.parent = null;
             gameObject.SetActive(true);
             gameObject.transform.position = position;
             gameObject.transform.rotation = rot;
-
             meshFilter.mesh = Mesh;
-            fOCoroutine = StartCoroutine(FadeOut(time));
+            fOCoroutine = StartCoroutine(FadeOut(time,parent));
         }
     }
 
@@ -54,7 +55,7 @@ public class AfterImage : MonoBehaviour
     /// </summary>
     /// <param name="time">색이 변하는 시간값</param>
     /// <returns></returns>
-    private IEnumerator FadeOut(float time)
+    private IEnumerator FadeOut(float time, Transform parent)
     {
         while (time > 0f)
         { 
@@ -63,6 +64,7 @@ public class AfterImage : MonoBehaviour
             yield return null;
         }
         gameObject.SetActive(false);
+        gameObject.transform.parent = parent;
         fOCoroutine = null;
     }
 }
