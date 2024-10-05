@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "544742627544",
+    "firebase_url": "https://godofweapon-25150-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "godofweapon-25150",
+    "storage_bucket": "godofweapon-25150.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544742627544:android:a54ef12c4a251977df1fad",
+        "android_client_info": {
+          "package_name": "com.God.GodOfWeapon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRP1WEeSwndl8bVZoVy4BS50rX2KhNAow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
