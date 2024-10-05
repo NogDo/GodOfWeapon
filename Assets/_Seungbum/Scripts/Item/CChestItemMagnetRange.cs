@@ -17,8 +17,8 @@ public class CChestItemMagnetRange : MonoBehaviour
     {
         if (other.CompareTag("Character") && !CStageManager.Instance.IsStageEnd)
         {
-            GetComponent<SphereCollider>().enabled = false;
             chestItem.StartMagnet(other.transform);
+            GetComponent<SphereCollider>().enabled = false;
         }
     }
 }

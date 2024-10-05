@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CChestItem : MonoBehaviour
 {
+    #region private º¯¼ö
+    Animator animator;
+    #endregion
+
     void Awake()
     {
+        animator = GetComponent<Animator>();
+
         CStageManager.Instance.OnStageEnd += StageEnd;
     }
 
@@ -45,7 +51,7 @@ public class CChestItem : MonoBehaviour
     /// <param name="target"></param>
     public void StartMagnet(Transform target)
     {
-        
+        StartCoroutine(MagnetToPlayer(target));
     }
 
     /// <summary>
@@ -58,15 +64,24 @@ public class CChestItem : MonoBehaviour
         float duration = 1.0f;
 
         Vector3 startPosition = transform.position;
-        Vector3 startScale = transform.localScale;
+        startPosition.y = 1.0f;
+
+        animator.SetTrigger("Magnet");
 
         while (time <= duration)
         {
-            
+            Vector3 targetPosition = target.position;
+            targetPosition.y = 1.0f;
+
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
 
             time += Time.deltaTime;
 
             yield return null;
         }
+
+        transform.position = target.position;
+
+        yield return null;
     }
 }

@@ -49,5 +49,8 @@ public class UICombineButton : MonoBehaviour
         UIManager.Instance.baseWeapon.gameObject.GetComponent<CItemMouseEventController>().UpgradeItem();
         CellManager.Instance.PlayerInventory.UpgradeWeaponData(UIManager.Instance.baseWeapon.Weapon);
         UIManager.Instance.baseWeapon = null;
+
+        CStageManager.Instance.DecreaseMoney(extraUI.nCombineCost);
+        CShopManager.Instance.SetInteractableReRellButton();
     }
 }

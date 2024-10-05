@@ -206,7 +206,7 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (true)
         {
-            float chestSpawnTime = Random.Range(10.0f, 20.0f);
+            float chestSpawnTime = Random.Range(5.0f, 10.0f);
 
             yield return new WaitForSeconds(chestSpawnTime);
 

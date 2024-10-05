@@ -29,11 +29,11 @@ public class UIWeaponExtra : MonoBehaviour
     public Camera shopCamera;
 
     // ui창에서 조합버튼을 눌렀을때 나오는 패널
-    public GameObject[] combineButtonImage;
+    public Button[] combineButtons;
     //조합할 아이템의 가격을 표시하는 텍스트
     public Text combineWeaponValue;
 
-   
+    public int nCombineCost;
     #endregion
 
     #region private 변수
@@ -197,17 +197,17 @@ public class UIWeaponExtra : MonoBehaviour
         UIManager.Instance.ActiveShopWeaponExtraInfoPanel(weapon, false);
         weapon.gameObject.GetComponent<CItemMouseEventController>().ClickToCombine(false);
 
-        int combinePrice = DataManager.Instance.GetWeaponData(weapon.Weapon.uid).price;
+        nCombineCost = DataManager.Instance.GetWeaponData(weapon.Weapon.uid).price;
         float price = DataManager.Instance.GetWeaponData(weapon.Weapon.uid).price * 0.3f * weapon.Weapon.level;
-        combinePrice += Mathf.FloorToInt(price);
-        combineWeaponValue.text = $"{combinePrice}";
-        if (combinePrice < 200)
+        nCombineCost += Mathf.FloorToInt(price);
+        combineWeaponValue.text = $"{nCombineCost}";
+        if (nCombineCost < CStageManager.Instance.Money)
         {
-            combineButtonImage[1].SetActive(false);
+            combineButtons[1].interactable = true;
         }
         else
         {
-            combineButtonImage[1].SetActive(true);
+            combineButtons[1].interactable = false;
         }
     }
    /// <summary>
@@ -239,16 +239,16 @@ public class UIWeaponExtra : MonoBehaviour
 
             if (count >= 3)
             {
-                combineButtonImage[0].SetActive(false);
+                combineButtons[0].interactable = true;
             }
             else
             {
-                combineButtonImage[0].SetActive(true);
+                combineButtons[0].interactable = false;
             }
         }
         else
         {
-            combineButtonImage[0].SetActive(true);
+            combineButtons[0].interactable = false;
         }
     }
 

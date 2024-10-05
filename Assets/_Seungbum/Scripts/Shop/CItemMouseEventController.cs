@@ -418,6 +418,7 @@ public class CItemMouseEventController : MonoBehaviour
                 if (nIndex != -1)
                 {
                     CStageManager.Instance.DecreaseMoney(itemStats.Item.price);
+                    CShopManager.Instance.SetInteractableReRellButton();
                     CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }
@@ -434,6 +435,7 @@ public class CItemMouseEventController : MonoBehaviour
                 if (nIndex != -1)
                 {
                     CStageManager.Instance.DecreaseMoney(weaponStats.Weapon.price);
+                    CShopManager.Instance.SetInteractableReRellButton();
                     CShopManager.Instance.InActiveShopCostUI(nIndex);
                 }
             }

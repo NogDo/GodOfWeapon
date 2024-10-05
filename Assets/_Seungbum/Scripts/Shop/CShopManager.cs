@@ -567,8 +567,19 @@ public class CShopManager : MonoBehaviour
             CStageManager.Instance.DecreaseMoney(nReRollCost);
         }
 
-        nReRollCost = CStageManager.Instance.StageCount * 5 + nReRollCount * CStageManager.Instance.StageCount;
+        nReRollCost = CStageManager.Instance.StageCount * 4 + nReRollCount * CStageManager.Instance.StageCount / 2;
 
+        SetInteractableReRellButton();
+
+        textReRollCost.text = $"재굴림 - <color=#ffdc00>{nReRollCost}g</color>";
+        nReRollCount++;
+    }
+
+    /// <summary>
+    /// 재굴림 버튼의 활성화 여부를 설정한다.
+    /// </summary>
+    public void SetInteractableReRellButton()
+    {
         // 보유 돈이 부족하다면 버튼을 비활성화 시킨다.
         if (CStageManager.Instance.Money >= nReRollCost)
         {
@@ -579,9 +590,6 @@ public class CShopManager : MonoBehaviour
         {
             buttonReRoll.interactable = false;
         }
-
-        textReRollCost.text = $"재굴림 - <color=#ffdc00>{nReRollCost}g</color>";
-        nReRollCount++;
     }
 
     /// <summary>
