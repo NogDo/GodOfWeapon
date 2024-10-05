@@ -2496,6 +2496,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1066894849, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3830001800783713387, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2583,6 +2587,22 @@ PrefabInstance:
     - target: {fileID: 3830001800783713399, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
       propertyPath: m_Name
       value: MainCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721622514783986765, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100421893237024108, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a72acdc4864f2ce41b866942613647f8, type: 3}
