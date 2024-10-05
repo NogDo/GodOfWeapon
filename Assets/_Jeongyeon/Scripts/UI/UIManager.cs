@@ -377,6 +377,4 @@ public class UIManager : MonoBehaviour
         rTotalDamage.text = totalDamage.ToString();
         rTotalRuntime.text = $"{minute}:{second}";
     }
-
-  
 }

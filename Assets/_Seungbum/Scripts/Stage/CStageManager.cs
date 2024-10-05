@@ -188,6 +188,8 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.SetMoneyText(Money);
         UIManager.Instance.ChangeFloorText(nStageCount);
         UIManager.Instance.SetHPUI(tfCharacter.GetComponent<Character>().maxHp, tfCharacter.GetComponent<Character>().currentHp);
+        UIManager.Instance.SetExpUI(fMaxEXP, fEXP);
+        UIManager.Instance.SetActiveLevelUpUI(false);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
 
         tfCharacter.position = new Vector3(2.0f, -4.95f, 2.0f);
