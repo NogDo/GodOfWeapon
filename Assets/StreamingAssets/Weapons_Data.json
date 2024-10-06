@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "weaponName": "Lance",
     "weaponKoreanName": "기병창",
@@ -85,7 +85,7 @@
     "price": 35,
     "damage": 7.0,
     "massValue": 0.1,
-    "attackSpeed": 0.2,
+    "attackSpeed": 0.4,
     "attackRange": 8.0,
     "weaponType": 2,
     "tooltip": "다른 활보다 압도적으로 빠른 공격속도"
@@ -96,7 +96,7 @@
     "uid": 8,
     "level": 1,
     "price": 24,
-    "damage": 6.0,
+    "damage": 8.0,
     "massValue": 0.1,
     "attackSpeed": 0.6,
     "attackRange": 8.0,

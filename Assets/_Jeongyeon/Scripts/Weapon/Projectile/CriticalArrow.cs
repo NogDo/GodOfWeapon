@@ -8,7 +8,9 @@ public class CriticalArrow : WeaponProjectile
     #endregion
 
     #region Private Fields
-    private float speed = 30.0f;
+    private float speed = 20.0f; // 화살의 속도
+    private float damage; // 데미지
+    private float massValue; // 질량값
 
     private Rigidbody rb; // 리지드 바디
     private GameObject startParent; // 시작 부모
@@ -32,6 +34,12 @@ public class CriticalArrow : WeaponProjectile
         hitParticlePool = startParent.transform.parent.GetComponentInChildren<WHitParticlePool>();
     }
 
+    private void OnEnable()
+    {
+        damage = crossbowInfo.data.damage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10);
+        massValue = crossbowInfo.data.massValue + (inventory.myItemData.massValue / 100);
+    }
+    
     public override void Return()
     {
         transform.parent = startParent.transform;
@@ -49,8 +57,7 @@ public class CriticalArrow : WeaponProjectile
 
     private void OnTriggerEnter(Collider other)
     {
-        float damage = crossbowInfo.data.damage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10);
-        float massValue = crossbowInfo.data.massValue + (inventory.myItemData.massValue / 100);
+       
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             Vector3 hitPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
@@ -59,9 +66,17 @@ public class CriticalArrow : WeaponProjectile
             CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
             CStageManager.Instance.AddTotalDamage(damage + (damage * 0.5f));
         }
-        if (CheckBloodDrain(inventory.myItemData.bloodDrain/100) == true)
+        if (CheckBloodDrain(inventory.myItemData.bloodDrain / 50) == true)
         {
-            player.currentHp += 1;
+            if (player.maxHp > player.currentHp)
+            {
+                player.currentHp += 1;
+                
+            }
+            else if (player.currentHp + 1 > player.maxHp)
+            {
+                player.currentHp = player.maxHp;
+            }
             UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
             UIManager.Instance.CurrentHpChange(player);
             CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);

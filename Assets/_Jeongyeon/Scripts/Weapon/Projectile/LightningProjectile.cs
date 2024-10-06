@@ -10,6 +10,9 @@ public class LightningProjectile : WeaponProjectile
     private LightningSpearController spearController; // 창의 데미지를 가지고 있는 컨트롤러
     private PlayerInventory inventory; // 플레이어 인벤토리
     private Character player; // 플레이어 
+
+    private float damage; // 데미지
+    private float massValue; // 질량값
     #endregion
 
     private void Awake()
@@ -19,6 +22,11 @@ public class LightningProjectile : WeaponProjectile
         spearController = GetComponentInParent<LightningSpearController>();
         inventory = transform.parent.GetComponentInParent<PlayerInventory>();
         player = transform.parent.GetComponentInParent<Character>();
+    }
+    private void OnEnable()
+    {
+        damage = (spearController.AttackDamage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10)) * 0.8f;
+        massValue = spearController.MassValue + (inventory.myItemData.massValue / 100);
     }
     public override void Return()
     {
@@ -37,8 +45,6 @@ public class LightningProjectile : WeaponProjectile
 
     private void OnTriggerEnter(Collider other)
     {
-        float damage = (spearController.AttackDamage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10)) * 0.8f;
-        float massValue = spearController.MassValue + (inventory.myItemData.massValue / 100);
         if (other.TryGetComponent<IHittable>(out IHittable hit))
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius);
@@ -59,9 +65,17 @@ public class LightningProjectile : WeaponProjectile
                         CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
                         CStageManager.Instance.AddTotalDamage(damage);
                     }
-                    if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
+                    if (CheckBloodDrain(inventory.myItemData.bloodDrain / 75) == true)
                     {
-                        player.currentHp += 1;
+                        if (player.maxHp > player.currentHp)
+                        {
+                            player.currentHp += 1;
+
+                        }
+                        else if (player.currentHp + 1 > player.maxHp)
+                        {
+                            player.currentHp = player.maxHp;
+                        }
                         UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
                         UIManager.Instance.CurrentHpChange(player);
                         CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);

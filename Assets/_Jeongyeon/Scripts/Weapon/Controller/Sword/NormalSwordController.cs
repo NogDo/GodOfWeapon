@@ -30,7 +30,7 @@ public class NormalSwordController : SwordController
             inventory = GetComponentInParent<PlayerInventory>();
         }
         extraDamage = inventory.playerWeapon.Count / 3;
-        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 500));
         if (duration < 0.2f)
         {
             duration = 0.2f;

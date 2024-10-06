@@ -18,9 +18,10 @@ public class FireBaseManager : MonoBehaviour
     // 파이어베이스 앱이 초기화 되어 사용 가능한지 여부
     public bool IsInitialized { get; private set; } = false;
 
-    public event Action onInit; // 파이어베이스가 초기화되면 호출
+    public event Action OnInit; // 파이어베이스가 초기화되면 호출
 
     public UserData userData;
+    public JsonData jsonData;
     public DatabaseReference usersRef;
 
     private void Awake()
@@ -47,7 +48,7 @@ public class FireBaseManager : MonoBehaviour
             Auth = FirebaseAuth.DefaultInstance;
             DB = FirebaseDatabase.DefaultInstance;
             IsInitialized = true;
-            onInit?.Invoke();
+            OnInit?.Invoke();
             print($"파이어베이스 초기화 성공!");
         }
         else
@@ -66,7 +67,6 @@ public class FireBaseManager : MonoBehaviour
     public async void Login(string email, string pw, Action<FirebaseUser> callback = null)
     {
         var result = await Auth.SignInWithEmailAndPasswordAsync(email, pw);
-
         usersRef = DB.GetReference($"users/{result.User.UserId}");
 
         DataSnapshot userDataValues = await usersRef.GetValueAsync();
@@ -80,6 +80,51 @@ public class FireBaseManager : MonoBehaviour
         else
         {
             FBPanelManager.Instance.FailLogin();
+        }
+    }
+
+    /// <summary>
+    /// 제이슨을 비교하는 메서드
+    /// </summary>
+    /// <param name="hash">해쉬로 변환된 값</param>
+    /// <param name="num">0 = 무기, 1 = 아이템, 2 = 적</param>
+    public async void CompareJson(string hash, int num)
+    {
+        switch (num)
+        {
+            case 0:
+                usersRef = DB.GetReference($"json/weapon");
+                break;
+            case 1:
+                usersRef = DB.GetReference($"json/item");
+                break;
+        }
+
+        DataSnapshot jsonDataValues = await usersRef.GetValueAsync();
+
+        if (jsonDataValues.Exists)
+        {
+            string json = jsonDataValues.GetRawJsonValue();
+            jsonData = JsonConvert.DeserializeObject<JsonData>(json);
+        }
+        if (jsonData.hash != hash)
+        {
+            Debug.Log("데이터가 다르자나!");
+            switch (num)
+            {
+                case 0:
+                    DataManager.Instance.weaponJson = jsonData.json;
+                    DataManager.Instance.LoadWeapon();
+                    break;
+                case 1:
+                    DataManager.Instance.itemJson = jsonData.json;
+                    DataManager.Instance.LoadItem();
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("데이터 힛또");
         }
     }
     public async void Create(string email, string name, string pw)
@@ -103,6 +148,26 @@ public class FireBaseManager : MonoBehaviour
         {
             Debug.LogError(e.Message);
             FBPanelManager.Instance.FailCreate("회원가입 실패");
+        }
+    }
+
+    public async void CreateJson(string hash, string value)
+    {
+        try
+        {
+            usersRef = DB.GetReference($"json/weapon");
+
+            JsonData jsonData = new JsonData(hash, value);
+
+            string jsonDatas = JsonConvert.SerializeObject(jsonData);
+
+            await usersRef.SetRawJsonValueAsync(jsonDatas);
+
+            this.jsonData = jsonData;
+        }
+        catch (FirebaseException e)
+        {
+            Debug.LogError(e.Message);
         }
     }
 }

@@ -42,9 +42,11 @@ public class Character : MonoBehaviour
     private Rigidbody rb;
     private Animator anim;
     private SMRCreator smrCreator; // 잔상을 생성하는 클래스
-    private IEnumerator hitCoroutine;
-    private PlayerInventory inventory;
-    private ItemData myData;
+    private IEnumerator hitCoroutine; // 플레이어가 맞았을때 실행되는 코루틴
+    private PlayerInventory inventory; // 플레이어의 인벤토리
+    private ItemData myData; // 플레이어의 아이템 데이터
+
+    private Coroutine barrierCoroutine; // 보호막 효과를 주는 코루틴
     #endregion
 
     public void Awake()
@@ -67,7 +69,6 @@ public class Character : MonoBehaviour
         currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         currentHp = maxHp;
         UIManager.Instance.CurrentHpChange(this);
-        GetBarrier();
     }
     private void OnEnable()
     {
@@ -77,6 +78,14 @@ public class Character : MonoBehaviour
             StartCoroutine(StopMove());
         }
         currentDashCount = dashCount;
+        if (barrierCoroutine != null)
+        {
+            StopCoroutine(barrierCoroutine);
+            Barrier[0].gameObject.SetActive(false);
+            Barrier[1].gameObject.SetActive(false);
+            Barrier[0].Stop();
+            Barrier[1].Stop();
+        }
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ignore Object"), false);
@@ -114,6 +123,9 @@ public class Character : MonoBehaviour
     public virtual void Hit(float damage)
     {
         float finalDamage = damage - myData.defense / 20;
+        hitCoroutine = HitEffect();
+        StopCoroutine(hitCoroutine);
+        StartCoroutine(hitCoroutine);
         if (finalDamage == 0)
         {
             finalDamage = 1;
@@ -129,7 +141,7 @@ public class Character : MonoBehaviour
         CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
     }
     /// <summary>
-    /// 플레이어의 회전을 조절하는 메서드
+    /// 플레이어의 이동과 회전을 조절하는 메서드
     /// </summary>
     public void MovePlayer()
     {
@@ -250,11 +262,7 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<IAttackable>(out IAttackable hit) && !CStageManager.Instance.IsStageEnd)
         {
-            hitCoroutine = HitEffect();
-            StopCoroutine(hitCoroutine);
-            StartCoroutine(hitCoroutine);
             Hit(hit.GetAttackDamage());
-
         }
         if (other.gameObject.CompareTag("Fence"))
         {
@@ -283,9 +291,6 @@ public class Character : MonoBehaviour
         if (other.TryGetComponent<IAttackable>(out IAttackable hit) && !CStageManager.Instance.IsStageEnd)
         {
             Hit(hit.GetAttackDamage());
-            hitCoroutine = HitEffect();
-            StopCoroutine(hitCoroutine);
-            StartCoroutine(hitCoroutine);
         }
     }
     /// <summary>
@@ -314,6 +319,7 @@ public class Character : MonoBehaviour
     {
         canMove = false;
         rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         yield return new WaitForSeconds(1.0f);
         rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         canMove = true;
@@ -354,9 +360,26 @@ public class Character : MonoBehaviour
 
     public void GetBarrier()
     {
-        StartCoroutine(BarrierEffect());
+        barrierCoroutine = StartCoroutine(BarrierEffect());
     }
 
+    public void GetHealingItem()
+    {
+        if (currentHp + 15 > maxHp)
+        {
+            currentHp = maxHp;
+            UIManager.Instance.SetHPUI(maxHp, currentHp);
+            UIManager.Instance.CurrentHpChange(this);
+        }
+        else
+        {
+            currentHp += 15;
+            UIManager.Instance.SetHPUI(maxHp, currentHp);
+            UIManager.Instance.CurrentHpChange(this);
+        }
+            CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 15);
+
+    }
     private IEnumerator BarrierEffect()
     {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
@@ -375,6 +398,8 @@ public class Character : MonoBehaviour
         Barrier[1].gameObject.SetActive(false);
         Barrier[1].Stop();
     }
+
+
 }
 
 
