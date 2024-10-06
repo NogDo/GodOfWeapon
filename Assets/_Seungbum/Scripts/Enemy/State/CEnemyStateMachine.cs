@@ -104,14 +104,6 @@ public class CEnemyStateMachine : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        if (currentState != null)
-        {
-            currentState.OnFixedUpdate();
-        }
-    }
-
     /// <summary>
     /// 현재 상태를 변경한다.
     /// </summary>

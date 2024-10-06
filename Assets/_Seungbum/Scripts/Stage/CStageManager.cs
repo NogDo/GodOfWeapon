@@ -303,6 +303,7 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.SetActiveLevelUpUI(false);
         UIManager.Instance.SetActiveStageUI(false);
         CCreateMapManager.Instance.DestroyMap();
+        CEnemyPoolManager.Instance.DestroyPool();
 
         EndStage();
 

@@ -27,10 +27,6 @@ public class CEnemyAttackState : CEnemyBaseState
         }
     }
 
-    public override void OnFixedUpdate()
-    {
-    }
-
     public override void OnExit()
     {
     }

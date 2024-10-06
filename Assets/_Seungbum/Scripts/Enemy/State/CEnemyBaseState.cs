@@ -24,11 +24,6 @@ public abstract class CEnemyBaseState
     public abstract void OnUpdate();
 
     /// <summary>
-    /// 현재 State를 FixedUpdate로 갱신
-    /// </summary>
-    public abstract void OnFixedUpdate();
-
-    /// <summary>
     /// 현재 State를 종료할 때 실행
     /// </summary>
     public abstract void OnExit();
