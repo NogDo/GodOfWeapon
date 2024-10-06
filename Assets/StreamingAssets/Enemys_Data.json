@@ -78,5 +78,15 @@
     "NowHP": 15.0,
     "Attack": 3.0,
     "AttackCooltime": 5.0
+  },
+  {
+    "Attacktype": 0,
+    "Name": "Spook",
+    "ID": 9,
+    "Speed": 4.5,
+    "MaxHP": 10.0,
+    "NowHP": 10.0,
+    "Attack": 2.0,
+    "AttackCooltime": 0.0
   }
 ]
