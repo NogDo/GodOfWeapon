@@ -73,7 +73,10 @@ public class CEnemyPoolManager : MonoBehaviour
         spawnChestCoroutine = SpawnChest();
 
         StartCoroutine(spawnMeleeEnemyCoroutine);
-        StartCoroutine(spawnRangeEnemyCoroutine);
+        if (enemyPool.RangeEnemyCount > 0)
+        {
+            StartCoroutine(spawnRangeEnemyCoroutine);
+        }
         StartCoroutine(spawnChestCoroutine);
     }
 
@@ -126,6 +129,7 @@ public class CEnemyPoolManager : MonoBehaviour
         while (true)
         {
             int meleeEnemySpawnCount = Random.Range(nMeleeEnemySpawnCountMax - 3, nMeleeEnemySpawnCountMax);
+            meleeEnemySpawnCount = meleeEnemySpawnCount * enemyPool.MeleeEnemyCount;
 
             StartCoroutine(DelaySpawn(meleeEnemySpawnCount, EAttackType.MELEE));
 
@@ -144,6 +148,7 @@ public class CEnemyPoolManager : MonoBehaviour
         while (true)
         {
             int rangeEnemySpawnCount = Random.Range(nRangeEnemySpawnCountMax - 3, nRangeEnemySpawnCountMax);
+            rangeEnemySpawnCount = rangeEnemySpawnCount * enemyPool.RangeEnemyCount;
 
             StartCoroutine(DelaySpawn(rangeEnemySpawnCount, EAttackType.RANGE));
 

@@ -12,7 +12,32 @@ public class CEnemyPool : MonoBehaviour
     CMeleeEnemyFactory meleeEnemyFactory;
     CRangeEnemyFactory rangeEnemyFactory;
     CChestFactory chestFactory;
+
+    int nMeleeEnemyCount;
+    int nRangeEnemyCount;
     #endregion
+
+    /// <summary>
+    /// 근거리 적 종류 개수
+    /// </summary>
+    public int MeleeEnemyCount
+    {
+        get
+        {
+            return nMeleeEnemyCount;
+        }
+    }
+
+    /// <summary>
+    /// 원거리 적 종류 개수
+    /// </summary>
+    public int RangeEnemyCount
+    {
+        get
+        {
+            return nRangeEnemyCount;
+        }
+    }
 
     void Awake()
     {
@@ -26,6 +51,25 @@ public class CEnemyPool : MonoBehaviour
     /// </summary>
     public void InitPool()
     {
+        int nEnemycount = 2;
+
+        if (CStageManager.Instance.StageCount >= 4)
+        {
+            nEnemycount = 3;
+
+            nMeleeEnemyCount = Random.Range(2, 4);
+            nRangeEnemyCount = nEnemycount - nMeleeEnemyCount;
+        }
+
+        else
+        {
+            nMeleeEnemyCount = Random.Range(1, 3);
+            nRangeEnemyCount = nEnemycount - nMeleeEnemyCount;
+        }
+
+        meleeEnemyFactory.SetEnemyIndex(nMeleeEnemyCount);
+        rangeEnemyFactory.SetEnemyIndex(nRangeEnemyCount);
+
         for (int i = 0; i < 10; i++)
         {
             meleeEnemyFactory.CreateEnemy();

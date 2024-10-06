@@ -48,16 +48,7 @@ public class CStartFloorController : MonoBehaviour
         boxCollider.enabled = true;
         cellarDoorCollider.enabled = false;
 
-        //if (CStageManager.Instance.StageCount == 1)
-        //{
         CEnemyPoolManager.Instance.InitPooling();
-        //}
-
-        //else
-        //{
-        //    CEnemyPoolManager.Instance.StartSpawn();
-        //}
-
         CDamageTextPoolManager.Instance.StartSpawn();
 
         yield return null;
