@@ -4,8 +4,8 @@
     "Name": "Death",
     "ID": 1,
     "Speed": 4.0,
-    "MaxHP": 15.0,
-    "NowHP": 15.0,
+    "MaxHP": 12.0,
+    "NowHP": 12.0,
     "Attack": 2.0,
     "AttackCooltime": 0.0
   },
@@ -58,5 +58,15 @@
     "NowHP": 15.0,
     "Attack": 1.0,
     "AttackCooltime": 4.0
+  },
+  {
+    "Attacktype": 0,
+    "Name": "Nightmare",
+    "ID": 7,
+    "Speed": 3.8,
+    "MaxHP": 15.0,
+    "NowHP": 15.0,
+    "Attack": 3.0,
+    "AttackCooltime": 0.0
   }
 ]
