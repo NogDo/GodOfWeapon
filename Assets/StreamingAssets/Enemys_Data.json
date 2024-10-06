@@ -68,5 +68,15 @@
     "NowHP": 15.0,
     "Attack": 3.0,
     "AttackCooltime": 0.0
+  },
+  {
+    "Attacktype": 1,
+    "Name": "Skeleton Mage",
+    "ID": 8,
+    "Speed": 4.5,
+    "MaxHP": 15.0,
+    "NowHP": 15.0,
+    "Attack": 3.0,
+    "AttackCooltime": 5.0
   }
 ]

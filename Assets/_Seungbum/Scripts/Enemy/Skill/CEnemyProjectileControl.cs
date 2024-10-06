@@ -56,7 +56,7 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
 
             col.enabled = false;
 
-            ownParticle.Stop();
+            ownParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             hitParticle.Play();
 
             StartCoroutine(ProjectileActiveFalse());
