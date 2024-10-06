@@ -7,6 +7,8 @@ public class CEnemyMeshControl : MonoBehaviour
     #region private º¯¼ö
     [SerializeField]
     SkinnedMeshRenderer skin;
+    [SerializeField]
+    MeshRenderer otherMesh;
 
     [SerializeField]
     Material materialNormal;
@@ -32,6 +34,11 @@ public class CEnemyMeshControl : MonoBehaviour
     public void ChangeMateiral_Die()
     {
         skin.material = materialDie;
+        
+        if (otherMesh != null)
+        {
+            otherMesh.material = materialDie;
+        }
     }
 
     /// <summary>
@@ -40,6 +47,11 @@ public class CEnemyMeshControl : MonoBehaviour
     public void ChangeMaterial_Normal()
     {
         skin.material = materialNormal;
+
+        if (otherMesh != null)
+        {
+            otherMesh.material = materialNormal;
+        }
     }
 
     /// <summary>
@@ -59,9 +71,19 @@ public class CEnemyMeshControl : MonoBehaviour
     {
         skin.material = materialHit;
 
+        if (otherMesh != null)
+        {
+            otherMesh.material = materialHit;
+        }
+
         yield return new WaitForSeconds(0.1f);
 
         skin.material = materialNormal;
+
+        if (otherMesh != null)
+        {
+            otherMesh.material = materialNormal;
+        }
 
         yield return null;
     }
@@ -72,6 +94,11 @@ public class CEnemyMeshControl : MonoBehaviour
     public void DisableMesh()
     {
         skin.enabled = false;
+
+        if (otherMesh != null)
+        {
+            otherMesh.enabled = false;
+        }
 
         StartCoroutine(EnableMesh());
     }
@@ -85,5 +112,10 @@ public class CEnemyMeshControl : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         skin.enabled = true;
+
+        if (otherMesh != null)
+        {
+            otherMesh.enabled = true;
+        }
     }
 }

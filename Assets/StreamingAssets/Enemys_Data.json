@@ -88,5 +88,15 @@
     "NowHP": 10.0,
     "Attack": 2.0,
     "AttackCooltime": 0.0
+  },
+  {
+    "Attacktype": 2,
+    "Name": "Grim Reaper",
+    "ID": 10,
+    "Speed": 4.5,
+    "MaxHP": 250.0,
+    "NowHP": 250.0,
+    "Attack": 10.0,
+    "AttackCooltime": 5.0
   }
 ]

@@ -15,7 +15,7 @@ public class CEnemyAttackState : CEnemyBaseState
 
     public override void OnUpdate()
     {
-        if (!enemyController.IsAttackCoolTime)
+        if (!enemyController.IsAttackCoolTime && !enemyController.IsAttacking)
         {
             enemyController.Attack();
         }

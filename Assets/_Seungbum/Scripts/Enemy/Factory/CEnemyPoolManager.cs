@@ -14,6 +14,7 @@ public class CEnemyPoolManager : MonoBehaviour
     IEnumerator spawnMeleeEnemyCoroutine;
     IEnumerator spawnRangeEnemyCoroutine;
     IEnumerator spawnChestCoroutine;
+    IEnumerator spawnEliteEnemyCoroutine;
 
     float fMeleeEnemySpawnTime = 3.0f;
     float fRangeEnemySpawnTime = 5.0f;
@@ -71,6 +72,7 @@ public class CEnemyPoolManager : MonoBehaviour
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
         spawnRangeEnemyCoroutine = SpawnRangeEnemy();
         spawnChestCoroutine = SpawnChest();
+        spawnEliteEnemyCoroutine = SpawnEliteEnemy();
 
         StartCoroutine(spawnMeleeEnemyCoroutine);
         if (enemyPool.RangeEnemyCount > 0)
@@ -78,6 +80,7 @@ public class CEnemyPoolManager : MonoBehaviour
             StartCoroutine(spawnRangeEnemyCoroutine);
         }
         StartCoroutine(spawnChestCoroutine);
+        StartCoroutine(spawnEliteEnemyCoroutine);
     }
 
 
@@ -89,6 +92,7 @@ public class CEnemyPoolManager : MonoBehaviour
         StopCoroutine(spawnMeleeEnemyCoroutine);
         StopCoroutine(spawnRangeEnemyCoroutine);
         StopCoroutine(spawnChestCoroutine);
+        StopCoroutine(spawnEliteEnemyCoroutine);
     }
 
     /// <summary>
@@ -216,6 +220,22 @@ public class CEnemyPoolManager : MonoBehaviour
             yield return new WaitForSeconds(chestSpawnTime);
 
             enemyPool.SpawnChest();
+        }
+    }
+
+    /// <summary>
+    /// 郡府飘 利阑 家券 内风凭
+    /// </summary>
+    IEnumerator SpawnEliteEnemy()
+    {
+        while (nEliteSpawnCount > 0)
+        {
+            float eliteEnemySpawnTime = Random.Range(5.0f, 10.0f);
+
+            yield return new WaitForSeconds(eliteEnemySpawnTime);
+
+            enemyPool.SpawnEliteEnemy();
+            nEliteSpawnCount--;
         }
     }
 }

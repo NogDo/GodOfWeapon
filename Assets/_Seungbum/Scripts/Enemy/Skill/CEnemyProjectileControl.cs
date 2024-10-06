@@ -99,6 +99,11 @@ public class CEnemyProjectileControl : MonoBehaviour, IAttackable
     /// </summary>
     public void Shoot()
     {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         col.enabled = true;
 
         StartCoroutine(moveCoroutine);

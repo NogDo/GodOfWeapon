@@ -12,6 +12,7 @@ public class CEnemyPool : MonoBehaviour
     CMeleeEnemyFactory meleeEnemyFactory;
     CRangeEnemyFactory rangeEnemyFactory;
     CChestFactory chestFactory;
+    CEliteEnemyFactory eliteEnemyFactory;
 
     int nMeleeEnemyCount;
     int nRangeEnemyCount;
@@ -44,6 +45,7 @@ public class CEnemyPool : MonoBehaviour
         meleeEnemyFactory = transform.GetChild(0).GetComponent<CMeleeEnemyFactory>();
         rangeEnemyFactory = transform.GetChild(1).GetComponent<CRangeEnemyFactory>();
         chestFactory = transform.GetChild(2).GetComponent<CChestFactory>();
+        eliteEnemyFactory = transform.GetChild(3).GetComponent<CEliteEnemyFactory>();
     }
 
     /// <summary>
@@ -97,6 +99,11 @@ public class CEnemyPool : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        foreach (Transform child in eliteEnemyFactory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         meleeEnemyPool.Clear();
         rangeEnemyPool.Clear();
         enemyChestPool.Clear();
@@ -142,6 +149,14 @@ public class CEnemyPool : MonoBehaviour
     }
 
     /// <summary>
+    /// 엘리트 적을 소환한다.
+    /// </summary>
+    public void SpawnEliteEnemy()
+    {
+        eliteEnemyFactory.CreateEnemy();
+    }
+
+    /// <summary>
     /// 적을 디스폰한다. (Pool에 반환)
     /// </summary>
     /// <param name="enemy">적 오브젝트</param>
@@ -156,6 +171,9 @@ public class CEnemyPool : MonoBehaviour
 
             case EAttackType.RANGE:
                 rangeEnemyPool.Enqueue(enemy);
+                break;
+
+            case EAttackType.BOTH:
                 break;
 
             case EAttackType.NONE:
