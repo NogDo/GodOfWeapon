@@ -29,7 +29,7 @@ public class LanceController : SpearController
             inventory = GetComponentInParent<PlayerInventory>();
         }
         extraSpeed = inventory.playerWeapon.Count;
-        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100)) - (extraSpeed * 0.1f);
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 500)) - (extraSpeed * 0.1f);
         if (duration < 0.2f)
         {
             duration = 0.2f;
@@ -49,7 +49,8 @@ public class LanceController : SpearController
     {
         attackParent.transform.position = startParent.transform.position;
         attackParent.transform.rotation = startParent.transform.rotation;
-        gameObject.transform.parent = attackParent.transform;
+        gameObject.transform.parent = attackParent
+            .transform;
 
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.5f;
         isAttacking = true;

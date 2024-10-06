@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Unity.VisualScripting;
 using System;
+using Google.MiniJSON;
 
 public class DataManager : MonoBehaviour
 {
@@ -12,10 +13,14 @@ public class DataManager : MonoBehaviour
     private List<ItemData> itemDatas;
     private List<WeaponData> weaponDatas;
     private List<EnemyStats> enemyStatsDatas;
-    private WeaponData crossbow;
-    private ItemData dice;
-    #endregion
 
+    private string wPath; // 무기 데이터 경로
+    private string iPath; // 아이템 데이터 경로
+    #endregion
+    #region Public 변수
+    [HideInInspector] public string weaponJson; // 무기 json데이터를 담는 변수
+    [HideInInspector] public string itemJson; // 아이템 json데이터를 담는 변수
+    #endregion
     public static DataManager Instance { get; private set; }
     public void Awake()
     {
@@ -30,29 +35,53 @@ public class DataManager : MonoBehaviour
         itemDatas = new List<ItemData>();
         enemyStatsDatas = new List<EnemyStats>();
 
-        LoadItem();
-        LoadWeapon();
+        wPath = $"{Application.streamingAssetsPath}/Weapons_Data.json";
+        iPath = $"{Application.streamingAssetsPath}/Items_Data.json";
+        weaponJson = File.ReadAllText(wPath);
+        itemJson = File.ReadAllText(iPath);
+        LoadWeapon();// 테스트를위해 넣어둠 씬전환이 되면 지울 것!
+        LoadItem(); // 테스트를위해 넣어둠 씬전환이 되면 지울 것!
         LoadEnemy();
     }
     private void Start()
     {
-
+        //FireBaseManager.Instance.OnInit += CompareJsonData; // 파이어베이스 초기화가 완료되면 Json데이터를 비교하는 메서드를 호출
+        // FireBaseManager.Instance.OnInit += SetJsonInDatabase;
     }
 
-    public void LoadItem()
+    public void CompareJsonData()
     {
-        string path = $"{Application.streamingAssetsPath}/Items_Data.json";
-        string json = File.ReadAllText(path);
-        List<ItemData> itemData = JsonConvert.DeserializeObject<List<ItemData>>(json);
-        this.itemDatas.AddRange(itemData);
+        FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(weaponJson), 0);
+        FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(itemJson), 1);
+
     }
 
-    public void LoadWeapon()
+    /// <summary>
+    /// 제이슨을 데이터베이스에 넣는 메서드 path에 뭘 넣느냐에 따라 위치가 달라짐 조심 !!
+    /// </summary>
+    public void SetJsonInDatabase()
     {
         string path = $"{Application.streamingAssetsPath}/Weapons_Data.json";
         string json = File.ReadAllText(path);
-        List<WeaponData> WeaponData = JsonConvert.DeserializeObject<List<WeaponData>>(json);
+        FireBaseManager.Instance.CreateJson(HashHelper.CreateHash(json), json);
+    }
+    /// <summary>
+    /// 불러온 아이템 정보를 넣고 데이터를 저장하는 메서드
+    /// </summary>
+    public void LoadItem()
+    {
+        List<ItemData> itemData = JsonConvert.DeserializeObject<List<ItemData>>(itemJson);
+        this.itemDatas.AddRange(itemData);
+        File.WriteAllText(iPath, itemJson);
+    }
+    /// <summary>
+    /// 불러온 무기 정보를 넣고 데이터를 저장하는 메서드
+    /// </summary>
+    public void LoadWeapon()
+    {
+        List<WeaponData> WeaponData = JsonConvert.DeserializeObject<List<WeaponData>>(weaponJson);
         this.weaponDatas.AddRange(WeaponData);
+        File.WriteAllText(wPath, weaponJson);
     }
 
     /// <summary>
@@ -70,13 +99,6 @@ public class DataManager : MonoBehaviour
 
     public ItemData GetItemData(int uid)
     {
-        //foreach (ItemData data in itemDatas)
-        //{
-        //    if (data.uid == uid)
-        //    {
-        //        return data;
-        //    }
-        //}
 
         if (uid - 1 >= itemDatas.Count)
         {
@@ -89,7 +111,11 @@ public class DataManager : MonoBehaviour
             return itemDatas[uid - 1];
         }
     }
-
+    /// <summary>
+    /// 아이템 이름으로 아이템 데이터를 불러오는 메서드
+    /// </summary>
+    /// <param name="name">아이템 이름</param>
+    /// <returns></returns>
     public ItemData GetItemData(string name)
     {
         foreach (ItemData data in itemDatas)
@@ -102,16 +128,13 @@ public class DataManager : MonoBehaviour
         Debug.LogError("아이템이 없다구요!");
         return null;
     }
-
+    /// <summary>
+    /// 무기의 uid로 무기 데이터를 불러오는 메서드
+    /// </summary>
+    /// <param name="uid">무기 uid</param>
+    /// <returns></returns>
     public WeaponData GetWeaponData(int uid)
     {
-        //foreach (WeaponData data in weaponDatas)
-        //{
-        //    if (data.uid == uid)
-        //    {
-        //        return data;
-        //    }
-        //}
 
         if (uid - 1 >= weaponDatas.Count)
         {
@@ -125,6 +148,11 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 무기의 이름으로 무기 데이터를 불러오는 메서드
+    /// </summary>
+    /// <param name="name">무기 이름</param>
+    /// <returns></returns>
     public WeaponData GetWeaponData(string name)
     {
         foreach (WeaponData data in weaponDatas)

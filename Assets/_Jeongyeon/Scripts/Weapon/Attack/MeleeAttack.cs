@@ -38,12 +38,21 @@ public class MeleeAttack : WeaponAttack
                 CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
                 CStageManager.Instance.AddTotalDamage(damage);
             }
-            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 100) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 75) == true)
             {
-                player.currentHp += 1;
+                if (player.maxHp > player.currentHp)
+                {
+                    player.currentHp += 1;
+
+                }
+                else if (player.currentHp + 1 > player.maxHp)
+                {
+                    player.currentHp = player.maxHp;
+                }
                 UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
                 UIManager.Instance.CurrentHpChange(player);
                 CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);
+
             }
         }
     }

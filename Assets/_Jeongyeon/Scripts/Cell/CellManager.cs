@@ -59,7 +59,9 @@ public class CellManager : MonoBehaviour
         SetCell();
         canActiveCell = new List<Pos>();
     }
-
+    /// <summary>
+    /// 게임이 재시작될때 셀을 비우는 메서드
+    /// </summary>
     public void ReStart()
     {
         ResetAllCell();

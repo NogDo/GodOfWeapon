@@ -42,7 +42,7 @@ public class CrossBowController : WeaponController
         {
             inventory = GetComponentInParent<PlayerInventory>();
         }
-        attackSpeed = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100));
+        attackSpeed = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 500));
         if (attackSpeed < 0.01f)
         {
             attackSpeed = 0.01f;

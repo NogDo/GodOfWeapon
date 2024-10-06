@@ -13,6 +13,23 @@ public class SpearController : WeaponController, IPierce
     protected Collider attackCollider;
     #endregion
 
+    private void OnEnable()
+    {
+        myData = weaponStatInfo.data;
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<PlayerInventory>();
+        }
+        duration = myData.attackSpeed - (myData.attackSpeed * (inventory.myItemData.attackSpeed / 500));
+        if (duration < 0.2f)
+        {
+            duration = 0.2f;
+        }
+        monsterIndex = weaponStatInfo.index;
+        AttackRange = myData.attackRange + (inventory.myItemData.attackRange) / 100;
+        AttackDamage = myData.damage + (inventory.myItemData.damage) / 10;
+        MassValue = myData.massValue + (inventory.myItemData.massValue) / 100;
+    }
     public virtual IEnumerator PreParePierce(float setY)
     {
         attackParent.transform.position = startParent.transform.position;
