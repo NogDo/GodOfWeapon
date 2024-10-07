@@ -1374,10 +1374,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1650119916878779383, guid: e01707d50c096464cbb31b502707c246, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1650119917306241865, guid: e01707d50c096464cbb31b502707c246, type: 3}
       propertyPath: m_Name
       value: EnemyPool
@@ -1425,14 +1421,6 @@ PrefabInstance:
     - target: {fileID: 1650119917306241866, guid: e01707d50c096464cbb31b502707c246, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650119917417680154, guid: e01707d50c096464cbb31b502707c246, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296264935749394380, guid: e01707d50c096464cbb31b502707c246, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e01707d50c096464cbb31b502707c246, type: 3}
