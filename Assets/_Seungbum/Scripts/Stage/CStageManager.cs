@@ -478,6 +478,6 @@ public class CStageManager : MonoBehaviour
         CEnemyPoolManager.Instance.StopSpawn();
         CDamageTextPoolManager.Instance.StopSpawn();
 
-        UIManager.Instance.StageOver(isClear, nStageCount, nTotalMoney, nTotalKillCount, Mathf.RoundToInt(fTotalDamage), fTotalTime);
+        UIManager.Instance.StageOver(isClear, nStageCount, nTotalMoney, nTotalKillCount, Mathf.RoundToInt(fTotalDamage), fTotalTime,0);
     }
 }

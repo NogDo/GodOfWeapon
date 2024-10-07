@@ -105,28 +105,39 @@ public class FireBaseManager : MonoBehaviour
 
         if (jsonDataValues.Exists)
         {
-            string json = jsonDataValues.GetRawJsonValue();
-            jsonData = JsonConvert.DeserializeObject<JsonData>(json);
-        }
-        if (jsonData.hash != hash)
-        {
-            Debug.Log("데이터가 다르자나!");
-            switch (num)
+            var jsonHash = jsonDataValues.Child("hash");
+            if (jsonHash.Exists)
             {
-                case 0:
-                    DataManager.Instance.weaponJson = jsonData.json;
-                    DataManager.Instance.LoadWeapon();
-                    break;
-                case 1:
-                    DataManager.Instance.itemJson = jsonData.json;
-                    DataManager.Instance.LoadItem();
-                    break;
+               string hashValue = jsonHash.GetValue(false).ToString();
+
+                if (hashValue != hash)
+                {
+                    var jsonValue = jsonDataValues.Child("json");
+                    if (jsonValue.Exists)
+                    {
+                        string value = jsonValue.GetValue(false).ToString();
+                        switch (num)
+                        {
+                            case 0:
+                                DataManager.Instance.weaponJson = value;
+                                DataManager.Instance.LoadWeapon();
+                                break;
+                            case 1:
+                                DataManager.Instance.itemJson = value;
+                                DataManager.Instance.LoadItem();
+                                break;
+                        }
+
+                        Debug.Log("다른거 불러오기 성공");
+                    }
+                }
+                else
+                {
+                    Debug.Log("해쉬값이 같아용~");
+                }
             }
         }
-        else
-        {
-            Debug.Log("데이터 힛또");
-        }
+       
     }
     public async void Create(string email, string name, string pw)
     {
