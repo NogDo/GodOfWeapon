@@ -49,8 +49,9 @@ public class CEnemyLineIndicatorControl : MonoBehaviour
         fWaitTime = waitTime;
 
         spriteBody.size = new Vector2(fWidth, fLength);
-        spriteBody.transform.position = new Vector3(0.0f, 0.0f, spriteBody.size.y / 2);
-        spriteHead.transform.position = new Vector3(0.0f, 0.0f, spriteBody.size.y + 1);
+        spriteHead.size = new Vector2(fWidth, 2.0f);
+        spriteBody.transform.localPosition = new Vector3(0.0f, 0.0f, spriteBody.size.y / 2);
+        spriteHead.transform.localPosition = new Vector3(0.0f, 0.0f, spriteBody.size.y + 1);
     }
 
     /// <summary>
@@ -67,7 +68,7 @@ public class CEnemyLineIndicatorControl : MonoBehaviour
     /// <returns></returns>
     IEnumerator InActiveIndicator()
     {
-        yield return new WaitForSeconds(fWaitTime);
+        yield return new WaitForSeconds(1.0f);
 
         gameObject.SetActive(false);
     }

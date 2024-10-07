@@ -45,6 +45,8 @@ public class CStartFloorController : MonoBehaviour
             yield return null;
         }
 
+        tfCellarDoor.localPosition = Vector3.zero;
+
         boxCollider.enabled = true;
         cellarDoorCollider.enabled = false;
 

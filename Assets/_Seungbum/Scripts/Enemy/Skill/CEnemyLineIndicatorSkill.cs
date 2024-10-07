@@ -16,8 +16,13 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
         Vector3 spawnPosition = transform.position;
         spawnPosition.y = 0.2f;
 
+        Vector3 targetPosition = target.position;
+        targetPosition.y = 0.0f;
+
+        transform.rotation = Quaternion.LookRotation(targetPosition - transform.position);
+
         CEnemyLineIndicatorControl indicator = CEnemyIndicatorManager.Instance.SpawnLineIndicator();
-        indicator.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, transform.root.eulerAngles.y, 0.0f));
+        indicator.transform.localRotation = transform.localRotation;
         indicator.InitIndicator(spawnPosition, fAttack + fOwnerAttack, fWidth, fLength, fDuration);
 
         indicator.gameObject.SetActive(true);
@@ -27,7 +32,7 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
     }
 
     /// <summary>
-    /// 적을 움직인다.
+    /// 적 또는 오브젝트를 움직인다.
     /// </summary>
     /// <returns></returns>
     IEnumerator Move()
@@ -40,8 +45,11 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
 
         while (time < durtaion)
         {
-            rb.MovePosition(rb.position + 5.0f * Time.deltaTime * transform.forward);
-            time += Time.deltaTime;
+            if (!CStageManager.Instance.IsStageEnd)
+            {
+                rb.MovePosition(rb.position + 7.5f * Time.deltaTime * transform.forward);
+                time += Time.deltaTime;
+            }
 
             yield return null;
         }
