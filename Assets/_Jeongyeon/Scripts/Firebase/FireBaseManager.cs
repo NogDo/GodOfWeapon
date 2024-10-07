@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 public class FireBaseManager : MonoBehaviour
@@ -21,11 +22,15 @@ public class FireBaseManager : MonoBehaviour
     public bool IsInitialized { get; private set; } = false;
 
     public event Action OnInit; // 파이어베이스가 초기화되면 호출
+    public event Action OnRank; // 랭킹을 불러오면 호출
 
-    public UserData userData;
-    public JsonData jsonData;
-    public RankData rankData;
-    public DatabaseReference usersRef;
+    public UserData userData; // 유저 데이터
+    public JsonData jsonData; // Json 데이터
+    public RankData rankData; // 랭킹 데이터
+
+    public List<RankData> totalRankData;
+
+    public DatabaseReference usersRef; // 데이터베이스 레퍼런스
 
     private string userName;
     private void Awake()
@@ -265,8 +270,13 @@ public class FireBaseManager : MonoBehaviour
                 {
                     string json = data.GetRawJsonValue();
                     RankData rankData = JsonConvert.DeserializeObject<RankData>(json);
-
+                    totalRankData.Add(rankData);
+                    if (totalRankData.Count > 10)
+                    {
+                        break;
+                    }
                 }
+                OnRank?.Invoke();
             }
         }
         catch (FirebaseException e)
