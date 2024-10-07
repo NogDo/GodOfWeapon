@@ -26,6 +26,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
     IEnumerator afterSpawn;
 
+    [SerializeField]
     float fRotationSpeed = 5.0f;
 
     int nCurrentSkillNum;

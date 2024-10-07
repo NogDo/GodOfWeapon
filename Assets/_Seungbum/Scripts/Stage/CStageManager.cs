@@ -208,7 +208,7 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     void InitStageStats()
     {
-        nStageCount = 1;
+        nStageCount = 20;
         nLevel = 1;
         nCurrentLevel = 1;
         nPlayerMoney = 1000;

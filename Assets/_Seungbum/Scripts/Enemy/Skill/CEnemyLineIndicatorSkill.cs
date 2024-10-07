@@ -4,12 +4,37 @@ using UnityEngine;
 
 public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
 {
+    #region public 변수
+    public GameObject oActiveObject;
+    public GameObject oInActiveObject;
+    #endregion
+
     #region private 변수
     [SerializeField]
     float fWidth;
     [SerializeField]
     float fLength;
+    [SerializeField]
+    float fMoveSpeed;
+
+    bool isFence = false;
     #endregion
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fence"))
+        {
+            isFence = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fence"))
+        {
+            isFence = false;
+        }
+    }
 
     public override void Active(Transform target)
     {
@@ -41,17 +66,43 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
 
         float time = 0.0f;
         float durtaion = fDuration - 1.0f;
-        Rigidbody rb = GetComponent<Rigidbody>();
+
+        if (oActiveObject != null)
+        {
+            oActiveObject.SetActive(true);
+        }
+
+        if (oInActiveObject != null)
+        {
+            oInActiveObject.SetActive(false);
+        }
+
+        GetComponent<Collider>().isTrigger = true;
 
         while (time < durtaion)
         {
-            if (!CStageManager.Instance.IsStageEnd)
+            if (!CStageManager.Instance.IsStageEnd && !isFence)
             {
-                rb.MovePosition(rb.position + 7.5f * Time.deltaTime * transform.forward);
-                time += Time.deltaTime;
+                transform.Translate(Vector3.forward * fMoveSpeed * Time.deltaTime);
             }
+
+            time += Time.deltaTime;
 
             yield return null;
         }
+
+        if (oActiveObject != null)
+        {
+            oActiveObject.SetActive(false);
+        }
+
+        if (oInActiveObject != null)
+        {
+            oInActiveObject.SetActive(true);
+        }
+
+        GetComponent<Collider>().isTrigger = false;
+
+        yield return null;
     }
 }

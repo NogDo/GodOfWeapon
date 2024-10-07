@@ -15,6 +15,7 @@ public class CEnemyPoolManager : MonoBehaviour
     IEnumerator spawnRangeEnemyCoroutine;
     IEnumerator spawnChestCoroutine;
     IEnumerator spawnEliteEnemyCoroutine;
+    IEnumerator spawnBossCoroutine;
 
     float fMeleeEnemySpawnTime = 3.0f;
     float fRangeEnemySpawnTime = 5.0f;
@@ -24,7 +25,7 @@ public class CEnemyPoolManager : MonoBehaviour
 
     float fEnemySpawnRate = 0.0f;
     int nEliteSpawnCount = 0;
-    int nExtraEliteSpawnCount = 1;
+    int nExtraEliteSpawnCount = 0;
     #endregion
 
     void Awake()
@@ -66,13 +67,14 @@ public class CEnemyPoolManager : MonoBehaviour
 
         nExtraEliteSpawnCount = 0;
 
-        nMeleeEnemySpawnCountMax = 5 + CStageManager.Instance.StageCount / 2;
-        nRangeEnemySpawnCountMax = 3 + CStageManager.Instance.StageCount / 2;
+        nMeleeEnemySpawnCountMax = 5 + CStageManager.Instance.StageCount / 4;
+        nRangeEnemySpawnCountMax = 3 + CStageManager.Instance.StageCount / 4;
 
         spawnMeleeEnemyCoroutine = SpawnMeleeEnemy();
         spawnRangeEnemyCoroutine = SpawnRangeEnemy();
         spawnChestCoroutine = SpawnChest();
         spawnEliteEnemyCoroutine = SpawnEliteEnemy();
+        spawnBossCoroutine = SpawnBoss();
 
         StartCoroutine(spawnMeleeEnemyCoroutine);
         if (enemyPool.RangeEnemyCount > 0)
@@ -81,6 +83,10 @@ public class CEnemyPoolManager : MonoBehaviour
         }
         StartCoroutine(spawnChestCoroutine);
         StartCoroutine(spawnEliteEnemyCoroutine);
+        if (CStageManager.Instance.StageCount == 20)
+        {
+            StartCoroutine(spawnBossCoroutine);
+        }
     }
 
 
@@ -237,5 +243,18 @@ public class CEnemyPoolManager : MonoBehaviour
             enemyPool.SpawnEliteEnemy();
             nEliteSpawnCount--;
         }
+    }
+
+    /// <summary>
+    /// 보스를 소환하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator SpawnBoss()
+    {
+        float bossSpawnTime = Random.Range(3.0f, 5.0f);
+
+        yield return new WaitForSeconds(bossSpawnTime);
+
+        enemyPool.SpawnBoss();
     }
 }

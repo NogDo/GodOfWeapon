@@ -13,6 +13,7 @@ public class CEnemyPool : MonoBehaviour
     CRangeEnemyFactory rangeEnemyFactory;
     CChestFactory chestFactory;
     CEliteEnemyFactory eliteEnemyFactory;
+    CBossFactory bossFactory;
 
     int nMeleeEnemyCount;
     int nRangeEnemyCount;
@@ -46,6 +47,7 @@ public class CEnemyPool : MonoBehaviour
         rangeEnemyFactory = transform.GetChild(1).GetComponent<CRangeEnemyFactory>();
         chestFactory = transform.GetChild(2).GetComponent<CChestFactory>();
         eliteEnemyFactory = transform.GetChild(3).GetComponent<CEliteEnemyFactory>();
+        bossFactory = transform.GetChild(4).GetComponent<CBossFactory>();
     }
 
     /// <summary>
@@ -104,6 +106,11 @@ public class CEnemyPool : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        foreach (Transform child in bossFactory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         meleeEnemyPool.Clear();
         rangeEnemyPool.Clear();
         enemyChestPool.Clear();
@@ -154,6 +161,14 @@ public class CEnemyPool : MonoBehaviour
     public void SpawnEliteEnemy()
     {
         eliteEnemyFactory.CreateEnemy();
+    }
+
+    /// <summary>
+    /// 보스를 소환한다.
+    /// </summary>
+    public void SpawnBoss()
+    {
+        bossFactory.CreateEnemy();
     }
 
     /// <summary>
