@@ -36,6 +36,7 @@ public class FireBaseManager : MonoBehaviour
     {
         InitializeAsync();
     }
+
     //async 키워드를 통해 비동기 프로그래밍
     private async void InitializeAsync()
     {

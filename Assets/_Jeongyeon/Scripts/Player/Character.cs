@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
     private bool isdash = false; // 대쉬중인지 확인하는 변수
     private bool canMove = true; // 플레이어 움직임을 제어하는 변수
     private bool isfirst = true; // 로비에서 시작시 움직임 제어를 막는 변수
+    private bool invincible = false; // 무적상태인지 확인하는 변수
     private Vector3 run; // 이동시 사용할 벡터
 
     private Transform cameraTransform;
@@ -122,23 +123,26 @@ public class Character : MonoBehaviour
     /// <param name="damage">받을 데미지</param>
     public virtual void Hit(float damage)
     {
-        float finalDamage = damage - myData.defense / 20;
-        hitCoroutine = HitEffect();
-        StopCoroutine(hitCoroutine);
-        StartCoroutine(hitCoroutine);
-        if (finalDamage == 0)
+        if (invincible == false)
         {
-            finalDamage = 1;
+            float finalDamage = damage - myData.defense / 20;
+            hitCoroutine = HitEffect();
+            StopCoroutine(hitCoroutine);
+            StartCoroutine(hitCoroutine);
+            if (finalDamage == 0)
+            {
+                finalDamage = 1;
+            }
+            currentHp -= finalDamage;
+            if (currentHp <= 0)
+            {
+                currentHp = 0;
+                PlayerDie();
+            }
+            UIManager.Instance.CurrentHpChange(this);
+            UIManager.Instance.SetHPUI(maxHp, currentHp);
+            CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
         }
-        currentHp -= finalDamage;
-        if (currentHp <= 0)
-        {
-            currentHp = 0;
-            PlayerDie();
-        }
-        UIManager.Instance.CurrentHpChange(this);
-        UIManager.Instance.SetHPUI(maxHp, currentHp);
-        CDamageTextPoolManager.Instance.SpawnPlayerText(transform, finalDamage);
     }
     /// <summary>
     /// 플레이어의 이동과 회전을 조절하는 메서드
@@ -377,13 +381,14 @@ public class Character : MonoBehaviour
             UIManager.Instance.SetHPUI(maxHp, currentHp);
             UIManager.Instance.CurrentHpChange(this);
         }
-            CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 15);
+        CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 15);
 
     }
     private IEnumerator BarrierEffect()
     {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
+        invincible = true;
         Barrier[0].gameObject.SetActive(true);
         Barrier[0].Play();
         yield return new WaitForSeconds(4.0f);
@@ -395,6 +400,7 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(2.9f);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
+        invincible = false;
         Barrier[1].gameObject.SetActive(false);
         Barrier[1].Stop();
     }

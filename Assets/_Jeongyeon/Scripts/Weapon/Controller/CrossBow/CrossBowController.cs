@@ -27,16 +27,11 @@ public class CrossBowController : WeaponController
         shootPosition = positionInfo.shootPositions;
         startParent = gameObject.transform.parent.gameObject;
         anim = GetComponent<Animator>();
+        CStageManager.Instance.OnStageEnd += ResetPosition;
     }
 
     public virtual void OnEnable()
     {
-        if (startParent != null)
-        {
-            gameObject.transform.parent = startParent.transform;
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        }
         myData = weaponStatInfo.data;
         if (inventory == null)
         {
@@ -48,7 +43,10 @@ public class CrossBowController : WeaponController
             attackSpeed = 0.01f;
         }
     }
-
+    private void OnDestroy()
+    {
+        CStageManager.Instance.OnStageEnd -= ResetPosition;
+    }
     public void Update()
     {
         if (isAttacking == false)
@@ -174,5 +172,13 @@ public class CrossBowController : WeaponController
         yield return new WaitForSeconds(attackSpeed);
         isAttacking = false;
     }
-
+    /// <summary>
+    /// 스테이지가 종료되면 화살의 위치를 초기화하는 메서드
+    /// </summary>
+    private void ResetPosition()
+    {
+        gameObject.transform.parent = startParent.transform;
+        gameObject.transform.localPosition = Vector3.zero;
+        gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+    }
 }

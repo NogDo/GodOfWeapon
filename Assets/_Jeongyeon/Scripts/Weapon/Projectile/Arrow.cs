@@ -90,7 +90,7 @@ public class Arrow : WeaponProjectile
                 CDamageTextPoolManager.Instance.SpawnEnemyNormalText(other.transform, damage);
                 CStageManager.Instance.AddTotalDamage(damage);
             }
-            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 75) == true)
+            if (CheckBloodDrain(inventory.myItemData.bloodDrain / 75) == true && player.currentHp < player.maxHp)
             {
                 if (player.maxHp > player.currentHp)
                 {
