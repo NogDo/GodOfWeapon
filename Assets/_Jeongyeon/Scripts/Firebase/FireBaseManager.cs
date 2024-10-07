@@ -1,11 +1,13 @@
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class FireBaseManager : MonoBehaviour
 {
@@ -22,8 +24,10 @@ public class FireBaseManager : MonoBehaviour
 
     public UserData userData;
     public JsonData jsonData;
+    public RankData rankData;
     public DatabaseReference usersRef;
 
+    private string userName;
     private void Awake()
     {
         if (Instance == null)
@@ -76,6 +80,7 @@ public class FireBaseManager : MonoBehaviour
         {
             string json = userDataValues.GetRawJsonValue();
             userData = JsonConvert.DeserializeObject<UserData>(json);
+            userName = userData.userName;
             FBPanelManager.Instance.SuccessLogin();
         }
         else
@@ -108,7 +113,7 @@ public class FireBaseManager : MonoBehaviour
             var jsonHash = jsonDataValues.Child("hash");
             if (jsonHash.Exists)
             {
-               string hashValue = jsonHash.GetValue(false).ToString();
+                string hashValue = jsonHash.GetValue(false).ToString();
 
                 if (hashValue != hash)
                 {
@@ -134,9 +139,15 @@ public class FireBaseManager : MonoBehaviour
                 }
             }
         }
-       
+
     }
-    public async void Create(string email, string name, string pw)
+    /// <summary>
+    /// 파이어베이스에 회원을 등록하는 메서드
+    /// </summary>
+    /// <param name="email">아이디</param>
+    /// <param name="name">이름</param>
+    /// <param name="pw">비밀번호</param>
+    public async void CreateID(string email, string name, string pw)
     {
         try
         {
@@ -178,5 +189,90 @@ public class FireBaseManager : MonoBehaviour
         {
             Debug.LogError(e.Message);
         }
+    }
+
+    /// <summary>
+    /// 현재 데이터베이스에 랭킹이 등록되어 있는지 확인하고 있으면 갱신 없으면 랭킹을 등록하는 메서드
+    /// </summary>
+    /// <param name="totalValue">총 점수</param>
+    /// <param name="stage">도달한 층</param>
+    public async void CheckRank(int totalValue, int stage)
+    {
+
+        usersRef = DB.GetReference($"rank/{userName}");
+
+        DataSnapshot rankDataValues = await usersRef.GetValueAsync();
+
+        if (rankDataValues.Exists)
+        {
+            var rankValue = rankDataValues.Child("totalDamage");
+            if (rankValue.Exists)
+            {
+                int value = int.Parse(rankValue.GetValue(false).ToString());
+
+                if (value < totalValue)
+                {
+                    await rankDataValues.Reference.Child("totalDamage").SetValueAsync(totalValue);
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        else
+        {
+            CreateRank(userName, totalValue, stage);
+        }
+    }
+    /// <summary>
+    /// 데이터베이스에 랭킹을 등록하는 메서드
+    /// </summary>
+    /// <param name="name">등록하는 사람 이름</param>
+    /// <param name="value">총 점수값</param>
+    public async void CreateRank(string name, int value, int stage)
+    {
+        try
+        {
+            usersRef = DB.GetReference($"rank/{name}");
+
+            RankData rankData = new RankData(name, value, stage);
+
+            string rankDatas = JsonConvert.SerializeObject(rankData);
+
+            await usersRef.SetRawJsonValueAsync(rankDatas);
+
+            this.rankData = rankData;
+        }
+        catch (FirebaseException e)
+        {
+            Debug.LogError(e.Message);
+        }
+    }
+    /// <summary>
+    /// 랭크 정보를 불러오는 메서드
+    /// </summary>
+    public async void GetRankData()
+    {
+        try
+        {
+            usersRef = DB.GetReference("rank");
+            DataSnapshot rankDatas = await usersRef.GetValueAsync();
+
+            if (rankDatas.Exists)
+            {
+                foreach (DataSnapshot data in rankDatas.Children)
+                {
+                    string json = data.GetRawJsonValue();
+                    RankData rankData = JsonConvert.DeserializeObject<RankData>(json);
+
+                }
+            }
+        }
+        catch (FirebaseException e)
+        {
+            Debug.LogError(e.Message);
+        }
+
     }
 }

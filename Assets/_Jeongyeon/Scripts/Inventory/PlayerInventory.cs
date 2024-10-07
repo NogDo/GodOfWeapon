@@ -50,6 +50,10 @@ public class PlayerInventory : MonoBehaviour
         playerItem.Add(item);
         GetItemValues(item);
         UIManager.Instance.ChangeValue(myItemData);
+        if (item.uid == 12)
+        {
+            CEnemyPoolManager.Instance.IncreaseEnemySpawnRate(10);
+        }
     }
     /// <summary>
     /// 아이템이 인벤토리에서 빠져나갈때 리스트에서 삭제후 아이템 값을 빼는 메서드
@@ -60,6 +64,10 @@ public class PlayerInventory : MonoBehaviour
         playerItem.Remove(item);
         MinusItemValues(item);
         UIManager.Instance.ChangeValue(myItemData);
+        if (item.uid == 12)
+        {
+            CEnemyPoolManager.Instance.DecreaseEnemySpawnRate(10);
+        }
     }
     /// <summary>
     /// 인벤토리에 들어온 아이템을 리스트에 넣고 무기 종류에 따라 생성할 위치를 정하는 메서드
