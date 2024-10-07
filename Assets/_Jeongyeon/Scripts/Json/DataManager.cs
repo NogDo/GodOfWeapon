@@ -53,7 +53,7 @@ public class DataManager : MonoBehaviour
     {
         FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(weaponJson), 0);
         FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(itemJson), 1);
-
+        
     }
 
     /// <summary>
