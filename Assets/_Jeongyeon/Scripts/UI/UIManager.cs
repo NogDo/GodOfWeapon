@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour
     public Text rTotalKill;
     public Text rTotalDamage;
     public Text rTotalRuntime;
+    public Text rTotalValue;
     #endregion
 
     /// <summary>
@@ -356,7 +357,8 @@ public class UIManager : MonoBehaviour
     /// <param name="killCount">처치한 적</param>
     /// <param name="totalDamage">총 피해량</param>
     /// <param name="runtime">걸린 시간</param>
-    public void StageOver(bool Result, int stageCount, int totalMoney,int killCount, int totalDamage, float runtime)
+    /// <param name="totalValue">총 점수</param>
+    public void StageOver(bool Result, int stageCount, int totalMoney,int killCount, int totalDamage, float runtime, int totalValue)
     {
         int minute = (int)(runtime / 60);
         int second = (int)(runtime % 60);
@@ -376,5 +378,6 @@ public class UIManager : MonoBehaviour
         rTotalKill.text = killCount.ToString();
         rTotalDamage.text = totalDamage.ToString();
         rTotalRuntime.text = $"{minute}:{second}";
+        rTotalValue.text = totalValue.ToString();
     }
 }

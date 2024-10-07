@@ -66,7 +66,7 @@ public class CriticalArrow : WeaponProjectile
             CDamageTextPoolManager.Instance.SpawnEnemyCriticalText(other.transform, damage + (damage * 0.5f));
             CStageManager.Instance.AddTotalDamage(damage + (damage * 0.5f));
         }
-        if (CheckBloodDrain(inventory.myItemData.bloodDrain / 50) == true)
+        if (CheckBloodDrain(inventory.myItemData.bloodDrain / 75) == true && player.currentHp < player.maxHp)
         {
             if (player.maxHp > player.currentHp)
             {
