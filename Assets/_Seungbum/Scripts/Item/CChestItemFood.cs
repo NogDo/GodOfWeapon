@@ -7,7 +7,7 @@ public class CChestItemFood : CChestItem
     protected override void Use(Character character)
     {
         // TODO : 캐릭터 힐 메서드 만들고 부르기
-
+        character.GetHealingItem();
 
         base.Use(character);
     }

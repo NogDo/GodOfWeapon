@@ -317,7 +317,7 @@ public class UIManager : MonoBehaviour
     /// <param name="nowHP">현재 체력</param>
     public void SetHPUI(float maxHP, float nowHP)
     {
-        textHP.text = $"{Mathf.CeilToInt(nowHP)}/{Mathf.CeilToInt(maxHP)}";
+        textHP.text = $"{Mathf.FloorToInt(nowHP)}/{Mathf.FloorToInt(maxHP)}";
         imageHP.fillAmount = nowHP / maxHP;
     }
 

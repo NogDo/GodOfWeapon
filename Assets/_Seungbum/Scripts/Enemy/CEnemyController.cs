@@ -137,6 +137,9 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
             stateMachine.ChangeState(stateMachine.ChaseState);
         }
 
+        isAttacking = false;
+        isAttackCoolTime = false;
+
         afterSpawn = null;
 
         yield return null;
@@ -206,7 +209,6 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
         StartCoroutine(DeSpawn());
     }
-
 
     public void StageEnd()
     {
@@ -280,7 +282,8 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         {
             nCurrentSkillNum = Random.Range(0, enemyInfo.Skills.Length);
 
-            animator.SetTrigger($"Attack{nCurrentSkillNum}");
+            //animator.SetTrigger($"Attack{nCurrentSkillNum}");
+            animator.SetBool($"Attack{nCurrentSkillNum}", true);
 
             isAttacking = true;
             isAttackCoolTime = true;
@@ -302,6 +305,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     /// </summary>
     public void AttackAnimationEnd()
     {
+        animator.SetBool($"Attack{nCurrentSkillNum}", false);
         isAttacking = false;
 
         if (stateMachine.CurrentState != stateMachine.DieState)

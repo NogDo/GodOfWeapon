@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class CEnemySphereIndicatorSkill : CEnemyIndicatorSkill
 {
-    #region public 변수
-    public CEnemySphereIndicatorControl oIndicatorPrefab;
-    #endregion
-
     #region private 변수
     [SerializeField]
     float fRadius;

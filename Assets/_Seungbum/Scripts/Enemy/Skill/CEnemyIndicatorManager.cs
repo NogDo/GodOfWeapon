@@ -29,4 +29,13 @@ public class CEnemyIndicatorManager : MonoBehaviour
     {
         return indicatorPool.SpawnSphereIndicator();
     }
+
+    /// <summary>
+    /// 직선 피격 범위를 반환한다.
+    /// </summary>
+    /// <returns></returns>
+    public CEnemyLineIndicatorControl SpawnLineIndicator()
+    {
+        return indicatorPool.SpawnLineIndicator();
+    }
 }

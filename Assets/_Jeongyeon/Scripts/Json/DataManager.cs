@@ -37,13 +37,13 @@ public class DataManager : MonoBehaviour
         iPath = $"{Application.streamingAssetsPath}/Items_Data.json";
         weaponJson = File.ReadAllText(wPath);
         itemJson = File.ReadAllText(iPath);
-        /*LoadWeapon();// 테스트를위해 넣어둠 씬전환이 되면 지울 것!
-        LoadItem(); // 테스트를위해 넣어둠 씬전환이 되면 지울 것!*/
+        LoadWeapon();// 테스트를위해 넣어둠 씬전환이 되면 지울 것!
+        LoadItem(); // 테스트를위해 넣어둠 씬전환이 되면 지울 것!
         LoadEnemy();
     }
     private void Start()
     {
-        FireBaseManager.Instance.OnInit += CompareJsonData; // 파이어베이스 초기화가 완료되면 Json데이터를 비교하는 메서드를 호출
+        //FireBaseManager.Instance.OnInit += CompareJsonData; // 파이어베이스 초기화가 완료되면 Json데이터를 비교하는 메서드를 호출
         // FireBaseManager.Instance.OnInit += SetJsonInDatabase;
     }
 

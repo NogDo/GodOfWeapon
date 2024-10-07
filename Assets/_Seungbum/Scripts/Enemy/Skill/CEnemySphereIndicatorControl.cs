@@ -30,7 +30,7 @@ public class CEnemySphereIndicatorControl : MonoBehaviour
 
     void OnDisable()
     {
-        indicatorPool.ReturnPool(sphereindicator: this);
+        indicatorPool.ReturnPool(sphereIndicator: this);
     }
 
     /// <summary>

@@ -24,7 +24,7 @@ public class CEnemyPoolManager : MonoBehaviour
 
     float fEnemySpawnRate = 0.0f;
     int nEliteSpawnCount = 0;
-    int nExtraEliteSpawnCount = 0;
+    int nExtraEliteSpawnCount = 1;
     #endregion
 
     void Awake()
