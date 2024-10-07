@@ -127,13 +127,10 @@ public class FireBaseManager : MonoBehaviour
                                 DataManager.Instance.LoadItem();
                                 break;
                         }
-
-                        Debug.Log("다른거 불러오기 성공");
                     }
                 }
                 else
                 {
-                    Debug.Log("해쉬값이 같아용~");
                 }
             }
         }
