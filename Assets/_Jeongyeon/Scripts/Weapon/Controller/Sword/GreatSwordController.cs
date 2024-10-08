@@ -51,6 +51,7 @@ public class GreatSwordController : SwordController
     public override IEnumerator Pierce()
     {
         time = 0.0f;
+        SoundManager.Instance.PlayLWeaponAudio(2);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         particle[0].SetActive(true);
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -68,6 +69,7 @@ public class GreatSwordController : SwordController
     }
     public override IEnumerator Swing()
     {
+        SoundManager.Instance.PlayLWeaponAudio(1);
         anim.SetFloat("SwingSpeed", 1.0f + (myData.attackSpeed + (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100))) * 0.1f);
         anim.SetTrigger("isSwing");
         isSwing = true;

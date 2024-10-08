@@ -12,13 +12,6 @@ public class CrossBowRevolver : CrossBowController
     #region Public Fields
    
     #endregion
-    public override void Start()
-    {
-        positionInfo = GetComponentInParent<PositionInfo>();
-        shootPosition = positionInfo.shootPositions;
-        startParent = gameObject.transform.parent.gameObject;
-        anim = GetComponent<Animator>();
-    }
     public override void OnEnable()
     {
         base.OnEnable();
@@ -85,9 +78,11 @@ public class CrossBowRevolver : CrossBowController
     }
     public override IEnumerator Shoot()
     {
+        
         isAttacking = true;
         if (shootCount % 5 != 0)
         {
+            SoundManager.Instance.PlayCWeaponAudio(1);
             WeaponProjectile arrow = projectilePool.GetProjectile(0);
             arrow.transform.position = arrowPosition.position;
             arrow.transform.rotation = gameObject.transform.rotation;
@@ -99,6 +94,7 @@ public class CrossBowRevolver : CrossBowController
         }
         else
         {
+            SoundManager.Instance.PlayCWeaponAudio(2);
             WeaponProjectile cArrow = projectilePool.GetProjectile(1);
             cArrow.transform.position = arrowPosition.position;
             cArrow.transform.rotation = gameObject.transform.rotation;
@@ -113,6 +109,7 @@ public class CrossBowRevolver : CrossBowController
     {
         anim.SetTrigger("isReload");
         anim.SetFloat("reloadSpeed", attackSpeed + 1.0f);
+        SoundManager.Instance.PlayCWeaponAudio(3);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         shootCount = 1;
         StartCoroutine(base.CoolTime());
