@@ -36,7 +36,8 @@ public class CStartFloorController : MonoBehaviour
         tfCellarDoor.localPosition = startPosition;
 
         boxCollider.enabled = false;
-
+        SoundManager.Instance.StopBackgroundAudio();
+        SoundManager.Instance.PlayEffectAudio(0);
         while (time <= duration)
         {
             tfCellarDoor.localPosition = Vector3.Lerp(startPosition, Vector3.zero, time / duration);
@@ -44,7 +45,7 @@ public class CStartFloorController : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-
+        SoundManager.Instance.StopEffectAudio();
         tfCellarDoor.localPosition = Vector3.zero;
 
         boxCollider.enabled = true;
@@ -52,7 +53,7 @@ public class CStartFloorController : MonoBehaviour
 
         CEnemyPoolManager.Instance.InitPooling();
         CDamageTextPoolManager.Instance.StartSpawn();
-
+        SoundManager.Instance.PlayBackgrounAudio(2);
         yield return null;
     }
 }
