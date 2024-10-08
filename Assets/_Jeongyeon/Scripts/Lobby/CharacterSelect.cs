@@ -30,6 +30,7 @@ public class CharacterSelect : MonoBehaviour
     {
         if (characterSellectionController.selectCharacter == false)
         {
+            SoundManager.Instance.ButtonClickSound();
             lightController.TurnOnLights(myIndex);
             characterCamera.ChangeCamera(myIndex);
             UIManager.Instance.OffLobbyUI();
