@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 78b6ce899e7606e478ed028e6a83515c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -846,9 +846,15 @@ MonoBehaviour:
   backgrounAudioClip:
   - {fileID: 8300000, guid: e2fed1d95f4af0d48bd52057d2c15fd5, type: 3}
   - {fileID: 8300000, guid: 69fed0c1818d9ea409b604549afea755, type: 3}
+  - {fileID: 8300000, guid: c1750adcf02dca842814a696c7a45a88, type: 3}
+  - {fileID: 8300000, guid: ab0faec1250200a45a04263a3866ae83, type: 3}
+  effectAudioClip:
+  - {fileID: 8300000, guid: 51dc65a2b5c53044f9f420553a022f9d, type: 3}
+  - {fileID: 8300000, guid: ab0faec1250200a45a04263a3866ae83, type: 3}
+  characterAudioClip: []
   backgroundAudioSource: {fileID: 157573050}
   effectAudioSource: {fileID: 157573054}
-  playerAudioSource: {fileID: 157573053}
+  characterAudioSource: {fileID: 157573053}
 --- !u!4 &157573052
 Transform:
   m_ObjectHideFlags: 0
