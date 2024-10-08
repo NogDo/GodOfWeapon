@@ -67,6 +67,7 @@ public class CShopManager : MonoBehaviour
     STItemInfo[] shopItems = new STItemInfo[5];
 
     float[,] tierPercent;
+    float fDisCountRate;
     int nReRollCost;
     int nReRollCount;
     #endregion
@@ -79,6 +80,17 @@ public class CShopManager : MonoBehaviour
         get
         {
             return shopCamera;
+        }
+    }
+
+    /// <summary>
+    /// 상점 할인율
+    /// </summary>
+    public float DisCountRate
+    {
+        get
+        {
+            return fDisCountRate;
         }
     }
 
@@ -567,9 +579,9 @@ public class CShopManager : MonoBehaviour
             CStageManager.Instance.DecreaseMoney(nReRollCost);
         }
 
-        int reRollStageCost = nReRollCount * CStageManager.Instance.StageCount / 2;
+        int reRollStageCost = nReRollCount * CStageManager.Instance.StageCount / 3;
 
-        nReRollCost = CStageManager.Instance.StageCount * 3 + reRollStageCost;
+        nReRollCost = CStageManager.Instance.StageCount * 2 + reRollStageCost;
 
         SetInteractableReRellButton();
 
@@ -650,5 +662,31 @@ public class CShopManager : MonoBehaviour
         {
             costController[i].ActiveShopCostUI(true);
         }
+    }
+
+    /// <summary>
+    /// 상점 할인율을 초기화한다.
+    /// </summary>
+    public void InitDiscountRate()
+    {
+        fDisCountRate = 0.0f;
+    }
+
+    /// <summary>
+    /// 상점 할인율을 증가시킨다.
+    /// </summary>
+    /// <param name="rate">증가 시킬 할인율</param>
+    public void InCreaseDiscountRate(float rate)
+    {
+        fDisCountRate += rate;
+    }
+
+    /// <summary>
+    /// 상점 할인율을 감소시킨다.
+    /// </summary>
+    /// <param name="rate">감소 시킬 할인율</param>
+    public void DeCreaseDiscountRate(float rate)
+    {
+        fDisCountRate -= rate;
     }
 }

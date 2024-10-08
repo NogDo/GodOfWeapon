@@ -84,6 +84,8 @@ public class CWeaponStats : CStats
         float price = (weaponData.level - 1) * DataManager.Instance.GetWeaponData(weaponData.uid).price * 0.3f;
         weaponData.price += Mathf.FloorToInt(price);
 
+        SetWeaponPrice();
+
         if (costController != null)
         {
             costController.SetCost(weaponData.price);
@@ -94,7 +96,7 @@ public class CWeaponStats : CStats
     /// 데이터 매니저에서 가져온 무기 데이터를 복사한다.
     /// </summary>
     /// <param name="data">데이터 매니저에서 가져온 무기 데이터</param>
-    public void CopyData(WeaponData data)
+    void CopyData(WeaponData data)
     {
         weaponData = new WeaponData();
 
@@ -115,7 +117,7 @@ public class CWeaponStats : CStats
     ///  긴 무기의 스텟을 설정한다.
     /// </summary>
     /// <param name="level">등급</param>
-    public void LWeaponSetValue(int level)
+    void LWeaponSetValue(int level)
     {
         weaponData.damage += weaponData.damage * 0.25f * (level - 1);
         weaponData.attackSpeed -= weaponData.attackSpeed * 0.07f * (level - 1);
@@ -125,7 +127,7 @@ public class CWeaponStats : CStats
     /// 짧은 무기의 스텟을 설정한다.
     /// </summary>
     /// <param name="level">등급</param>
-    public void SWeaponSetValue(int level)
+    void SWeaponSetValue(int level)
     {
         weaponData.damage += weaponData.damage * 0.25f * (level - 1);
         weaponData.attackSpeed -= 0.1f * (level - 1);
@@ -135,7 +137,7 @@ public class CWeaponStats : CStats
     /// 석궁의 스텟을 설정한다.
     /// </summary>
     /// <param name="level">등급</param>
-    public void CrossbowSetValue(int level)
+    void CrossbowSetValue(int level)
     {
         switch (level - 1)
         {
@@ -150,5 +152,14 @@ public class CWeaponStats : CStats
                 break;
         }
         weaponData.attackSpeed -= weaponData.attackSpeed * 0.06f * (level - 1);
+    }
+
+
+    /// <summary>
+    /// 상점 할인율에 따른 무기 가격을 설정한다.
+    /// </summary>
+    void SetWeaponPrice()
+    {
+        weaponData.price -= (int)(weaponData.price / CShopManager.Instance.DisCountRate);
     }
 }

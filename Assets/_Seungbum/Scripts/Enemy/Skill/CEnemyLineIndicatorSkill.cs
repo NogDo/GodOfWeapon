@@ -17,8 +17,15 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
     [SerializeField]
     float fMoveSpeed;
 
+    CEnemyInfo enemyInfo;
+
     bool isFence = false;
     #endregion
+
+    void Awake()
+    {
+        enemyInfo = GetComponent<CEnemyInfo>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -81,7 +88,7 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
 
         while (time < durtaion)
         {
-            if (!CStageManager.Instance.IsStageEnd && !isFence)
+            if (!CStageManager.Instance.IsStageEnd && !isFence && enemyInfo.NowHP > 0)
             {
                 transform.Translate(Vector3.forward * fMoveSpeed * Time.deltaTime);
             }
