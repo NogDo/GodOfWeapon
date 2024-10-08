@@ -270,6 +270,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 143836847}
     - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
+      propertyPath: oBlockCollider
+      value: 
+      objectReference: {fileID: 830038301}
+    - target: {fileID: 2940096536873250247, guid: ac744fa946843a04e8259176d7f70b6d, type: 3}
       propertyPath: shopWeaponInfo
       value: 
       objectReference: {fileID: 1750547145}
@@ -596,6 +600,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &830038301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 983768328832489266, guid: b00b3affef2586f4cad1b8db540c70c4, type: 3}
+  m_PrefabInstance: {fileID: 2129669151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &890900857 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6426864250424092167, guid: a72acdc4864f2ce41b866942613647f8, type: 3}

@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public UIWeaponExtra shopWeaponExtraInfo;
     public TextMeshProUGUI textShopMoney;
     public TextMeshProUGUI textShopFloor;
+    public GameObject oBlockCollider;
 
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
@@ -254,6 +255,7 @@ public class UIManager : MonoBehaviour
     /// <param name="active">활성화 여부</param>
     public void SetActiveExtraUI(bool active)
     {
+        oBlockCollider.SetActive(active);
         isExtraUIOpen = active;
     }
 
