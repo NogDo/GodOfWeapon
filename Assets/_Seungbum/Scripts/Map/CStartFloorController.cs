@@ -18,8 +18,10 @@ public class CStartFloorController : MonoBehaviour
         cellarDoorCollider = tfCellarDoor.GetComponent<BoxCollider>();
     }
 
-    void OnEnable()
+    IEnumerator Start()
     {
+        yield return new WaitUntil(() => CStageManager.Instance.FadeControl.IsFadeEnd);
+
         StartCoroutine(Elevator());
     }
 
@@ -36,8 +38,13 @@ public class CStartFloorController : MonoBehaviour
         tfCellarDoor.localPosition = startPosition;
 
         boxCollider.enabled = false;
+
         SoundManager.Instance.StopBackgroundAudio();
         SoundManager.Instance.PlayStageStartAudio();
+        
+        CStageManager.Instance.CharacterTransform.position = new Vector3(2.0f, -4.95f, 2.0f);
+        CStageManager.Instance.CharacterTransform.gameObject.SetActive(true);
+
         while (time <= duration)
         {
             tfCellarDoor.localPosition = Vector3.Lerp(startPosition, Vector3.zero, time / duration);

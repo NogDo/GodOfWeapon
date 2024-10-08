@@ -14,37 +14,69 @@ public class CStageManager : MonoBehaviour
     #endregion
 
     #region private 변수
+    // 시작맵
     [SerializeField]
     GameObject oStartMapPrefab;
     GameObject oStartMap;
 
+    // 플레이어 관련
     GameObject oMainCamera;
     Transform tfCharacter;
     PlayerInventory player;
 
+    // 페이드 이미지
+    [SerializeField]
+    UIFadeControl fadeControl;
+
+    // 스테이지 시간 관련 코루틴
     IEnumerator stageTimerCoroutine;
     IEnumerator totalTimerCoroutine;
 
+    // 스테이지 관련 변수
     int nStageCount = 0;
+    float fStageTime = 0.0f;
+    bool isStageEnd = true;
+
+    // 결과창 관련 변수
+    int nTotalMoney = 0;
+    int nTotalKillCount = 0;
+    float fTotalDamage = 0.0f;
+    float fTotalTime = 0.0f;
+
+    // 플레이어 관련 변수
     int nLevel = 1;
     int nCurrentLevel = 1;
     int nPlayerMoney = 200;
     float fMaxEXP = 10.0f;
     float fEXP = 0.0f;
 
-    float fStageTime = 0.0f;
-
-    int nTotalMoney = 0;
-    int nTotalKillCount = 0;
-    float fTotalDamage = 0.0f;
-    float fTotalTime = 0.0f;
-
+    // 상점 관련 변수
     bool isAddCell = false;
     bool isClick = false;
-    bool isStageEnd = true;
-
-    private int nCurseDollCount = 0;
+    int nCurseDollCount = 0;
     #endregion
+
+    /// <summary>
+    /// UI 페이드 컨트롤
+    /// </summary>
+    public UIFadeControl FadeControl
+    {
+        get
+        {
+            return fadeControl;
+        }
+    }
+
+    /// <summary>
+    /// 캐릭터 트랜스폼
+    /// </summary>
+    public Transform CharacterTransform
+    {
+        get
+        {
+            return tfCharacter;
+        }
+    }
 
     /// <summary>
     /// 현재 스테이지
@@ -175,13 +207,15 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void StartStage()
     {
+        fadeControl.StartStageFade(true);
+
         InitStageStats();
 
         player = FindObjectOfType<PlayerInventory>();
         tfCharacter = player.transform;
         tfCharacter.gameObject.SetActive(false);
 
-        Destroy(oStartMap);
+        //Destroy(oStartMap);
         CCreateMapManager.Instance.Init();
         CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
@@ -191,9 +225,6 @@ public class CStageManager : MonoBehaviour
         UIManager.Instance.SetExpUI(fMaxEXP, fEXP);
         UIManager.Instance.SetActiveLevelUpUI(false);
         oMainCamera.GetComponent<CharacterCamera>().InCreaseCameraCount();
-
-        tfCharacter.position = new Vector3(2.0f, -4.95f, 2.0f);
-        tfCharacter.gameObject.SetActive(true);
 
         isStageEnd = false;
 
@@ -232,10 +263,23 @@ public class CStageManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 시작 맵을 삭제한다.
+    /// </summary>
+    public void DestoryStartMap()
+    {
+        if (oStartMap != null)
+        {
+            Destroy(oStartMap);
+        }
+    }
+
+    /// <summary>
     /// 다음 스테이지를 시작한다.
     /// </summary>
     public void NextStage()
     {
+        fadeControl.StartStageFade(false);
+
         nStageCount++;
 
         if (nStageCount < 3)
@@ -269,13 +313,15 @@ public class CStageManager : MonoBehaviour
         }
 
         CCreateMapManager.Instance.AddLine();
-        CShopManager.Instance.InActiveShop();
         UIManager.Instance.SetActiveStageUI(true);
         UIManager.Instance.ChangeFloorText(nStageCount);
-        oMainCamera.SetActive(true);
+    }
 
-        tfCharacter.position = new Vector3(2.0f, -4.95f, 2.0f);
-        tfCharacter.gameObject.SetActive(true);
+
+    public void NextStageAtferFade()
+    {
+        CShopManager.Instance.InActiveShop();
+        oMainCamera.SetActive(true);
 
         isStageEnd = false;
 
@@ -301,6 +347,8 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     public void StartShop()
     {
+        oMainCamera.SetActive(false);
+
         CShopManager.Instance.ActiveShop();
         UIManager.Instance.SetActiveLevelUpUI(false);
         UIManager.Instance.SetActiveStageUI(false);
@@ -343,8 +391,8 @@ public class CStageManager : MonoBehaviour
 
         yield return new WaitForSeconds(3.0f);
 
-        oMainCamera.SetActive(false);
-        StartShop();
+        fadeControl.StartShopFade();
+        //StartShop();
 
         yield return null;
     }
