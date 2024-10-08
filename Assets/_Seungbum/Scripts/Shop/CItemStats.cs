@@ -54,7 +54,7 @@ public class CItemStats : CStats
         this.itemData.meleeDamage = itemData.meleeDamage;
         this.itemData.rangeDamage = itemData.rangeDamage;
         this.itemData.criticalRate = itemData.criticalRate;
-        this.itemData.attackSpeed = itemData.attackRange;
+        this.itemData.attackSpeed = itemData.attackSpeed;
         this.itemData.moveSpeed = itemData.moveSpeed;
         this.itemData.attackRange = itemData.attackRange;
         this.itemData.massValue = itemData.massValue;

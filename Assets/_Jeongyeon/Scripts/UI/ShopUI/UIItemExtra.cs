@@ -131,6 +131,10 @@ public class UIItemExtra : MonoBehaviour
             case 4:
                 textLevel.color = Color.red;
                 break;
+
+            case 5:
+                textLevel.color = Color.yellow;
+                break;
         }
 
         // 중간 부분 (아이템 스텟, 툴팁)

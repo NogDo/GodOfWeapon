@@ -134,6 +134,10 @@ public class UIWeaponExtra : MonoBehaviour
             case 4:
                 textLevel.color = Color.red;
                 break;
+
+            case 5:
+                textLevel.color = Color.yellow;
+                break;
         }
 
 

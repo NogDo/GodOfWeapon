@@ -45,12 +45,42 @@ public class CItemPreviewContoller : MonoBehaviour
 
         if (isCanDrop)
         {
-            mesh.material = matWhite;
+            if (mesh.materials.Length > 1)
+            {
+                Material[] materials = new Material[mesh.materials.Length];
+
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    materials[i] = matWhite;
+                }
+
+                mesh.sharedMaterials = materials;
+            }
+
+            else
+            {
+                mesh.material = matWhite;
+            }
         }
 
         else
         {
-            mesh.material = matRed;
+            if (mesh.materials.Length > 1)
+            {
+                Material[] materials = new Material[mesh.materials.Length];
+
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    materials[i] = matRed;
+                }
+
+                mesh.sharedMaterials = materials;
+            }
+
+            else
+            {
+                mesh.material = matRed;
+            }
         }
     }
 }
