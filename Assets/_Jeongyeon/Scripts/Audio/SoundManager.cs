@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
     [Header("로비음악 클립을 담아두는 배열")]
     public AudioClip[] lobbyAudioClip;
     [Header("배경음악 클립을 담아두는 배열")]
-    public AudioClip[] backgrounAudioClip;
+    public AudioClip[] backgroundAudioClip;
     [Header("이펙트 클립을 담아두는 배열")]
     public AudioClip[] effectAudioClip;
     [Header("캐릭터 효과음 클립을 담아두는 배열")]
@@ -16,12 +16,19 @@ public class SoundManager : MonoBehaviour
     [Header("무기 효과음 클립을 담아두는 배열")]
     public AudioClip[] weaponAudioClip;
 
+    [Header("스테이지 종료 클립")]
     public AudioClip stageEndClip;
+    public AudioClip gameOverClip;
+
+    [Header("UI관련 클립")]
+    public AudioClip buttonClickClip;
 
     [Header("사운드별 오디오 소스")]
     public AudioSource backgroundAudioSource;
     public AudioSource effectAudioSource;
     public AudioSource characterAudioSource;
+
+    
     private void Awake()
     {
         if (Instance == null)
@@ -29,7 +36,7 @@ public class SoundManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(gameObject);
-        
+
     }
 
     private IEnumerator Start()
@@ -56,34 +63,38 @@ public class SoundManager : MonoBehaviour
     {
         StopBackgroundAudio();
         if (index == 10 || index == 20)
-        {            
-            backgroundAudioSource.clip = backgrounAudioClip[4];
+        {
+            backgroundAudioSource.clip = backgroundAudioClip[4];
             backgroundAudioSource.Play();
         }
-        else 
+        else
         {
             if (index < 5)
             {
-                backgroundAudioSource.clip = backgrounAudioClip[0];
+                backgroundAudioSource.clip = backgroundAudioClip[0];
                 backgroundAudioSource.Play();
             }
             else if (index < 9)
             {
-                backgroundAudioSource.clip = backgrounAudioClip[1];
+                backgroundAudioSource.clip = backgroundAudioClip[1];
                 backgroundAudioSource.Play();
             }
             else if (index < 15)
             {
-                backgroundAudioSource.clip = backgrounAudioClip[2];
+                backgroundAudioSource.clip = backgroundAudioClip[2];
                 backgroundAudioSource.Play();
             }
             else if (index < 19)
             {
-                backgroundAudioSource.clip = backgrounAudioClip[3];
+                backgroundAudioSource.clip = backgroundAudioClip[3];
                 backgroundAudioSource.Play();
             }
         }
     }
+
+    /// <summary>
+    /// 스테이지 시작시 발판이 올라오는 소리를 재생하는 메서드
+    /// </summary>
     public void PlayStageStartAudio()
     {
         StopBackgroundAudio();
@@ -103,7 +114,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="index">몇번째 효과음인지</param>
     public void PlayEffectAudio(int index)
-    { 
+    {
         effectAudioSource.PlayOneShot(effectAudioClip[index]);
     }
     /// <summary>
@@ -154,9 +165,27 @@ public class SoundManager : MonoBehaviour
     {
         StopBackgroundAudio();
         StopCharacterAudio();
-        PlayBackgrounAudio(3);
+        if (CStageManager.Instance.StageCount < 20)
+        {
+            backgroundAudioSource.clip = stageEndClip;
+            backgroundAudioSource.Play();
+        }
     }
 
+    public void ButtonClickSound()
+    {
+        effectAudioSource.PlayOneShot(buttonClickClip);
+    }
+    /// <summary>
+    /// 플레이어가 죽었을때 나는 소리를 재생하는 메서드
+    /// </summary>
+    public void PlayerDie()
+    {
+        StopBackgroundAudio();
+        StopCharacterAudio();
+        backgroundAudioSource.clip = gameOverClip;
+        backgroundAudioSource.Play();
+    }
     /// <summary>
     /// 모든 사운드를 멈추는 메서드
     /// </summary>
@@ -165,5 +194,15 @@ public class SoundManager : MonoBehaviour
         StopBackgroundAudio();
         StopEffectAudio();
         StopCharacterAudio();
+    }
+
+    public void EatFoodSound()
+    {
+        effectAudioSource.PlayOneShot(characterAudioClip[1]);
+    }
+
+    public void CombineSound()
+    {
+        effectAudioSource.PlayOneShot(effectAudioClip[1]);
     }
 }

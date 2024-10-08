@@ -50,9 +50,9 @@ public class PlayerInventory : MonoBehaviour
         playerItem.Add(item);
         GetItemValues(item);
         UIManager.Instance.ChangeValue(myItemData);
-        if (item.uid == 12)
+        if (item.enemyAmount > 0)
         {
-            CEnemyPoolManager.Instance.IncreaseEnemySpawnRate(10);
+            CEnemyPoolManager.Instance.IncreaseEnemySpawnRate(item.enemyAmount);
         }
     }
     /// <summary>
@@ -64,9 +64,9 @@ public class PlayerInventory : MonoBehaviour
         playerItem.Remove(item);
         MinusItemValues(item);
         UIManager.Instance.ChangeValue(myItemData);
-        if (item.uid == 12)
+        if (item.enemyAmount > 0)
         {
-            CEnemyPoolManager.Instance.DecreaseEnemySpawnRate(10);
+            CEnemyPoolManager.Instance.DecreaseEnemySpawnRate(item.enemyAmount);
         }
     }
     /// <summary>

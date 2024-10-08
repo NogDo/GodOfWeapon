@@ -46,6 +46,10 @@ public class RankingUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
+                if (rankingUI.activeSelf == false)
+                {
+                    SoundManager.Instance.ButtonClickSound();
+                }
                 dialogUI.SetActive(false);
                 rankingUI.SetActive(true);
                 loadingUI.SetActive(true);
