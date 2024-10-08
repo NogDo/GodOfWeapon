@@ -11,7 +11,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     #region public 변수
     public event Action OnSpawn;
     public event Action OnDie;
-    public event Action<float> OnHit;
+    public event Action<bool> OnHit;
     #endregion
 
     #region private 변수
@@ -173,12 +173,14 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
 
         if (enemyInfo.NowHP <= 0)
         {
+            OnHit?.Invoke(true);
+
             Die();
         }
 
         else
         {
-            OnHit?.Invoke(damage);
+            OnHit?.Invoke(false);
 
             if (stateMachine.CurrentState == stateMachine.ChaseState)
             {

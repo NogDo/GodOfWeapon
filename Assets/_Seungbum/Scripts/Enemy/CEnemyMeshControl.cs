@@ -56,11 +56,15 @@ public class CEnemyMeshControl : MonoBehaviour
 
     /// <summary>
     /// 적이 피격됐을 때 피격 Material을 잠깐동안 적용시키는 코루틴을 실행한다.
+    /// <param name="isDie">죽었는지 판단</param>
     /// </summary>
-    public void ChangeMaterial_Hit(float damage)
+    public void ChangeMaterial_Hit(bool isDie)
     {
-        StopCoroutine("OnHit");
-        StartCoroutine("OnHit");
+        if (!isDie)
+        {
+            StopCoroutine("OnHit");
+            StartCoroutine("OnHit");
+        }
     }
 
     /// <summary>
