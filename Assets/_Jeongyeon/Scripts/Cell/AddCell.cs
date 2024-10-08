@@ -33,6 +33,7 @@ public class AddCell : MonoBehaviour
 
     private void OnClick()
     {
+        SoundManager.Instance.AddCellSound();
         gameObject.SetActive(false);
     }
 

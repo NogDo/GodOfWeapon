@@ -62,9 +62,14 @@ public class SoundManager : MonoBehaviour
     public void PlayBackgrounAudio(int index)
     {
         StopBackgroundAudio();
-        if (index == 10 || index == 20)
+        if (index == 10)
         {
             backgroundAudioSource.clip = backgroundAudioClip[4];
+            backgroundAudioSource.Play();
+        }
+        else if (index == 20)
+        {
+            backgroundAudioSource.clip = backgroundAudioClip[5];
             backgroundAudioSource.Play();
         }
         else
@@ -200,9 +205,32 @@ public class SoundManager : MonoBehaviour
     {
         effectAudioSource.PlayOneShot(characterAudioClip[1]);
     }
-
+    /// <summary>
+    /// 조합을 했을때 나오는 소리를 재생하는 메서드
+    /// </summary>
     public void CombineSound()
     {
         effectAudioSource.PlayOneShot(effectAudioClip[1]);
+    }
+    /// <summary>
+    /// 물건을 팔거나 재굴림할때 나오는 소리를 재생하는 메서드
+    /// </summary>
+    public void DeleteSound()
+    {
+        effectAudioSource.PlayOneShot(effectAudioClip[2]);
+    }
+    /// <summary>
+    /// 셀을 추가할때 소리를 재생하는 메서드
+    /// </summary>
+    public void AddCellSound()
+    {
+        effectAudioSource.PlayOneShot(effectAudioClip[3]);
+    }
+    /// <summary>
+    /// 아이템을 집거나 셀에 놓았을때 나오는 소리를 재생하는 메서드
+    /// </summary>
+    public void ItemOnCellSound()
+    {
+        effectAudioSource.PlayOneShot(effectAudioClip[4]);
     }
 }

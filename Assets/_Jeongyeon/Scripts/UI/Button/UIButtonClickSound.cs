@@ -20,4 +20,9 @@ public class UIButtonClickSound : MonoBehaviour
     {
         SoundManager.Instance.ButtonClickSound();
     }
+
+    public void NextStage()
+    {
+        CStageManager.Instance.NextStage();
+    }
 }
