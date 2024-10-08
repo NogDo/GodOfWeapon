@@ -21,12 +21,13 @@ public class UIManager : MonoBehaviour
     public Text[] uiName;
     public Text[] uiValue;
 
-    [Header("상점 아이템 관련 UI")]
+    [Header("상점 관련 UI")]
     public UIItemInfo shopItemInfo;
     public UIItemExtra shopItemExtraInfo;
     public UIWeaponInfo shopWeaponInfo;
     public UIWeaponExtra shopWeaponExtraInfo;
     public TextMeshProUGUI textShopMoney;
+    public TextMeshProUGUI textShopFloor;
 
     [Header("로비 캐릭터 관련 UI")]
     public GameObject lCharacterNameUI;
@@ -277,6 +278,7 @@ public class UIManager : MonoBehaviour
     public void ChangeFloorText(int floor)
     {
         textFloor.text = $"{floor}층";
+        textShopFloor.text = $"{floor + 1}층";
     }
 
     /// <summary>
@@ -288,7 +290,7 @@ public class UIManager : MonoBehaviour
         int minute = (int)(time / 60);
         int second = (int)(time % 60);
 
-        textTimer.text = $"{minute}:{second}";
+        textTimer.text = $"{minute}:{second:D2}";
     }
 
     /// <summary>
