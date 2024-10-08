@@ -71,6 +71,7 @@ public class LanceController : SpearController
     public override IEnumerator Pierce()
     {
         anim.SetBool("isAttack", true);
+        SoundManager.Instance.PlayWeaponAudio(0);
         particle.SetActive(true);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         attackCollider.enabled = true;

@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
     public void ChangeGameScene()
     {
         SceneManager.LoadSceneAsync("MapCreate");
-        SoundManager.Instance.PlayBackgrounAudio(1);
+        SoundManager.Instance.PlayLobbyAudio(1);
     }
 
     public void GameExit()

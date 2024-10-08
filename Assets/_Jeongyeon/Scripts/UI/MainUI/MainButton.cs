@@ -18,6 +18,8 @@ public class MainButton : MonoBehaviour
         CStageManager.Instance.CreateStartMap();
         CellManager.Instance.PlayerInventory.ResetAllData();
         CellManager.Instance.ReStart();
+        SoundManager.Instance.StopAllSound();
+        SoundManager.Instance.PlayLobbyAudio(1);
         Destroy(CellManager.Instance.PlayerInventory.gameObject);
     }
 }
