@@ -420,13 +420,13 @@ public class CStageManager : MonoBehaviour
     {
         if (fEXP < fMaxEXP)
         {
-            fMaxEXP += fMaxEXP * 0.1f;
+            fMaxEXP += fMaxEXP * 0.075f;
         }
 
         else
         {
             fEXP -= fMaxEXP;
-            fMaxEXP += fMaxEXP * 0.1f;
+            fMaxEXP += fMaxEXP * 0.075f;
         }
 
         nCurrentLevel++;
@@ -483,6 +483,19 @@ public class CStageManager : MonoBehaviour
         CEnemyPoolManager.Instance.StopSpawn();
         CDamageTextPoolManager.Instance.StopSpawn();
 
-        UIManager.Instance.StageOver(isClear, nStageCount, nTotalMoney, nTotalKillCount, Mathf.RoundToInt(fTotalDamage), fTotalTime, 0);
+        int totalValue = 0;
+
+        if (isClear)
+        {
+            totalValue += 5000;
+        }
+
+        totalValue += nStageCount * 100;
+        totalValue += nTotalMoney * 10;
+        totalValue += nTotalKillCount * 10;
+        totalValue += (int)fTotalDamage;
+        totalValue -= (int)fTotalTime;
+
+        UIManager.Instance.StageOver(isClear, nStageCount, nTotalMoney, nTotalKillCount, Mathf.RoundToInt(fTotalDamage), fTotalTime, totalValue);
     }
 }
