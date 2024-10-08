@@ -36,5 +36,11 @@ public class UIHpBarControl : MonoBehaviour
     void ChangeHpBarValue(bool isDie)
     {
         imageHpBar.fillAmount = enemyInfo.NowHP / enemyInfo.MaxHP;
+
+        if (isDie)
+        {
+            CStageManager.Instance.Result(true);
+            gameObject.SetActive(false);
+        }
     }
 }

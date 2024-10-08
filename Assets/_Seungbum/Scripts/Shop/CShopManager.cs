@@ -567,7 +567,9 @@ public class CShopManager : MonoBehaviour
             CStageManager.Instance.DecreaseMoney(nReRollCost);
         }
 
-        nReRollCost = CStageManager.Instance.StageCount * 4 + nReRollCount * CStageManager.Instance.StageCount / 2;
+        int reRollStageCost = nReRollCount * CStageManager.Instance.StageCount / 2;
+
+        nReRollCost = CStageManager.Instance.StageCount * 3 + reRollStageCost;
 
         SetInteractableReRellButton();
 

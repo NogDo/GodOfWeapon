@@ -89,7 +89,6 @@ public class CEnemyPoolManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// 적 소환 코루틴들을 종료한다.
     /// </summary>

@@ -104,7 +104,7 @@
     "Name": "FinalBoss",
     "ID": 11,
     "Speed": 5.0,
-    "MaxHP": 500.0,
+    "MaxHP": -45.0,
     "NowHP": 500.0,
     "Attack": 15.0,
     "AttackCooltime": 5.0

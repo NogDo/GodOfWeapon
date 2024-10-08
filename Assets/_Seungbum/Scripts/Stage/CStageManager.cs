@@ -208,7 +208,7 @@ public class CStageManager : MonoBehaviour
     /// </summary>
     void InitStageStats()
     {
-        nStageCount = 20;
+        nStageCount = 1;
         nLevel = 1;
         nCurrentLevel = 1;
         nPlayerMoney = 1000;
@@ -472,6 +472,11 @@ public class CStageManager : MonoBehaviour
     /// <param name="isClear">클리어 여부</param>
     public void Result(bool isClear)
     {
+        if (isClear)
+        {
+            StageEnd();
+        }
+
         StopCoroutine(stageTimerCoroutine);
         StopCoroutine(totalTimerCoroutine);
 

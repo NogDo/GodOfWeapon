@@ -126,6 +126,11 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
     {
         yield return new WaitForSeconds(1.0f);
 
+        if (CStageManager.Instance.IsStageEnd)
+        {
+            gameObject.SetActive(false);
+        }
+
         animator.SetBool("isSpawnEnd", false);
         animator.SetTrigger("isSpawn");
 
@@ -232,7 +237,7 @@ public class CEnemyController : MonoBehaviour, IHittable, IAttackable
         stateMachine.ChangeState(stateMachine.DieState);
         OnDie?.Invoke();
 
-        Invoke("InActiveEnemy", 3.0f);
+        //Invoke("InActiveEnemy", 3.0f);
     }
 
     /// <summary>
