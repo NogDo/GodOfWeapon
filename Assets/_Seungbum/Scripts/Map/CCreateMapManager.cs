@@ -90,35 +90,43 @@ public class CCreateMapManager : MonoBehaviour
     public void AddLine()
     {
         // 최대 사이즈 10 x 10
-        int percent = Random.Range(0, 2);
-
-        if (percent == 0)
+        if (nStartWidth >= 10 && nStartHeight >= 10)
         {
-            if (nStartWidth + 1 >= 10)
-            {
-                nStartHeight++;
-                SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
-            }
-
-            else
-            {
-                nStartWidth++;
-                SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
-            }
+            SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ);
         }
 
         else
         {
-            if (nStartHeight + 1 >= 10)
+            int percent = Random.Range(0, 2);
+
+            if (percent == 0)
             {
-                nStartWidth++;
-                SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
+                if (nStartWidth + 1 >= 11)
+                {
+                    nStartHeight++;
+                    SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
+                }
+
+                else
+                {
+                    nStartWidth++;
+                    SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
+                }
             }
 
             else
             {
-                nStartHeight++;
-                SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
+                if (nStartHeight + 1 >= 11)
+                {
+                    nStartWidth++;
+                    SetMapSize(mapSize.minX, mapSize.maxX + 1, mapSize.minZ, mapSize.maxZ);
+                }
+
+                else
+                {
+                    nStartHeight++;
+                    SetMapSize(mapSize.minX, mapSize.maxX, mapSize.minZ, mapSize.maxZ + 1);
+                }
             }
         }
 

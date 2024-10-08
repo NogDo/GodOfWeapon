@@ -101,8 +101,8 @@ public class CMapRightDownBuilder : MonoBehaviour, IMapPartBuilder
 
                 Vector3 pos = new Vector3(i * fFloorWidth, -2.0f * fFloorHeight, j * fFloorLength);
 
-                // 세로 길이가 10이 넘는다면 계단 패턴을 적용
-                if (maxZ - minZ >= 10)
+                // 세로 길이가 7또는 9라면 계단 패턴을 적용
+                if (maxZ - minZ == 7 || maxZ - minZ == 9)
                 {
                     if (j >= maxZ)
                     {
