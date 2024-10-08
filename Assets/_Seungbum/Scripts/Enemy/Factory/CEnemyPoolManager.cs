@@ -133,7 +133,7 @@ public class CEnemyPoolManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpawnMeleeEnemy()
     {
-        float meleeEnemySpawnTime = fMeleeEnemySpawnTime - (fEnemySpawnRate / 0.01f);
+        float meleeEnemySpawnTime = fMeleeEnemySpawnTime - (fEnemySpawnRate / 100.0f);
 
         while (true)
         {
@@ -152,7 +152,7 @@ public class CEnemyPoolManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpawnRangeEnemy()
     {
-        float rangeEnemySpawnTime = fRangeEnemySpawnTime - (fEnemySpawnRate / 0.01f);
+        float rangeEnemySpawnTime = fRangeEnemySpawnTime - (fEnemySpawnRate / 100.0f);
 
         while (true)
         {
@@ -235,7 +235,7 @@ public class CEnemyPoolManager : MonoBehaviour
     {
         while (nEliteSpawnCount > 0)
         {
-            float eliteEnemySpawnTime = Random.Range(5.0f, 10.0f);
+            float eliteEnemySpawnTime = Random.Range(3.0f, 5.0f);
 
             yield return new WaitForSeconds(eliteEnemySpawnTime);
 

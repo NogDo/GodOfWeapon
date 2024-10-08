@@ -102,7 +102,14 @@ public class CItemMouseEventController : MonoBehaviour
         {
             if (UIManager.Instance.sourceWeapon.Count < 2)
             {
-                ClickToCombine(true);
+                if (weaponStats != null)
+                {
+                    if (UIManager.Instance.baseWeapon.Weapon.uid == weaponStats.Weapon.uid 
+                        && UIManager.Instance.baseWeapon.Weapon.level == weaponStats.Weapon.level)
+                    {
+                        ClickToCombine(true);
+                    }
+                }
             }
         }
 
