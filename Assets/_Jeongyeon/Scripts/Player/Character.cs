@@ -35,6 +35,7 @@ public class Character : MonoBehaviour
     private bool canMove = true; // 플레이어 움직임을 제어하는 변수
     private bool isfirst = true; // 로비에서 시작시 움직임 제어를 막는 변수
     private bool invincible = false; // 무적상태인지 확인하는 변수
+    private bool isDie = false; // 플레이어가 죽었는지 확인하는 변수
     private Vector3 run; // 이동시 사용할 벡터
 
     private Transform cameraTransform;
@@ -123,9 +124,10 @@ public class Character : MonoBehaviour
     /// <param name="damage">받을 데미지</param>
     public virtual void Hit(float damage)
     {
-        if (invincible == false)
+        if (invincible == false && isDie == false)
         {
             float finalDamage = damage - myData.defense / 20;
+            SoundManager.Instance.PlayCharacterAudio(0);
             hitCoroutine = HitEffect();
             StopCoroutine(hitCoroutine);
             StartCoroutine(hitCoroutine);
@@ -350,8 +352,11 @@ public class Character : MonoBehaviour
     /// </summary>
     public void PlayerDie()
     {
+        isDie = true;
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
+        SoundManager.Instance.StopAllSound();
+        SoundManager.Instance.PlayEffectAudio(2);
         for (int i = 0; i < weaponPostion.Length; i++)
         {
             weaponPostion[i].SetActive(false);

@@ -5,11 +5,18 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
-
-    [Header("사운드 클립을 담아두는 배열")]
+    [Header("로비음악 클립을 담아두는 배열")]
+    public AudioClip[] lobbyAudioClip;
+    [Header("배경음악 클립을 담아두는 배열")]
     public AudioClip[] backgrounAudioClip;
+    [Header("이펙트 클립을 담아두는 배열")]
     public AudioClip[] effectAudioClip;
+    [Header("캐릭터 효과음 클립을 담아두는 배열")]
     public AudioClip[] characterAudioClip;
+    [Header("무기 효과음 클립을 담아두는 배열")]
+    public AudioClip[] weaponAudioClip;
+
+    public AudioClip stageEndClip;
 
     [Header("사운드별 오디오 소스")]
     public AudioSource backgroundAudioSource;
@@ -27,25 +34,82 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        PlayBackgrounAudio(0);
+        PlayLobbyAudio(0);
         yield return new WaitUntil(() => CStageManager.Instance != null);
         CStageManager.Instance.OnStageEnd += StageEndSound;
     }
-
+    /// <summary>
+    /// 로비 음악을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">무슨 로비음악을 재생할건지 넣는 파라미터</param>
+    public void PlayLobbyAudio(int index)
+    {
+        StopBackgroundAudio();
+        backgroundAudioSource.clip = lobbyAudioClip[index];
+        backgroundAudioSource.Play();
+    }
+    /// <summary>
+    /// 배경음악을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">스테이지 입력</param>
     public void PlayBackgrounAudio(int index)
     {
         StopBackgroundAudio();
-        backgroundAudioSource.clip = backgrounAudioClip[index];
+        if (index == 10 || index == 20)
+        {            
+            backgroundAudioSource.clip = backgrounAudioClip[4];
+            backgroundAudioSource.Play();
+        }
+        else 
+        {
+            if (index < 5)
+            {
+                backgroundAudioSource.clip = backgrounAudioClip[0];
+                backgroundAudioSource.Play();
+            }
+            else if (index < 9)
+            {
+                backgroundAudioSource.clip = backgrounAudioClip[1];
+                backgroundAudioSource.Play();
+            }
+            else if (index < 15)
+            {
+                backgroundAudioSource.clip = backgrounAudioClip[2];
+                backgroundAudioSource.Play();
+            }
+            else if (index < 19)
+            {
+                backgroundAudioSource.clip = backgrounAudioClip[3];
+                backgroundAudioSource.Play();
+            }
+        }
+    }
+    public void PlayStageStartAudio()
+    {
+        StopBackgroundAudio();
+        backgroundAudioSource.clip = effectAudioClip[0];
         backgroundAudioSource.Play();
     }
-
-    public void PlayEffectAudio(int index)
+    /// <summary>
+    /// 무기 효과음을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">무슨 효과음인지</param>
+    public void PlayWeaponAudio(int index)
     {
-        StopEffectAudio();
-        effectAudioSource.clip = effectAudioClip[index];
-        effectAudioSource.Play();
+        effectAudioSource.PlayOneShot(weaponAudioClip[index]);
     }
-
+    /// <summary>
+    /// 효과음을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">몇번째 효과음인지</param>
+    public void PlayEffectAudio(int index)
+    { 
+        effectAudioSource.PlayOneShot(effectAudioClip[index]);
+    }
+    /// <summary>
+    /// 캐릭터 관련 오디오를 재생하는 메서드
+    /// </summary>
+    /// <param name="index">무슨 효과음인지</param>
     public void PlayCharacterAudio(int index)
     {
         StopCharacterAudio();
@@ -53,7 +117,9 @@ public class SoundManager : MonoBehaviour
         characterAudioSource.Play();
     }
 
-
+    /// <summary>
+    /// 배경음악을 멈추는 메서드
+    /// </summary>
     public void StopBackgroundAudio()
     {
         if (backgroundAudioSource.clip != null && backgroundAudioSource.isPlaying)
@@ -61,7 +127,9 @@ public class SoundManager : MonoBehaviour
             backgroundAudioSource.Stop();
         }
     }
-
+    /// <summary>
+    /// 효과음을 멈추는 메서드
+    /// </summary>
     public void StopEffectAudio()
     {
         if (effectAudioSource.clip != null && effectAudioSource.isPlaying)
@@ -69,7 +137,9 @@ public class SoundManager : MonoBehaviour
             effectAudioSource.Stop();
         }
     }
-
+    /// <summary>
+    /// 캐릭터 관련 오디오를 멈추는 메서드
+    /// </summary>
     public void StopCharacterAudio()
     {
         if (characterAudioSource.clip != null && characterAudioSource.isPlaying)
@@ -77,13 +147,23 @@ public class SoundManager : MonoBehaviour
             characterAudioSource.Stop();
         }
     }
-
+    /// <summary>
+    /// 스테이지가 종료되면 나오는 메서드
+    /// </summary>
     public void StageEndSound()
     {
         StopBackgroundAudio();
         StopCharacterAudio();
-        StopCharacterAudio();
         PlayBackgrounAudio(3);
+    }
 
+    /// <summary>
+    /// 모든 사운드를 멈추는 메서드
+    /// </summary>
+    public void StopAllSound()
+    {
+        StopBackgroundAudio();
+        StopEffectAudio();
+        StopCharacterAudio();
     }
 }

@@ -843,15 +843,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9d6e9528ea7694ea1cb74eb3892f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounAudioClip:
+  lobbyAudioClip:
   - {fileID: 8300000, guid: e2fed1d95f4af0d48bd52057d2c15fd5, type: 3}
   - {fileID: 8300000, guid: 69fed0c1818d9ea409b604549afea755, type: 3}
+  backgrounAudioClip:
+  - {fileID: 8300000, guid: f4fd3143b991d7f4c895da40ce70af53, type: 3}
   - {fileID: 8300000, guid: c1750adcf02dca842814a696c7a45a88, type: 3}
-  - {fileID: 8300000, guid: ab0faec1250200a45a04263a3866ae83, type: 3}
+  - {fileID: 8300000, guid: 6591c10aaf7de0545b6598b7899b9c4c, type: 3}
+  - {fileID: 8300000, guid: c14ae0bcfaaf2ec4f87519b7e32e43e1, type: 3}
+  - {fileID: 8300000, guid: 8c7c13a84da88b646916be776892f2cc, type: 3}
   effectAudioClip:
   - {fileID: 8300000, guid: 51dc65a2b5c53044f9f420553a022f9d, type: 3}
   - {fileID: 8300000, guid: ab0faec1250200a45a04263a3866ae83, type: 3}
   characterAudioClip: []
+  stageEndClip: {fileID: 8300000, guid: ab0faec1250200a45a04263a3866ae83, type: 3}
   backgroundAudioSource: {fileID: 157573050}
   effectAudioSource: {fileID: 157573054}
   characterAudioSource: {fileID: 157573053}
