@@ -96,6 +96,7 @@ public class Character : MonoBehaviour
     {
         isfirst = false;
         isdash = false;
+        invincible = false;
         smrCreator.Create(false);
     }
     public void Update()
@@ -355,8 +356,7 @@ public class Character : MonoBehaviour
         isDie = true;
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
-        SoundManager.Instance.StopAllSound();
-        SoundManager.Instance.PlayEffectAudio(2);
+        SoundManager.Instance.PlayerDie();
         for (int i = 0; i < weaponPostion.Length; i++)
         {
             weaponPostion[i].SetActive(false);
@@ -372,8 +372,12 @@ public class Character : MonoBehaviour
         barrierCoroutine = StartCoroutine(BarrierEffect());
     }
 
+    /// <summary>
+    /// 힐링아이템을 먹었을때 실행하는 메서드
+    /// </summary>
     public void GetHealingItem()
     {
+        SoundManager.Instance.EatFoodSound();
         if (currentHp + 15 > maxHp)
         {
             currentHp = maxHp;
@@ -385,10 +389,16 @@ public class Character : MonoBehaviour
             currentHp += 15;
             UIManager.Instance.SetHPUI(maxHp, currentHp);
             UIManager.Instance.CurrentHpChange(this);
+            CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 15);
         }
         CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 15);
 
+
     }
+    /// <summary>
+    /// 무적아이템을 먹었을때 무적 베리어생성과 효과를 적용하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator BarrierEffect()
     {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
