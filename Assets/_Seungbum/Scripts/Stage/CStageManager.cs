@@ -227,6 +227,8 @@ public class CStageManager : MonoBehaviour
         isStageEnd = true;
 
         nCurseDollCount = 0;
+
+        CShopManager.Instance.InitDiscountRate();
     }
 
     /// <summary>

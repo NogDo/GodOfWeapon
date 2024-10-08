@@ -160,6 +160,9 @@ public class CWeaponStats : CStats
     /// </summary>
     void SetWeaponPrice()
     {
-        weaponData.price -= (int)(weaponData.price / CShopManager.Instance.DisCountRate);
+        if (CShopManager.Instance.DisCountRate > 0)
+        {
+            weaponData.price -= (int)(weaponData.price / CShopManager.Instance.DisCountRate);
+        }
     }
 }
