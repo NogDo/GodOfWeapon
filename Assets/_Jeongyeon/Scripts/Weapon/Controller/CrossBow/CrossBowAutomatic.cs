@@ -16,4 +16,10 @@ public class CrossBowAutomatic : CrossBowController
             MassValue = 0.5f;
         }
     }
+
+    public override IEnumerator Shoot()
+    {
+        SoundManager.Instance.PlayCWeaponAudio(0);
+        return base.Shoot();
+    }
 }

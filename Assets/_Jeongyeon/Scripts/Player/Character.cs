@@ -377,7 +377,7 @@ public class Character : MonoBehaviour
     /// </summary>
     public void GetHealingItem()
     {
-        SoundManager.Instance.EatFoodSound();
+        SoundManager.Instance.PlayCharacterAudio(1);
         if (currentHp + 15 > maxHp)
         {
             currentHp = maxHp;
@@ -401,6 +401,7 @@ public class Character : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BarrierEffect()
     {
+        SoundManager.Instance.CombineSound();
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
         invincible = true;

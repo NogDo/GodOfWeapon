@@ -77,6 +77,7 @@ public class CriticalArrow : WeaponProjectile
             {
                 player.currentHp = player.maxHp;
             }
+            SoundManager.Instance.PlayCharacterAudio(2);
             UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
             UIManager.Instance.CurrentHpChange(player);
             CDamageTextPoolManager.Instance.SpawnPlayerHealText(player.transform, 1);

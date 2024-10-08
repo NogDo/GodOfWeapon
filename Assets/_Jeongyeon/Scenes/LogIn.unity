@@ -7583,6 +7583,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3208780623696487169, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: m_Volume
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487170, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3208780623696487171, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7632,6 +7640,22 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: weaponAudioClip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: cWeaponAudioClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: lWeaponAudioClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: characterAudioClip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: effectAudioClip.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 8c04e14a9928412468f7f4373bf30a35, type: 3}
@@ -7644,9 +7668,57 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 62ca59650c2156e46a1e9f401f7d5b6f, type: 3}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: weaponAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: bf74ee3554600274daf33182c56d5f2f, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: weaponAudioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ae9f1f6453ed0d948a988357e75c677e, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: backgroundAudioClip.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: cWeaponAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 32e8fe0be5fde514fa8cef1a576f862c, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: cWeaponAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d17efa7a28714743873f9c7fb03a6b4, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: cWeaponAudioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 65a145318edbf424fa6a41d3199c9505, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: cWeaponAudioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: aa0e509c3ef327f45a47843e3b49ef14, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: lWeaponAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 45f60c78fd24d08409d3d5d5f47facae, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: lWeaponAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: bf74ee3554600274daf33182c56d5f2f, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: lWeaponAudioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ae9f1f6453ed0d948a988357e75c677e, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: lWeaponAudioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: aa0e509c3ef327f45a47843e3b49ef14, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: characterAudioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ee246661b90faf64aa7b7978344d90f6, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: characterAudioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: e76f71c2e82f6bb4791aa4771c5c5f5d, type: 3}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: backgroundAudioClip.Array.data[4]
       value: 

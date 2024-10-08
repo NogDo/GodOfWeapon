@@ -13,8 +13,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] effectAudioClip;
     [Header("캐릭터 효과음 클립을 담아두는 배열")]
     public AudioClip[] characterAudioClip;
-    [Header("무기 효과음 클립을 담아두는 배열")]
-    public AudioClip[] weaponAudioClip;
+    [Header("긴 무기 효과음 클립을 담아두는 배열")]
+    public AudioClip[] lWeaponAudioClip;
+    [Header("석궁 효과음 클립을 담아두는 배열")]
+    public AudioClip[] cWeaponAudioClip;
 
     [Header("스테이지 종료 클립")]
     public AudioClip stageEndClip;
@@ -107,12 +109,20 @@ public class SoundManager : MonoBehaviour
         backgroundAudioSource.Play();
     }
     /// <summary>
-    /// 무기 효과음을 재생하는 메서드
+    /// 긴 무기 효과음을 재생하는 메서드
     /// </summary>
     /// <param name="index">무슨 효과음인지</param>
-    public void PlayWeaponAudio(int index)
+    public void PlayLWeaponAudio(int index)
     {
-        effectAudioSource.PlayOneShot(weaponAudioClip[index]);
+        effectAudioSource.PlayOneShot(lWeaponAudioClip[index]);
+    }
+    /// <summary>
+    /// 석궁 효과음을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">효과음 종류</param>
+    public void PlayCWeaponAudio(int index)
+    {
+        effectAudioSource.PlayOneShot(cWeaponAudioClip[index]);
     }
     /// <summary>
     /// 효과음을 재생하는 메서드
@@ -128,9 +138,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="index">무슨 효과음인지</param>
     public void PlayCharacterAudio(int index)
     {
-        StopCharacterAudio();
-        characterAudioSource.clip = characterAudioClip[index];
-        characterAudioSource.Play();
+        characterAudioSource.PlayOneShot(characterAudioClip[index]);
     }
 
     /// <summary>
@@ -199,11 +207,6 @@ public class SoundManager : MonoBehaviour
         StopBackgroundAudio();
         StopEffectAudio();
         StopCharacterAudio();
-    }
-
-    public void EatFoodSound()
-    {
-        effectAudioSource.PlayOneShot(characterAudioClip[1]);
     }
     /// <summary>
     /// 조합을 했을때 나오는 소리를 재생하는 메서드
