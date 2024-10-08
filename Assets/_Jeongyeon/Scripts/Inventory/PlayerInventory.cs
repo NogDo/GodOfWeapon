@@ -54,6 +54,10 @@ public class PlayerInventory : MonoBehaviour
         {
             CEnemyPoolManager.Instance.IncreaseEnemySpawnRate(item.enemyAmount);
         }
+        if (item.uid == 8)
+        {
+            CShopManager.Instance.InCreaseDiscountRate(10);
+        }
     }
     /// <summary>
     /// 아이템이 인벤토리에서 빠져나갈때 리스트에서 삭제후 아이템 값을 빼는 메서드
@@ -67,6 +71,10 @@ public class PlayerInventory : MonoBehaviour
         if (item.enemyAmount > 0)
         {
             CEnemyPoolManager.Instance.DecreaseEnemySpawnRate(item.enemyAmount);
+        }
+        if (item.uid == 8)
+        {
+            CShopManager.Instance.DeCreaseDiscountRate(20);
         }
     }
     /// <summary>

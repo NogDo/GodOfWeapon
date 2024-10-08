@@ -57,4 +57,9 @@ public class UICombineButton : MonoBehaviour
 
         yield return null;
     }
+
+    public void CombineButtonSound()
+    {
+        SoundManager.Instance.CombineSound();
+    }
 }
