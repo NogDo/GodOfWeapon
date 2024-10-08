@@ -275,9 +275,9 @@ public class FireBaseManager : MonoBehaviour
                     {
                         break;
                     }
-                }
-                OnRank?.Invoke();
+                }  
             }
+            OnRank?.Invoke();
         }
         catch (FirebaseException e)
         {

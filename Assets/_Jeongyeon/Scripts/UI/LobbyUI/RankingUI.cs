@@ -27,22 +27,16 @@ public class RankingUI : MonoBehaviour
     }
     private void Start()
     {
-        // FireBaseManager.Instance.OnRank += SetUserRank;
+        FireBaseManager.Instance.OnRank += SetUserRank;
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnDestroy()
     {
-        if (other.CompareTag("Character"))
-        {
-            dialogUI.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + (Vector3.right * 3.5f));
-            dialogUI.SetActive(true);
-
-        }
+        FireBaseManager.Instance.OnRank -= SetUserRank;
     }
-
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Character"))
+        if (dialogUI.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -53,10 +47,18 @@ public class RankingUI : MonoBehaviour
                 dialogUI.SetActive(false);
                 rankingUI.SetActive(true);
                 loadingUI.SetActive(true);
-                //FireBaseManager.Instance.GetRankData();
+                FireBaseManager.Instance.GetRankData();
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            dialogUI.SetActive(true);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Character"))
@@ -98,6 +100,11 @@ public class RankingUI : MonoBehaviour
             {
                 resultPanel[i].SetActive(true);
             }
+        }
+        else
+        {
+            loadingUI.SetActive(false);
+            rankingTitleUIPanel.SetActive(true);
         }
     }
 
