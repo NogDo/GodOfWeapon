@@ -36,13 +36,13 @@ public class ActivePanel : MonoBehaviour
                 tempCollider = hit.collider;
                 MouseEnter(tempCollider);
             }
-            else
+        }
+        else
+        {
+            if (tempCollider != null)
             {
-                if (tempCollider != null)
-                {
-                    MouseExit(tempCollider);
-                    tempCollider = null;
-                }
+                MouseExit(tempCollider);
+                tempCollider = null;
             }
         }
         
