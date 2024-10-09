@@ -27,6 +27,7 @@ public class LightningProjectile : WeaponProjectile
     {
         damage = (spearController.AttackDamage + (inventory.myItemData.damage / 10) + (inventory.myItemData.rangeDamage / 10)) * 0.8f;
         massValue = spearController.MassValue + (inventory.myItemData.massValue / 100);
+        
     }
     public override void Return()
     {
@@ -40,6 +41,7 @@ public class LightningProjectile : WeaponProjectile
         transform.localPosition = new Vector3(direction.x, 0.3f, direction.z);
         transform.localRotation = Quaternion.identity;
         GetComponent<ParticleSystem>().Play();
+        SoundManager.Instance.PlayLWeaponAudio(4);
         Invoke("Return", 2.0f);
     }
 

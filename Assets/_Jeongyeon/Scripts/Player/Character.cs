@@ -336,8 +336,18 @@ public class Character : MonoBehaviour
     /// </summary>
     public void UseHealingPotion()
     {
-        currentHp += myData.hp * 0.4f;
-        UIManager.Instance.SetHPUI(maxHp, currentHp);
+        if ((currentHp += maxHp * 0.4f) > maxHp)
+        {
+            currentHp = maxHp;
+            UIManager.Instance.SetHPUI(maxHp, currentHp);
+            UIManager.Instance.CurrentHpChange(this);
+        }
+        else
+        {
+            currentHp += maxHp * 0.4f;
+            UIManager.Instance.SetHPUI(maxHp, currentHp);
+            UIManager.Instance.CurrentHpChange(this);
+        }
     }
     /// <summary>
     /// 의식인형이 인벤토리에 들어왔을 경우 실행되는 메서드
@@ -362,6 +372,7 @@ public class Character : MonoBehaviour
             weaponPostion[i].SetActive(false);
         }
         anim.SetTrigger("isDie");
+        SoundManager.Instance.PlayCharacterAudio(3);
         canMove = false;
 
         CStageManager.Instance.Result(false);
@@ -401,7 +412,7 @@ public class Character : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BarrierEffect()
     {
-        SoundManager.Instance.CombineSound();
+        SoundManager.Instance.PlayEffectAudio(1);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), true);
         invincible = true;

@@ -7,5 +7,6 @@ public class HealingPotion : MonoBehaviour, IActiveItem
     public void UseItem()
     {
         CellManager.Instance.PlayerInventory.GetComponent<Character>().UseHealingPotion();
+        SoundManager.Instance.PlayEffectAudio(5);
     }
 }

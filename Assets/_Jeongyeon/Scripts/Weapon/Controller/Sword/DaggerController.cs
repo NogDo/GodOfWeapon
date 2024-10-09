@@ -109,6 +109,7 @@ public class DaggerController : SwordController
         time = 0.0f;
         durationSpeed = duration / 3 * 2;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+        SoundManager.Instance.PlaySWeaponAudio(0);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, enemyTransform.position.y + 1.0f, enemyTransform.position.z);
         particle[0].SetActive(true);
         while (time <= (duration / 2))

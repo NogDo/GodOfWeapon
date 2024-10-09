@@ -47,6 +47,7 @@ public class LightningSpearController : SpearController
     {
         float time = 0.0f;
         int particleCount = 0;
+        SoundManager.Instance.PlayLWeaponAudio(3);
         particle.SetActive(true);
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);

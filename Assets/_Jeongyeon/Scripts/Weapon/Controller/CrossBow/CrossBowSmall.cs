@@ -16,4 +16,9 @@ public class CrossBowSmall : CrossBowController
             MassValue = 0.5f;
         }
     }
+    public override IEnumerator Shoot()
+    {
+        SoundManager.Instance.PlayCWeaponAudio(4);
+        return base.Shoot();
+    }
 }

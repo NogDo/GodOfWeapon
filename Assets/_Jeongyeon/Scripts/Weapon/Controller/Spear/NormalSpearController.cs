@@ -49,6 +49,7 @@ public class NormalSpearController : SpearController
         float time = 0.0f;
         particle.SetActive(true);
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        SoundManager.Instance.PlayLWeaponAudio(0);
         Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y, enemyTransform.position.z);
         while (time <= duration / 2)
         {

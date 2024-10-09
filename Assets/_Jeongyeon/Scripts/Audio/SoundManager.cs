@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] lWeaponAudioClip;
     [Header("석궁 효과음 클립을 담아두는 배열")]
     public AudioClip[] cWeaponAudioClip;
+    [Header("짧은 무기 효과음 클립을 담아두는 배열")]
+    public AudioClip[] sWeaponAudioClip;
 
     [Header("스테이지 종료 클립")]
     public AudioClip stageEndClip;
@@ -29,7 +31,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource backgroundAudioSource;
     public AudioSource effectAudioSource;
     public AudioSource characterAudioSource;
-
+    public AudioSource weaponAudioSourece;
     
     private void Awake()
     {
@@ -67,6 +69,7 @@ public class SoundManager : MonoBehaviour
         if (index == 10)
         {
             backgroundAudioSource.clip = backgroundAudioClip[4];
+            backgroundAudioSource.loop = true;
             backgroundAudioSource.Play();
         }
         else if (index == 20)
@@ -111,10 +114,18 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// 긴 무기 효과음을 재생하는 메서드
     /// </summary>
-    /// <param name="index">무슨 효과음인지</param>
+    /// <param name="index">특정 무기효과음</param>
     public void PlayLWeaponAudio(int index)
     {
-        effectAudioSource.PlayOneShot(lWeaponAudioClip[index]);
+        weaponAudioSourece.PlayOneShot(lWeaponAudioClip[index]);
+    }
+    /// <summary>
+    /// 짧은 무기 효과음을 재생하는 메서드
+    /// </summary>
+    /// <param name="index">특정 무기효과음</param>
+    public void PlaySWeaponAudio(int index)
+    {
+        weaponAudioSourece.PlayOneShot(sWeaponAudioClip[index]);
     }
     /// <summary>
     /// 석궁 효과음을 재생하는 메서드
@@ -122,7 +133,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="index">효과음 종류</param>
     public void PlayCWeaponAudio(int index)
     {
-        effectAudioSource.PlayOneShot(cWeaponAudioClip[index]);
+        weaponAudioSourece.PlayOneShot(cWeaponAudioClip[index]);
     }
     /// <summary>
     /// 효과음을 재생하는 메서드
@@ -207,33 +218,5 @@ public class SoundManager : MonoBehaviour
         StopBackgroundAudio();
         StopEffectAudio();
         StopCharacterAudio();
-    }
-    /// <summary>
-    /// 조합을 했을때 나오는 소리를 재생하는 메서드
-    /// </summary>
-    public void CombineSound()
-    {
-        effectAudioSource.PlayOneShot(effectAudioClip[1]);
-    }
-    /// <summary>
-    /// 물건을 팔거나 재굴림할때 나오는 소리를 재생하는 메서드
-    /// </summary>
-    public void DeleteSound()
-    {
-        effectAudioSource.PlayOneShot(effectAudioClip[2]);
-    }
-    /// <summary>
-    /// 셀을 추가할때 소리를 재생하는 메서드
-    /// </summary>
-    public void AddCellSound()
-    {
-        effectAudioSource.PlayOneShot(effectAudioClip[3]);
-    }
-    /// <summary>
-    /// 아이템을 집거나 셀에 놓았을때 나오는 소리를 재생하는 메서드
-    /// </summary>
-    public void ItemOnCellSound()
-    {
-        effectAudioSource.PlayOneShot(effectAudioClip[4]);
     }
 }
