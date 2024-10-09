@@ -135,13 +135,13 @@ public class CEnemyInfo : MonoBehaviour
     /// </summary>
     public void SetStatsByStage()
     {
-        int stageCount = CStageManager.Instance.StageCount - 1;
+        int stageCount = CStageManager.Instance.StageCount;
 
-        if (stageCount % 3 == 1)
+        if (stageCount % 4 == 0)
         {
-            stats.Attack = initStats.Attack + 1.0f ;
+            stats.Attack = initStats.Attack + stageCount / 4;
         }
-        stats.MaxHP = initStats.MaxHP + 3.0f * stageCount;
+        stats.MaxHP = initStats.MaxHP + 1.5f * stageCount;
     }
 
     /// <summary>
