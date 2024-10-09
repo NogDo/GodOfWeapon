@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -24,6 +25,7 @@ public class Character : MonoBehaviour
     public GameObject[] weaponPostion; // 무기를 장착하는 위치
 
     public ParticleSystem[] Barrier; // 플레이어의 보호막 파티클
+
     #endregion
 
     #region Private Fields
@@ -66,10 +68,10 @@ public class Character : MonoBehaviour
         myData = inventory.myItemData;
     }
     private void Start()
-    {
+    {  
         maxHp = inventory.myItemData.hp;
-        currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         currentHp = maxHp;
+        currentMoveSpeed = moveSpeed + (inventory.myItemData.moveSpeed / 10);
         UIManager.Instance.CurrentHpChange(this);
     }
     private void OnEnable()
@@ -79,6 +81,7 @@ public class Character : MonoBehaviour
         {
             StartCoroutine(StopMove());
         }
+        maxHp = inventory.myItemData.hp;
         currentDashCount = dashCount;
         if (barrierCoroutine != null)
         {
@@ -91,6 +94,8 @@ public class Character : MonoBehaviour
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Projectile"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ignore Object"), false);
+        UIManager.Instance.CurrentHpChange(this);
+        UIManager.Instance.SetHPUI(maxHp, currentHp);
     }
     private void OnDisable()
     {
@@ -431,7 +436,6 @@ public class Character : MonoBehaviour
         Barrier[1].gameObject.SetActive(false);
         Barrier[1].Stop();
     }
-
 
 }
 

@@ -65,7 +65,6 @@ public class GoldSwordController : SwordController
         endRotatePosition = transform.localRotation * (Vector3.forward) * -1.0f;
         isAttacking = true;
         time = 0.0f;
-        Debug.Log(duration);
         while (time <= duration / 2)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-55, setY, 0), time / (duration / 2));

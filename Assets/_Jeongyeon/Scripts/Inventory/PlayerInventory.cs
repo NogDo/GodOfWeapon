@@ -83,6 +83,10 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="weaponStats">해당무기 정보</param>
     public void CreateWeapon(CWeaponStats weaponStats)
     {
+        if (weaponStats.Weapon.uid == 4)
+        {
+            myItemData.hp += 10;
+        }
         playerWeapon.Add(weaponStats.Weapon);
         if (playerWeapon[playerWeapon.Count - 1].weaponType == Type.LWeapon)
         {

@@ -11,22 +11,30 @@ public class GreatSwordController : SwordController
     #region Private Fields
     private bool isSwing = false;
     private Animator anim;
+    private Character player;
     #endregion
-
     public override void Start()
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
         inventory = GetComponentInParent<PlayerInventory>();
-        inventory.GetItemValues(hp: 10);
+        player = GetComponentInParent<Character>();
     }
-    private void OnDestroy()
-    {
-        inventory.MinusItemValues(hp: 10);
-    }
+
     public override void Update()
     {
         base.Update();
+    }
+    private void OnDestroy()
+    {
+        inventory.myItemData.hp -= 10;
+        player.maxHp -= 10;
+        if (player.currentHp == player.maxHp)
+        {
+            player.currentHp -= 10;
+        }
+        UIManager.Instance.CurrentHpChange(player);
+        UIManager.Instance.SetHPUI(player.maxHp, player.currentHp);
     }
     private void OnEnable()
     {
