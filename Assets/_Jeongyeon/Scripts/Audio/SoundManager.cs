@@ -66,6 +66,7 @@ public class SoundManager : MonoBehaviour
     public void PlayBackgrounAudio(int index)
     {
         StopBackgroundAudio();
+        backgroundAudioSource.loop = false;
         if (index == 10)
         {
             backgroundAudioSource.clip = backgroundAudioClip[4];
@@ -84,17 +85,17 @@ public class SoundManager : MonoBehaviour
                 backgroundAudioSource.clip = backgroundAudioClip[0];
                 backgroundAudioSource.Play();
             }
-            else if (index < 9)
+            else if (index < 10)
             {
                 backgroundAudioSource.clip = backgroundAudioClip[1];
                 backgroundAudioSource.Play();
             }
-            else if (index < 15)
+            else if (index < 16)
             {
                 backgroundAudioSource.clip = backgroundAudioClip[2];
                 backgroundAudioSource.Play();
             }
-            else if (index < 19)
+            else if (index < 20)
             {
                 backgroundAudioSource.clip = backgroundAudioClip[3];
                 backgroundAudioSource.Play();
@@ -208,6 +209,7 @@ public class SoundManager : MonoBehaviour
         StopBackgroundAudio();
         StopCharacterAudio();
         backgroundAudioSource.clip = gameOverClip;
+        backgroundAudioSource.loop = false;
         backgroundAudioSource.Play();
     }
     /// <summary>

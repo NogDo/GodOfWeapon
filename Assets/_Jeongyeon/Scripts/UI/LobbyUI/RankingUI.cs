@@ -55,12 +55,14 @@ public class RankingUI : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
+            userRank.Clear();
             dialogUI.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        userRank.Clear();
         if (other.CompareTag("Character"))
         {
             if (dialogUI.activeSelf == true)
@@ -84,13 +86,19 @@ public class RankingUI : MonoBehaviour
 
     public void SetUserRank()
     {
+        
         userRank = FireBaseManager.Instance.totalRankData;
         userRank.Sort(new Comparison<RankData>((a, b) => a.totalDamage.CompareTo(b.totalDamage)));
 
         if (userRank.Count > 0)
         {
+            
             for (int i = 0; i < userRank.Count; i++)
             {
+                if (i > 9)
+                {
+                    break;
+                }
                 nameTexts[i].text = userRank[i].userName;
                 scoreTexts[i].text = userRank[i].totalDamage.ToString();
             }
@@ -98,6 +106,10 @@ public class RankingUI : MonoBehaviour
             rankingTitleUIPanel.SetActive(true);
             for (int i = 0; i < userRank.Count; i++)
             {
+                if (i > 9)
+                {
+                    break;
+                }
                 resultPanel[i].SetActive(true);
             }
         }
