@@ -24,10 +24,18 @@ public class FBCreatePanel : MonoBehaviour
     public void OnCreateButtonClikc()
     {
         FireBaseManager.Instance.CreateID(idInput.text, nameInput.text, pwInput.text);
+        ResetInputField();
     }
-
     public void OnReturnButtonClick()
     {
         FBPanelManager.Instance.PanelOpen<FBLogInPanel>();
+        ResetInputField();
+    }
+
+    public void ResetInputField()
+    {
+        idInput.text = "";
+        nameInput.text = "";
+        pwInput.text = "";
     }
 }

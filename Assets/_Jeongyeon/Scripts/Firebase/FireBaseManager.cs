@@ -226,7 +226,7 @@ public class FireBaseManager : MonoBehaviour
     /// </summary>
     /// <param name="totalValue">총 점수</param>
     /// <param name="stage">도달한 층</param>
-    public async void CheckRank(int totalValue, int stage)
+    public async void CheckRank(int totalValue)
     {
 
         usersRef = DB.GetReference($"rank/{userName}");
@@ -252,7 +252,7 @@ public class FireBaseManager : MonoBehaviour
         }
         else
         {
-            CreateRank(userName, totalValue, stage);
+            CreateRank(userName, totalValue);
         }
     }
     /// <summary>
@@ -260,13 +260,13 @@ public class FireBaseManager : MonoBehaviour
     /// </summary>
     /// <param name="name">등록하는 사람 이름</param>
     /// <param name="value">총 점수값</param>
-    public async void CreateRank(string name, int value, int stage)
+    public async void CreateRank(string name, int value)
     {
         try
         {
             usersRef = DB.GetReference($"rank/{name}");
 
-            RankData rankData = new RankData(name, value, stage);
+            RankData rankData = new RankData(name, value);
 
             string rankDatas = JsonConvert.SerializeObject(rankData);
 
@@ -296,10 +296,6 @@ public class FireBaseManager : MonoBehaviour
                     string json = data.GetRawJsonValue();
                     RankData rankData = JsonConvert.DeserializeObject<RankData>(json);
                     totalRankData.Add(rankData);
-                    if (totalRankData.Count > 10)
-                    {
-                        break;
-                    }
                 }  
             }
             OnRank?.Invoke();

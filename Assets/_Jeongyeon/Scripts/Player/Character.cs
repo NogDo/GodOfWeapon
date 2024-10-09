@@ -341,7 +341,8 @@ public class Character : MonoBehaviour
     /// </summary>
     public void UseHealingPotion()
     {
-        if ((currentHp += maxHp * 0.4f) > maxHp)
+        currentHp += maxHp * 0.4f;
+        if (currentHp  > maxHp)
         {
             currentHp = maxHp;
             UIManager.Instance.SetHPUI(maxHp, currentHp);
@@ -349,7 +350,6 @@ public class Character : MonoBehaviour
         }
         else
         {
-            currentHp += maxHp * 0.4f;
             UIManager.Instance.SetHPUI(maxHp, currentHp);
             UIManager.Instance.CurrentHpChange(this);
         }

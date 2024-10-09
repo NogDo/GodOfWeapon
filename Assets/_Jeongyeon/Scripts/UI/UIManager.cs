@@ -383,5 +383,6 @@ public class UIManager : MonoBehaviour
         rTotalDamage.text = totalDamage.ToString();
         rTotalRuntime.text = $"{minute}:{second}";
         rTotalValue.text = totalValue.ToString();
+        FireBaseManager.Instance.CheckRank(totalValue);
     }
 }

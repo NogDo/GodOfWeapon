@@ -40,13 +40,11 @@ public class RankData
 {
     public string userName;
     public int totalDamage;
-    public int stage;
 
-    public RankData(string userName, int totalDamage, int stage)
+    public RankData(string userName, int totalDamage)
     {
         this.userName = userName;
         this.totalDamage = totalDamage;
-        this.stage = stage;
     }
 }
 public class HashHelper

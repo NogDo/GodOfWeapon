@@ -242,7 +242,7 @@ public class CStageManager : MonoBehaviour
         nStageCount = 1;
         nLevel = 1;
         nCurrentLevel = 1;
-        nPlayerMoney = 100000;
+        nPlayerMoney = 300;
         fMaxEXP = 10.0f;
         fEXP = 0.0f;
 
