@@ -14,10 +14,12 @@ public class DataManager : MonoBehaviour
 
     private string wPath; // 무기 데이터 경로
     private string iPath; // 아이템 데이터 경로
+    private string ePath; // 적 데이터 경로
     #endregion
     #region Public 변수
     [HideInInspector] public string weaponJson; // 무기 json데이터를 담는 변수
     [HideInInspector] public string itemJson; // 아이템 json데이터를 담는 변수
+    [HideInInspector] public string enemyJson; // 적 json데이터를 담는 변수
     #endregion
     public static DataManager Instance { get; private set; }
     public void Awake()
@@ -35,23 +37,25 @@ public class DataManager : MonoBehaviour
 
         wPath = $"{Application.streamingAssetsPath}/Weapons_Data.json";
         iPath = $"{Application.streamingAssetsPath}/Items_Data.json";
+        ePath = $"{Application.streamingAssetsPath}/Enemys_Data.json";
         weaponJson = File.ReadAllText(wPath);
         itemJson = File.ReadAllText(iPath);
-        LoadWeapon();// 테스트를위해 넣어둠 씬전환이 되면 지울 것!
-        LoadItem(); // 테스트를위해 넣어둠 씬전환이 되면 지울 것!
-        LoadEnemy();
+        enemyJson = File.ReadAllText(ePath);
+        //LoadWeapon();// 테스트를위해 넣어둠 씬전환이 되면 지울 것!
+        //LoadItem(); // 테스트를위해 넣어둠 씬전환이 되면 지울 것!
+        //LoadEnemy();
     }
     private void Start()
     {
-        //FireBaseManager.Instance.OnInit += CompareJsonData; // 파이어베이스 초기화가 완료되면 Json데이터를 비교하는 메서드를 호출
-        // FireBaseManager.Instance.OnInit += SetJsonInDatabase;
+        FireBaseManager.Instance.OnInit += CompareJsonData; // 파이어베이스 초기화가 완료되면 Json데이터를 비교하는 메서드를 호출
+        //FireBaseManager.Instance.OnInit += SetJsonInDatabase;
     }
 
     public void CompareJsonData()
     {
         FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(weaponJson), 0);
         FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(itemJson), 1);
-        
+        FireBaseManager.Instance.CompareJson(HashHelper.CreateHash(enemyJson), 2);
     }
 
     /// <summary>
@@ -59,7 +63,7 @@ public class DataManager : MonoBehaviour
     /// </summary>
     public void SetJsonInDatabase()
     {
-        string path = $"{Application.streamingAssetsPath}/Weapons_Data.json";
+        string path = $"{Application.streamingAssetsPath}/Enemys_Data.json";
         string json = File.ReadAllText(path);
         FireBaseManager.Instance.CreateJson(HashHelper.CreateHash(json), json);
     }
@@ -87,11 +91,9 @@ public class DataManager : MonoBehaviour
     /// </summary>
     public void LoadEnemy()
     {
-        string path = $"{Application.streamingAssetsPath}/Enemys_Data.json";
-        string json = File.ReadAllText(path);
-
-        List<EnemyStats> enemyStats = JsonConvert.DeserializeObject<List<EnemyStats>>(json);
+        List<EnemyStats> enemyStats = JsonConvert.DeserializeObject<List<EnemyStats>>(enemyJson);
         this.enemyStatsDatas.AddRange(enemyStats);
+        File.WriteAllText(ePath, enemyJson);
     }
 
 

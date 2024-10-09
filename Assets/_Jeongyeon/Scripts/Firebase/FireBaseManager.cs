@@ -106,8 +106,13 @@ public class FireBaseManager : MonoBehaviour
             case 0:
                 usersRef = DB.GetReference($"json/weapon");
                 break;
+
             case 1:
                 usersRef = DB.GetReference($"json/item");
+                break;
+
+            case 2:
+                usersRef = DB.GetReference($"json/enemy");
                 break;
         }
 
@@ -132,15 +137,36 @@ public class FireBaseManager : MonoBehaviour
                                 DataManager.Instance.weaponJson = value;
                                 DataManager.Instance.LoadWeapon();
                                 break;
+
                             case 1:
                                 DataManager.Instance.itemJson = value;
                                 DataManager.Instance.LoadItem();
+                                break;
+
+                            case 2:
+                                Debug.Log("적 json이 변조되었음");
+                                DataManager.Instance.enemyJson = value;
+                                DataManager.Instance.LoadEnemy();
                                 break;
                         }
                     }
                 }
                 else
                 {
+                    switch (num)
+                    {
+                        case 0:
+                            DataManager.Instance.LoadWeapon();
+                            break;
+
+                        case 1:
+                            DataManager.Instance.LoadItem();
+                            break;
+
+                        case 2:
+                            DataManager.Instance.LoadEnemy();
+                            break;
+                    }
                 }
             }
         }
@@ -180,7 +206,7 @@ public class FireBaseManager : MonoBehaviour
     {
         try
         {
-            usersRef = DB.GetReference($"json/weapon");
+            usersRef = DB.GetReference($"json/enemy");
 
             JsonData jsonData = new JsonData(hash, value);
 
