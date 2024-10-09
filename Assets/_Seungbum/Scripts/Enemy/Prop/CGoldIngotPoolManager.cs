@@ -36,4 +36,13 @@ public class CGoldIngotPoolManager : MonoBehaviour
     {
         goldIngotPool.SpawnGoldIngot(2, spawnPosition);
     }
+
+    /// <summary>
+    /// 금괴 풀을 초기화 한다.
+    /// </summary>
+    public void InitPool()
+    {
+        goldIngotPool.DestroyPool();
+        goldIngotPool.InitPool();
+    }
 }

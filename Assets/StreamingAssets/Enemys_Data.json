@@ -94,8 +94,8 @@
     "Name": "Grim Reaper",
     "ID": 10,
     "Speed": 4.5,
-    "MaxHP": 250.0,
-    "NowHP": 250.0,
+    "MaxHP": 500.0,
+    "NowHP": 500.0,
     "Attack": 10.0,
     "AttackCooltime": 5.0
   },
@@ -104,8 +104,8 @@
     "Name": "FinalBoss",
     "ID": 11,
     "Speed": 5.0,
-    "MaxHP": -45.0,
-    "NowHP": 500.0,
+    "MaxHP": 1000.0,
+    "NowHP": 1000.0,
     "Attack": 15.0,
     "AttackCooltime": 5.0
   }

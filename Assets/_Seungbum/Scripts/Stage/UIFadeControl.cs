@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIFadeControl : MonoBehaviour
 {
     #region private 변수
     Image imageFade;
+    AsyncOperation async;
 
     bool isFadeEnd;
+    bool isLoadEnd;
     #endregion
 
     /// <summary>
@@ -27,12 +30,21 @@ public class UIFadeControl : MonoBehaviour
         imageFade = GetComponent<Image>();
     }
 
+    IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        imageFade.material.SetFloat("_FadeAmount", 1.0f);
+    }
+
     /// <summary>
     /// 메인 화면에서 게임 화면으로 넘어갈 때 화면 페이드 코루틴을 실행하는 메서드
     /// </summary>
     public void StartMainFade()
     {
+        isLoadEnd = false;
         StartCoroutine(MainFade());
+        StartCoroutine(LoadScene());
     }
 
     /// <summary>
@@ -46,11 +58,19 @@ public class UIFadeControl : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 상점으로 넘어갈 때 화면 페이드 코루틴을 실행하는 메서드
     /// </summary>
     public void StartShopFade()
     {
         StartCoroutine(ShopFade());
+    }
+
+    /// <summary>
+    /// 시작맵으로 넘어갈 때 화면 페이드 코루틴을 실행하는 메서드
+    /// </summary>
+    public void StartStartMapFade()
+    {
+        StartCoroutine(StartMapFade());
     }
 
     /// <summary>
@@ -73,9 +93,32 @@ public class UIFadeControl : MonoBehaviour
 
         imageFade.material.SetFloat("_FadeAmount", -0.1f);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitUntil(() => isLoadEnd);
 
-        imageFade.material.SetFloat("_FadeAmount", 1.0f);
+        async.allowSceneActivation = true;
+
+        yield return null;
+    }
+
+    /// <summary>
+    /// 씬을 비동기로 로드하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator LoadScene()
+    {
+        async = SceneManager.LoadSceneAsync("MapCreate");
+        async.allowSceneActivation = false;
+
+        while (async.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        isLoadEnd = true;
+
+        yield return null;
     }
 
     /// <summary>
@@ -116,6 +159,8 @@ public class UIFadeControl : MonoBehaviour
         imageFade.material.SetFloat("_FadeAmount", 1.0f);
 
         isFadeEnd = true;
+
+        yield return null;
     }
 
     /// <summary>
@@ -142,5 +187,34 @@ public class UIFadeControl : MonoBehaviour
 
         CStageManager.Instance.StartShop();
         imageFade.material.SetFloat("_FadeAmount", 1.0f);
+
+        yield return null;
+    }
+
+    /// <summary>
+    /// 시작 화면 페이드 진행 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator StartMapFade()
+    {
+        float time = 0.0f;
+        float duration = 0.25f;
+
+        while (time <= duration)
+        {
+            imageFade.material.SetFloat("_FadeAmount", (duration - time) * 4);
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
+        imageFade.material.SetFloat("_FadeAmount", -0.1f);
+
+        yield return new WaitForSeconds(0.3f);
+
+        imageFade.material.SetFloat("_FadeAmount", 1.0f);
+
+        yield return null;
     }
 }

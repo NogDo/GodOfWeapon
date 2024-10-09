@@ -38,6 +38,20 @@ public class CGoldIngotPool : MonoBehaviour
     }
 
     /// <summary>
+    /// 풀 안에있는 오브젝트들을 제거한다.
+    /// </summary>
+    public void DestroyPool()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        tier1GoldIngotPool.Clear();
+        tier2GoldIngotPool.Clear();
+    }
+
+    /// <summary>
     /// 사용할 오브젝트를 활성화 시킨다. 오브젝트가 없다면 새로 생성한다.
     /// </summary>
     /// <param name="tier"></param>

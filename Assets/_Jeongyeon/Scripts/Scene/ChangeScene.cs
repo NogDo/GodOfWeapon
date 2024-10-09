@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-   
+    #region private º¯¼ö
+    [SerializeField]
+    UIFadeControl fadeControl;
+    #endregion
+
     public void ChangeGameScene()
     {
-        SceneManager.LoadSceneAsync("MapCreate");
+        fadeControl.StartMainFade();
         SoundManager.Instance.PlayLobbyAudio(1);
     }
 
