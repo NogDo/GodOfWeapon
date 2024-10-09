@@ -7745,7 +7745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: effectAudioClip.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: cWeaponAudioClip.Array.size
@@ -7767,6 +7767,10 @@ PrefabInstance:
       propertyPath: effectAudioClip.Array.data[6]
       value: 
       objectReference: {fileID: 8300000, guid: fd2f46d83b5867f48a98e8b38e456382, type: 3}
+    - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
+      propertyPath: effectAudioClip.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: c58a342195818084daf8c18478d5504a, type: 3}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: cWeaponAudioClip.Array.data[1]
       value: 

@@ -82,6 +82,8 @@ public class UIFadeControl : MonoBehaviour
         float time = 0.0f;
         float duration = 0.25f;
 
+        SoundManager.Instance.PlayEffectAudio(7);
+
         while (time <= duration)
         {
             imageFade.material.SetFloat("_FadeAmount", (duration - time) * 4);
@@ -131,6 +133,8 @@ public class UIFadeControl : MonoBehaviour
         float time = 0.0f;
         float duration = 0.25f;
 
+        SoundManager.Instance.PlayEffectAudio(7);
+
         while (time <= duration)
         {
             imageFade.material.SetFloat("_FadeAmount", (duration - time) * 4);
@@ -172,6 +176,8 @@ public class UIFadeControl : MonoBehaviour
         float time = 0.0f;
         float duration = 0.25f;
 
+        SoundManager.Instance.PlayEffectAudio(7);
+
         while (time <= duration)
         {
             imageFade.material.SetFloat("_FadeAmount", (duration - time) * 4);
@@ -199,6 +205,8 @@ public class UIFadeControl : MonoBehaviour
     {
         float time = 0.0f;
         float duration = 0.25f;
+
+        SoundManager.Instance.PlayEffectAudio(7);
 
         while (time <= duration)
         {
