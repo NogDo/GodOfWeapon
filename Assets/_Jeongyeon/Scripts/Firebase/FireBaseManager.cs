@@ -144,7 +144,6 @@ public class FireBaseManager : MonoBehaviour
                                 break;
 
                             case 2:
-                                Debug.Log("적 json이 변조되었음");
                                 DataManager.Instance.enemyJson = value;
                                 DataManager.Instance.LoadEnemy();
                                 break;
