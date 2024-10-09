@@ -69,6 +69,9 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
     /// <returns></returns>
     IEnumerator Move()
     {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Collider>().isTrigger = true;
+
         yield return new WaitForSeconds(1.0f);
 
         float time = 0.0f;
@@ -83,8 +86,6 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
         {
             oInActiveObject.SetActive(false);
         }
-
-        GetComponent<Collider>().isTrigger = true;
 
         while (time < durtaion)
         {
@@ -109,6 +110,7 @@ public class CEnemyLineIndicatorSkill : CEnemyIndicatorSkill
         }
 
         GetComponent<Collider>().isTrigger = false;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         yield return null;
     }
