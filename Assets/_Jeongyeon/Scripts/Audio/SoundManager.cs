@@ -193,6 +193,7 @@ public class SoundManager : MonoBehaviour
         if (CStageManager.Instance.StageCount < 20)
         {
             backgroundAudioSource.clip = stageEndClip;
+            backgroundAudioSource.loop = false;
             backgroundAudioSource.Play();
         }
     }

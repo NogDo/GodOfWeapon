@@ -137,9 +137,9 @@ public class CEnemyInfo : MonoBehaviour
     {
         int stageCount = CStageManager.Instance.StageCount - 1;
 
-        if (stageCount % 2 == 1)
+        if (stageCount % 3 == 1)
         {
-            stats.Attack = initStats.Attack + 1.0f * stageCount;
+            stats.Attack = initStats.Attack + 1.0f ;
         }
         stats.MaxHP = initStats.MaxHP + 3.0f * stageCount;
     }
