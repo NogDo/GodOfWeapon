@@ -19,6 +19,7 @@ public class CrossBowBasic : CrossBowController
     }
     public override IEnumerator Shoot()
     {
+        SoundManager.Instance.PlayCWeaponAudio(5);
         while (true)
         {
             float count = Random.Range(0, 100);

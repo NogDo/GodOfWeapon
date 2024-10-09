@@ -209,7 +209,7 @@ public class CItemMouseEventController : MonoBehaviour
         // ¶ç¿öÁ®ÀÖ´ø UI ²ô±â
         ActiveUIPanel(false);
 
-        SoundManager.Instance.ItemOnCellSound();
+        SoundManager.Instance.PlayEffectAudio(4);
 
         isGrab = true;
     }
@@ -352,7 +352,7 @@ public class CItemMouseEventController : MonoBehaviour
             transform.SetParent(CShopManager.Instance.tfNonBuyItems);
         }
 
-        SoundManager.Instance.ItemOnCellSound();
+        SoundManager.Instance.PlayEffectAudio(4);
 
         isGrab = false;
         itemPreview.SetActive(false);

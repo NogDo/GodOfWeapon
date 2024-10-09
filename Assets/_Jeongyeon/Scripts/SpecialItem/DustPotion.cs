@@ -8,5 +8,6 @@ public class DustPotion : MonoBehaviour, IActiveItem
     {
         CStageManager.Instance.LevelUp();
         CEnemyPoolManager.Instance.IncreaseEliteSpawnCount(1);
+        SoundManager.Instance.PlayEffectAudio(6);
     }
 }

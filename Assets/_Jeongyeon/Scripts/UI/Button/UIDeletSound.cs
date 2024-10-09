@@ -17,6 +17,6 @@ public class UIDeletSound : MonoBehaviour
 
     private void DeleteSound()
     {
-        SoundManager.Instance.DeleteSound();
+        SoundManager.Instance.PlayEffectAudio(2);
     }
 }

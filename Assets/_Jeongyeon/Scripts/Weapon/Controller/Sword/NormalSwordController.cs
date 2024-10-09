@@ -73,7 +73,8 @@ public class NormalSwordController : SwordController
     {
         time = 0.0f;
         transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y - 0.5f, enemyTransform.position.z);
+        Vector3 TargetPosition = new Vector3(enemyTransform.position.x, transform.position.y - 1.0f, enemyTransform.position.z);
+        SoundManager.Instance.PlaySWeaponAudio(1);
         particle[0].SetActive(true);
         while (time <= (duration / 2))
         {
@@ -120,6 +121,7 @@ public class NormalSwordController : SwordController
     /// <returns></returns>
     public override IEnumerator Swing()
     {
+        SoundManager.Instance.PlaySWeaponAudio(2);
         anim.SetFloat("SwingSpeed", 1.0f + (myData.attackSpeed + (myData.attackSpeed * (inventory.myItemData.attackSpeed / 100))) * 0.1f);
         anim.SetTrigger("isSwing");
         isSwing = true;

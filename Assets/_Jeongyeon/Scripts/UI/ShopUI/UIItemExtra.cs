@@ -302,7 +302,9 @@ public class UIItemExtra : MonoBehaviour
         imageItem.rectTransform.sizeDelta = imageSize;
         imageItem.rectTransform.anchoredPosition = new Vector2(0.0f, -imageSize.y / 2);
     }
-
+    /// <summary>
+    /// 판매버튼이 눌렸을때 호출되는 메서드
+    /// </summary>
     public void OnSellButtonClick()
     {
         CellManager.Instance.PlayerInventory.MinusItem(item.Item);
@@ -311,7 +313,9 @@ public class UIItemExtra : MonoBehaviour
         UIManager.Instance.SetActiveExtraUI(false);
         Destroy(item.gameObject);
     }
-
+    /// <summary>
+    /// 사용버튼이 눌렸을때 호출되는 메서드
+    /// </summary>
     public void OnActiveButtonClick()
     {
         item.gameObject.GetComponent<IActiveItem>().UseItem();

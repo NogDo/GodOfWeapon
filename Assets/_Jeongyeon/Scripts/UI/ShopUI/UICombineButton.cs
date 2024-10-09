@@ -60,6 +60,6 @@ public class UICombineButton : MonoBehaviour
 
     public void CombineButtonSound()
     {
-        SoundManager.Instance.CombineSound();
+        SoundManager.Instance.PlayEffectAudio(1);
     }
 }
