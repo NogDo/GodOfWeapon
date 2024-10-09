@@ -78,6 +78,10 @@ public class CCreateMapManager : MonoBehaviour
         int minX = (nStartWidth % 2 == 0) ? nStartWidth / 2 - 1 : nStartWidth / 2;
         int maxX = nStartWidth - minX - 1;
         int minZ = (nStartHeight % 2 == 0) ? nStartHeight / 2 - 1 : nStartHeight / 2;
+        if (minZ == 4)
+        {
+            minZ = 3;
+        }
         int maxZ = nStartHeight - minZ - 1;
 
         SetMapSize(-minX, maxX, -minZ, maxZ);
