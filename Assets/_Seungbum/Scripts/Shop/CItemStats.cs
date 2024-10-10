@@ -75,7 +75,7 @@ public class CItemStats : CStats
     {
         if (CShopManager.Instance.DisCountRate > 0)
         {
-            itemData.price -= (int)(itemData.price / CShopManager.Instance.DisCountRate);
+            itemData.price -= (int)(itemData.price * CShopManager.Instance.DisCountRate / 100);
         }
     }
 }
