@@ -88,7 +88,7 @@ public class RankingUI : MonoBehaviour
     {
         
         userRank = FireBaseManager.Instance.totalRankData;
-        userRank.Sort(new Comparison<RankData>((a, b) => a.totalDamage.CompareTo(b.totalDamage)));
+        userRank.Sort(new Comparison<RankData>((a, b) => b.totalDamage.CompareTo(a.totalDamage)));
 
         if (userRank.Count > 0)
         {

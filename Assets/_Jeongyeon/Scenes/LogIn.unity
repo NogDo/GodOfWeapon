@@ -7761,7 +7761,7 @@ PrefabInstance:
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: cWeaponAudioClip.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 65a145318edbf424fa6a41d3199c9505, type: 3}
+      objectReference: {fileID: 8300000, guid: 1d17efa7a28714743873f9c7fb03a6b4, type: 3}
     - target: {fileID: 3208780623696487172, guid: f50c1f21cf665124893be7bee8c561d7, type: 3}
       propertyPath: cWeaponAudioClip.Array.data[2]
       value: 
