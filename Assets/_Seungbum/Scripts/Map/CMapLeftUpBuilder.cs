@@ -79,11 +79,6 @@ public class CMapLeftUpBuilder : MonoBehaviour, IMapPartBuilder
         CreateCollider();
     }
 
-    public CMapPart GetMapPart()
-    {
-        return mapPart;
-    }
-
     public void BuildFloor()
     {
         GameObject floor = new GameObject("Floor");

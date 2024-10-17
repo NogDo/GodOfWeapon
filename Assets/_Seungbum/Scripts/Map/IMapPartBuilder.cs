@@ -5,12 +5,6 @@ using UnityEngine;
 public interface IMapPartBuilder
 {
     /// <summary>
-    /// 만든 맵을 반환한다.
-    /// </summary>
-    /// <returns></returns>
-    CMapPart GetMapPart();
-
-    /// <summary>
     /// 맵 인스턴스 생성 및 맵 구현
     /// </summary>
     /// <param name="minX">가로 최소값</param>
@@ -32,10 +26,6 @@ public interface IMapPartBuilder
     /// <summary>
     /// 바닥을 생성한다.
     /// </summary>
-    /// <param name="minX">가로 최소값</param>
-    /// <param name="maxX">가로 최대값</param>
-    /// <param name="minZ">세로 최소값</param>
-    /// <param name="maxZ">세로 최대값</param>
     void BuildFloor();
 
     /// <summary>

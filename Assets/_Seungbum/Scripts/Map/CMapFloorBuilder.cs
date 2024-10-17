@@ -80,11 +80,6 @@ public class CMapFloorBuilder : MonoBehaviour, IMapPartBuilder
         BuildUpWall();
     }
 
-    public CMapPart GetMapPart()
-    {
-        return mapPart;
-    }
-
     public void BuildFloor()
     {
         GameObject floor = new GameObject("Floor");

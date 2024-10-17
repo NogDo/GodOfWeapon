@@ -91,8 +91,7 @@ public class DataManager : MonoBehaviour
     /// </summary>
     public void LoadEnemy()
     {
-        List<EnemyStats> enemyStats = JsonConvert.DeserializeObject<List<EnemyStats>>(enemyJson);
-        this.enemyStatsDatas.AddRange(enemyStats);
+        enemyStatsDatas = JsonConvert.DeserializeObject<List<EnemyStats>>(enemyJson);
         File.WriteAllText(ePath, enemyJson);
     }
 
@@ -174,7 +173,6 @@ public class DataManager : MonoBehaviour
     {
         if (uid - 1 >= enemyStatsDatas.Count)
         {
-            Debug.LogError("아이템이 없다구요!");
             return null;
         }
 
