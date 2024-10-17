@@ -229,8 +229,6 @@ public class CItemMouseEventController : MonoBehaviour
 
             if (Physics.Raycast(gridPoints[i].position, Vector3.down, out hit, float.MaxValue, LayerMask.GetMask("Cell")))
             {
-                Debug.DrawRay(gridPoints[i].position, Vector3.down * hit.distance, Color.red);
-
                 if (hit.transform.parent.TryGetComponent<CellInfo>(out CellInfo cellinfo))
                 {
                     STPos cellPos = new STPos(cellinfo.x, cellinfo.z);
