@@ -27,9 +27,13 @@ public class DataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
         weaponDatas = new List<WeaponData>();
         itemDatas = new List<ItemData>();

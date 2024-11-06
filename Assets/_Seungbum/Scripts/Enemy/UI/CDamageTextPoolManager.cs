@@ -16,9 +16,16 @@ public class CDamageTextPoolManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
         damageTextPool = GetComponent<CDamageTextPool>();
     }

@@ -138,9 +138,13 @@ public class CStageManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
         oMainCamera = Camera.main.transform.parent.gameObject;
     }

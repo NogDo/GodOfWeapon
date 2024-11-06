@@ -96,9 +96,16 @@ public class CShopManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
-        DontDestroyOnLoad(this);
+        else
+        {
+            Destroy(gameObject);
+        }
 
         tierPercent = new float[4, 4]
         {

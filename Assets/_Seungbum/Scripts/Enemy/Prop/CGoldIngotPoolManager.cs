@@ -14,9 +14,16 @@ public class CGoldIngotPoolManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
         goldIngotPool = GetComponent<CGoldIngotPool>();
     }
